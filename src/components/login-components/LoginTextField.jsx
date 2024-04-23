@@ -10,4 +10,8 @@ function LoginTextField(props){
     )
 }
 
+LoginTextField.propTypes ={
+    label: PropTypes.string
+}
+
 export default LoginTextField
