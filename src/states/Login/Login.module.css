@@ -1,0 +1,13 @@
+.parentDiv{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background-color: #1e0a77;
+    color: rgb(207, 183, 230);
+    border-radius: 16px;
+}
+
+.loginContainer{
+    margin: 30px;
+    padding: 2px;
+}
