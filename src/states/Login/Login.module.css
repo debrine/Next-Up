@@ -6,6 +6,18 @@
     background-color: #1e0a77;
     color: rgb(207, 183, 230);
     border-radius: 16px;
+    transition: 
+        top 2s,
+        left 2s,
+        background-color 2s,
+        transform 2s;
+}
+
+.parentDiv:hover{
+    background-color: aqua;
+    top: 0;
+    left: 0;
+    transform: translate(0,0);
 }
 
 .loginContainer{
