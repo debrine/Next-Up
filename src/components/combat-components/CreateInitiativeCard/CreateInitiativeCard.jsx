@@ -24,11 +24,17 @@ function CreateInitiativeCard(props){
                 placeholder='Enter Name'
             />
             <CharacterNoteField />
-            <input 
-                type="color" 
-                value={color}
-                onChange={selectBackgroundColor}
-            />
+            <CharacterNoteField />
+            <CharacterNoteField />
+            <div className={styles.colorButtonContainer}>
+                <input 
+                    type="color" 
+                    value={color}
+                    onChange={selectBackgroundColor}
+                />
+                <button className={styles.addCharacter}>Add</button>
+            </div>
+            
         </div>
     )
 }

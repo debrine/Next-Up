@@ -7,14 +7,19 @@ function CharacterNoteField(){
     const [turnsLeft, setTurnsLeft] = useState(0)
 
     const turnsLeftRef = useRef(0)
+
+    let buttonStyle = turnsLeft == 0 ? styles.expiredButton : styles.removeButton
     
     function updateComment(e){
         setComment(e.target.value)
     }
 
     function updateExpire(e){
-        setTurnsLeft(e.target.value)
+        if (e.target.value >= 0){
+            setTurnsLeft(e.target.value)
+        }
     }
+
    
     return(
         <div className={styles.commentContainer}>
@@ -24,8 +29,19 @@ function CharacterNoteField(){
                 placeholder='Character Notes'
             />
             <div className={styles.expireContainer}>
-                <label id='expireNotice'>Expired</label>
-                <input type="number" id="expireCounter" onChange={updateExpire} value={turnsLeft}/>
+                <div className={styles.turnsLeftContainer}>
+                    <label >Number of Turns: </label>
+                    <input 
+                        type="number" 
+                        className={styles.expireCounter} 
+                        onChange={updateExpire} 
+                        value={turnsLeft}
+                    />
+                </div>
+                
+                <button className={buttonStyle}>
+                    {turnsLeft == 0 ? 'Expired' : 'Remove'}
+                </button>
             </div>
             {/* <input type="number" ref={turnsLeftRef}/>
             {turnsLeftRef.current} */}
