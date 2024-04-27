@@ -7,6 +7,7 @@ function CreateInitiativeCard(props){
 
     const [color, setColor] = useState('#ffffff')
     const [name, setName] = useState()
+    const [noteList, setNoteList] = useState([])
 
     function selectBackgroundColor(e){
         setColor(e.target.value)
@@ -15,17 +16,27 @@ function CreateInitiativeCard(props){
     function updateCharacterName(e){
         setName(e.target.value)
     }
+
+    function addNote(){
+        setNoteList(noteList.concat(<CharacterNoteField />))
+    }
     
     return(
         <div className={styles.cardContainer} style={{backgroundColor: color}}>
-            <input 
-                value={name} 
-                onChange={updateCharacterName} 
-                placeholder='Enter Name'
-            />
-            <CharacterNoteField />
-            <CharacterNoteField />
-            <CharacterNoteField />
+            <div>
+                <input 
+                    value={name} 
+                    onChange={updateCharacterName} 
+                    placeholder='Enter Name'
+                    className={styles.characterName}
+                />
+            </div>
+            {noteList}
+            <div>
+                <button className={styles.addNote} onClick={addNote}>
+                    New Note
+                </button>
+            </div>
             <div className={styles.colorButtonContainer}>
                 <input 
                     type="color" 

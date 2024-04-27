@@ -1,6 +1,6 @@
 .cardContainer{
     width: 300px;
-    height: 300px;
+    height: 350px;
     display: grid;
     justify-content: center;
     text-align: center;
@@ -14,6 +14,7 @@
 
 .colorButtonContainer{
     display: grid;
+    height: 50px;
     grid-template-columns: 1fr 1fr;
 }
 
@@ -29,6 +30,23 @@ input[type='color']{
 
 input[type='color']:hover{
     border: 3px solid hsl(0, 0%, 50%);
+}
+
+/* Buttons */
+
+.addNote{
+    font-size: 1.2rem;
+    border-radius: 1.5em;
+    font-weight: bold;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    color: white;
+    transition: background-color 0.2s ease;
+    background-color: hsl(115, 100%, 35%);
+    margin: 6px;
+}
+.addNote:hover{
+    background-color: hsl(115, 100%, 30%);
 }
 
 .addCharacter{
