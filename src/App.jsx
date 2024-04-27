@@ -3,11 +3,10 @@ import Login from "./states/Login/Login.jsx"
 
 
 function App() {
-
   return (
     <>
-      {/* <Login /> */}
-      <CreateInitiativeCard/>
+      <Login />
+      {/* <CreateInitiativeCard/> */}
     </>
   )
 }

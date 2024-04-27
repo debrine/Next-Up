@@ -17,6 +17,7 @@ function CreateInitiativeCard(props){
         setName(e.target.value)
     }
 
+    
     function addNote(){
         setNoteList(noteList.concat(<CharacterNoteField />))
     }
