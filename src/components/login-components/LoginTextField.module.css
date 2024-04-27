@@ -1,3 +1,5 @@
 .textAreaDiv{
-    
+    display: flex;
+    font-weight: bold;
+    transition: display 2s;
 }

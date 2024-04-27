@@ -9,17 +9,19 @@ function Login(props){
 
     const testFunction = () => {
         setLoggedIn(c => !loggedIn)
+        const toggleSideBar = document.getElementById(styles.parentDiv)
+
+        toggleSideBar.classList.toggle(styles.hiddenDiv)
     }
 
     return(
         <>
-            <div className={styles.parentDiv} onClick={testFunction}>
+            <div className={styles.parentDiv} onClick={testFunction} id={styles.parentDiv}>
                 <div className={styles.loginContainer}>
                     <LoginTextField label='Username' loginStatus={loggedIn}/>
                     <br />
                     <LoginTextField label='Password' loginStatus={loggedIn}/>
                 </div>
-                {loggedIn ? 'yes': 'no'}
             </div>
         </>
     )

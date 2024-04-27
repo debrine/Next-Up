@@ -4,14 +4,21 @@ import styles from './LoginTextField.module.css'
 function LoginTextField(props){
 
     const test = document.getElementsByClassName(styles.textAreaDiv)
-    if(props.loginStatus){test[0].style.display = 'none'}
+    if(props.loginStatus){
+        Array.from(test).forEach(i=>{
+            i.style.display = 'none'
+        })
+    } else {
+        Array.from(test).forEach(i=>{
+            i.style.display = 'block'
+        })
+    }
 
     return(
         <div className={styles.textAreaDiv}>
             <label>{props.label}:</label>
             <br />
             <input type='text' id={props.label} name={props.label}/>
-            {props.loginStatus ? 'yes':'no'}
         </div>
     )
 }
