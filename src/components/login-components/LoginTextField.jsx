@@ -6,11 +6,14 @@ function LoginTextField(props){
     const test = document.getElementsByClassName(styles.textAreaDiv)
     if(props.loginStatus){
         Array.from(test).forEach(i=>{
-            i.style.display = 'none'
+            i.style.opacity = 0
         })
     } else {
         Array.from(test).forEach(i=>{
-            i.style.display = 'block'
+            function sleep(ms){
+                return new Promise(resolve => setTimeout(resolve, ms))
+            }
+            sleep(1000).then(()=> {i.style.opacity = 1})
         })
     }
 

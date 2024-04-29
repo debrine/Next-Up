@@ -1,3 +1,21 @@
 body{
+    background-image: url('./assets/starfinder-pact-worlds.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+/* .backgroundDiv::before{
+    content: '';
+    background-image: url('./assets/starfinder-pact-worlds.jpeg');
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 1;
+    transform: opacity 2s;
+} */

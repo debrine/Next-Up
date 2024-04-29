@@ -12,6 +12,9 @@ function Login(props){
         const toggleSideBar = document.getElementById(styles.parentDiv)
 
         toggleSideBar.classList.toggle(styles.hiddenDiv)
+
+        // const backgroundHide = document.getElementsByClassName('backgroundDiv')
+        // backgroundHide[0].style.opacity = 0
     }
 
     return(

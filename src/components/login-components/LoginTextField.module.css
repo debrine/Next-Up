@@ -1,5 +1,8 @@
 .textAreaDiv{
     display: flex;
+    flex-direction: column;
+    width: 200px;
     font-weight: bold;
-    transition: display 2s;
+    transition: 
+    opacity 1s ease-in;
 }
