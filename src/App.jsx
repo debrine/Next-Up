@@ -5,8 +5,8 @@ import Login from "./states/Login/Login.jsx"
 function App() {
   return (
     <div className='backgroundDiv'>
-      <Login />
-      {/* <CreateInitiativeCard/> */}
+      {/* <Login /> */}
+      <CreateInitiativeCard/>
     </div>
   )
 }

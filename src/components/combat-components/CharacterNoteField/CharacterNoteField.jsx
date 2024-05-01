@@ -1,16 +1,16 @@
 import styles from './CharacterNoteField.module.css'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
-function CharacterNoteField(){
+function CharacterNoteField(props){
 
     const [comment, setComment] = useState('')
     const [turnsLeft, setTurnsLeft] = useState(0)
 
-    const turnsLeftRef = useRef(0)
+    const nextTurnRef = useRef(props.next)
 
     let buttonStyle = turnsLeft == 0 ? styles.expiredButton : styles.removeButton
     
-    function updateComment(e){
+    function updateNote(e){
         setComment(e.target.value)
     }
 
@@ -20,12 +20,28 @@ function CharacterNoteField(){
         }
     }
 
-   
+    function removeNote(){
+        const noteToRemove = document.getElementById(props.id)
+        noteToRemove.remove();
+    }
+
+    useEffect(()=>
+        {if(props.next == 4){
+            if(turnsLeft === 0){
+                removeNote
+                console.log('Deleting')
+            } else{
+                setTurnsLeft(t=> t -1)
+                console.log('Decreasing')
+            }
+        }}
+    , [props.next])
+
     return(
-        <div className={styles.commentContainer}>
+        <div className={styles.commentContainer} id={props.id}>
             <textarea 
                 value={comment}
-                onChange={updateComment}
+                onChange={updateNote}
                 placeholder='Character Notes'
             />
             <div className={styles.expireContainer}>
@@ -39,7 +55,7 @@ function CharacterNoteField(){
                     />
                 </div>
                 
-                <button className={buttonStyle}>
+                <button className={buttonStyle} onClick={removeNote}>
                     {turnsLeft == 0 ? 'Expired' : 'Remove'}
                 </button>
             </div>
