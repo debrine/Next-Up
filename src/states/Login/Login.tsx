@@ -1,15 +1,15 @@
-import PropTypes from 'prop-types'
+
 import styles from "./Login.module.css"
-import LoginTextField from '../../components/login-components/LoginTextField.jsx'
+import LoginTextField from '../../components/login-components/LoginTextField.tsx'
 import { useState } from 'react'
 
-function Login(props){
+function Login(){
 
     const [loggedIn, setLoggedIn] = useState(false)
 
     const testFunction = () => {
-        setLoggedIn(c => !loggedIn)
-        const toggleSideBar = document.getElementById(styles.parentDiv)
+        setLoggedIn(!loggedIn)
+        let toggleSideBar: HTMLElement = (document.getElementById(styles.parentDiv) as HTMLDivElement)
 
         toggleSideBar.classList.toggle(styles.hiddenDiv)
 

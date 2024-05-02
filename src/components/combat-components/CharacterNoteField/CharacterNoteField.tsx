@@ -1,44 +1,37 @@
 import styles from './CharacterNoteField.module.css'
-import { useState, useRef, useEffect } from 'react'
+import { useState, ChangeEvent } from 'react'
 
-function CharacterNoteField(props){
+type CharacterNoteFieldProps ={
+    id: string
+}
+function CharacterNoteField({
+    id
+}: CharacterNoteFieldProps){
 
     const [comment, setComment] = useState('')
     const [turnsLeft, setTurnsLeft] = useState(0)
 
-    const nextTurnRef = useRef(props.next)
 
     let buttonStyle = turnsLeft == 0 ? styles.expiredButton : styles.removeButton
     
-    function updateNote(e){
+    const updateNote = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setComment(e.target.value)
     }
 
-    function updateExpire(e){
-        if (e.target.value >= 0){
-            setTurnsLeft(e.target.value)
+    const updateExpire = (e: ChangeEvent<HTMLInputElement>) => {
+        if (+e.target.value >= 0){
+            setTurnsLeft(+e.target.value)
         }
     }
 
     function removeNote(){
-        const noteToRemove = document.getElementById(props.id)
+        const noteToRemove = (document.getElementById(id) as HTMLDivElement)
         noteToRemove.remove();
     }
 
-    useEffect(()=>
-        {if(props.next == 4){
-            if(turnsLeft === 0){
-                removeNote
-                console.log('Deleting')
-            } else{
-                setTurnsLeft(t=> t -1)
-                console.log('Decreasing')
-            }
-        }}
-    , [props.next])
 
     return(
-        <div className={styles.commentContainer} id={props.id}>
+        <div className={styles.commentContainer} id={id}>
             <textarea 
                 value={comment}
                 onChange={updateNote}

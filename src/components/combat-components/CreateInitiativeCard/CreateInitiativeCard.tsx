@@ -1,44 +1,40 @@
-import PropTypes from 'prop-types'
 import styles from './CreateInitiativeCard.module.css'
-import React, {useState} from 'react'
-import CharacterNoteField from '../CharacterNoteField/CharacterNoteField'
+import {ChangeEvent, useState} from 'react'
+import CharacterNoteField from '../CharacterNoteField/CharacterNoteField.tsx'
 
-function CreateInitiativeCard(props){
 
-    const [color, setColor] = useState('#6091A9')
-    const [name, setName] = useState()
-    const [noteList, setNoteList] = useState([])
+function CreateInitiativeCard(){
+
+    const [color, setColor] = useState<string>('#6091A9')
+    const [name, setName] = useState<string>('')
+    const [noteList, setNoteList] = useState<any[]>([])
     // temp to test, eventually a variable will be set to the place of the component in the array to determine turn order
-    const testArray = ['1','2','3','4','5']
-    const [currentTurn, setCurrentTurn] = useState(0)
+    const testArray: any[] = ['0','1','2','3','4','5']
+    const [currentTurn, setCurrentTurn] = useState<number>(0)
     
 
-    function selectBackgroundColor(e){
+    const selectBackgroundColor = (e: ChangeEvent<HTMLInputElement>) => {
         setColor(e.target.value)
     }
 
-    function updateCharacterName(e){
+    const updateCharacterName = (e: ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value)
     }
     
-    function addNote(){
-        const keyID = crypto.randomUUID()
-        setNoteList(n => [...n, <CharacterNoteField 
-                                    key={keyID} 
-                                    id={keyID} 
-                                    next={testArray}
-                                />])
+    const addNote = (e: React.MouseEvent<HTMLButtonElement>) =>{
+        if(e){
+            e.preventDefault();
+            const keyID: string = crypto.randomUUID()
+            setNoteList([...noteList, <CharacterNoteField id={keyID} key={keyID}/>])
+        }
     }
     
     function nextTurn(){
         if(currentTurn === testArray.length){
-            setCurrentTurn(c=> c = 0)
-            console.log('resetting')
+            setCurrentTurn(0)
         } else{
             setCurrentTurn(c=> c+1)
-            console.log('adding')
         }
-        console.log(currentTurn)
     }
     
     return(
@@ -66,7 +62,7 @@ function CreateInitiativeCard(props){
                 <button className={styles.addCharacter}>Add</button>
             </div>
             <button onClick={nextTurn}>
-                Next turn {testArray[currentTurn]}
+                Next turn {currentTurn}
             </button>
         </div>
     )
