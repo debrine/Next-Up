@@ -7,25 +7,29 @@ function CreateInitiativeCard(){
 
     const [color, setColor] = useState<string>('#6091A9')
     const [name, setName] = useState<string>('')
-    const [noteList, setNoteList] = useState<any[]>([])
+    const [noteList, setNoteList] = useState<JSX.Element[]>([])
     // temp to test, eventually a variable will be set to the place of the component in the array to determine turn order
-    const testArray: any[] = ['0','1','2','3','4','5']
+    const testArray: string[] = ['0','1','2','3','4','5']
     const [currentTurn, setCurrentTurn] = useState<number>(0)
     
 
     const selectBackgroundColor = (e: ChangeEvent<HTMLInputElement>) => {
-        setColor(e.target.value)
+        if(e && e.target.value){
+            setColor(e.target.value)
+        }
     }
 
     const updateCharacterName = (e: ChangeEvent<HTMLInputElement>) => {
-        setName(e.target.value)
+        if(e && e.target.value){
+            setName(e.target.value)
+        }
     }
     
     const addNote = (e: React.MouseEvent<HTMLButtonElement>) =>{
         if(e){
             e.preventDefault();
             const keyID: string = crypto.randomUUID()
-            setNoteList([...noteList, <CharacterNoteField id={keyID} key={keyID}/>])
+            setNoteList(n=>[...n, <CharacterNoteField id={keyID} key={keyID}/>])
         }
     }
     

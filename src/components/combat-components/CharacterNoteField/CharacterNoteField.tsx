@@ -4,6 +4,7 @@ import { useState, ChangeEvent } from 'react'
 type CharacterNoteFieldProps ={
     id: string
 }
+
 function CharacterNoteField({
     id
 }: CharacterNoteFieldProps){
@@ -15,7 +16,9 @@ function CharacterNoteField({
     let buttonStyle = turnsLeft == 0 ? styles.expiredButton : styles.removeButton
     
     const updateNote = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        setComment(e.target.value)
+        if(e && e.target.value){
+            setComment(e.target.value)
+        }
     }
 
     const updateExpire = (e: ChangeEvent<HTMLInputElement>) => {
