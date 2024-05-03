@@ -1,0 +1,16 @@
+.parentDiv{
+    margin: 4px 6px;
+}
+
+.shortDiv{
+    background-color: black;
+    color: white;
+    width: fit-content;
+    padding: 2px 7px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    font-family: monospace;
+}
+.longDiv{
+    font-size: 0.6rem;
+}

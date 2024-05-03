@@ -1,6 +1,7 @@
 .parentDiv{
     display: block;
     margin-right: 8px;
+    text-align: start;
 }
 
 .characterNameDiv{
@@ -28,10 +29,4 @@
     grid-template-columns: 0.3fr 1.85fr 1.85fr;
     column-gap: 1em;
     padding-bottom: 2px;
-}
-
-/* Remove arrows on number input */
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
 }

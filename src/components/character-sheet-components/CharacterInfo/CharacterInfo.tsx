@@ -91,6 +91,7 @@ function CharacterInfo(){
                     className={styles.characterNameBar}
                     value={characterName}
                     onChange={handleCharacterName}
+                    spellCheck={false}
                 />
             </div>
 
@@ -102,6 +103,7 @@ function CharacterInfo(){
                         className={styles.infoInput}
                         value={classLevel}
                         onChange={handleClassLevel}
+                        spellCheck={false}
                     />
                     <div>CLASS/LEVEL</div>
                 </div>
@@ -111,6 +113,7 @@ function CharacterInfo(){
                         className={styles.infoInput}
                         value={race}
                         onChange={handleRace}
+                        spellCheck={false}
                     />
                     <div>RACE</div>
                 </div>
@@ -120,6 +123,7 @@ function CharacterInfo(){
                         className={styles.infoInput}
                         value={theme}
                         onChange={handleTheme}
+                        spellCheck={false}
                     />
                     <div>THEME</div>
                 </div>
@@ -134,6 +138,7 @@ function CharacterInfo(){
                         className={styles.infoInput}
                         value={size}
                         onChange={handleSize}
+                        spellCheck={false}
                     />
                     <div>SIZE</div>
                 </div>
@@ -152,6 +157,7 @@ function CharacterInfo(){
                         className={styles.infoInput}
                         value={gender}
                         onChange={handleGender}
+                        spellCheck={false}
                     />
                     <div>GENDER</div>
                 </div>
@@ -161,6 +167,7 @@ function CharacterInfo(){
                         className={styles.infoInput}
                         value={home}
                         onChange={handleHome}
+                        spellCheck={false}
                     />
                     <div>HOME WORLD</div>
                 </div>
@@ -175,6 +182,7 @@ function CharacterInfo(){
                         className={styles.infoInput}
                         value={alignment}
                         onChange={handleAlignment}
+                        spellCheck={false}
                     />
                     <div>ALIGNMENT</div>
                 </div>
@@ -184,6 +192,7 @@ function CharacterInfo(){
                         className={styles.infoInput}
                         value={diety}
                         onChange={handleDiety}
+                        spellCheck={false}
                     />
                     <div>DIETY</div>
                 </div>
@@ -193,6 +202,7 @@ function CharacterInfo(){
                         className={styles.infoInput}
                         value={player}
                         onChange={handlePlayer}
+                        spellCheck={false}
                     />
                     <div>PLAYER</div>
                 </div>

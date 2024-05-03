@@ -6,7 +6,11 @@ function DescriptionBlock(){
     return(
         <div className={styles.parentDiv}>
             <SheetLabel sheetLabelText='DESCRIPTION' />
-            <textarea name="description" id={styles.descriptionID}/>
+            <textarea 
+                name="description"
+                id={styles.descriptionID}
+                spellCheck={false}
+            />
         </div>
     )
 }
