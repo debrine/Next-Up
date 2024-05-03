@@ -1,5 +1,5 @@
 import styles from './CharacterSheet.module.css'
-import SheetLabel from './CharacterSheet-Components/Labels/SheetLabel.tsx'
+import SheetLabel from '../../components/character-sheet-components/labels/SheetLabel.tsx'
 import { ChangeEvent, useState } from 'react'
 
 function CharacterSheet(){
@@ -211,6 +211,16 @@ function CharacterSheet(){
                     <textarea name="description" id={styles.descriptionID}/>
                 </div>
             </div>
+            <div className={styles.statArea}>
+                <div className={styles.leftSide}>
+
+                </div>
+
+                <div className={styles.rightSide}>
+
+                </div>
+            </div>
+            
         </div>
     )
 }
