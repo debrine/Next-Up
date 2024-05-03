@@ -4,7 +4,6 @@ import LoginTextField from '../../components/login-components/LoginTextField.tsx
 import { useState } from 'react'
 
 function Login(){
-
     const [loggedIn, setLoggedIn] = useState(false)
 
     const testFunction = () => {

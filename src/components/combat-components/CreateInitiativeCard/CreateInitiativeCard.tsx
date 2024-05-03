@@ -19,8 +19,8 @@ function CreateInitiativeCard(){
         }
     }
 
-    const updateCharacterName = (e: ChangeEvent<HTMLInputElement>) => {
-        if(e && e.target.value){
+    const updateInitiativeCharacterName = (e: ChangeEvent<HTMLInputElement>) => {
+        if(e){
             setName(e.target.value)
         }
     }
@@ -46,9 +46,9 @@ function CreateInitiativeCard(){
             <div>
                 <input 
                     value={name} 
-                    onChange={updateCharacterName} 
+                    onChange={updateInitiativeCharacterName} 
                     placeholder='Enter Name'
-                    className={styles.characterName}
+                    className={styles.initiativeCharacterName}
                 />
             </div>
             {noteList}
