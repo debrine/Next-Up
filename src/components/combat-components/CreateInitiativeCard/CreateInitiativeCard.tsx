@@ -41,11 +41,11 @@ function CreateInitiativeCard(){
     function nextTurn(){
         if(turn === testArray.length){
             // turnReset is working when assigned to a button, but not in this statement.
-            turnReset
+            turnReset()
             console.log(`Resetting ${turn}`)
         } else{
             increaseTurnCount(1)
-            console.log('Adding')
+            console.log(`Adding ${turn}`)
         }
     }
     
@@ -74,7 +74,7 @@ function CreateInitiativeCard(){
                 <button className={styles.addCharacter}>Add</button>
             </div>
             <button onClick={nextTurn}>
-                Next turn {testArray[turn]}
+                Next turn {turn}
             </button>
         </div>
     )
