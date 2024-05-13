@@ -1,6 +1,7 @@
 import styles from './CreateInitiativeCard.module.css'
 import {ChangeEvent, useState} from 'react'
 import CharacterNoteField from '../CharacterNoteField/CharacterNoteField.tsx'
+import { useTurnCounterStore } from '../../../global-values/useTurnCounterStore.tsx'
 
 
 function CreateInitiativeCard(){
@@ -10,8 +11,12 @@ function CreateInitiativeCard(){
     const [noteList, setNoteList] = useState<JSX.Element[]>([])
     // temp to test, eventually a variable will be set to the place of the component in the array to determine turn order
     const testArray: string[] = ['0','1','2','3','4','5']
-    const [currentTurn, setCurrentTurn] = useState<number>(0)
-    
+    // const [currentTurn, setCurrentTurn] = useState<number>(0)
+    const {turn, increaseTurnCount, turnReset} = useTurnCounterStore((state)=>({
+        turn: state.turn,
+        increaseTurnCount: state.increaseTurnCount,
+        turnReset: state.turnReset
+    }))
 
     const selectBackgroundColor = (e: ChangeEvent<HTMLInputElement>) => {
         if(e && e.target.value){
@@ -34,10 +39,12 @@ function CreateInitiativeCard(){
     }
     
     function nextTurn(){
-        if(currentTurn === testArray.length){
-            setCurrentTurn(0)
+        if(turn === testArray.length){
+            turnReset
+            console.log(`Resetting ${turn}`)
         } else{
-            setCurrentTurn(c=> c+1)
+            increaseTurnCount(1)
+            console.log('Adding')
         }
     }
     
@@ -66,7 +73,7 @@ function CreateInitiativeCard(){
                 <button className={styles.addCharacter}>Add</button>
             </div>
             <button onClick={nextTurn}>
-                Next turn {currentTurn}
+                Next turn {testArray[turn]}
             </button>
         </div>
     )
