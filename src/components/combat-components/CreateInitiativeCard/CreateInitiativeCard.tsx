@@ -40,6 +40,7 @@ function CreateInitiativeCard(){
     
     function nextTurn(){
         if(turn === testArray.length){
+            // turnReset is working when assigned to a button, but not in this statement.
             turnReset
             console.log(`Resetting ${turn}`)
         } else{
