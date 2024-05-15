@@ -5,48 +5,7 @@ import AbilityScoreType from './AbilityScoreType/AbilityScoreType.tsx'
 import ScoreModifierInput from './ScoreModifierInput/ScoreModifierInput.tsx'
 
 function AbilityScoreBlock(){
-    // const [scoreStr, setScoreStr] = useState<number>(10)
-    // const [scoreDex, setScoreDex] = useState<number>(10)
-    // const [scoreCon, setScoreCon] = useState<number>(10)
-    // const [scoreInt, setScoreInt] = useState<number>(10)
-    // const [scoreWis, setScoreWis] = useState<number>(10)
-    // const [scoreCha, setScoreCha] = useState<number>(10)
-
-    // const handleScoreStr = (e: ChangeEvent<HTMLInputElement>) => {
-    //     if(e && +e.target.value){
-    //         setScoreStr(+e.target.value)
-    //     }
-    // }
-
-    // const handleScoreDex = (e: ChangeEvent<HTMLInputElement>) => {
-    //     if(e && +e.target.value){
-    //         setScoreDex(+e.target.value)
-    //     }
-    // }
-
-    // const handleScoreCon = (e: ChangeEvent<HTMLInputElement>) => {
-    //     if(e && +e.target.value){
-    //         setScoreCon(+e.target.value)
-    //     }
-    // }
-
-    // const handleScoreInt = (e: ChangeEvent<HTMLInputElement>) => {
-    //     if(e && +e.target.value){
-    //         setScoreInt(+e.target.value)
-    //     }
-    // }
-
-    // const handleScoreWis = (e: ChangeEvent<HTMLInputElement>) => {
-    //     if(e && +e.target.value){
-    //         setScoreWis(+e.target.value)
-    //     }
-    // }
-
-    // const handleScoreCha = (e: ChangeEvent<HTMLInputElement>) => {
-    //     if(e && +e.target.value){
-    //         setScoreCha(+e.target.value)
-    //     }
-    // }
+    
 
     return(
         <div className={styles.parentDiv}>
