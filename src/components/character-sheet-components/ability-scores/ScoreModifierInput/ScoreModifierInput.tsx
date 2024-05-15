@@ -1,5 +1,5 @@
-import { ChangeEvent, useState } from 'react'
 import styles from './ScoreModifierInput.module.css'
+import { useForm } from 'react-hook-form'
 
 type ScoreModifierInputProps = {
     heading: string,
@@ -9,48 +9,9 @@ function ScoreModifierInput({
     heading,
     defaultValue
 }: ScoreModifierInputProps){
-    const [scoreStr, setScoreStr] = useState<number>(defaultValue)
-    const [scoreDex, setScoreDex] = useState<number>(defaultValue)
-    const [scoreCon, setScoreCon] = useState<number>(defaultValue)
-    const [scoreInt, setScoreInt] = useState<number>(defaultValue)
-    const [scoreWis, setScoreWis] = useState<number>(defaultValue)
-    const [scoreCha, setScoreCha] = useState<number>(defaultValue)
-
-    const handleScoreStr = (e: ChangeEvent<HTMLInputElement>) => {
-        if(e && +e.target.value){
-            setScoreStr(+e.target.value)
-        }
-    }
-
-    const handleScoreDex = (e: ChangeEvent<HTMLInputElement>) => {
-        if(e && +e.target.value){
-            setScoreDex(+e.target.value)
-        }
-    }
-
-    const handleScoreCon = (e: ChangeEvent<HTMLInputElement>) => {
-        if(e && +e.target.value){
-            setScoreCon(+e.target.value)
-        }
-    }
-
-    const handleScoreInt = (e: ChangeEvent<HTMLInputElement>) => {
-        if(e && +e.target.value){
-            setScoreInt(+e.target.value)
-        }
-    }
-
-    const handleScoreWis = (e: ChangeEvent<HTMLInputElement>) => {
-        if(e && +e.target.value){
-            setScoreWis(+e.target.value)
-        }
-    }
-
-    const handleScoreCha = (e: ChangeEvent<HTMLInputElement>) => {
-        if(e && +e.target.value){
-            setScoreCha(+e.target.value)
-        }
-    }
+    const {
+        register
+    } = useForm();
 
     return(
         <div className={styles.parentDiv}>
@@ -59,33 +20,46 @@ function ScoreModifierInput({
             </div>
             <input 
                 type="number"
-                value={scoreStr}
-                onChange={handleScoreStr}
+                {
+                    ...register('scoreStr')
+                    
+                }
+                defaultValue={defaultValue}
             />
             <input 
                 type="number"
-                value={scoreDex}
-                onChange={handleScoreDex}
+                {
+                    ...register('scoreDex')
+                }
+                defaultValue={defaultValue}
             />
             <input 
                 type="number"
-                value={scoreCon}
-                onChange={handleScoreCon}
+                {
+                    ...register('scoreCon')
+                }
+                defaultValue={defaultValue}
             />
             <input 
                 type="number"
-                value={scoreInt}
-                onChange={handleScoreInt}
+                {
+                    ...register('scoreInt')
+                }
+                defaultValue={defaultValue}
             />
             <input 
                 type="number"
-                value={scoreWis}
-                onChange={handleScoreWis}
+                {
+                    ...register('scoreWis')
+                }
+                defaultValue={defaultValue}
             />
             <input 
                 type="number"
-                value={scoreCha}
-                onChange={handleScoreCha}
+                {
+                    ...register('scoreCha')
+                }
+                defaultValue={defaultValue}
             />
         </div>
     )
