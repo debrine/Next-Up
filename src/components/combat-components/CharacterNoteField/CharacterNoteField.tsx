@@ -1,5 +1,7 @@
+import { useForm } from 'react-hook-form'
+import { useTurnCounterStore } from '../../../global-values/useTurnCounterStore.ts'
 import styles from './CharacterNoteField.module.css'
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, useEffect } from 'react'
 
 type CharacterNoteFieldProps ={
     id: string
@@ -8,24 +10,30 @@ type CharacterNoteFieldProps ={
 function CharacterNoteField({
     id
 }: CharacterNoteFieldProps){
+    const {
+        register
+    } = useForm()
 
-    const [comment, setComment] = useState('')
     const [turnsLeft, setTurnsLeft] = useState(0)
+
+    const turn = useTurnCounterStore((state) =>({
+        turn: state.turn
+    }))
 
 
     let buttonStyle = turnsLeft == 0 ? styles.expiredButton : styles.removeButton
-    
-    const updateNote = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        if(e && e.target.value){
-            setComment(e.target.value)
-        }
-    }
 
     const updateExpire = (e: ChangeEvent<HTMLInputElement>) => {
         if (+e.target.value >= 0){
             setTurnsLeft(+e.target.value)
         }
     }
+
+    useEffect(()=>{
+        if(turnsLeft > 0){
+            setTurnsLeft(turnsLeft - 1)
+        }
+    },[turn])
 
     function removeNote(){
         const noteToRemove = (document.getElementById(id) as HTMLDivElement)
@@ -36,8 +44,9 @@ function CharacterNoteField({
     return(
         <div className={styles.commentContainer} id={id}>
             <textarea 
-                value={comment}
-                onChange={updateNote}
+                {
+                    ...register('comment')
+                }
                 placeholder='Character Notes'
             />
             <div className={styles.expireContainer}>

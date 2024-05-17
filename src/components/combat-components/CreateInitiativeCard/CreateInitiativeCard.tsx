@@ -1,7 +1,7 @@
 import styles from './CreateInitiativeCard.module.css'
 import {ChangeEvent, useState} from 'react'
 import CharacterNoteField from '../CharacterNoteField/CharacterNoteField.tsx'
-import { useTurnCounterStore } from '../../../global-values/useTurnCounterStore.tsx'
+import { useTurnCounterStore } from '../../../global-values/useTurnCounterStore.ts'
 
 
 function CreateInitiativeCard(){
