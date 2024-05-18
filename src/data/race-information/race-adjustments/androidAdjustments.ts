@@ -1,6 +1,6 @@
 import { useAbilityScore } from "../../../global-values/character-stats/useAbilityScore.ts";
 
- export function androidAdjustments(){
+ export default function androidAdjustments(){
     // Ability Score adjustments
     const {dex, dexterityScore, int, intelligenceScore, cha, charismaScore} = useAbilityScore((state)=>({
         dex: state.dex,
