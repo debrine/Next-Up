@@ -1,4 +1,4 @@
-import { useAbilityScore } from "../../../global-values/character-stats/useAbilityScore.ts";
+import { useAbilityScore } from "../../../../global-values/character-stats/useAbilityScore.ts";
 
 export default function humanAdjustments(option: string){
     // Attribute will be taken by selecting from a dropdown list.

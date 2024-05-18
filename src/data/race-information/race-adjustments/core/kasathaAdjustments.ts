@@ -1,4 +1,4 @@
-import { useAbilityScore } from "../../../global-values/character-stats/useAbilityScore.ts";
+import { useAbilityScore } from "../../../../global-values/character-stats/useAbilityScore.ts";
 
 export default function kasathaAdjustments(){
     const {
