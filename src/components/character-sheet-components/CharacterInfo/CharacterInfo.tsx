@@ -2,11 +2,15 @@ import styles from './CharacterInfo.module.css'
 import SheetLabel from '../labels/SheetLabel.tsx'
 // import { ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useCharacterRace } from '../../../global-values/character-stats/useCharacterRace.ts';
 
 function CharacterInfo(){
     const {
         register
     } = useForm();
+    const { race } = useCharacterRace((state)=>({
+        race: state.race
+    }))
 
     // const [speed, setSpeed] = useState<number>(30)
 
@@ -19,6 +23,7 @@ function CharacterInfo(){
 
     return(
         <div className={styles.parentDiv}>
+            {race}
             <div className={styles.characterNameDiv}>
                 <SheetLabel sheetLabelText='CHARACTER NAME' />
                 <input 

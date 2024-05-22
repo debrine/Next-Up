@@ -1,14 +1,6 @@
-const SoldierClassDefaults: {
-    hitStaminaPoints: number,
-    keyAbilityScore: string[],
-    classSkills: string[],
-    skillPointsPerLevel: number,
-    armorProficiencies: string[],
-    weaponProficiencies: string[],
-    babAdvancement: number,
-    goodSavingThrows: string[],
-    badSavingThrows: string[]
-} = {
+import { ClassDefaultTypes } from "../all-class-types/classDefaultTypes.ts"
+
+const SoldierClassDefaults: ClassDefaultTypes = {
 
     hitStaminaPoints: 7,
 

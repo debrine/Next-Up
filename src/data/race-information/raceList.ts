@@ -52,7 +52,7 @@ export let raceList: {
             'Wisdom',
             'Charisma']
         ],
-        raceFunction: humanAdjustments // Check on this. Need to confirm that it takes the option when called.
+        raceFunction: (option) => humanAdjustments(option) // Check on this. Need to confirm that it takes the option when called.
     },
     {
         raceSource: 'Core',
@@ -89,7 +89,7 @@ export let raceList: {
             ['Korasha', 'Damaya'],
             ['skills here, will add later']
         ],
-        raceFunction: lashuntaAdjustments
+        raceFunction: (option) => lashuntaAdjustments(option)
     },
     {
         raceSource: 'Core',

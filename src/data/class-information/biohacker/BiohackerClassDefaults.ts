@@ -1,14 +1,6 @@
-const OperativeClassDefaults: {
-    hitStaminaPoints: number,
-    keyAbilityScore: string[],
-    classSkills: string[],
-    skillPointsPerLevel: number,
-    armorProficiencies: string[],
-    weaponProficiencies: string[],
-    babAdvancement: number,
-    goodSavingThrows: string[],
-    badSavingThrows: string[]
-} = {
+import { ClassDefaultTypes } from "../all-class-types/classDefaultTypes.ts"
+
+const BiohackerClassDefaults: ClassDefaultTypes = {
 
     hitStaminaPoints: 6,
 
@@ -41,7 +33,7 @@ const OperativeClassDefaults: {
     ],
 
     weaponProficiencies: [
-        'basic weapons',
+        'basic melee weapons',
         'small arms',
         'sniper weapons'
     ],
@@ -49,13 +41,13 @@ const OperativeClassDefaults: {
     babAdvancement: 0.75,
     
     goodSavingThrows: [
-        'Ref',
-        'Will'
+        'Fort'
     ],
 
     badSavingThrows: [
-        'Fort',
+        'Ref',
+        'Will'
     ],
 }
 
-export default OperativeClassDefaults
+export default BiohackerClassDefaults
