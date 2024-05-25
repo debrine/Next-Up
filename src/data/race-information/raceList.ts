@@ -16,7 +16,7 @@ export let raceList: {
     hasOptions: boolean,
     optionDescription?: string[],
     optionArray?: [string[], ...any[]],
-    raceFunction: (option: string) => void
+    raceFunction: (option?: string) => void
 }[] = [
     {
         raceSource: 'Core',
@@ -137,3 +137,22 @@ export let raceList: {
         raceFunction: ysokiAdjustments
     }
 ]
+
+// type Race = {
+//     raceSource: string,
+//     raceName: string,
+//     raceHP: number,
+//     raceSize: string,
+//     raceAbilityName: string[],
+//     raceAbilityDescription: string[],
+//     hasOptions: boolean,
+//     optionDescription?: string[],
+//     optionArray?: [string[], ...any[]],
+//     raceFunction: (option?: string) => void
+// }
+
+// const raceMap: {
+//     [raceName: string]: Race
+// } = {
+
+// }

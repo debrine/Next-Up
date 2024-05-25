@@ -1,6 +1,10 @@
 import { useAbilityScore } from "../../../../global-values/character-stats/useAbilityScore.ts";
 
-export default function humanAdjustments(option: string){
+export default function humanAdjustments(option?: string){
+    if(option == undefined){
+        return
+    }
+
     // Attribute will be taken by selecting from a dropdown list.
     const {
         str, strengthScore,
@@ -24,18 +28,25 @@ export default function humanAdjustments(option: string){
         charismaScore: state.charismaScore
     }))
 
-    if(option === 'Strength'){
-        strengthScore(str + 2)
-    } else if(option === 'Dexterity'){
-        dexterityScore(dex + 2)
-    } else if(option === 'Constitution'){
-        constitutionScore(con + 2)
-    } else if(option === 'Intelligence'){
-        intelligenceScore(int + 2)
-    } else if(option === 'Wisdom'){
-        wisdomScore(wis + 2)
-    } else if(option === 'Charisma'){
-        charismaScore(cha + 2)
+    switch (option) {
+        case 'Strength':
+            strengthScore(str + 2);
+            break;
+        case 'Dexterity':
+            dexterityScore(dex + 2);
+            break;
+        case 'Constitution':
+            constitutionScore(con + 2)
+            break;
+        case 'Intelligence':
+            intelligenceScore(int + 2)
+            break;
+        case 'Wisdom':
+            wisdomScore(wis + 2)
+            break;
+        case 'Charisma':
+            charismaScore(cha + 2)
+            break;
     }
 
     // Humans also get an extra feat at 1st level, and bonus skill rank per level.

@@ -3,19 +3,22 @@ import CharacterInfo from '../../components/character-sheet-components/Character
 import DescriptionBlock from '../../components/character-sheet-components/DescriptionBlock/DescriptionBlock.tsx'
 import LeftSide from '../../components/character-sheet-components/LeftSide/LeftSide.tsx'
 import RightSide from '../../components/character-sheet-components/RightSide/RightSide.tsx'
-import { useCharacterRace } from '../../global-values/character-stats/useCharacterRace.ts'
+// import { useCharacterRace } from '../../global-values/character-stats/useCharacterRace.ts'
 import { ChangeEvent } from 'react'
+import { useLocalStorage } from '../../data/useLocalStorage.ts'
 
 function CharacterSheet(){
-    const { race, selectedCharacterRace} = useCharacterRace((state)=>({
-        race: state.race,
-        selectedCharacterRace: state.selectedCharacterRace
-    }))
-
+    
+    const [characterRace, setCharacterRace] = useLocalStorage('characterRace')
+    
+    function useCharacterRace(e: ChangeEvent<HTMLInputElement>){
+        setCharacterRace(e.target.value)
+        console.log(e.target.value)
+    }
+    
     return(
         <div className={styles.characterSheetMainDiv}>
-            {race}
-        <input type="text" placeholder='Race' onChange={(e)=>selectedCharacterRace(e.target.value)}/>
+        <input type="text" placeholder='Race' onChange={(e)=> useCharacterRace(e)}/>
 
             <div className={styles.characterInfoDescriptionBlock}>
 

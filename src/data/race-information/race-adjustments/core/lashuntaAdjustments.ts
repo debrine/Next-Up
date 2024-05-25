@@ -1,6 +1,9 @@
 import { useAbilityScore } from "../../../../global-values/character-stats/useAbilityScore.ts";
 
-export default function lashuntaAdjustments(option: string){
+export default function lashuntaAdjustments(option?: string){
+    if(option == undefined){
+        return
+    }
     const {
         str, strengthScore,
         con, constitutionScore,

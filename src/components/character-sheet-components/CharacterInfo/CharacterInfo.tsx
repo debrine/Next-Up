@@ -11,6 +11,7 @@ function CharacterInfo(){
     const { race } = useCharacterRace((state)=>({
         race: state.race
     }))
+    const characterRace = JSON.parse(localStorage.getItem('characterRace')!)
 
     // const [speed, setSpeed] = useState<number>(30)
 
@@ -23,7 +24,6 @@ function CharacterInfo(){
 
     return(
         <div className={styles.parentDiv}>
-            {race}
             <div className={styles.characterNameDiv}>
                 <SheetLabel sheetLabelText='CHARACTER NAME' />
                 <input 
@@ -57,6 +57,7 @@ function CharacterInfo(){
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
+                        value={characterRace== null? '': characterRace }
                     />
                     <div>RACE</div>
                 </div>
