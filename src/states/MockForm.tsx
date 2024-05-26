@@ -27,7 +27,7 @@ function MockForm(){
             alignment,
             diety
         })
-    },[race, chClass,theme,gender,homeWorld,alignment,diety])
+    },[race, chClass,theme,gender,homeWorld,alignment,diety, characterBasicInfo])
 
     function useCharacterRace(e: ChangeEvent<HTMLInputElement>){
         setRace(e.target.value)
