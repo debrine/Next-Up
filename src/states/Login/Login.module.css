@@ -1,0 +1,40 @@
+.parentDiv{
+    position: fixed;
+    top:50%;
+    left: 50%;
+    height: 190px;
+    width: 300px;
+    transform: translate(-50%, -50%);
+    background-color: hsl(251, 72%, 37%);
+    color: rgb(207, 183, 230);
+    border-radius: 16px;
+    transition: 
+        top 2s,
+        left 2s,
+        background-color 2s ease,
+        height 2s ease,
+        width 2s ease,
+        position 2s,
+        border-radius 2s,
+        transform 2s;
+}
+
+.hiddenDiv{
+    background-color: hsl(182, 48%, 62%);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 175px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translate(0, 0);
+    border-radius: 0 16px 16px 0;
+}
+
+.loginContainer{
+    margin: 30px;
+    padding: 2px;
+}

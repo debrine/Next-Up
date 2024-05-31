@@ -1,0 +1,27 @@
+.parentDiv textarea{
+    resize: none;
+    width: 100%;
+    height: 93px;
+    margin-left: 2px;
+    padding: 4px;
+}
+
+/* Scrollbar */
+.parentDiv textarea::-webkit-scrollbar{
+    width: 8px;
+}
+.parentDiv textarea::-webkit-scrollbar-track {
+    margin: 2px;
+    background: none;
+    border-radius: 5px;
+}
+.parentDiv textarea::-webkit-scrollbar-thumb {
+    border: 1px solid #555;
+    border-radius: 0.5em;
+}
+.parentDiv textarea::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+.parentDiv textarea::-webkit-scrollbar-thumb {
+background: #888; 
+}

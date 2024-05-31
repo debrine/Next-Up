@@ -1,0 +1,32 @@
+.characterSheetMainDiv{
+    font-size: 0.8rem;
+    width: fit-content;
+}
+
+.characterInfoDescriptionBlock{
+    display: flex;
+    max-width: 900px;
+}
+.characterInfoDescriptionBlock input{
+    border: none;
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+input{
+    font-size: 1rem;
+}
+textarea{
+    font-size: 1rem;
+}
+
+.statArea{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+}
+
+/* Remove arrows on number input */
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
