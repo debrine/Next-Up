@@ -7,7 +7,7 @@ function MockForm(){
     // See if React-Hook-Form could handle these somehow?
     // See if this can be done without also making the state every time, as it's only needed when calling the value.
 
-    const [characterBasicInfo, setCharacterBasicInfo] = useLocalStorage('characterBasicInfo',{})
+    const [characterBasicInfo, setCharacterBasicInfo] = useLocalStorage('characterBasicInfoTesting',{})
 
     const [race, setRace] = useState<String>('')
     const [chClass, setChClass] = useState<String>('')

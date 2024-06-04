@@ -4,6 +4,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom"
 import CharacterSheet from "./states/CharacterSheet/CharacterSheet.tsx"
 import MockForm from "./states/MockForm.tsx"
 import TempNav from "./states/TempNav.tsx"
+import CreateCharacter from "./states/CreateCharacter/CreateCharacter.tsx"
 
 const Dashboard = ()=>{
   return(
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
         path: '/Next-Up/charactersheet',
         element: <CharacterSheet />
       },
+      {
+        path: '/Next-Up/create-character',
+        element: <CreateCharacter />
+      }
     ]
   }
   

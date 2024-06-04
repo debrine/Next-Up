@@ -9,7 +9,7 @@ function CharacterInfo(){
     } = useForm();
 
     // Testing localStorage
-    const characterInfoObject = JSON.parse(localStorage.getItem('characterBasicInfo')!)
+    const characterInfoObject = JSON.parse(localStorage.getItem('characterBasicInfoTesting')!)
 
     // const [speed, setSpeed] = useState<number>(30)
 
