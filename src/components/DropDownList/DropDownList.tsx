@@ -16,7 +16,6 @@ const DropDownList: React.FC<DropDownProps> = ({
 //   Handle passing the option back to the parent component
   const onClickHandler = (option: string): void => {
     optionSelection(option);
-    console.log(option)
   };
 
   useEffect(() => {

@@ -30,7 +30,6 @@ function CreateCharacterOptions({
 
     const optionSelection = (option: string): void => {
         setSelectedOption(option)
-        console.log(option)
     }
 
     return (
@@ -42,10 +41,8 @@ function CreateCharacterOptions({
             onClick={(): void => toggleDropDown()}
             onBlur={(e: React.FocusEvent<HTMLButtonElement>): void => dismissHandler(e)}
         >
-            {optionType}
-        </button>
-        <div>{selectedOption ? 'Selected: '+ selectedOption : "Nothing Selected"}</div>
-        {showDropDown && (
+        <div>{selectedOption ? 'Race: '+ selectedOption : "Race..."}</div>
+            {showDropDown && (
             <DropDownList 
                 optionsArray={races()}
                 showDropDown={false}
@@ -53,6 +50,8 @@ function CreateCharacterOptions({
                 optionSelection={optionSelection}
             />
         )}
+        </button>
+        
     </div>
     )
 }
