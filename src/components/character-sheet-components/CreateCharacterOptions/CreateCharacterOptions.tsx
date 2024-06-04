@@ -4,18 +4,18 @@ import DropDownList from '../../DropDownList/DropDownList';
 
 type createCharacterOptionsProps = {
     optionType: string
+    optionArray: string[]
 }
 
 function CreateCharacterOptions({
-    optionType
+    optionType,
+    optionArray
 }: createCharacterOptionsProps) {
 
     const [showDropDown, setShowDropDown] = useState<boolean>(false);
     const [selectedOption, setSelectedOption] = useState<string>('');
 
-    const races = () => {
-        return ["Android", "Human", "Kasatha", "Lashunta", "Shirren", "Vesk", "Ysoki"];
-    };
+
 
     // Toggle Drop Down
     const toggleDropDown = ()=>{
@@ -44,7 +44,7 @@ function CreateCharacterOptions({
         <div>{selectedOption ? 'Race: '+ selectedOption : "Race..."}</div>
             {showDropDown && (
             <DropDownList 
-                optionsArray={races()}
+                optionsArray={optionArray}
                 showDropDown={false}
                 toggleDropDown={(): void=> toggleDropDown()}
                 optionSelection={optionSelection}
