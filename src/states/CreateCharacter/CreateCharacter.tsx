@@ -24,6 +24,7 @@ function CreateCharacter() {
 
     function setBasicInfoHandler(){
         setCharacterBasicInfo({
+          ...characterBasicInfo,
             race,
             chClass,
             theme,
@@ -39,8 +40,15 @@ function CreateCharacter() {
 
   return (
     <div className={styles.parentDiv}>
-        <CreateCharacterOptions optionType='Race' optionArray={raceArray} setFunction={setRace}/>
-        <button onClick={setBasicInfoHandler}>Set Values (Temp)</button>
+      <p>Only Race is working currently. The rest are in place to test.</p>
+      <CreateCharacterOptions optionType='Race' optionArray={raceArray} setFunction={setRace}/>
+      <CreateCharacterOptions optionType='Class' optionArray={raceArray} setFunction={setChClass}/>
+      <CreateCharacterOptions optionType='Theme' optionArray={raceArray} setFunction={setTheme}/>
+      <CreateCharacterOptions optionType='Gender' optionArray={raceArray} setFunction={setGender}/>
+      <CreateCharacterOptions optionType='HomeWorld' optionArray={raceArray} setFunction={setHomeWorld}/>
+      <CreateCharacterOptions optionType='Alignment' optionArray={raceArray} setFunction={setAlignment}/>
+      <CreateCharacterOptions optionType='Diety' optionArray={raceArray} setFunction={setDiety}/>
+      <button onClick={setBasicInfoHandler}>Set Values (Temp)</button>
     </div>
   )
 }
