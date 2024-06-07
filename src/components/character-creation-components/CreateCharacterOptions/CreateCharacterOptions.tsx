@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import styles from './CreateCharacterOptions.module.css'
 import DropDownList from '../../DropDownList/DropDownList';
-import { useLocalStorage } from '../../../data/useLocalStorage';
 
 type createCharacterOptionsProps = {
     optionType: string
@@ -15,19 +14,10 @@ function CreateCharacterOptions({
     setFunction
 }: createCharacterOptionsProps) {
 
-    // Save option selected to local storage
-    const [characterBasicInfo, setCharacterBasicInfo] = useLocalStorage('characterBasicInfo',{})
-
     const [showDropDown, setShowDropDown] = useState<boolean>(false);
     const [selectedOption, setSelectedOption] = useState<string>('');
 
-    // Saves as "optionType":"Kasatha" instead of "Race":"Kasatha". Would prefer to have these values set here dynamically instead of individually in the CreateCharacter.tsx file.
-    function saveOptionHandler(){
-        setCharacterBasicInfo({
-            ...characterBasicInfo,
-            optionType: selectedOption
-        })
-    }
+    
     
     // Toggle Drop Down
     const toggleDropDown = ()=>{
@@ -66,7 +56,6 @@ function CreateCharacterOptions({
             />
         )}
         </button>
-        <button onClick={saveOptionHandler}>Set value (Not working properly)</button>
         
     </div>
     )

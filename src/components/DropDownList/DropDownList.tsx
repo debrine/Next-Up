@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+
 
 type DropDownProps = {
   optionsArray: string[];
@@ -9,18 +9,14 @@ type DropDownProps = {
 
 const DropDownList: React.FC<DropDownProps> = ({
   optionsArray,
+  showDropDown,
   optionSelection,
 }: DropDownProps): JSX.Element => {
-  const [showDropDown, setShowDropDown] = useState<boolean>(false);
 
-//   Handle passing the option back to the parent component
+//   Handle setting the option from the parent component
   const onClickHandler = (option: string): void => {
     optionSelection(option);
   };
-
-  useEffect(() => {
-    setShowDropDown(showDropDown);
-  }, [showDropDown]);
 
   return (
     <>

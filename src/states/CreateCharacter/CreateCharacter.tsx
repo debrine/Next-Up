@@ -1,54 +1,109 @@
-import { useState } from 'react'
-import CreateCharacterOptions from '../../components/character-sheet-components/CreateCharacterOptions/CreateCharacterOptions'
-import { raceList } from '../../data/race-information/raceList'
-import { useLocalStorage } from '../../data/useLocalStorage'
+import {  useEffect, useRef, useState } from 'react'
+import CreateCharacterOptions from '../../components/character-creation-components/CreateCharacterOptions/CreateCharacterOptions.tsx'
+import { raceList } from '../../data/race-information/raceList.ts'
+import { useLocalStorage } from '../../data/useLocalStorage.ts'
 import styles from './CreateCharacter.module.css'
+import CharacterCreationName from '../../components/character-creation-components/CharacterCreationName/CharacterCreationName.tsx'
+
+/*
+  Set everything in a temp state, then when character is confirmed, set it all within 
+  Needed for character creation:
+    Name first (This way we can assign the name key to other things in local storage)
+    Class
+      Followed by class options, if any.
+    Theme
+    Set Ability Scores
+    First Feat
+    The rest can be added after the fact.
+*/
+
 
 function CreateCharacter() {
     let raceArray: string[] = raceList.map((race)=>{
         return(race.raceName)
-    })
+    });
 
-    /*
-    Maybe temporary. See note in CreateCharacterOptions.tsx****************************************************************************
-    */
     const [characterBasicInfo, setCharacterBasicInfo] = useLocalStorage('characterBasicInfo',{})
 
     const [race, setRace] = useState<String>('')
     const [chClass, setChClass] = useState<String>('')
     const [theme, setTheme] = useState<String>('')
-    const [gender, setGender] = useState<String>('')
-    const [homeWorld, setHomeWorld] = useState<String>('')
-    const [alignment, setAlignment] = useState<String>('')
-    const [diety, setDiety] = useState<String>('')
+    const [componentArrayPosition, setComponentArrayPosition] = useState<number>(0)
 
-    function setBasicInfoHandler(){
+    // Character Name **********************
+    // Set the character name in local storage to an array of objects.
+    // Set the default array
+    let nameArray = useRef<{characterName: string, id: string}[]>([])
+    // Find if the array exists.
+    useEffect(()=>{
+        if(localStorage.getItem('charactersAvailable') != null){
+            nameArray.current = JSON.parse(localStorage.getItem('charactersAvailable')!)
+        }
+    }, [])
+    
+
+    const [inputName, setInputName] = useState<string>('')
+        
+    const [, setCharacterNames] = useLocalStorage('charactersAvailable')
+
+    /*
+      Function to add the character.
+    */
+    function addCharacterHandler(){
+      // Generate Key to point the character selected to.
+        const keyID: string = crypto.randomUUID()
+        nameArray.current = ([
+                ...nameArray.current,
+                {
+                    characterName: inputName,
+                    id: keyID
+                }
+            ])
+        setCharacterNames( nameArray.current )
         setCharacterBasicInfo({
           ...characterBasicInfo,
             race,
             chClass,
             theme,
-            gender,
-            homeWorld,
-            alignment,
-            diety
         })
     }
-    /*
-    Maybe temporary. See note in CreateCharacterOptions.tsx****************************************************************************
-    */
+
+
+    let componentArray: JSX.Element[] = [
+      <CharacterCreationName setInputName={setInputName} inputName={inputName}/>,
+      <CreateCharacterOptions optionType='Race' optionArray={raceArray} setFunction={setRace}/>,
+      <CreateCharacterOptions optionType='Class' optionArray={raceArray} setFunction={setChClass}/>,
+      <CreateCharacterOptions optionType='Theme' optionArray={raceArray} setFunction={setTheme}/>
+    ]
+
+    // function setBasicInfoHandler(){
+    //     setCharacterBasicInfo({
+    //       ...characterBasicInfo,
+    //         race,
+    //         chClass,
+    //         theme,
+    //     })
+    // }
+
+    function handleNext(){
+      if(componentArrayPosition < componentArray.length-1){
+        setComponentArrayPosition(componentArrayPosition+1)
+      }
+    }
+
+    function handleBack(){
+      if(componentArrayPosition > 0){
+        setComponentArrayPosition(componentArrayPosition-1)
+      }
+    }
+
 
   return (
     <div className={styles.parentDiv}>
-      <p>Only Race is working currently. The rest are in place to test.</p>
-      <CreateCharacterOptions optionType='Race' optionArray={raceArray} setFunction={setRace}/>
-      <CreateCharacterOptions optionType='Class' optionArray={raceArray} setFunction={setChClass}/>
-      <CreateCharacterOptions optionType='Theme' optionArray={raceArray} setFunction={setTheme}/>
-      <CreateCharacterOptions optionType='Gender' optionArray={raceArray} setFunction={setGender}/>
-      <CreateCharacterOptions optionType='HomeWorld' optionArray={raceArray} setFunction={setHomeWorld}/>
-      <CreateCharacterOptions optionType='Alignment' optionArray={raceArray} setFunction={setAlignment}/>
-      <CreateCharacterOptions optionType='Diety' optionArray={raceArray} setFunction={setDiety}/>
-      <button onClick={setBasicInfoHandler}>Set Values (Temp)</button>
+      {componentArray[componentArrayPosition]}
+      <button onClick={handleBack}>Back</button>
+      <button onClick={handleNext}>Next</button>
+      <button onClick={addCharacterHandler}>Set Values (Temp)</button>
     </div>
   )
 }
