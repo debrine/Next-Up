@@ -21,83 +21,112 @@ import CharacterCreationName from '../../components/character-creation-component
 
 function CreateCharacter() {
 
-  // const { register, watch } = useForm()
+  // const { watch } = useForm()
 
-    let raceArray: string[] = raceList.map((race)=>{
-        return(race.raceName)
-    });
+  let raceArray: string[] = raceList.map((race)=>{
+      return(race.raceName)
+  });
 
-    const [race, setRace] = useState<String>('')
-    const [chClass, setChClass] = useState<String>('')
-    const [theme, setTheme] = useState<String>('')
-    const [componentArrayPosition, setComponentArrayPosition] = useState<number>(0)
-    // const [, setTempCharacterInfo] = useLocalStorage(`tempCharacterInfo`)
-    const [, setCharacterBasicInfo] = useLocalStorage(`characterBasicInfo`,{})
-
-    // Character Name **********************
-    // Set the character name in local storage to an array of objects.
-    // Set the default array
-    let nameArray = useRef<{characterName: string, id: string}[]>([])
-    // Find if the array exists.
-    useEffect(()=>{
-        if(localStorage.getItem('charactersAvailable') != null){
-            nameArray.current = JSON.parse(localStorage.getItem('charactersAvailable')!)
-        }
-    }, [])
-
-    // Testing Hook Form *********************************************************************************
-    // useEffect(()=>{
-    //     const subscription = watch((data) =>
-    //         setTempCharacterInfo(data)
-    //     )
-    //     return ()=> subscription.unsubscribe()
-    // },[watch])
-    
-
-    const [inputName, setInputName] = useState<string>('')
-        
-    const [, setCharacterNames] = useLocalStorage('charactersAvailable')
-
-    /*
-      Function to add the character.
-    */
-    function addCharacterHandler(){
-      // Generate Key to point the character selected to.
-      const keyID: string = crypto.randomUUID()
-        nameArray.current = ([
-                ...nameArray.current,
-                {
-                    characterName: inputName,
-                    id: keyID
-                }
-            ])
-        setCharacterNames( nameArray.current )
-        setCharacterBasicInfo({
-            race,
-            chClass,
-            theme,
-        })
+  // Number to give an ID to characterBasicInfo
+  let characterBasicInfo = useRef<[]>([])
+  useEffect(()=>{
+    if(localStorage.getItem('characterBasicInfo') != null){
+      characterBasicInfo.current = JSON.parse(localStorage.getItem('characterBasicInfo')!)
     }
+  })
 
+  const [race, setRace] = useState<String>('')
+  const [chClass, setChClass] = useState<String>('')
+  const [theme, setTheme] = useState<String>('')
+  const [componentArrayPosition, setComponentArrayPosition] = useState<number>(0)
 
-    let componentArray: JSX.Element[] = [
-      <CharacterCreationName setInputName={setInputName} inputName={inputName}/>,
-      <CreateCharacterOptions optionType='Race' optionArray={raceArray} setFunction={setRace}/>,
-      <CreateCharacterOptions optionType='Class' optionArray={raceArray} setFunction={setChClass}/>,
-      <CreateCharacterOptions optionType='Theme' optionArray={raceArray} setFunction={setTheme}/>
-    ]
+  // Temporarily set values to be used before saving to local storage.
+  const [, setTempCharacterInfo] = useLocalStorage(`tempCharacterInfo`, {}) 
+  // Values that will be saved to local storage.
+  const [, setCharacterBasicInfo] = useLocalStorage(`characterBasicInfo`)
 
-    function handleNext(){
-      if(componentArrayPosition < componentArray.length-1){
-        setComponentArrayPosition(componentArrayPosition+1)
+  // Character Name **********************
+  // Set the character name in local storage to an array of objects.
+  // Set the default array
+  let nameArray = useRef<{characterName: string, id: string}[]>([])
+  // Find if the array exists.
+  useEffect(()=>{
+      if(localStorage.getItem('charactersAvailable') != null){
+          nameArray.current = JSON.parse(localStorage.getItem('charactersAvailable')!)
       }
-    }
+  }, [])
 
-    function handleBack(){
-      if(componentArrayPosition > 0){
-        setComponentArrayPosition(componentArrayPosition-1)
+  // Testing Hook Form *********************************************************************************
+  // useEffect(()=>{
+  //     const subscription = watch((data) =>
+  //         setTempCharacterInfo(data)
+  //     )
+  //     return ()=> subscription.unsubscribe()
+  // },[watch])
+  
+
+  const [inputName, setInputName] = useState<string>('')
+  const [, setCharacterNames] = useLocalStorage('charactersAvailable')
+
+  /*
+    Function to add values temporarily
+  */
+  function addTempValuesHandler(){
+  // Generate Key to point the character selected to.
+  const keyID: string = crypto.randomUUID()
+  setTempCharacterInfo({
+    inputName,
+    keyID,
+    race,
+    chClass,
+    theme
+  })
+  }
+
+  /*
+    Function to add the character.
+  */
+  function addCharacterHandler(){
+    // Generate Key to point the character selected to.
+    // const keyID: string = crypto.randomUUID()
+    const tempCharInfo = JSON.parse(localStorage.getItem('tempCharacterInfo')!)
+    setCharacterNames([
+      ...nameArray.current,
+      {
+        characterName: tempCharInfo.inputName,
+        id: tempCharInfo.keyID
       }
+    ])
+    setCharacterBasicInfo([
+      ...characterBasicInfo.current,
+      {
+      keyID: tempCharInfo.keyID,
+      race,
+      chClass,
+      theme,
+      }
+    ])
+  }
+
+
+  let componentArray: JSX.Element[] = [
+    <CharacterCreationName setInputName={setInputName} inputName={inputName}/>,
+    <CreateCharacterOptions optionType='Race' optionArray={raceArray} setFunction={setRace}/>,
+    <CreateCharacterOptions optionType='Class' optionArray={raceArray} setFunction={setChClass}/>,
+    <CreateCharacterOptions optionType='Theme' optionArray={raceArray} setFunction={setTheme}/>
+  ]
+
+  function handleNext(){
+    if(componentArrayPosition < componentArray.length-1){
+      setComponentArrayPosition(componentArrayPosition+1)
     }
+  }
+
+  function handleBack(){
+    if(componentArrayPosition > 0){
+      setComponentArrayPosition(componentArrayPosition-1)
+    }
+  }
 
 
   return (
@@ -105,7 +134,8 @@ function CreateCharacter() {
       {componentArray[componentArrayPosition]}
       <button onClick={handleBack}>Back</button>
       <button onClick={handleNext}>Next</button>
-      <button onClick={addCharacterHandler}>Set Values (Temp)</button>
+      <button onClick={addTempValuesHandler}>Set Values (Temp)</button>
+      <button onClick={addCharacterHandler}>Set Values (Add)</button>
     </div>
   )
 }

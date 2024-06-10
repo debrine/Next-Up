@@ -13,7 +13,7 @@ function CreateCharacterOptions({
     optionArray,
     setFunction
 }: createCharacterOptionsProps) {
-    // const { getValues } = useForm()
+    // const { register, getValues } = useForm()
 
     const [showDropDown, setShowDropDown] = useState<boolean>(false);
     const [selectedOption, setSelectedOption] = useState<string>('');
