@@ -4,6 +4,7 @@ import { raceList } from '../../data/race-information/raceList.ts'
 import { useLocalStorage } from '../../data/useLocalStorage.ts'
 import styles from './CreateCharacter.module.css'
 import CharacterCreationName from '../../components/character-creation-components/CharacterCreationName/CharacterCreationName.tsx'
+// import { useForm } from 'react-hook-form'
 
 /*
   Set everything in a temp state, then when character is confirmed, set it all within 
@@ -20,6 +21,8 @@ import CharacterCreationName from '../../components/character-creation-component
 
 function CreateCharacter() {
 
+  // const { register, watch } = useForm()
+
     let raceArray: string[] = raceList.map((race)=>{
         return(race.raceName)
     });
@@ -28,6 +31,7 @@ function CreateCharacter() {
     const [chClass, setChClass] = useState<String>('')
     const [theme, setTheme] = useState<String>('')
     const [componentArrayPosition, setComponentArrayPosition] = useState<number>(0)
+    // const [, setTempCharacterInfo] = useLocalStorage(`tempCharacterInfo`)
     const [, setCharacterBasicInfo] = useLocalStorage(`characterBasicInfo`,{})
 
     // Character Name **********************
@@ -40,6 +44,14 @@ function CreateCharacter() {
             nameArray.current = JSON.parse(localStorage.getItem('charactersAvailable')!)
         }
     }, [])
+
+    // Testing Hook Form *********************************************************************************
+    // useEffect(()=>{
+    //     const subscription = watch((data) =>
+    //         setTempCharacterInfo(data)
+    //     )
+    //     return ()=> subscription.unsubscribe()
+    // },[watch])
     
 
     const [inputName, setInputName] = useState<string>('')
@@ -74,15 +86,6 @@ function CreateCharacter() {
       <CreateCharacterOptions optionType='Class' optionArray={raceArray} setFunction={setChClass}/>,
       <CreateCharacterOptions optionType='Theme' optionArray={raceArray} setFunction={setTheme}/>
     ]
-
-    // function setBasicInfoHandler(){
-    //     setCharacterBasicInfo({
-    //       ...characterBasicInfo,
-    //         race,
-    //         chClass,
-    //         theme,
-    //     })
-    // }
 
     function handleNext(){
       if(componentArrayPosition < componentArray.length-1){

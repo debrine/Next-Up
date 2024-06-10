@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styles from './CreateCharacterOptions.module.css'
-import DropDownList from '../../DropDownList/DropDownList';
+// import { FieldValues, UseFormRegister, useForm } from 'react-hook-form'
 
 type createCharacterOptionsProps = {
     optionType: string
@@ -13,9 +13,11 @@ function CreateCharacterOptions({
     optionArray,
     setFunction
 }: createCharacterOptionsProps) {
+    // const { getValues } = useForm()
 
     const [showDropDown, setShowDropDown] = useState<boolean>(false);
     const [selectedOption, setSelectedOption] = useState<string>('');
+    // const selectedOption = getValues(optionType)
 
     
     
@@ -48,12 +50,29 @@ function CreateCharacterOptions({
         >
         <div>{selectedOption ? `${optionType}: ${selectedOption}` : `${optionType}...`}</div>
             {showDropDown && (
-            <DropDownList 
-                optionsArray={optionArray}
-                showDropDown={false}
-                toggleDropDown={(): void=> toggleDropDown()}
-                optionSelection={optionSelection}
-            />
+            // <DropDownList 
+            //     optionsArray={optionArray}
+            //     showDropDown={false}
+            //     toggleDropDown={(): void=> toggleDropDown()}
+            //     optionSelection={optionSelection}
+            // />
+            <div className={showDropDown ? 'dropdown' : 'dropdown active'}>
+                {optionArray.map(
+                    (option: string, index: number): JSX.Element => {
+                        return (
+                        <p
+                            key={index}
+                            // {...register(optionType)}
+                            onClick={(): void => {
+                            optionSelection(option);
+                            }}
+                        >
+                            {option}
+                        </p>
+                        );
+                    }
+                )}
+            </div>
         )}
         </button>
         

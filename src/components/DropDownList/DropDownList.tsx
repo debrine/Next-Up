@@ -1,4 +1,4 @@
-
+// Check back to see if this is going to be needed at all later.
 
 type DropDownProps = {
   optionsArray: string[];
@@ -13,11 +13,6 @@ const DropDownList: React.FC<DropDownProps> = ({
   optionSelection,
 }: DropDownProps): JSX.Element => {
 
-//   Handle setting the option from the parent component
-  const onClickHandler = (option: string): void => {
-    optionSelection(option);
-  };
-
   return (
     <>
       <div className={showDropDown ? 'dropdown' : 'dropdown active'}>
@@ -27,7 +22,7 @@ const DropDownList: React.FC<DropDownProps> = ({
               <p
                 key={index}
                 onClick={(): void => {
-                  onClickHandler(option);
+                  optionSelection(option);
                 }}
               >
                 {option}
