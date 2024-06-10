@@ -19,16 +19,16 @@ import CharacterCreationName from '../../components/character-creation-component
 
 
 function CreateCharacter() {
+
     let raceArray: string[] = raceList.map((race)=>{
         return(race.raceName)
     });
-
-    const [characterBasicInfo, setCharacterBasicInfo] = useLocalStorage('characterBasicInfo',{})
 
     const [race, setRace] = useState<String>('')
     const [chClass, setChClass] = useState<String>('')
     const [theme, setTheme] = useState<String>('')
     const [componentArrayPosition, setComponentArrayPosition] = useState<number>(0)
+    const [, setCharacterBasicInfo] = useLocalStorage(`characterBasicInfo`,{})
 
     // Character Name **********************
     // Set the character name in local storage to an array of objects.
@@ -51,7 +51,7 @@ function CreateCharacter() {
     */
     function addCharacterHandler(){
       // Generate Key to point the character selected to.
-        const keyID: string = crypto.randomUUID()
+      const keyID: string = crypto.randomUUID()
         nameArray.current = ([
                 ...nameArray.current,
                 {
@@ -61,7 +61,6 @@ function CreateCharacter() {
             ])
         setCharacterNames( nameArray.current )
         setCharacterBasicInfo({
-          ...characterBasicInfo,
             race,
             chClass,
             theme,
