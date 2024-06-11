@@ -44,7 +44,7 @@ function CharacterInfo(){
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
-                        value={characterInfoObject.chClass}
+                        value={characterInfoObject[0].chClass}
                     />
                     <div>CLASS/LEVEL</div>
                 </div>
@@ -56,7 +56,7 @@ function CharacterInfo(){
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
-                        value={characterInfoObject.race}
+                        value={characterInfoObject[0].race}
                     />
                     <div>RACE</div>
                 </div>
@@ -68,7 +68,7 @@ function CharacterInfo(){
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
-                        value={characterInfoObject.theme}
+                        value={characterInfoObject[0].theme}
                     />
                     <div>THEME</div>
                 </div>
@@ -107,7 +107,7 @@ function CharacterInfo(){
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
-                        value={characterInfoObject.gender}
+                        value={characterInfoObject[0].gender}
                     />
                     <div>GENDER</div>
                 </div>
@@ -119,7 +119,7 @@ function CharacterInfo(){
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
-                        value={characterInfoObject.homeWorld}
+                        value={characterInfoObject[0].homeWorld}
                     />
                     <div>HOME WORLD</div>
                 </div>
@@ -136,7 +136,7 @@ function CharacterInfo(){
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
-                        value={characterInfoObject.alignment}
+                        value={characterInfoObject[0].alignment}
                     />
                     <div>ALIGNMENT</div>
                 </div>
@@ -148,7 +148,7 @@ function CharacterInfo(){
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
-                        value={characterInfoObject.diety}
+                        value={characterInfoObject[0].diety}
                     />
                     <div>DIETY</div>
                 </div>

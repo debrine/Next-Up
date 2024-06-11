@@ -4,10 +4,11 @@ import { raceList } from '../../data/race-information/raceList.ts'
 import { useLocalStorage } from '../../data/useLocalStorage.ts'
 import styles from './CreateCharacter.module.css'
 import CharacterCreationName from '../../components/character-creation-components/CharacterCreationName/CharacterCreationName.tsx'
+import AcePilotAdjustments from '../../data/theme-information/theme-adjustments/AcePilotAdjustments.ts'
 // import { useForm } from 'react-hook-form'
 
 /*
-  Set everything in a temp state, then when character is confirmed, set it all within 
+  Set everything in a temp state, then when character is confirmed, set it all within a function.
   Needed for character creation:
     Name first (This way we can assign the name key to other things in local storage)
     Class
@@ -38,11 +39,26 @@ function CreateCharacter() {
   const [race, setRace] = useState<String>('')
   const [chClass, setChClass] = useState<String>('')
   const [theme, setTheme] = useState<String>('')
+  const [abilityScores, setAbilityScores] = useState<{
+    strScore:number, 
+    dexScore:number,
+    conScore:number,
+    intScore:number,
+    wisScore:number,
+    chaScore:number,
+  }>({
+    strScore: 10,
+    dexScore: 10,
+    conScore: 10,
+    intScore: 10,
+    wisScore: 10,
+    chaScore: 10
+  })
   const [componentArrayPosition, setComponentArrayPosition] = useState<number>(0)
 
   // Temporarily set values to be used before saving to local storage.
   const [, setTempCharacterInfo] = useLocalStorage(`tempCharacterInfo`, {}) 
-  // Values that will be saved to local storage.
+  // Values that will be saved to local storage. These values aren't meant to be changed.
   const [, setCharacterBasicInfo] = useLocalStorage(`characterBasicInfo`)
 
   // Character Name **********************
@@ -79,7 +95,8 @@ function CreateCharacter() {
     keyID,
     race,
     chClass,
-    theme
+    theme,
+    abilityScores
   })
   }
 
@@ -87,9 +104,8 @@ function CreateCharacter() {
     Function to add the character.
   */
   function addCharacterHandler(){
-    // Generate Key to point the character selected to.
-    // const keyID: string = crypto.randomUUID()
     const tempCharInfo = JSON.parse(localStorage.getItem('tempCharacterInfo')!)
+    AcePilotAdjustments(abilityScores, setAbilityScores)
     setCharacterNames([
       ...nameArray.current,
       {
@@ -104,10 +120,10 @@ function CreateCharacter() {
       race,
       chClass,
       theme,
+      abilityScores
       }
     ])
   }
-
 
   let componentArray: JSX.Element[] = [
     <CharacterCreationName setInputName={setInputName} inputName={inputName}/>,
