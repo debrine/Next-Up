@@ -1,18 +1,23 @@
 import { useEffect, useRef } from "react"
 import { useLocalStorage } from "../../../data/useLocalStorage";
 
-type AddCharacterButtonProps ={
-    race: String;
-    chClass: String;
-    theme: String;
-}
+/*
+  Set everything in a temp state, then when character is confirmed, set it all within a function.
+  Needed for character creation:
+    Name first (This way we can assign the name key to other things in local storage)
+    Class
+      Followed by class options, if any.
+    Theme
+    Set Ability Scores
+    First Feat
+    The rest can be added after the fact.
+*/
 
-function AddCharacterButton({
-    race,
-    chClass,
-    theme
-}: AddCharacterButtonProps) {
+function AddCharacterButton() {
     
+    // Values that will be saved to local storage. These values aren't meant to be changed.
+    const [, setCharacterBasicInfo] = useLocalStorage(`characterBasicInfo`)
+
     // Number to give an ID to characterBasicInfo
     let characterBasicInfo = useRef<[]>([])
     useEffect(()=>{
@@ -21,11 +26,8 @@ function AddCharacterButton({
         }
     })
 
-    // Values that will be saved to local storage. These values aren't meant to be changed.
-    const [, setCharacterBasicInfo] = useLocalStorage(`characterBasicInfo`)
 
 
-    const [, setCharacterNames] = useLocalStorage('charactersAvailable')
 
     // Ability Score default values will be adjusted by Theme and Race.
     let abilityScores = useRef<{
@@ -54,6 +56,7 @@ function AddCharacterButton({
         nameArray.current = JSON.parse(localStorage.getItem('charactersAvailable')!)
     }
     }, [])
+    const [, setCharacterNames] = useLocalStorage('charactersAvailable')
 
     /*
     Function to add the character.
@@ -73,9 +76,9 @@ function AddCharacterButton({
             ...characterBasicInfo.current,
             {
             keyID: tempCharInfo.keyID,
-            race,
-            chClass,
-            theme,
+            race: tempCharInfo.race,
+            chClass: tempCharInfo.chClass,
+            theme: tempCharInfo.theme,
             abilityScores
             }
         ])

@@ -6,24 +6,9 @@ import styles from './CreateCharacter.module.css'
 import CharacterCreationName from '../../components/character-creation-components/CharacterCreationName/CharacterCreationName.tsx'
 import { themeList } from '../../data/theme-information/themeList.ts'
 import AddCharacterButton from '../../components/character-creation-components/AddCharacterButton/AddCharacterButton.tsx'
-// import { useForm } from 'react-hook-form'
-
-/*
-  Set everything in a temp state, then when character is confirmed, set it all within a function.
-  Needed for character creation:
-    Name first (This way we can assign the name key to other things in local storage)
-    Class
-      Followed by class options, if any.
-    Theme
-    Set Ability Scores
-    First Feat
-    The rest can be added after the fact.
-*/
 
 
 function CreateCharacter() {
-
-  // const { watch } = useForm()
 
   let raceArray: string[] = raceList.map((race)=>{
       return(race.raceName)
@@ -41,14 +26,6 @@ function CreateCharacter() {
 
   // Temporarily set values to be used before saving to local storage.
   const [, setTempCharacterInfo] = useLocalStorage(`tempCharacterInfo`, {}) 
-
-  // Testing Hook Form *********************************************************************************
-  // useEffect(()=>{
-  //     const subscription = watch((data) =>
-  //         setTempCharacterInfo(data)
-  //     )
-  //     return ()=> subscription.unsubscribe()
-  // },[watch])
   
 
   const [inputName, setInputName] = useState<string>('')
@@ -87,15 +64,27 @@ function CreateCharacter() {
     }
   }
 
+  function renderNext(){
+    if(componentArrayPosition === componentArray.length-1){
+      return(
+        <>
+          <button onClick={addTempValuesHandler}>Set Values (Temp)</button>
+          <AddCharacterButton />
+        </>
+      )
+      
+    } else {
+      return(
+        <button onClick={handleNext}>Next</button>
+      )
+    }
+  }
 
   return (
     <div className={styles.parentDiv}>
       {componentArray[componentArrayPosition]}
       <button onClick={handleBack}>Back</button>
-      <button onClick={handleNext}>Next</button>
-      <button onClick={addTempValuesHandler}>Set Values (Temp)</button>
-      {/* <button onClick={addCharacterHandler}>Set Values (Add)</button> */}
-      <AddCharacterButton theme={theme} chClass={chClass} race={race}/>
+      {renderNext()}
     </div>
   )
 }
