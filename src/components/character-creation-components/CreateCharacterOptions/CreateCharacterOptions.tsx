@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './CreateCharacterOptions.module.css'
 // import { FieldValues, UseFormRegister, useForm } from 'react-hook-form'
 
@@ -19,8 +19,11 @@ function CreateCharacterOptions({
     const [selectedOption, setSelectedOption] = useState<string>('');
     // const selectedOption = getValues(optionType)
 
-    
-    
+    // To clear the selected option between components.
+    useEffect(()=>{
+        setSelectedOption('')
+    },[optionType])
+
     // Toggle Drop Down
     const toggleDropDown = ()=>{
         setShowDropDown(!showDropDown)
@@ -35,7 +38,9 @@ function CreateCharacterOptions({
 
     // Set the selected option.
     const optionSelection = (option: string): void => {
+        // Set the option to be shown as selected.
         setSelectedOption(option)
+        // Set our values in the parent to the option selected (ex. race, chClass, theme....)
         setFunction(option)
     }
 
@@ -48,7 +53,7 @@ function CreateCharacterOptions({
             onClick={(): void => toggleDropDown()}
             onBlur={(e: React.FocusEvent<HTMLButtonElement>): void => dismissHandler(e)}
         >
-        <div>{selectedOption ? `${optionType}: ${selectedOption}` : `${optionType}...`}</div>
+        <div>{selectedOption !='' ? `${optionType}: ${selectedOption}` : `${optionType}...`}</div>
             {showDropDown && (
             // <DropDownList 
             //     optionsArray={optionArray}
