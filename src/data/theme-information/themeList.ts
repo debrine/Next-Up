@@ -3,7 +3,16 @@ import AcePilotAdjustments from "./theme-adjustments/AcePilotAdjustments.ts"
 export let themeList: {
     themeName: string,
     themeDescription: string,
-    themeFunction: ()=>void,
+    themeFunction: (
+        ref: React.MutableRefObject<{
+            strScore: number;
+            dexScore: number;
+            conScore: number;
+            intScore: number;
+            wisScore: number;
+            chaScore: number;
+        }>
+    )=>void,
     themeFirstTitle: string,
     themeFirstDescription: string,
     themeSixthTitle: string,
@@ -16,7 +25,7 @@ export let themeList: {
     {
         themeName: 'Ace Pilot',
         themeDescription: 'You are most comfortable at the controls of a vehicle, whether it\'s a starship racing through the inky void of space or a ground vehicle zooming between trees, around boulders, and across dusty badlands. You might be a member of an elite military force, the recipient of intense courses of training. Alternatively, you might be a total amateur with innate skills that make you a much-admired hotshot.',
-        themeFunction: AcePilotAdjustments,
+        themeFunction: (ref) => AcePilotAdjustments(ref),
         themeFirstTitle: 'Theme Knowledge (1st Level)',
         themeFirstDescription: 'You are obsessed with starships and vehicles, and have committed to memory almost every related tidbit of knowledge you\'ve ever come across. Reduce the DC of Culture checks to recall knowledge about starship and vehicle models and parts as well as famous hotshot pilots by 5. Piloting is a class skill for you, though if it is a class skill from the class you take at 1st level, you instead gain a +1 bonus to your Piloting checks. In addition, you gain an ability adjustment of +1 to Dexterity at character creation.',
         themeSixthTitle: 'Lone Wolf (6th Level)',

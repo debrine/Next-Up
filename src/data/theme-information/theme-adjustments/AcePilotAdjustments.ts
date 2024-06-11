@@ -1,31 +1,23 @@
 // Skill - Piloting
 // Ability Score - Dex
+
 export default function AcePilotAdjustments(
-    abilityScores?: {
+    ref: React.MutableRefObject<{
         strScore: number;
         dexScore: number;
         conScore: number;
         intScore: number;
         wisScore: number;
         chaScore: number;
-    },
-    setAbilityScores?: React.Dispatch<React.SetStateAction<{
-        strScore: number;
-        dexScore: number;
-        conScore: number;
-        intScore: number;
-        wisScore: number;
-        chaScore: number;
-    }>>)
-{
-    if(setAbilityScores && abilityScores){
-        setAbilityScores({
-        strScore: abilityScores.strScore,
-        dexScore: (abilityScores.dexScore +1),
-        conScore: abilityScores.conScore,
-        intScore: abilityScores.intScore,
-        wisScore: abilityScores.wisScore,
-        chaScore: abilityScores.chaScore,
-        })
+    }>
+    
+){
+    ref.current = {
+        strScore: ref.current.strScore,
+        dexScore: (ref.current.dexScore +1),
+        conScore: ref.current.conScore,
+        intScore: ref.current.intScore,
+        wisScore: ref.current.wisScore,
+        chaScore: ref.current.chaScore,
     }
 }

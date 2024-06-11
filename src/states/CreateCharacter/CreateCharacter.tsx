@@ -1,10 +1,11 @@
-import {  useEffect, useRef, useState } from 'react'
+import {  useState } from 'react'
 import CreateCharacterOptions from '../../components/character-creation-components/CreateCharacterOptions/CreateCharacterOptions.tsx'
 import { raceList } from '../../data/race-information/raceList.ts'
 import { useLocalStorage } from '../../data/useLocalStorage.ts'
 import styles from './CreateCharacter.module.css'
 import CharacterCreationName from '../../components/character-creation-components/CharacterCreationName/CharacterCreationName.tsx'
-import AcePilotAdjustments from '../../data/theme-information/theme-adjustments/AcePilotAdjustments.ts'
+import { themeList } from '../../data/theme-information/themeList.ts'
+import AddCharacterButton from '../../components/character-creation-components/AddCharacterButton/AddCharacterButton.tsx'
 // import { useForm } from 'react-hook-form'
 
 /*
@@ -28,49 +29,18 @@ function CreateCharacter() {
       return(race.raceName)
   });
 
-  // Number to give an ID to characterBasicInfo
-  let characterBasicInfo = useRef<[]>([])
-  useEffect(()=>{
-    if(localStorage.getItem('characterBasicInfo') != null){
-      characterBasicInfo.current = JSON.parse(localStorage.getItem('characterBasicInfo')!)
-    }
+  let themeArray: string[] = themeList.map((theme)=>{
+    return(theme.themeName)
   })
 
   const [race, setRace] = useState<String>('')
   const [chClass, setChClass] = useState<String>('')
   const [theme, setTheme] = useState<String>('')
-  const [abilityScores, setAbilityScores] = useState<{
-    strScore:number, 
-    dexScore:number,
-    conScore:number,
-    intScore:number,
-    wisScore:number,
-    chaScore:number,
-  }>({
-    strScore: 10,
-    dexScore: 10,
-    conScore: 10,
-    intScore: 10,
-    wisScore: 10,
-    chaScore: 10
-  })
+
   const [componentArrayPosition, setComponentArrayPosition] = useState<number>(0)
 
   // Temporarily set values to be used before saving to local storage.
   const [, setTempCharacterInfo] = useLocalStorage(`tempCharacterInfo`, {}) 
-  // Values that will be saved to local storage. These values aren't meant to be changed.
-  const [, setCharacterBasicInfo] = useLocalStorage(`characterBasicInfo`)
-
-  // Character Name **********************
-  // Set the character name in local storage to an array of objects.
-  // Set the default array
-  let nameArray = useRef<{characterName: string, id: string}[]>([])
-  // Find if the array exists.
-  useEffect(()=>{
-      if(localStorage.getItem('charactersAvailable') != null){
-          nameArray.current = JSON.parse(localStorage.getItem('charactersAvailable')!)
-      }
-  }, [])
 
   // Testing Hook Form *********************************************************************************
   // useEffect(()=>{
@@ -82,54 +52,27 @@ function CreateCharacter() {
   
 
   const [inputName, setInputName] = useState<string>('')
-  const [, setCharacterNames] = useLocalStorage('charactersAvailable')
 
   /*
     Function to add values temporarily
   */
   function addTempValuesHandler(){
-  // Generate Key to point the character selected to.
-  const keyID: string = crypto.randomUUID()
-  setTempCharacterInfo({
-    inputName,
-    keyID,
-    race,
-    chClass,
-    theme,
-    abilityScores
-  })
-  }
-
-  /*
-    Function to add the character.
-  */
-  function addCharacterHandler(){
-    const tempCharInfo = JSON.parse(localStorage.getItem('tempCharacterInfo')!)
-    AcePilotAdjustments(abilityScores, setAbilityScores)
-    setCharacterNames([
-      ...nameArray.current,
-      {
-        characterName: tempCharInfo.inputName,
-        id: tempCharInfo.keyID
-      }
-    ])
-    setCharacterBasicInfo([
-      ...characterBasicInfo.current,
-      {
-      keyID: tempCharInfo.keyID,
+    // Generate Key to point the character selected to.
+    const keyID: string = crypto.randomUUID()
+    setTempCharacterInfo({
+      inputName,
+      keyID,
       race,
       chClass,
-      theme,
-      abilityScores
-      }
-    ])
+      theme
+    })
   }
 
   let componentArray: JSX.Element[] = [
     <CharacterCreationName setInputName={setInputName} inputName={inputName}/>,
     <CreateCharacterOptions optionType='Race' optionArray={raceArray} setFunction={setRace}/>,
     <CreateCharacterOptions optionType='Class' optionArray={raceArray} setFunction={setChClass}/>,
-    <CreateCharacterOptions optionType='Theme' optionArray={raceArray} setFunction={setTheme}/>
+    <CreateCharacterOptions optionType='Theme' optionArray={themeArray} setFunction={setTheme}/>
   ]
 
   function handleNext(){
@@ -151,7 +94,8 @@ function CreateCharacter() {
       <button onClick={handleBack}>Back</button>
       <button onClick={handleNext}>Next</button>
       <button onClick={addTempValuesHandler}>Set Values (Temp)</button>
-      <button onClick={addCharacterHandler}>Set Values (Add)</button>
+      {/* <button onClick={addCharacterHandler}>Set Values (Add)</button> */}
+      <AddCharacterButton theme={theme} chClass={chClass} race={race}/>
     </div>
   )
 }
