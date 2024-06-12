@@ -4,14 +4,7 @@ export let themeList: {
     themeName: string,
     themeDescription: string,
     themeFunction: (
-        ref: React.MutableRefObject<{
-            strScore: number;
-            dexScore: number;
-            conScore: number;
-            intScore: number;
-            wisScore: number;
-            chaScore: number;
-        }>
+        keyID: ThemeTypes
     )=>void,
     themeFirstTitle: string,
     themeFirstDescription: string,
