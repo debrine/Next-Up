@@ -6,6 +6,7 @@ import styles from './CreateCharacter.module.css'
 import CharacterCreationName from '../../components/character-creation-components/CharacterCreationName/CharacterCreationName.tsx'
 import { themeList } from '../../data/theme-information/themeList.ts'
 import AddCharacterButton from '../../components/character-creation-components/AddCharacterButton/AddCharacterButton.tsx'
+// import { classList } from '../../data/class-information/classList.ts'
 
 
 function CreateCharacter() {
@@ -13,6 +14,11 @@ function CreateCharacter() {
   let raceArray: string[] = raceList.map((race)=>{
       return(race.raceName)
   });
+
+  // Breaking the code somehow????
+  // let classArray: string[] = classList.map((chClass)=>{
+  //   return(chClass.className)
+  // })
 
   let themeArray: string[] = themeList.map((theme)=>{
     return(theme.themeName)

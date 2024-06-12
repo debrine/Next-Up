@@ -1,0 +1,3 @@
+type ThemeTypes = {
+    keyID: 'string'
+}
