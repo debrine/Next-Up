@@ -1,11 +1,11 @@
-import { ClassDefaultTypes } from "../all-class-types/classDefaultTypes.ts"
+import { ClassDefaultTypes } from "../../type-files/classDefaultTypes.type.ts"
 
 const TechnomancerClassDefaults: ClassDefaultTypes = {
 
     hitStaminaPoints: 5,
 
     keyAbilityScore: [
-        'Int'
+        'Intelligence'
     ],
 
     classSkills: [
@@ -32,8 +32,8 @@ const TechnomancerClassDefaults: ClassDefaultTypes = {
     babAdvancement: 0.75,
     
     goodSavingThrows: [
-        'Fort',
-        'Ref',
+        'Fortitude',
+        'Reflex',
     ],
 
     badSavingThrows: [

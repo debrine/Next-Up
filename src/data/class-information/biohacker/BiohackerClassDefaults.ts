@@ -1,11 +1,12 @@
-import { ClassDefaultTypes } from "../all-class-types/classDefaultTypes.ts"
+import { ClassDefaultTypes } from "../../type-files/classDefaultTypes.type"
+
 
 const BiohackerClassDefaults: ClassDefaultTypes = {
 
     hitStaminaPoints: 6,
 
     keyAbilityScore: [
-        'Dex'
+        'Dexterity'
     ],
 
     classSkills: [
@@ -41,11 +42,11 @@ const BiohackerClassDefaults: ClassDefaultTypes = {
     babAdvancement: 0.75,
     
     goodSavingThrows: [
-        'Fort'
+        'Fortitude'
     ],
 
     badSavingThrows: [
-        'Ref',
+        'Reflex',
         'Will'
     ],
 }

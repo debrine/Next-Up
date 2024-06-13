@@ -1,11 +1,11 @@
-import { ClassDefaultTypes } from "../all-class-types/classDefaultTypes.ts"
+import { ClassDefaultTypes } from "../../type-files/classDefaultTypes.type.ts"
 
 const OperativeClassDefaults: ClassDefaultTypes = {
 
     hitStaminaPoints: 6,
 
     keyAbilityScore: [
-        'Dex'
+        'Dexterity'
     ],
 
     classSkills: [
@@ -41,12 +41,12 @@ const OperativeClassDefaults: ClassDefaultTypes = {
     babAdvancement: 0.75,
     
     goodSavingThrows: [
-        'Ref',
+        'Reflex',
         'Will'
     ],
 
     badSavingThrows: [
-        'Fort',
+        'Fortitude',
     ],
 }
 

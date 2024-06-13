@@ -1,13 +1,14 @@
 // Skill - Piloting
 // Ability Score - Dex
 
+import EditLocalStorageValue from "../../EditLocalStorageValue"
+
 export default function AcePilotAdjustments(
-    keyID: ThemeTypes
+    keyID: KeyIDType
 ){
-    // Dex
-    let ability = JSON.parse(localStorage.getItem(`Dexterity${keyID}`)!)
-    ability.asValue++
-    localStorage.setItem(`Dexterity${keyID}`, JSON.stringify(ability))
+    
+    // Dexterity
+    EditLocalStorageValue(true, 1, 'Dexterity')
 
     // Piloting
     let skill = JSON.parse(localStorage.getItem(`Piloting${keyID}`)!)

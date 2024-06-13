@@ -1,23 +1,24 @@
-import { useAbilityScore } from "../../../../global-values/character-stats/useAbilityScore"
+import EditLocalStorageValue from "../../../EditLocalStorageValue";
 
 export default function ysokiAdjustments(){
-    // Attribute will be taken by selecting from a dropdown list.
-    const {
-        str, strengthScore,
-        dex, dexterityScore,
-        int, intelligenceScore,
-    } = useAbilityScore((state)=>({
-        str: state.str,
-        strengthScore: state.strengthScore,
-        dex: state.dex,
-        dexterityScore: state.dexterityScore,
-        int: state.int,
-        intelligenceScore: state.intelligenceScore,
-    }))
-
-    dexterityScore(dex + 2);
-    intelligenceScore(int + 2);
-    strengthScore(str - 2);
+    
+    // Dexterity
+    EditLocalStorageValue(true, 2, 'Dexterity')
+    
+    // Intelligence
+    EditLocalStorageValue(true, 2, 'Intelligence')
+    
+    // Strength
+    EditLocalStorageValue(false, 2, 'Strength')
 
     // Ysoki receive a +2 racial bonus to Engineering, Stealth, and Survival checks.
+    
+    // Engineering
+    EditLocalStorageValue(true, 2, 'Engineering')
+    
+    // Stealth
+    EditLocalStorageValue(true, 2, 'Stealth')
+    
+    // Survival
+    EditLocalStorageValue(true, 2, 'Survival')
 }

@@ -4,7 +4,7 @@ export let themeList: {
     themeName: string,
     themeDescription: string,
     themeFunction: (
-        keyID: ThemeTypes
+        keyID: KeyIDType
     )=>void,
     themeAbilityTitle: string[],
     themeAbilityDescription: string[]

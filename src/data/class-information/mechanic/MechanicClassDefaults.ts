@@ -1,11 +1,11 @@
-import { ClassDefaultTypes } from "../all-class-types/classDefaultTypes.ts"
+import { ClassDefaultTypes } from "../../type-files/classDefaultTypes.type.ts"
 
 const MechanicClassDefaults: ClassDefaultTypes = {
 
     hitStaminaPoints: 6,
 
     keyAbilityScore: [
-        'Int'
+        'Intelligence'
     ],
 
     classSkills: [
@@ -33,8 +33,8 @@ const MechanicClassDefaults: ClassDefaultTypes = {
     babAdvancement: 0.75,
     
     goodSavingThrows: [
-        'Fort',
-        'Ref',
+        'Fortitude',
+        'Reflex',
     ],
 
     badSavingThrows: [

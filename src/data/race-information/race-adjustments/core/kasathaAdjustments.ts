@@ -1,22 +1,28 @@
-import { useAbilityScore } from "../../../../global-values/character-stats/useAbilityScore.ts";
+import EditLocalStorageValue from "../../../EditLocalStorageValue"
 
-export default function kasathaAdjustments(){
-    const {
-        str, strengthScore,
-        int, intelligenceScore,
-        wis, wisdomScore,
-    } = useAbilityScore((state)=>({
-        str: state.str,
-        strengthScore: state.strengthScore,
-        int: state.int,
-        intelligenceScore: state.intelligenceScore,
-        wis: state.wis,
-        wisdomScore: state.wisdomScore,
-    }))
+export default function kasathaAdjustments(
+){
+    // Ability Score adjustments
+    // +2 to Strength and Wisdom.
+    // -2 to Intelligence
 
-    strengthScore(str + 2)
-    wisdomScore(wis + 2)
-    intelligenceScore(int - 2)
+    // Strength
+    EditLocalStorageValue(true, 2, 'Strength')
 
-    // +2 bonus to Acrobatics, Athletics, and Culture (useBaseSkill to be added later after testing stuff out)
+    // Wisdom
+    EditLocalStorageValue(true, 2, 'Wisdom')
+
+    // Intelligence
+    EditLocalStorageValue(false, 2, 'Intelligence')
+
+    // +2 bonus to Acrobatics, Athletics, and Culture
+
+    // Acrobatics
+    EditLocalStorageValue(true, 2, 'Acrobatics')
+
+    // Athletics
+    EditLocalStorageValue(true, 2, 'Athletics')
+
+    // Culture
+    EditLocalStorageValue(true, 2, 'Culture')
 }

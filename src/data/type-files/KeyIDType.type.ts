@@ -1,3 +1,3 @@
-type ThemeTypes = {
+type KeyIDType = {
     keyID: 'string'
 }

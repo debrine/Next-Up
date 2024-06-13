@@ -1,6 +1,6 @@
 import {  useState } from 'react'
 import CreateCharacterOptions from '../../components/character-creation-components/CreateCharacterOptions/CreateCharacterOptions.tsx'
-import { raceList } from '../../data/race-information/raceList.ts'
+// import { raceList } from '../../data/race-information/raceList.ts'
 import { useLocalStorage } from '../../data/useLocalStorage.ts'
 import styles from './CreateCharacter.module.css'
 import CharacterCreationName from '../../components/character-creation-components/CharacterCreationName/CharacterCreationName.tsx'
@@ -11,9 +11,9 @@ import AddCharacterButton from '../../components/character-creation-components/A
 
 function CreateCharacter() {
 
-  let raceArray: string[] = raceList.map((race)=>{
-      return(race.raceName)
-  });
+  // let raceArray: string[] = raceList.map((race)=>{
+  //     return(race.raceName)
+  // });
 
   // Breaking the code somehow????
   // let classArray: string[] = classList.map((chClass)=>{
@@ -53,8 +53,8 @@ function CreateCharacter() {
 
   let componentArray: JSX.Element[] = [
     <CharacterCreationName setInputName={setInputName} inputName={inputName}/>,
-    <CreateCharacterOptions optionType='Race' optionArray={raceArray} setFunction={setRace}/>,
-    <CreateCharacterOptions optionType='Class' optionArray={raceArray} setFunction={setChClass}/>,
+    <CreateCharacterOptions optionType='Race' optionArray={themeArray} setFunction={setRace}/>,
+    <CreateCharacterOptions optionType='Class' optionArray={themeArray} setFunction={setChClass}/>,
     <CreateCharacterOptions optionType='Theme' optionArray={themeArray} setFunction={setTheme}/>
   ]
 

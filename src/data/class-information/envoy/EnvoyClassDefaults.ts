@@ -1,11 +1,11 @@
-import { ClassDefaultTypes } from "../all-class-types/classDefaultTypes.ts"
+import { ClassDefaultTypes } from "../../type-files/classDefaultTypes.type.ts"
 
 const EnvoyClassDefaults: ClassDefaultTypes = {
 
     hitStaminaPoints: 6,
 
     keyAbilityScore: [
-        'Cha'
+        'Charisma'
     ],
 
     classSkills: [
@@ -41,12 +41,12 @@ const EnvoyClassDefaults: ClassDefaultTypes = {
     babAdvancement: 0.75,
     
     goodSavingThrows: [
-        'Ref',
+        'Reflex',
         'Will'
     ],
 
     badSavingThrows: [
-        'Fort'
+        'Fortitude'
     ],
 }
 

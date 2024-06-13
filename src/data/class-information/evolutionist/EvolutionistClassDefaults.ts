@@ -1,12 +1,12 @@
-import { ClassDefaultTypes } from "../all-class-types/classDefaultTypes.ts"
+import { ClassDefaultTypes } from "../../type-files/classDefaultTypes.type.ts"
 
 const EvolutionistClassDefaults: ClassDefaultTypes = {
 
     hitStaminaPoints: 6,
 
     keyAbilityScore: [
-        'Str',
-        'Dex'
+        'Strength',
+        'Dexterity'
     ],
 
     classSkills: [
@@ -35,8 +35,8 @@ const EvolutionistClassDefaults: ClassDefaultTypes = {
     babAdvancement: 1,
     
     goodSavingThrows: [
-        'Fort',
-        'Ref',
+        'Fortitude',
+        'Reflex',
     ],
 
     badSavingThrows: [

@@ -1,12 +1,12 @@
-import { ClassDefaultTypes } from "../all-class-types/classDefaultTypes.ts"
+import { ClassDefaultTypes } from "../../type-files/classDefaultTypes.type.ts"
 
 const SoldierClassDefaults: ClassDefaultTypes = {
 
     hitStaminaPoints: 7,
 
     keyAbilityScore: [
-        'Str',
-        'Dex'
+        'Strength',
+        'Dexterity'
     ],
 
     classSkills: [
@@ -40,12 +40,12 @@ const SoldierClassDefaults: ClassDefaultTypes = {
     babAdvancement: 1,
     
     goodSavingThrows: [
-        'Fort',
+        'Fortitude',
         'Will'
     ],
 
     badSavingThrows: [
-        'Ref',
+        'Reflex',
     ],
 }
 

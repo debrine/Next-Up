@@ -1,11 +1,11 @@
-import { ClassDefaultTypes } from "../all-class-types/classDefaultTypes.ts"
+import { ClassDefaultTypes } from "../../type-files/classDefaultTypes.type.ts"
 
 const NanocyteClassDefaults: ClassDefaultTypes = {
 
     hitStaminaPoints: 6,
 
     keyAbilityScore: [
-        'Con'
+        'Constitution'
     ],
 
     classSkills: [
@@ -38,11 +38,11 @@ const NanocyteClassDefaults: ClassDefaultTypes = {
     babAdvancement: 1,
     
     goodSavingThrows: [
-        'Fort',
+        'Fortitude',
     ],
 
     badSavingThrows: [
-        'Ref',
+        'Reflex',
         'Will'
     ],
 }

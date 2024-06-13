@@ -1,22 +1,23 @@
-import { useAbilityScore } from "../../../../global-values/character-stats/useAbilityScore.ts";
+import EditLocalStorageValue from "../../../EditLocalStorageValue";
 
 export default function shirrenAdjustments(){
-    const {
-        con, constitutionScore,
-        wis, wisdomScore,
-        cha, charismaScore,
-    } = useAbilityScore((state)=>({
-        con: state.con,
-        constitutionScore: state.constitutionScore,
-        wis: state.wis,
-        wisdomScore: state.wisdomScore,
-        cha: state.cha,
-        charismaScore: state.charismaScore
-    }))
+    
+    // Constitution
+    EditLocalStorageValue(true, 2, 'Constitution')
+    
+    // Wisdom
+    EditLocalStorageValue(true, 2, 'Wisdom')
+    
+    // Charisma
+    EditLocalStorageValue(false, 2, 'Charisma')
 
-    constitutionScore(con + 2);
-    wisdomScore(wis + 2);
-    charismaScore(cha - 2);
+    // +2 to Culture and Diplomacy
+    
+    // Culture
+    EditLocalStorageValue(true, 2, 'Culture')
+    
+    // Diplomacy
+    EditLocalStorageValue(true, 2, 'Diplomacy')
 
-    // +2 to Culture and Diplomacy added later
+    
 }

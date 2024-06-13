@@ -1,11 +1,11 @@
-import { ClassDefaultTypes } from "../all-class-types/classDefaultTypes.ts"
+import { ClassDefaultTypes } from "../../type-files/classDefaultTypes.type.ts"
 
 const VanguardClassDefaults: ClassDefaultTypes = {
 
     hitStaminaPoints: 7,
 
     keyAbilityScore: [
-        'Con'
+        'Constitution'
     ],
 
     classSkills: [
@@ -39,8 +39,8 @@ const VanguardClassDefaults: ClassDefaultTypes = {
     babAdvancement: 1,
     
     goodSavingThrows: [
-        'Fort',
-        'Ref',
+        'Fortitude',
+        'Reflex',
     ],
 
     badSavingThrows: [

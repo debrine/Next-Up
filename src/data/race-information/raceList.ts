@@ -1,3 +1,4 @@
+import { skillList } from "../skillList.ts"
 import androidAdjustments from "./race-adjustments/core/androidAdjustments.ts"
 import humanAdjustments from "./race-adjustments/core/humanAdjustments.ts"
 import kasathaAdjustments from "./race-adjustments/core/kasathaAdjustments.ts"
@@ -5,6 +6,11 @@ import lashuntaAdjustments from "./race-adjustments/core/lashuntaAdjustments.ts"
 import shirrenAdjustments from "./race-adjustments/core/shirrenAdjustments.ts"
 import veskAdjustments from "./race-adjustments/core/veskAdjustments.ts"
 import ysokiAdjustments from "./race-adjustments/core/ysokiAdjustments.ts"
+
+// When an option for any skill is needed.
+let skillNames: string[] = skillList.map(skill=>{
+    return(skill.skillName)
+})
 
 export let raceList: {
     raceSource: string,
@@ -16,7 +22,9 @@ export let raceList: {
     hasOptions: boolean,
     optionDescription?: string[],
     optionArray?: [string[], ...any[]],
-    raceFunction: (option?: string) => void
+    raceFunction: (
+        option?: string[],
+    ) => void
 }[] = [
     {
         raceSource: 'Core',
@@ -52,7 +60,7 @@ export let raceList: {
             'Wisdom',
             'Charisma']
         ],
-        raceFunction: (option) => humanAdjustments(option) // Check on this. Need to confirm that it takes the option when called.
+        raceFunction: (ref) => humanAdjustments(ref)
     },
     {
         raceSource: 'Core',
@@ -83,13 +91,15 @@ export let raceList: {
         hasOptions: true,
         optionDescription: [
             'All lashuntas gain +2 Charisma at character creation. Korasha lashuntas are muscular (+2 Strength at character creation) but often brash and unobservant (-2 Wisdom at character creation). Damaya lashuntas are typically clever and well-spoken (+2 Intelligence at character creation) but somewhat delicate (-2 Constitution at character creation).',
-            'Lashuntas love to learn, and they receive a +2 racial bonus to any two skills of their choice.'
+            'Lashuntas love to learn, and they receive a +2 racial bonus to any two skills of their choice. Select the first skill',
+            'Select your second skill'
         ],
         optionArray: [
             ['Korasha', 'Damaya'],
-            ['skills here, will add later']
+            skillNames,
+            skillNames
         ],
-        raceFunction: (option) => lashuntaAdjustments(option)
+        raceFunction: (ref) => lashuntaAdjustments(ref)
     },
     {
         raceSource: 'Core',
@@ -137,22 +147,3 @@ export let raceList: {
         raceFunction: ysokiAdjustments
     }
 ]
-
-// type Race = {
-//     raceSource: string,
-//     raceName: string,
-//     raceHP: number,
-//     raceSize: string,
-//     raceAbilityName: string[],
-//     raceAbilityDescription: string[],
-//     hasOptions: boolean,
-//     optionDescription?: string[],
-//     optionArray?: [string[], ...any[]],
-//     raceFunction: (option?: string) => void
-// }
-
-// const raceMap: {
-//     [raceName: string]: Race
-// } = {
-
-// }

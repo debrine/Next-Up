@@ -1,11 +1,11 @@
-import { ClassDefaultTypes } from "../all-class-types/classDefaultTypes.ts"
+import { ClassDefaultTypes } from "../../type-files/classDefaultTypes.type.ts"
 
 const WitchwarperClassDefaults: ClassDefaultTypes = {
 
     hitStaminaPoints: 5,
 
     keyAbilityScore: [
-        'Cha'
+        'Charisma'
     ],
 
     classSkills: [
@@ -33,11 +33,11 @@ const WitchwarperClassDefaults: ClassDefaultTypes = {
     babAdvancement: 0.75,
     
     goodSavingThrows: [
-        'Ref',
+        'Reflex',
     ],
 
     badSavingThrows: [
-        'Fort',
+        'Fortitude',
         'Will'
     ],
 }

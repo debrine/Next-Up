@@ -1,11 +1,11 @@
-import { ClassDefaultTypes } from "../all-class-types/classDefaultTypes.ts"
+import { ClassDefaultTypes } from "../../type-files/classDefaultTypes.type.ts"
 
 const MysticClassDefaults: ClassDefaultTypes = {
 
     hitStaminaPoints: 6,
 
     keyAbilityScore: [
-        'Wis'
+        'Wisdom'
     ],
 
     classSkills: [
@@ -40,8 +40,8 @@ const MysticClassDefaults: ClassDefaultTypes = {
     ],
 
     badSavingThrows: [
-        'Fort',
-        'Ref',
+        'Fortitude',
+        'Reflex',
     ],
 }
 

@@ -1,5 +1,5 @@
 import BiohackerClassDefaults from "./biohacker/BiohackerClassDefaults.tsx";
-import { ClassDefaultTypes } from "./all-class-types/classDefaultTypes.ts";
+import { ClassDefaultTypes } from "../type-files/classDefaultTypes.type.ts";
 import EnvoyClassDefaults from "./envoy/EnvoyClassDefaults";
 
 export let classList: {

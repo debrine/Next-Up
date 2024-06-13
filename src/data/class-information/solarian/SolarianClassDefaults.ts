@@ -1,11 +1,11 @@
-import { ClassDefaultTypes } from "../all-class-types/classDefaultTypes.ts"
+import { ClassDefaultTypes } from "../../type-files/classDefaultTypes.type.ts"
 
 const SolarianClassDefaults: ClassDefaultTypes = {
 
     hitStaminaPoints: 7,
 
     keyAbilityScore: [
-        'Cha'
+        'Charisma'
     ],
 
     classSkills: [
@@ -36,12 +36,12 @@ const SolarianClassDefaults: ClassDefaultTypes = {
     babAdvancement: 1,
     
     goodSavingThrows: [
-        'Fort',
+        'Fortitude',
         'Will'
     ],
 
     badSavingThrows: [
-        'Ref',
+        'Reflex',
     ],
 }
 

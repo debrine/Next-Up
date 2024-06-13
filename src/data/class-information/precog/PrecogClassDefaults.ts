@@ -1,11 +1,11 @@
-import { ClassDefaultTypes } from "../all-class-types/classDefaultTypes.ts"
+import { ClassDefaultTypes } from "../../type-files/classDefaultTypes.type.ts"
 
 const PrecogClassDefaults: ClassDefaultTypes = {
 
     hitStaminaPoints: 5,
 
     keyAbilityScore: [
-        'Dex'
+        'Dexterity'
     ],
 
     classSkills: [
@@ -35,11 +35,11 @@ const PrecogClassDefaults: ClassDefaultTypes = {
     babAdvancement: 0.75,
     
     goodSavingThrows: [
-        'Ref',
+        'Reflex',
     ],
 
     badSavingThrows: [
-        'Fort',
+        'Fortitude',
         'Will'
     ],
 }
