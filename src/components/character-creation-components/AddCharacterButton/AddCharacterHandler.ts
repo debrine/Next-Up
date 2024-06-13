@@ -1,7 +1,5 @@
 import { skillList } from "../../../data/skillList";
-import AcePilotAdjustments from "../../../data/theme-information/theme-adjustments/AcePilotAdjustments";
 import { abilityScoreList } from "../../../data/abilityScoreList";
-import androidAdjustments from "../../../data/race-information/race-adjustments/core/androidAdjustments";
 
 
 type AddCharacterHandlerType= {
@@ -40,14 +38,10 @@ export default function AddCharacterHandler( {
           theme: tempCharInfo.theme
         }
     ])
-    // Only writing last one, but iterating through them all.
-    console.log(skillList)
     skillList.forEach(skill=>{
       localStorage.setItem(`${skill.skillName}${tempCharInfo.keyID}`, JSON.stringify(skill))
     })
     abilityScoreList.forEach(ability=>{
       localStorage.setItem(`${ability.aSName}${tempCharInfo.keyID}`, JSON.stringify(ability))
     })
-    AcePilotAdjustments(tempCharInfo.keyID)
-    androidAdjustments(tempCharInfo.keyID)
   }
