@@ -5,7 +5,8 @@ type DropDownProps = {
   optionType: string
   optionsArray: string[];
   optionSelection: Function;
-  selectedOption: string
+  selectedOption: string;
+  index?:number
 };
 
 const DropDownList: React.FC<DropDownProps> = ({

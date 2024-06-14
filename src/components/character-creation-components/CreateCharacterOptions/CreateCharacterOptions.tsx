@@ -7,18 +7,22 @@ type createCharacterOptionsProps = {
     optionType: string
     optionArray: string[]
     setFunction: React.Dispatch<React.SetStateAction<String>>
-    creationOptionsSelected: React.MutableRefObject<string[]>
-    // creationOptionsSelected: string[]
-    // setCreationOptionsSelected: React.Dispatch<React.SetStateAction<string[]>>
+    creationOptionsSelected: {
+        optionValue: string;
+        optionSet: React.Dispatch<React.SetStateAction<string>>;
+    }[]
+    // setCreationOptionsSelected: React.Dispatch<React.SetStateAction<{
+    //     optionValue: string;
+    //     optionSet: React.Dispatch<React.SetStateAction<string>>;
+    // }[]>>
 }
 
 function CreateCharacterOptions({
     optionType,
     optionArray,
     setFunction,
-    creationOptionsSelected
+    creationOptionsSelected,
     // setCreationOptionsSelected,
-    // creationOptionsSelected
 }: createCharacterOptionsProps) {
 
     const [selectedOption, setSelectedOption] = useState<string>('');

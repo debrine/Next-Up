@@ -1,4 +1,4 @@
-import {  useRef, useState } from 'react'
+import {  useState } from 'react'
 import CreateCharacterOptions from '../../components/character-creation-components/CreateCharacterOptions/CreateCharacterOptions.tsx'
 import { raceList } from '../../data/race-information/raceList.ts'
 import { useLocalStorage } from '../../data/useLocalStorage.ts'
@@ -23,12 +23,36 @@ function CreateCharacter() {
     return(theme.themeName)
   })
 
-  const [race, setRace] = useState<String>('')
   const [chClass, setChClass] = useState<String>('')
   const [theme, setTheme] = useState<String>('')
+  /*
+    Race
+  */
+  const [race, setRace] = useState<String>('')
   // Set the selected option if the race requires options.
-  // const [raceOptionsSelected, setRaceOptionsSelected] = useState<string[]>(['','',''])
-  let raceOptionsSelected = useRef<string[]>(['','',''])
+  const [raceOptionOne, setRaceOptionOne] = useState<string>('')
+  const [raceOptionTwo, setRaceOptionTwo] = useState<string>('')
+  const [raceOptionThree, setRaceOptionThree] = useState<string>('')
+
+  // Array to be passed into the DropDownList in Race Display.
+  const raceOptionsSelected: { 
+    optionValue: string; 
+    optionSet: React.Dispatch<React.SetStateAction<string>>; 
+  }[] = ([
+    {
+      optionValue: raceOptionOne,
+      optionSet: setRaceOptionOne
+    },
+    {
+      optionValue: raceOptionTwo,
+      optionSet: setRaceOptionTwo
+    },
+    {
+      optionValue: raceOptionThree,
+      optionSet: setRaceOptionThree
+    },
+  ])
+  // let raceOptionsSelected = useRef<string[]>(['','',''])
 
   const [componentArrayPosition, setComponentArrayPosition] = useState<number>(0)
 
