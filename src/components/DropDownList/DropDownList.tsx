@@ -1,36 +1,65 @@
-// Check back to see if this is going to be needed at all later.
+import { useState } from "react";
+
 
 type DropDownProps = {
+  optionType: string
   optionsArray: string[];
-  showDropDown: boolean;
-  toggleDropDown: Function;
   optionSelection: Function;
+  selectedOption: string
 };
 
 const DropDownList: React.FC<DropDownProps> = ({
+  optionType,
   optionsArray,
-  showDropDown,
   optionSelection,
+  selectedOption
 }: DropDownProps): JSX.Element => {
+
+  const [showDropDown, setShowDropDown] = useState<boolean>(false);
+
+    // Toggle Drop Down
+    const toggleDropDown = ()=>{
+      setShowDropDown(!showDropDown)
+  }
+
+  // Dismiss showing options.
+  const dismissHandler = (e: React.FocusEvent<HTMLButtonElement>): void =>{
+      if(e.currentTarget === e.target) {
+          setShowDropDown(false)
+      }
+  }
 
   return (
     <>
-      <div className={showDropDown ? 'dropdown' : 'dropdown active'}>
-        {optionsArray.map(
-          (option: string, index: number): JSX.Element => {
-            return (
-              <p
-                key={index}
-                onClick={(): void => {
-                  optionSelection(option);
-                }}
-              >
-                {option}
-              </p>
-            );
-          }
+      <button
+          onClick={(): void => toggleDropDown()}
+          onBlur={(e: React.FocusEvent<HTMLButtonElement>): void => dismissHandler(e)}
+      >
+        <div>{
+          selectedOption !='' &&
+          selectedOption != undefined ?
+          `${optionType}: ${selectedOption}` :
+          `${optionType}...`
+        }</div> 
+        {showDropDown && (
+          <div className={showDropDown ? 'dropdown' : 'dropdown active'}>
+            {optionsArray.map(
+              (option: string, index: number): JSX.Element => {
+                return (
+                  <p
+                    key={index}
+                    onClick={(): void => {
+                      optionSelection(option);
+                    }}
+                  >
+                    {option}
+                  </p>
+                );
+              }
+            )}
+          </div>
         )}
-      </div>
+      </button>
     </>
   );
 };

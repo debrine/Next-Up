@@ -5,18 +5,19 @@ import DropDownList from '../../DropDownList/DropDownList'
 
 type CharacterCreationRaceDisplayProps ={
   race: string;
-  toggleDropDown: Function;
-  showDropDown: boolean;
-  raceOptionSelected: string;
-  setRaceOptionSelected: React.Dispatch<React.SetStateAction<string>>;
-  dismissHandler: (e: React.FocusEvent<HTMLButtonElement>)=> void
+  raceOptionsSelected: React.MutableRefObject<string[]>
+  // raceOptionsSelected: string[];
+  // setRaceOptionsSelected: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 function CharacterCreationRaceDisplay(
   props: CharacterCreationRaceDisplayProps
 ) {
-  const { race, raceOptionSelected, setRaceOptionSelected, toggleDropDown, showDropDown, dismissHandler } = props
-  // const { race } = props
+  // const { race, raceOptionsSelected, setRaceOptionsSelected } = props
+  const { race, raceOptionsSelected } = props
+
+  const [tempArrayValue, setTempArrayValue] = useState<string>('')
+  
 
   const [selectedRaceObject, setSelectedRaceObject] = useState<RaceListTypes>({
     raceSource: '',
@@ -66,36 +67,48 @@ function CharacterCreationRaceDisplay(
       )
     }
   )
+  useEffect(()=>{
+    // setRaceOptionsSelected(['','',''])
+    setTempArrayValue('')
+    raceOptionsSelected.current = ['','','']
+  },[race])
 
-  // Not working, find out why later.
+  function addOptionSelected(index: number){
+    let tempList = raceOptionsSelected.current
+    tempList.forEach((option: string, i: number)=>{
+      if(i === index){
+        option = tempArrayValue
+        console.log(tempArrayValue)
+      }
+    })
+    console.log(tempList)
+    raceOptionsSelected.current = tempList
+    // setRaceOptionsSelected(tempList)
+    console.log(raceOptionsSelected)
+  }
+  
+
+  // Needs to be able to set values into the array.
   function showOptions(){
     if(
       hasOptions
     ){
       return(
         optionDescription.map(
-        (option, index)=>{
+        (option: string, index: number)=>{
+          // tempArrayIndex.current.push(index)
+          {addOptionSelected(index)!}
           return(
             <div className={styles.raceOptions}>
               <div>
                 {option}
               </div>
-              <button
-                onClick={(): void => toggleDropDown()}
-                onBlur={(e: React.FocusEvent<HTMLButtonElement>): void => dismissHandler(e)}
-              >
-              <div>{raceOptionSelected !='' ? `Option Selected: ${raceOptionSelected}` : `Select Option...`}</div>
-                {
-                  showDropDown && (
-                    <DropDownList 
-                      optionsArray={optionArray[index]}
-                      showDropDown={showDropDown}
-                      toggleDropDown={(): void=> toggleDropDown()}
-                      optionSelection={setRaceOptionSelected}
-                  />
-                  )
-                }
-              </button>
+                <DropDownList 
+                  optionsArray={optionArray[index]}
+                  optionSelection={setTempArrayValue}
+                  optionType='Option'
+                  selectedOption={raceOptionsSelected.current[index]}
+                />
             </div>
           )
         }

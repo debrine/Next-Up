@@ -7,19 +7,20 @@ type createCharacterOptionsProps = {
     optionType: string
     optionArray: string[]
     setFunction: React.Dispatch<React.SetStateAction<String>>
-    setCreationOptionSelected: React.Dispatch<React.SetStateAction<string>>
-    creationOptionSelected: string
+    creationOptionsSelected: React.MutableRefObject<string[]>
+    // creationOptionsSelected: string[]
+    // setCreationOptionsSelected: React.Dispatch<React.SetStateAction<string[]>>
 }
 
 function CreateCharacterOptions({
     optionType,
     optionArray,
     setFunction,
-    setCreationOptionSelected,
-    creationOptionSelected
+    creationOptionsSelected
+    // setCreationOptionsSelected,
+    // creationOptionsSelected
 }: createCharacterOptionsProps) {
 
-    const [showDropDown, setShowDropDown] = useState<boolean>(false);
     const [selectedOption, setSelectedOption] = useState<string>('');
     
 
@@ -28,17 +29,7 @@ function CreateCharacterOptions({
         setSelectedOption('')
     },[optionType])
 
-    // Toggle Drop Down
-    const toggleDropDown = ()=>{
-        setShowDropDown(!showDropDown)
-    }
-
-    // Dismiss showing options.
-    const dismissHandler = (e: React.FocusEvent<HTMLButtonElement>): void =>{
-        if(e.currentTarget === e.target) {
-            setShowDropDown(false)
-        }
-    }
+    
 
     // Set the selected option.
     const optionSelection = (option: string): void => {
@@ -53,11 +44,8 @@ function CreateCharacterOptions({
             return(
             <CharacterCreationRaceDisplay 
             race={selectedOption} 
-            setRaceOptionSelected={setCreationOptionSelected}
-            raceOptionSelected={creationOptionSelected}
-            toggleDropDown={(): void=> toggleDropDown()}
-            showDropDown={showDropDown}
-            dismissHandler={dismissHandler}
+            // setRaceOptionsSelected={setCreationOptionsSelected}
+            raceOptionsSelected={creationOptionsSelected}
             />
             )
         }
@@ -68,20 +56,13 @@ function CreateCharacterOptions({
         <h1>
             Select {optionType}
         </h1>
-        <button
-            onClick={(): void => toggleDropDown()}
-            onBlur={(e: React.FocusEvent<HTMLButtonElement>): void => dismissHandler(e)}
-        >
-        <div>{selectedOption !='' ? `${optionType}: ${selectedOption}` : `${optionType}...`}</div>
-            {showDropDown && (
+        
             <DropDownList 
+                optionType={optionType}
                 optionsArray={optionArray}
-                showDropDown={showDropDown}
-                toggleDropDown={(): void=> toggleDropDown()}
                 optionSelection={optionSelection}
+                selectedOption={selectedOption}
             />
-        )}
-        </button>
         {renderSelectionType()}
     </div>
     )

@@ -1,4 +1,4 @@
-import {  useState } from 'react'
+import {  useRef, useState } from 'react'
 import CreateCharacterOptions from '../../components/character-creation-components/CreateCharacterOptions/CreateCharacterOptions.tsx'
 import { raceList } from '../../data/race-information/raceList.ts'
 import { useLocalStorage } from '../../data/useLocalStorage.ts'
@@ -27,7 +27,8 @@ function CreateCharacter() {
   const [chClass, setChClass] = useState<String>('')
   const [theme, setTheme] = useState<String>('')
   // Set the selected option if the race requires options.
-  const [raceOptionSelected, setRaceOptionSelected] = useState<string>('')
+  // const [raceOptionsSelected, setRaceOptionsSelected] = useState<string[]>(['','',''])
+  let raceOptionsSelected = useRef<string[]>(['','',''])
 
   const [componentArrayPosition, setComponentArrayPosition] = useState<number>(0)
 
@@ -36,6 +37,7 @@ function CreateCharacter() {
   
 
   const [inputName, setInputName] = useState<string>('')
+
 
   /*
     Function to add values temporarily
@@ -58,22 +60,22 @@ function CreateCharacter() {
       optionType='Race' 
       optionArray={raceArray} 
       setFunction={setRace} 
-      setCreationOptionSelected ={setRaceOptionSelected} 
-      creationOptionSelected={raceOptionSelected}
+      // setCreationOptionsSelected ={setRaceOptionsSelected} 
+      creationOptionsSelected={raceOptionsSelected}
     />,
     <CreateCharacterOptions 
       optionType='Class' 
       optionArray={classArray} 
       setFunction={setChClass} 
-      setCreationOptionSelected ={setRaceOptionSelected} 
-      creationOptionSelected={raceOptionSelected}
+      // setCreationOptionsSelected ={setRaceOptionsSelected} 
+      creationOptionsSelected={raceOptionsSelected}
     />,
     <CreateCharacterOptions 
       optionType='Theme' 
       optionArray={themeArray} 
       setFunction={setTheme} 
-      setCreationOptionSelected ={setRaceOptionSelected} 
-      creationOptionSelected={raceOptionSelected}
+      // setCreationOptionsSelected ={setRaceOptionsSelected} 
+      creationOptionsSelected={raceOptionsSelected}
     />
   ]
 
