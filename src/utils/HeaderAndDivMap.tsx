@@ -10,7 +10,8 @@ function HeaderAndDivMap({
     divArray,
     divClassName
 }:HeaderAndDivMapProps) {
-    headerArray.map(
+    return(
+      headerArray.map(
         (header, index)=>{
           return(
             <div className={divClassName}>
@@ -20,6 +21,7 @@ function HeaderAndDivMap({
           )
         }
       )
+    )
 }
 
 export default HeaderAndDivMap

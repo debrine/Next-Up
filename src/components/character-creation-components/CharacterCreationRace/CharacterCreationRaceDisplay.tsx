@@ -1,21 +1,50 @@
 import { useEffect, useState } from 'react'
 import { raceList } from '../../../data/race-information/raceList'
 import styles from './CharacterCreationRaceDisplay.module.css'
-// import DropDownList from '../../DropDownList/DropDownList'
+import DropDownList from '../../DropDownList/DropDownList'
 
 type CharacterCreationRaceDisplayProps ={
-  race: string,
-  raceOptionArray: React.Dispatch<React.SetStateAction<String[]>>
+  race: string;
   toggleDropDown: Function;
+  showDropDown: boolean;
+  raceOptionSelected: string;
+  setRaceOptionSelected: React.Dispatch<React.SetStateAction<string>>;
+  dismissHandler: (e: React.FocusEvent<HTMLButtonElement>)=> void
 }
 
 function CharacterCreationRaceDisplay(
   props: CharacterCreationRaceDisplayProps
 ) {
-  // const { race, raceOptionArray, toggleDropDown } = props
-  const { race } = props
+  const { race, raceOptionSelected, setRaceOptionSelected, toggleDropDown, showDropDown, dismissHandler } = props
+  // const { race } = props
 
-  const [selectedRaceObject, setSelectedRaceObject] = useState<RaceListTypes | null>(null)
+  const [selectedRaceObject, setSelectedRaceObject] = useState<RaceListTypes>({
+    raceSource: '',
+    raceName: '',
+    raceScoreModifiers: '',
+    raceDescription: '',
+    raceSizeAndType: '',
+    raceHP: 0,
+    raceSize: '',
+    raceAbilityName: [''],
+    raceAbilityDescription: [''],
+    hasOptions: false,
+    optionDescription: [''],
+    optionArray: [['']],
+    raceFunction: ()=>null
+  })
+
+  const {
+    raceScoreModifiers,
+    raceDescription,
+    raceSizeAndType,
+    raceHP,
+    raceAbilityName,
+    raceAbilityDescription,
+    hasOptions,
+    optionDescription,
+    optionArray
+  } = selectedRaceObject
 
   // Set the Race object to display as user selects their race.
   useEffect(()=>{
@@ -27,71 +56,84 @@ function CharacterCreationRaceDisplay(
   },[race])
 
 
-  let raceAbilityArray = selectedRaceObject?.raceAbilityName.map(
+  let raceAbilityArray = raceAbilityName.map(
     (header, index)=>{
       return(
         <div className={styles.abilityDiv}>
                 <h3>{header}</h3>
-                <div>{selectedRaceObject.raceAbilityDescription[index]}</div>
+                <div>{raceAbilityDescription[index]}</div>
             </div>
       )
     }
   )
 
   // Not working, find out why later.
-  // function showOptions(){
-  //   if(
-  //     selectedRaceObject?.hasOptions
-  //   ){
-  //     selectedRaceObject.optionDescription.map(
-  //       (option, index)=>{
-  //         return(
-  //           <div className={styles.raceOptions}>
-  //             <div>
-  //               {option}
-  //             </div>
-  //             <DropDownList 
-  //                 optionsArray={selectedRaceObject.optionArray[index]}
-  //                 showDropDown={false}
-  //                 toggleDropDown={(): void=> toggleDropDown()}
-  //                 optionSelection={raceOptionArray}
-  //             />
-  //           </div>
-  //         )
-  //       }
-  //     )
-  //   } else{
-  //     return(<></>)
-  //   }
-  // }
+  function showOptions(){
+    if(
+      hasOptions
+    ){
+      return(
+        optionDescription.map(
+        (option, index)=>{
+          return(
+            <div className={styles.raceOptions}>
+              <div>
+                {option}
+              </div>
+              <button
+                onClick={(): void => toggleDropDown()}
+                onBlur={(e: React.FocusEvent<HTMLButtonElement>): void => dismissHandler(e)}
+              >
+              <div>{raceOptionSelected !='' ? `Option Selected: ${raceOptionSelected}` : `Select Option...`}</div>
+                {
+                  showDropDown && (
+                    <DropDownList 
+                      optionsArray={optionArray[index]}
+                      showDropDown={showDropDown}
+                      toggleDropDown={(): void=> toggleDropDown()}
+                      optionSelection={setRaceOptionSelected}
+                  />
+                  )
+                }
+              </button>
+            </div>
+          )
+        }
+      )
+      
+      )
+    } else{
+      return(<></>)
+    }
+  }
 
   function renderRaceInformation(){
-    if(selectedRaceObject != null){
+    if(race != ''){
       return(
         <div className={styles.parentDiv}>
           <div className={styles.raceDescription}>
-            {selectedRaceObject.raceDescription}
+            {raceDescription}
           </div>
           <div className={styles.abilityModifiersHP}>
             <h3>
               ABILITY SCORE MODIFIERS
             </h3>
             <span className={styles.abilityScoreModifierSpan}>
-              {selectedRaceObject.raceScoreModifiers}
+              {raceScoreModifiers}
             </span>
             <span className={styles.hpSpan}>
-              {selectedRaceObject.raceHP.toString()} HP
+              {raceHP.toString()} HP
             </span>
           </div>
 
           <div className={styles.abilityDiv}>
             <h3>SIZE AND TYPE</h3>
             <div>
-              {selectedRaceObject.raceSizeAndType}
+              {raceSizeAndType}
             </div>
           </div>
           {raceAbilityArray}
-          {/* {showOptions()} */}
+          {showOptions()}
         </div>
       )
     }

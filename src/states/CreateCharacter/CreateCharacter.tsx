@@ -27,7 +27,7 @@ function CreateCharacter() {
   const [chClass, setChClass] = useState<String>('')
   const [theme, setTheme] = useState<String>('')
   // Set the selected option if the race requires options.
-  const [, setRaceOption] = useState<String[]>([''])
+  const [raceOptionSelected, setRaceOptionSelected] = useState<string>('')
 
   const [componentArrayPosition, setComponentArrayPosition] = useState<number>(0)
 
@@ -54,9 +54,27 @@ function CreateCharacter() {
 
   let componentArray: JSX.Element[] = [
     <CharacterCreationName setInputName={setInputName} inputName={inputName}/>,
-    <CreateCharacterOptions optionType='Race' optionArray={raceArray} setFunction={setRace} setCreationOptions ={setRaceOption}/>,
-    <CreateCharacterOptions optionType='Class' optionArray={classArray} setFunction={setChClass} setCreationOptions ={setRaceOption}/>,
-    <CreateCharacterOptions optionType='Theme' optionArray={themeArray} setFunction={setTheme} setCreationOptions ={setRaceOption}/>
+    <CreateCharacterOptions 
+      optionType='Race' 
+      optionArray={raceArray} 
+      setFunction={setRace} 
+      setCreationOptionSelected ={setRaceOptionSelected} 
+      creationOptionSelected={raceOptionSelected}
+    />,
+    <CreateCharacterOptions 
+      optionType='Class' 
+      optionArray={classArray} 
+      setFunction={setChClass} 
+      setCreationOptionSelected ={setRaceOptionSelected} 
+      creationOptionSelected={raceOptionSelected}
+    />,
+    <CreateCharacterOptions 
+      optionType='Theme' 
+      optionArray={themeArray} 
+      setFunction={setTheme} 
+      setCreationOptionSelected ={setRaceOptionSelected} 
+      creationOptionSelected={raceOptionSelected}
+    />
   ]
 
   function handleNext(){

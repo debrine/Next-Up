@@ -2,26 +2,26 @@ import { useEffect, useState } from 'react'
 import styles from './CreateCharacterOptions.module.css'
 import DropDownList from '../../DropDownList/DropDownList'
 import CharacterCreationRaceDisplay from '../CharacterCreationRace/CharacterCreationRaceDisplay'
-// import { FieldValues, UseFormRegister, useForm } from 'react-hook-form'
 
 type createCharacterOptionsProps = {
     optionType: string
     optionArray: string[]
     setFunction: React.Dispatch<React.SetStateAction<String>>
-    setCreationOptions: React.Dispatch<React.SetStateAction<String[]>>
+    setCreationOptionSelected: React.Dispatch<React.SetStateAction<string>>
+    creationOptionSelected: string
 }
 
 function CreateCharacterOptions({
     optionType,
     optionArray,
     setFunction,
-    setCreationOptions
+    setCreationOptionSelected,
+    creationOptionSelected
 }: createCharacterOptionsProps) {
-    // const { register, getValues } = useForm()
 
     const [showDropDown, setShowDropDown] = useState<boolean>(false);
     const [selectedOption, setSelectedOption] = useState<string>('');
-    // const selectedOption = getValues(optionType)
+    
 
     // To clear the selected option between components.
     useEffect(()=>{
@@ -53,8 +53,11 @@ function CreateCharacterOptions({
             return(
             <CharacterCreationRaceDisplay 
             race={selectedOption} 
-            raceOptionArray={setCreationOptions}
+            setRaceOptionSelected={setCreationOptionSelected}
+            raceOptionSelected={creationOptionSelected}
             toggleDropDown={(): void=> toggleDropDown()}
+            showDropDown={showDropDown}
+            dismissHandler={dismissHandler}
             />
             )
         }
