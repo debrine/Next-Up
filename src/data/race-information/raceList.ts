@@ -12,26 +12,16 @@ let skillNames: string[] = skillList.map(skill=>{
     return(skill.skillName)
 })
 
-export let raceList: {
-    raceSource: string,
-    raceName: string,
-    raceHP: number,
-    raceSize: string,
-    raceAbilityName: string[],
-    raceAbilityDescription: string[],
-    hasOptions: boolean,
-    optionDescription?: string[],
-    optionArray?: [string[], ...any[]],
-    raceFunction: (
-        option?: string[],
-    ) => void
-}[] = [
+export let raceList: RaceListTypes[] = [
     {
         raceSource: 'Core',
         raceName:'Android',
+        raceScoreModifiers: '+2 Dex, +2 Int, -2 Cha',
+        raceDescription: 'Complex technological creations crafted to resemble humans, androids were originally a servitor race, but they have since broken free to form their own society. Unlike ordinary robots or ship AIs, androids do not simply respond according to their programming; rather, they have independent consciousnesses and are animated by souls—a distinction crucial to their generally accepted status as people rather than property.',
+        raceSizeAndType: 'Androids are Medium humanoids with the android subtype.',
         raceHP: 4,
         raceSize: 'Medium',
-        raceAbilityName: ['Constructed', 'Exceptional Vision', 'Flat Affect','Upgrade Slot'],
+        raceAbilityName: ['CONSTRUCTED', 'EXCEPTIONAL VISION', 'FLAT AFFECT','UPGRADE SLOT'],
         raceAbilityDescription: [
             'For effects targeting creatures by type, androids count as both constructs and humanoids (whichever type allows an ability to affect them for abilities that affect only one type, and whichever is worse for abilities that affect both types). They receive a +2 racial bonus to saving throws against disease, mind-affecting effects, poison, and sleep, unless those effects specifically target constructs. In addition, androids do not breathe or suffer the normal environmental effects of being in a vacuum.',
             'Androids have darkvision with a range of 60 feet and low-light vision. See pages 263-264 for more information.',
@@ -39,15 +29,21 @@ export let raceList: {
             'Androids have a single armor upgrade slot in their bodies. Regardless of whether androids are wearing physical armor, they can use this slot to install any one armor upgrade that could be installed into light armor.'
         ],
         hasOptions: false,
+        optionDescription: [],
+        optionArray: [[]],
         raceFunction: androidAdjustments
     },
     {
         raceSource: 'Core',
         raceName: 'Human',
+        raceScoreModifiers: '+2 to any one ability score',
+        raceDescription: 'Ambitious, creative, and endlessly curious, humans have shown more drive to explore their system and the universe beyond than any of their neighbor races—for better and for worse. They\'ve helped usher in a new era of system-wide communication and organization and are admired for their passion and tenacity, but their tendency to shoot first and think about the consequences later can make them a liability for those races otherwise inclined to work with them.',
+        raceSizeAndType: 'Humans are Medium humanoids and have the human subtype.',
         raceHP: 4,
         raceSize: 'Medium',
-        raceAbilityName: ['Skilled'],
+        raceAbilityName: ['BONUS FEAT', 'SKILLED'],
         raceAbilityDescription: [
+            'Humans select one extra feat at 1st level.',
             'Humans gain an additional skill rank at 1st level and each level thereafter.'
         ],
         hasOptions: true,
@@ -65,9 +61,12 @@ export let raceList: {
     {
         raceSource: 'Core',
         raceName: 'Kasatha',
+        raceScoreModifiers: '+2 Str, +2 Wis, -2 Int',
+        raceDescription: 'Originally from a planet orbiting a dying star far beyond the Pact Worlds, the four-armed kasathas maintain a reputation as a noble and mysterious people. They are famous for their anachronistic warriors, ancient wisdom, and strange traditions.',
+        raceSizeAndType: 'Kasathas are Medium humanoids with the kasatha subtype.',
         raceHP: 4,
         raceSize: 'Medium',
-        raceAbilityName: ['Desert Stride','Four-Armed','Historian','Natural Grace'],
+        raceAbilityName: ['DESERT STRIDE','FOUR-ARMED','HISTORIAN','NATURAL GRACE'],
         raceAbilityDescription: [
             'Kasathas can move through nonmagical difficult terrain in deserts, hills, and mountains at their normal speed.',
             'Kasathas have four arms, which allows them to wield and hold up to four hands\' worth of weapons and equipment. While their multiple arms increase the number of items they can have at the ready, it doesn\'t increase the number of attacks they can make during combat.',
@@ -75,14 +74,19 @@ export let raceList: {
             'Kasathas receive a +2 racial bonus to Acrobatics and Athletics checks.'
         ],
         hasOptions: false,
+        optionDescription: [],
+        optionArray: [[]],
         raceFunction: kasathaAdjustments
     },
     {
         raceSource: 'Core',
         raceName: 'Lashunta',
+        raceScoreModifiers: '+2 Cha, +2 Str, -2 Wis (Korasha) or +2 Cha, +2 Int, -2 Con (Damaya)',
+        raceDescription: 'Idealized by many other humanoid races and gifted with innate psychic abilities, lashuntas are at once consummate scholars and enlightened warriors, naturally divided into two specialized subraces with different abilities and societal roles.',
+        raceSizeAndType: 'Lashuntas are Medium humanoids with the lashunta subtype.',
         raceHP: 4,
         raceSize: 'Medium',
-        raceAbilityName: ['Lashunta Magic','Limited Telepathy','Student'],
+        raceAbilityName: ['LASHUNTA MAGIC','LIMITED TELEPATHY','STUDENT'],
         raceAbilityDescription: [
             'Lashuntas gain the following spell-like abilities: At will: daze, psychokinetic hand. 1/day: detect thoughts. See Spell-like Abilities on page 262. The caster level for these effects is equal to the lashunta\'s level.',
             'Lashuntas can mentally communicate with any creatures within 30 feet with whom they share a language. Conversing telepathically with multiple creatures simultaneously is just as difficult as listening to multiple people speaking.',
@@ -104,9 +108,12 @@ export let raceList: {
     {
         raceSource: 'Core',
         raceName: 'Shirren',
+        raceScoreModifiers: '+2 Con, +2 Wis, -2 Cha',
+        raceDescription: 'Once part of a ravenous hive of locust-like predators, the insectile shirrens only recently broke with their hive mind to become a race of telepaths physically addicted to their own individualism, yet dedicated to the idea of community and harmony with other races.',
+        raceSizeAndType: 'Shirrens are Medium humanoids with the shirren subtype.',
         raceHP: 6,
         raceSize: 'Medium',
-        raceAbilityName: ['Blindsense', 'Communalism', 'Cultural Fascination','Limited Telepathy'],
+        raceAbilityName: ['BLINDSENSE', 'COMMUNALISM', 'CULTURAL FASCINATION','LIMITED TELEPATHY'],
         raceAbilityDescription: [
             'Shirrens\' sensitive antennae grant them blindsense (vibration)—the ability to sense vibrations in the air—with a range of 30 feet. See page 262 for more information about blindsense.',
             'Shirrens are used to working with others as part of a team. Once per day, as long as an ally is within 10 feet, a shirren can roll a single attack roll or skill check twice and take the higher result.',
@@ -114,14 +121,19 @@ export let raceList: {
             'Shirrens can communicate telepathically with any creatures within 30 feet with whom they share a language. Conversing telepathically with multiple creatures simultaneously is just as difficult as listening to multiple people speak.'
         ],
         hasOptions: false,
+        optionDescription: [],
+        optionArray: [[]],
         raceFunction: shirrenAdjustments
     },
     {
         raceSource: 'Core',
         raceName: 'Vesk',
+        raceScoreModifiers: '+2 Str, +2 Con, -2 Int',
+        raceDescription: 'Heavily muscled and covered with thick scales and short, sharp horns, the reptilian vesk are exactly as predatory and warlike as they appear. Originally hailing from a star system near the Pact Worlds, they sought to conquer and subdue their stellar neighbors, as they had all the other intelligent races in their own system, until an overwhelming threat forced them into a grudging alliance with the Pact Worlds—for now.',
+        raceSizeAndType: 'Vesk are Medium humanoids with the vesk subtype.',
         raceHP: 6,
         raceSize: 'Medium',
-        raceAbilityName: ['Armor Savant','Fearless','Low-Light Vision','Natural Weapons'],
+        raceAbilityName: ['ARMOR SAVANT','FEARLESS','LOW-LIGHT VISION','NATURAL WEAPONS'],
         raceAbilityDescription: [
             'Vesk use armor in a way that complements their uniquely sturdy physiology. When wearing armor, they gain a +1 racial bonus to AC. When they\'re wearing heavy armor, their armor check penalty is 1 less severe than normal.',
             'Vesk receive a +2 racial bonus to saving throws against fear effects.',
@@ -129,14 +141,19 @@ export let raceList: {
             'Vesk can attack with a special unarmed strike that deals lethal damage, doesn\'t count as archaic, and threatens squares. Vesk gain a special version of the Weapon Specialization feat with this unarmed strike at 3rd level, allowing them to add 1-1/2 x their character level to their damage rolls for this unarmed strike (instead of just adding their character level, as usual).'
         ],
         hasOptions: false,
+        optionDescription: [],
+        optionArray: [[]],
         raceFunction: veskAdjustments
     },
     {
         raceSource: 'Core',
         raceName: 'Ysoki',
+        raceScoreModifiers: '+2 Dex, +2 Int, -2 Str',
+        raceDescription: 'Small and furtive, the ysoki are often overlooked by larger races. Yet through wit and technological prowess, they\'ve spread throughout the solar system, giving truth to the old adage that every starship needs a few rats.',
+        raceSizeAndType: 'Ysoki are Small humanoids with the ysoki subtype.',
         raceHP: 2,
         raceSize: "Small",
-        raceAbilityName: ['Cheek Pouches','Darkvision','Moxie','Scrounger'],
+        raceAbilityName: ['CHEEK POUCHES','DARKVISION','MOXIE','SCROUNGER'],
         raceAbilityDescription: [
             'Ysoki can store up to 1 cubic foot of items weighing up to 1 bulk in total in their cheek pouches, and they can transfer a single object between hand and cheek as a swift action. A ysoki can disgorge the entire contents of his pouch onto the ground in his square as a move action that does not provoke an attack of opportunity.',
             'Ysoki can see up to 60 feet in the dark. See page 263 for more information.',
@@ -144,6 +161,8 @@ export let raceList: {
             'Ysoki receive a +2 racial bonus to Engineering, Stealth, and Survival checks.'
         ],
         hasOptions: false,
+        optionDescription: [],
+        optionArray: [[]],
         raceFunction: ysokiAdjustments
     }
 ]

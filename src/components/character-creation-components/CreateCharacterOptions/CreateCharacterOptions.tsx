@@ -1,17 +1,21 @@
 import { useEffect, useState } from 'react'
 import styles from './CreateCharacterOptions.module.css'
+import DropDownList from '../../DropDownList/DropDownList'
+import CharacterCreationRaceDisplay from '../CharacterCreationRace/CharacterCreationRaceDisplay'
 // import { FieldValues, UseFormRegister, useForm } from 'react-hook-form'
 
 type createCharacterOptionsProps = {
     optionType: string
     optionArray: string[]
     setFunction: React.Dispatch<React.SetStateAction<String>>
+    setCreationOptions: React.Dispatch<React.SetStateAction<String[]>>
 }
 
 function CreateCharacterOptions({
     optionType,
     optionArray,
-    setFunction
+    setFunction,
+    setCreationOptions
 }: createCharacterOptionsProps) {
     // const { register, getValues } = useForm()
 
@@ -44,6 +48,18 @@ function CreateCharacterOptions({
         setFunction(option)
     }
 
+    function renderSelectionType(){
+        if(optionType === 'Race'){
+            return(
+            <CharacterCreationRaceDisplay 
+            race={selectedOption} 
+            raceOptionArray={setCreationOptions}
+            toggleDropDown={(): void=> toggleDropDown()}
+            />
+            )
+        }
+    }
+
     return (
     <div className={styles.parentDiv}>
         <h1>
@@ -55,32 +71,15 @@ function CreateCharacterOptions({
         >
         <div>{selectedOption !='' ? `${optionType}: ${selectedOption}` : `${optionType}...`}</div>
             {showDropDown && (
-            // <DropDownList 
-            //     optionsArray={optionArray}
-            //     showDropDown={false}
-            //     toggleDropDown={(): void=> toggleDropDown()}
-            //     optionSelection={optionSelection}
-            // />
-            <div className={showDropDown ? 'dropdown' : 'dropdown active'}>
-                {optionArray.map(
-                    (option: string, index: number): JSX.Element => {
-                        return (
-                        <p
-                            key={index}
-                            // {...register(optionType)}
-                            onClick={(): void => {
-                            optionSelection(option);
-                            }}
-                        >
-                            {option}
-                        </p>
-                        );
-                    }
-                )}
-            </div>
+            <DropDownList 
+                optionsArray={optionArray}
+                showDropDown={showDropDown}
+                toggleDropDown={(): void=> toggleDropDown()}
+                optionSelection={optionSelection}
+            />
         )}
         </button>
-        
+        {renderSelectionType()}
     </div>
     )
 }

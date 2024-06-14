@@ -6,7 +6,7 @@ import styles from './CreateCharacter.module.css'
 import CharacterCreationName from '../../components/character-creation-components/CharacterCreationName/CharacterCreationName.tsx'
 import { themeList } from '../../data/theme-information/themeList.ts'
 import AddCharacterButton from '../../components/character-creation-components/AddCharacterButton/AddCharacterButton.tsx'
-// import { classList } from '../../data/class-information/classList.ts'
+import { classList } from '../../data/class-information/classList.ts'
 
 
 function CreateCharacter() {
@@ -15,10 +15,9 @@ function CreateCharacter() {
       return(race.raceName)
   });
 
-  // Breaking the code somehow????
-  // let classArray: string[] = classList.map((chClass)=>{
-  //   return(chClass.className)
-  // })
+  let classArray: string[] = classList.map((chClass)=>{
+    return(chClass.className)
+  })
 
   let themeArray: string[] = themeList.map((theme)=>{
     return(theme.themeName)
@@ -27,6 +26,8 @@ function CreateCharacter() {
   const [race, setRace] = useState<String>('')
   const [chClass, setChClass] = useState<String>('')
   const [theme, setTheme] = useState<String>('')
+  // Set the selected option if the race requires options.
+  const [, setRaceOption] = useState<String[]>([''])
 
   const [componentArrayPosition, setComponentArrayPosition] = useState<number>(0)
 
@@ -53,9 +54,9 @@ function CreateCharacter() {
 
   let componentArray: JSX.Element[] = [
     <CharacterCreationName setInputName={setInputName} inputName={inputName}/>,
-    <CreateCharacterOptions optionType='Race' optionArray={raceArray} setFunction={setRace}/>,
-    <CreateCharacterOptions optionType='Class' optionArray={raceArray} setFunction={setChClass}/>,
-    <CreateCharacterOptions optionType='Theme' optionArray={themeArray} setFunction={setTheme}/>
+    <CreateCharacterOptions optionType='Race' optionArray={raceArray} setFunction={setRace} setCreationOptions ={setRaceOption}/>,
+    <CreateCharacterOptions optionType='Class' optionArray={classArray} setFunction={setChClass} setCreationOptions ={setRaceOption}/>,
+    <CreateCharacterOptions optionType='Theme' optionArray={themeArray} setFunction={setTheme} setCreationOptions ={setRaceOption}/>
   ]
 
   function handleNext(){
