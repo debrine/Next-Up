@@ -1,5 +1,6 @@
 type ThemeListTypes = {
     themeName: string,
+    themeScoreModifiers: string,
     themeDescription: string,
     themeFunction: (
         keyID: KeyIDType,

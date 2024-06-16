@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import styles from './CreateCharacterOptions.module.css'
 import DropDownList from '../../DropDownList/DropDownList'
-import CharacterCreationRaceDisplay from '../CharacterCreationRace/CharacterCreationRaceDisplay'
+import CharacterCreationRaceDisplay from '../CharacterCreationRaceDisplay/CharacterCreationRaceDisplay'
+import CharacterCreationThemeDisplay from '../CharacterCreationThemeDisplay/CharacterCreationThemeDisplay'
 
 type createCharacterOptionsProps = {
     optionType: string
@@ -10,11 +11,7 @@ type createCharacterOptionsProps = {
     creationOptionsSelected: {
         optionValue: string;
         optionSet: React.Dispatch<React.SetStateAction<string>>;
-    }[]
-    // setCreationOptionsSelected: React.Dispatch<React.SetStateAction<{
-    //     optionValue: string;
-    //     optionSet: React.Dispatch<React.SetStateAction<string>>;
-    // }[]>>
+    }[],
 }
 
 function CreateCharacterOptions({
@@ -46,11 +43,17 @@ function CreateCharacterOptions({
     function renderSelectionType(){
         if(optionType === 'Race'){
             return(
-            <CharacterCreationRaceDisplay 
-            race={selectedOption} 
-            // setRaceOptionsSelected={setCreationOptionsSelected}
-            raceOptionsSelected={creationOptionsSelected}
-            />
+                <CharacterCreationRaceDisplay 
+                    race={selectedOption} 
+                    raceOptionsSelected={creationOptionsSelected}
+                />
+            )
+        } else if (optionType === 'Theme'){
+            return(
+                <CharacterCreationThemeDisplay
+                    theme={selectedOption}
+                    themeOptionsSelected={creationOptionsSelected}
+                />
             )
         }
     }

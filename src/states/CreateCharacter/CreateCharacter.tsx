@@ -24,7 +24,7 @@ function CreateCharacter() {
   })
 
   const [chClass, setChClass] = useState<String>('')
-  const [theme, setTheme] = useState<String>('')
+
   /*
     Race
   */
@@ -52,7 +52,34 @@ function CreateCharacter() {
       optionSet: setRaceOptionThree
     },
   ])
-  // let raceOptionsSelected = useRef<string[]>(['','',''])
+
+  /*
+    Theme
+  */
+    const [theme, setTheme] = useState<String>('')
+    // Set the selected option if the theme requires options.
+    const [themeOptionOne, setThemeOptionOne] = useState<string>('')
+    const [themeOptionTwo, setThemeOptionTwo] = useState<string>('')
+    const [themeOptionThree, setThemeOptionThree] = useState<string>('')
+  
+    // Array to be passed into the DropDownList in Theme Display.
+    const themeOptionsSelected: { 
+      optionValue: string; 
+      optionSet: React.Dispatch<React.SetStateAction<string>>; 
+    }[] = ([
+      {
+        optionValue: themeOptionOne,
+        optionSet: setThemeOptionOne
+      },
+      {
+        optionValue: themeOptionTwo,
+        optionSet: setThemeOptionTwo
+      },
+      {
+        optionValue: themeOptionThree,
+        optionSet: setThemeOptionThree
+      },
+    ])
 
   const [componentArrayPosition, setComponentArrayPosition] = useState<number>(0)
 
@@ -84,22 +111,19 @@ function CreateCharacter() {
       optionType='Race' 
       optionArray={raceArray} 
       setFunction={setRace} 
-      // setCreationOptionsSelected ={setRaceOptionsSelected} 
       creationOptionsSelected={raceOptionsSelected}
     />,
     <CreateCharacterOptions 
       optionType='Class' 
       optionArray={classArray} 
       setFunction={setChClass} 
-      // setCreationOptionsSelected ={setRaceOptionsSelected} 
-      creationOptionsSelected={raceOptionsSelected}
+      creationOptionsSelected={themeOptionsSelected}
     />,
     <CreateCharacterOptions 
       optionType='Theme' 
       optionArray={themeArray} 
       setFunction={setTheme} 
-      // setCreationOptionsSelected ={setRaceOptionsSelected} 
-      creationOptionsSelected={raceOptionsSelected}
+      creationOptionsSelected={themeOptionsSelected}
     />
   ]
 

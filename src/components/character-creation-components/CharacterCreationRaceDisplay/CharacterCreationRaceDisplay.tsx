@@ -9,10 +9,6 @@ type CharacterCreationRaceDisplayProps ={
     optionValue: string;
     optionSet: React.Dispatch<React.SetStateAction<string>>;
 }[]
-  // setRaceOptionsSelected: React.Dispatch<React.SetStateAction<{
-  //     optionValue: string;
-  //     optionSet: React.Dispatch<React.SetStateAction<string>>;
-  // }[]>>
 }
 
 function CharacterCreationRaceDisplay(
@@ -76,9 +72,10 @@ function CharacterCreationRaceDisplay(
   },[race])
   
 
-  // Needs to be able to set values into the array.
+  // Sets values into an array to be used for character creation.
   function showOptions(){
     if(
+      // If the Race has options to select.
       hasOptions
     ){
       return(
@@ -87,6 +84,7 @@ function CharacterCreationRaceDisplay(
           return(
             <div className={styles.raceOptions} key={`raceOption${index}`}>
               <div>
+                {/* Display the description of the option. */}
                 {option}
               </div>
                 <DropDownList 

@@ -2,17 +2,19 @@ import AcePilotAdjustments from "./theme-adjustments/AcePilotAdjustments.ts"
 import AthleteAdjustments from "./theme-adjustments/AthleteAdjustments.ts"
 import BattleMedicAdjustments from "./theme-adjustments/BattleMedicAdjustments.ts"
 import BeastbloodAdjustments from "./theme-adjustments/BeastbloodAdjustments.ts"
+import BiotechnicianAdjustments from "./theme-adjustments/BiotechnicianAdjustments.ts"
 
 export let themeList: ThemeListTypes[] = [
     {
         themeName: 'Ace Pilot',
+        themeScoreModifiers: '+1 Dex',
         themeDescription: 'You are most comfortable at the controls of a vehicle, whether it\'s a starship racing through the inky void of space or a ground vehicle zooming between trees, around boulders, and across dusty badlands. You might be a member of an elite military force, the recipient of intense courses of training. Alternatively, you might be a total amateur with innate skills that make you a much-admired hotshot.',
         themeFunction: (ref) => AcePilotAdjustments(ref),
         themeAbilityTitle: [
-            'Theme Knowledge (1st Level)',
-            'Lone Wolf (6th Level)',
-            'Need For Speed (12th Level)',
-            'Master Pilot (18th Level)'
+            'THEME KNOWLEDGE (1ST)',
+            'LONE WOLF (6TH)',
+            'NEED FOR SPEED (12TH)',
+            'MASTER PILOT (18TH)'
         ],
         themeAbilityDescription: [
             'You are obsessed with starships and vehicles, and have committed to memory almost every related tidbit of knowledge you\'ve ever come across. Reduce the DC of Culture checks to recall knowledge about starship and vehicle models and parts as well as famous hotshot pilots by 5. Piloting is a class skill for you, though if it is a class skill from the class you take at 1st level, you instead gain a +1 bonus to your Piloting checks. In addition, you gain an ability adjustment of +1 to Dexterity at character creation.',
@@ -29,13 +31,14 @@ export let themeList: ThemeListTypes[] = [
     },
     {
         themeName: 'Athlete',
+        themeScoreModifiers: '+1 Str, Dex, or Con',
         themeDescription: 'You currently are or formerly were a professional-level athlete with highly specialized physical skills. You might be a member of your region\'s sports team, chosen for your exceptional strength or finesse, or maybe you competed in individual events requiring exemplary endurance. Your prowess may have already led you to travel extensively for competitions, or you might still be an up-and-coming star. Either way, your impressive physical capabilities enable you to make a living as a professional competitor.',
         themeFunction: (ref, option) => AthleteAdjustments(ref, option),
         themeAbilityTitle: [
-            'Theme Knowledge (1st Level)',
-            'Physical Prowess (6th Level)',
-            'Fan Favorite (12th Level)',
-            'Champion (18th Level)'
+            'THEME KNOWLEDGE (1ST)',
+            'PHYSICAL PROWESS (6TH)',
+            'FAN FAVOURITE (12TH)',
+            'CHAMPION (18TH)'
         ],
         themeAbilityDescription: [
             'You\'ve been involved in your sport or activity for years, and you know a great deal about the industry. When recalling knowledge regarding details of your industry, whether historical or current, reduce the DC of the Culture check by 5. In addition, based on the primary abilities required in your chosen sport, either Acrobatics (for Dexterity or Constitution) or Athletics (for Strength or Constitution) is a class skill for you, though if the relevant skill is a class skill from the class you take at 1st level, you instead gain a +1 bonus to your Acrobatics or Athletics checks. Likewise, you gain an ability adjustment of +1 to either Strength, Dexterity, or Constitution at character creation, depending on which ability is most relevant to your athletic endeavors.',
@@ -65,13 +68,14 @@ export let themeList: ThemeListTypes[] = [
     },
     {
             themeName: 'Battle Medic',
+            themeScoreModifiers: '+1 Int',
             themeDescription: 'You\'ve been trained to treat combat wounds on and off the battlefield. Operating in high-intensity situations in remote rural locales, on city streets, and amid the din of combat, you honed your ability to remain calm and collected under duress and heal those around you. Your peers likely see you as an incredibly valuable team member and, because of this, they defend you with their lives.',
             themeFunction: (ref) => BattleMedicAdjustments(ref),
             themeAbilityTitle: [
-                'Theme Knowledge (1st Level)',
-                'Exposure Immunity (6th Level)',
-                'Bedside Manner (12th Level)',
-                'Preeminent Physican (18th Level)'
+                'THEME KNOWLEDGE (1ST)',
+                'EXPOSURE IMMUNITY (6TH)',
+                'BEDSIDE MANNER (12TH)',
+                'PREEMINENT PHYSICIAN (18TH)'
             ],
             themeAbilityDescription: [
                 'Having studied and even occasionally treated infirmities and illnesses across the galaxy, you can detect and diagnose a wide array of maladies in both your own species and in beings from all walks of life. You have also done extensive research on unusual—even mystical—aspects of biology and chemistry, and now almost nothing in those fields surprises you. Reduce the DC of any Life Science or Mysticism check to recall knowledge about a disease or poison by 5. Medicine is a class skill for you, though if it is a class skill from the class you take at 1st level, you instead gain a +1 bonus to Medicine checks. In addition, you gain an ability adjustment of +1 to Intelligence at character creation.',
@@ -88,13 +92,14 @@ export let themeList: ThemeListTypes[] = [
         },
         {
                 themeName: 'Beastblood',
+                themeScoreModifiers: '+1 Int or Wis',
                 themeDescription: 'You have a powerful affinity with the beasts of the wild. Perhaps you descend from—or were infected by—a lycanthrope or similar creature, were subjected to the rituals of a beastly fiend, or performed ancestral trials to pledge yourself to a beast spirit. Whatever the source, you fight and hunt like a wild thing, and you know the natural side of worlds like you were born to them.',
                 themeFunction: (ref, option) => BeastbloodAdjustments(ref, option),
                 themeAbilityTitle: [
-                    'Theme Knowledge (1st Level)',
-                    'Bestial Lineage (6th Level)',
-                    'Wild Hunt (12th Level)',
-                    'Animal Instincts (18th Level)'
+                    'THEME KNOWLEDGE (1ST)',
+                    'BESTIAL LINEAGE (6TH)',
+                    'WILD HUNT (12TH)',
+                    'ANIMAL INSTINCTS (18TH)'
                 ],
                 themeAbilityDescription: [
                     'You have sterling instincts when it comes to understanding wild places and the creatures that inhabit them. When you attempt a Life Science, Physical Science, or Survival check to recall knowledge about animals or terrestrial wilderness environments, reduce the DC by 5. Survival is a class skill for you, though if it\'s also a class skill from the class you take at 1st level, you instead gain a +1 bonus to Survival checks. In addition, you gain an ability adjustment of +1 to Intelligence or Wisdom at character creation.',
@@ -109,18 +114,43 @@ export let themeList: ThemeListTypes[] = [
                 optionDescription: ['Choose your ability score to gain a +1 bonus.'],
                 optionArray: [['Intelligence', 'Wisdom']],
             },
+            {
+                    themeName: 'Biotechnician',
+                    themeScoreModifiers: '+1 Int',
+                    themeDescription: 'You are a biotech researcher or avid user of such tech, constantly seeking out or developing new biotechnologies and combining existing augmentations with advancements in other fields. You might be a member of the Augmented, a researcher in one of Bretheda\'s cutting-edge biotech corporations, a spellcasting genetomancer blending biotechnology with magic, or even a voluntary test subject for new augmentations. Either way, you have taken a strong hand in your own evolution.',
+                    themeFunction: (ref) => BiotechnicianAdjustments(ref),
+                    themeAbilityTitle: [
+                        'THEME KNOWLEDGE (1ST)',
+                        'INDUSTRY CONNECTIONS (6TH)',
+                        'TEST SUBJECT (12TH)',
+                        'ADAPTIVE BIOTECH (18TH)'
+                    ],
+                    themeAbilityDescription: [
+                        'You have a sharp mind for the intricacies of biotech augmentations and keep up-to-date on current research in the field, whether because you work to develop such technology or because you are the beneficiary of biotech augmentations— or, most likely, both. Reduce the DC of Life Science checks to identify biotech augmentations and to recall knowledge about famous biotech corporations and researchers by 5. Medicine is a class skill for you, though if it is a class skill from the class you take at 1st level, you instead gain a +1 bonus to your Medicine checks. In addition, you gain an ability adjustment of +1 to Intelligence at character creation.',
+            
+                        'You\'ve forged and maintained a number of connections with significant players in the biotech industry, scoring yourself favors and preferred treatment. As long as you are able to contact your connections in the industry, you gain a 10% discount off the typical list price for biotech augmentations installed in you.',
+            
+                        'Thanks to your enthusiasm for biotech gear and constant tinkering with your DNA, you can adopt experimental, cutting-edge augmentations in your body beyond what most people can support. You can install one additional piece of biotech augmentation than a typical member of your race. For example, a human could have both a dragon gland and a wildwise implant even though they both occupy the throat system.',
+                        
+                        'You have learned to leverage your biotech augmentations in ways their creators hardly envisioned. Up to twice per day as a standard action, you can deactivate a piece of biotech implanted in your body (except for a prosthetic limb), rendering it inert until your next 8-hour rest, to regain 1 Resolve Point. An inert piece of biotech doesn\'t grant its usual benefits (for instance, an inert venom spur can\'t be used to attack), and you can shut down a single biotech implant only once per day.'
+                    ],
+                    hasOptions: false,
+                    optionDescription: [],
+                    optionArray: [[]],
+                },
 ]
 
 /*
 {
         themeName: '',
+        themeScoreModifiers: '+1 ',
         themeDescription: '',
         themeFunction: (ref, option) => (ref, option),
         themeAbilityTitle: [
-            'Theme Knowledge (1st Level)',
-            ' (6th Level)',
-            ' (12th Level)',
-            ' (18th Level)'
+            'THEME KNOWLEDGE (1ST)',
+            ' (6TH)',
+            ' (12TH)',
+            ' (18TH)'
         ],
         themeAbilityDescription: [
             '',
