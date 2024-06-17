@@ -48,7 +48,7 @@ const DropDownList: React.FC<DropDownProps> = ({
               (option: string, index: number): JSX.Element => {
                 return (
                   <p
-                    key={index}
+                    key={`${index}${option}`}
                     onClick={(): void => {
                       optionSelection(option);
                     }}

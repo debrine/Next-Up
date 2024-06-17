@@ -50,7 +50,7 @@ function CharacterCreationThemeDisplay(
     let themeAbilityArray = themeAbilityTitle.map(
       (header, index)=>{
         return(
-          <div className={styles.abilityDiv}>
+          <div className={styles.abilityDiv} key={`${header}${index}`}>
                 <h3>{header}</h3>
                 {/* hr is temp, the div will be a red line like the offical book. */}
                 <hr />
@@ -97,7 +97,7 @@ function CharacterCreationThemeDisplay(
       }
     }
   
-    function renderthemeInformation(){
+    function renderThemeInformation(){
       if(themeSelected != ''){
         return(
           <div className={styles.parentDiv}>
@@ -118,7 +118,7 @@ function CharacterCreationThemeDisplay(
     }
   
     return(
-      renderthemeInformation()
+      renderThemeInformation()
     )
 }
 

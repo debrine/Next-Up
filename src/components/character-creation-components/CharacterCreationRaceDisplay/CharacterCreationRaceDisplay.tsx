@@ -58,7 +58,7 @@ const {
   let raceAbilityArray = raceAbilityName.map(
     (header, index)=>{
       return(
-        <div className={styles.abilityDiv}>
+        <div className={styles.abilityDiv} key={`${header}${index}`}>
                 <h3>{header}</h3>
                 <div>{raceAbilityDescription[index]}</div>
             </div>
