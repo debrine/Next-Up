@@ -11,17 +11,17 @@ import { classList } from '../../data/class-information/classList.ts'
 
 function CreateCharacter() {
 
-  let raceArray: string[] = raceList.map((race)=>{
-      return(race.raceName)
+  let raceArray: string[] = Object.keys(raceList).map((key:string)=>{
+    return(key)
   });
 
-  let classArray: string[] = classList.map((chClass)=>{
-    return(chClass.className)
+  let classArray: string[] = Object.keys(classList).map((key:string)=>{
+    return(key)
   })
 
-  let themeArray: string[] = themeList.map((theme)=>{
-    return(theme.themeName)
-  })
+  let themeArray: string[] = Object.keys(themeList).map((key:string)=>{
+    return(key)
+  });
 
   const [chClass, setChClass] = useState<String>('')
 

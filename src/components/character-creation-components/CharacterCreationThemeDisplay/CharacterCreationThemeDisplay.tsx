@@ -4,7 +4,7 @@ import { themeList } from '../../../data/theme-information/themeList';
 import DropDownList from '../../DropDownList/DropDownList';
 
 type CharacterCreationThemeDisplay={
-    theme: string;
+  themeSelected: string;
     themeOptionsSelected: {
     optionValue: string;
     optionSet: React.Dispatch<React.SetStateAction<string>>;
@@ -14,7 +14,7 @@ type CharacterCreationThemeDisplay={
 function CharacterCreationThemeDisplay(
     props: CharacterCreationThemeDisplay
 ) {
-    const { theme, themeOptionsSelected } = props
+    const { themeSelected, themeOptionsSelected } = props
   
   
     const [selectedThemeObject, setSelectedThemeObject] = useState<ThemeListTypes>({
@@ -41,12 +41,10 @@ function CharacterCreationThemeDisplay(
   
     // Set the theme object to display as user selects their theme.
     useEffect(()=>{
-      themeList.forEach(themeType =>{
-        if(themeType.themeName === theme){
-          setSelectedThemeObject(themeType)
-        }
-      })
-    },[theme])
+      if(themeList[themeSelected]){
+        setSelectedThemeObject(themeList[themeSelected])
+      }
+    },[themeSelected])
   
   
     let themeAbilityArray = themeAbilityTitle.map(
@@ -66,7 +64,7 @@ function CharacterCreationThemeDisplay(
       themeOptionsSelected.forEach(i=>{
         i.optionSet('')
       })
-    },[theme])
+    },[themeSelected])
     
   
     // Sets values into an array to be used for character creation.
@@ -100,7 +98,7 @@ function CharacterCreationThemeDisplay(
     }
   
     function renderthemeInformation(){
-      if(theme != ''){
+      if(themeSelected != ''){
         return(
           <div className={styles.parentDiv}>
             <div className={styles.descriptionDiv}>

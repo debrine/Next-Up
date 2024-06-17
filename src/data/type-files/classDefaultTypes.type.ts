@@ -1,4 +1,4 @@
-export type ClassDefaultTypes= {
+type ClassDefaultTypes= {
     hitStaminaPoints: number;
     keyAbilityScore: string[];
     classSkills: string[];

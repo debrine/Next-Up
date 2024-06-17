@@ -41,17 +41,17 @@ function CreateCharacterOptions({
     }
 
     function renderSelectionType(){
-        if(optionType === 'Race'){
+        if(optionType === 'Race'){if(selectedOption != undefined){
             return(
                 <CharacterCreationRaceDisplay 
-                    race={selectedOption} 
+                    raceSelected={selectedOption} 
                     raceOptionsSelected={creationOptionsSelected}
                 />
-            )
+            )}
         } else if (optionType === 'Theme'){
             return(
                 <CharacterCreationThemeDisplay
-                    theme={selectedOption}
+                    themeSelected={selectedOption}
                     themeOptionsSelected={creationOptionsSelected}
                 />
             )
