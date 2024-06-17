@@ -38,10 +38,10 @@ export default function AddCharacterHandler( {
           theme: tempCharInfo.theme
         }
     ])
-    skillList.forEach(skill=>{
-      localStorage.setItem(`${skill.skillName}${tempCharInfo.keyID}`, JSON.stringify(skill))
+    Object.keys(skillList).forEach((key:string)=>{
+      localStorage.setItem(`${skillList[key].skillName}${tempCharInfo.keyID}`, JSON.stringify(skillList[key]))
     })
-    abilityScoreList.forEach(ability=>{
-      localStorage.setItem(`${ability.aSName}${tempCharInfo.keyID}`, JSON.stringify(ability))
+    Object.keys(abilityScoreList).forEach((key:string)=>{
+      localStorage.setItem(`${abilityScoreList[key].aSName}${tempCharInfo.keyID}`, JSON.stringify(abilityScoreList[key]))
     })
   }

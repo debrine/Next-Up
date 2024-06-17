@@ -1,4 +1,3 @@
-import { ClassDefaultTypes } from "../../type-files/classDefaultTypes.type"
 
 
 const BiohackerClassDefaults: ClassDefaultTypes = {
