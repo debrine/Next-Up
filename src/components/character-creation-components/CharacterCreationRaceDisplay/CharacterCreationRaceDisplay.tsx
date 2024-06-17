@@ -4,7 +4,7 @@ import styles from './CharacterCreationRaceDisplay.module.css'
 import DropDownList from '../../DropDownList/DropDownList'
 
 type CharacterCreationRaceDisplayProps ={
-  race: string;
+  raceSelected: string;
   raceOptionsSelected: {
     optionValue: string;
     optionSet: React.Dispatch<React.SetStateAction<string>>;
@@ -14,45 +14,45 @@ type CharacterCreationRaceDisplayProps ={
 function CharacterCreationRaceDisplay(
   props: CharacterCreationRaceDisplayProps
 ) {
-  const { race, raceOptionsSelected } = props
+  const { raceSelected, raceOptionsSelected } = props
 
 
-  const [selectedRaceObject, setSelectedRaceObject] = useState<RaceListTypes>({
-    raceSource: '',
-    raceName: '',
-    raceScoreModifiers: '',
-    raceDescription: '',
-    raceSizeAndType: '',
-    raceHP: 0,
-    raceSize: '',
-    raceAbilityName: [''],
-    raceAbilityDescription: [''],
-    hasOptions: false,
-    optionDescription: [''],
-    optionArray: [['']],
-    raceFunction: ()=>null
-  })
+  const [selectedRaceObject, setSelectedRaceObject] = useState<RaceListTypes>(
+    {
+      raceSource: '',
+      raceName: '',
+      raceScoreModifiers: '',
+      raceDescription: '',
+      raceSizeAndType: '',
+      raceHP: 0,
+      raceSize: '',
+      raceAbilityName: [''],
+      raceAbilityDescription: [''],
+      hasOptions: false,
+      optionDescription: [''],
+      optionArray: [['']],
+      raceFunction: ()=>null
+    }
+  )
 
-  const {
-    raceScoreModifiers,
-    raceDescription,
-    raceSizeAndType,
-    raceHP,
-    raceAbilityName,
-    raceAbilityDescription,
-    hasOptions,
-    optionDescription,
-    optionArray
-  } = selectedRaceObject
+const {
+  raceScoreModifiers,
+  raceDescription,
+  raceSizeAndType,
+  raceHP,
+  raceAbilityName,
+  raceAbilityDescription,
+  hasOptions,
+  optionDescription,
+  optionArray,
+} = selectedRaceObject
 
   // Set the Race object to display as user selects their race.
   useEffect(()=>{
-    raceList.forEach(raceType =>{
-      if(raceType.raceName === race){
-        setSelectedRaceObject(raceType)
-      }
-    })
-  },[race])
+    if(raceList[raceSelected] != undefined){
+      setSelectedRaceObject(raceList[raceSelected])
+    }
+  },[raceSelected])
 
 
   let raceAbilityArray = raceAbilityName.map(
@@ -69,7 +69,7 @@ function CharacterCreationRaceDisplay(
     raceOptionsSelected.forEach(i=>{
       i.optionSet('')
     })
-  },[race])
+  },[raceSelected])
   
 
   // Sets values into an array to be used for character creation.
@@ -103,7 +103,7 @@ function CharacterCreationRaceDisplay(
   }
 
   function renderRaceInformation(){
-    if(race != ''){
+    if(raceSelected != ''){
       return(
         <div className={styles.parentDiv}>
           <div className={styles.raceDescription}>

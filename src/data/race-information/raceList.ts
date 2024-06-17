@@ -12,8 +12,8 @@ let skillNames: string[] = skillList.map(skill=>{
     return(skill.skillName)
 })
 
-export let raceList: RaceListTypes[] = [
-    {
+export let raceList: {[key:string]: RaceListTypes} = {
+    'Android':{
         raceSource: 'Core',
         raceName:'Android',
         raceScoreModifiers: '+2 Dex, +2 Int, -2 Cha',
@@ -33,7 +33,7 @@ export let raceList: RaceListTypes[] = [
         optionArray: [[]],
         raceFunction: androidAdjustments
     },
-    {
+    'Human':{
         raceSource: 'Core',
         raceName: 'Human',
         raceScoreModifiers: '+2 to any one ability score',
@@ -58,7 +58,7 @@ export let raceList: RaceListTypes[] = [
         ],
         raceFunction: (ref) => humanAdjustments(ref)
     },
-    {
+    'Kasatha':{
         raceSource: 'Core',
         raceName: 'Kasatha',
         raceScoreModifiers: '+2 Str, +2 Wis, -2 Int',
@@ -78,7 +78,7 @@ export let raceList: RaceListTypes[] = [
         optionArray: [[]],
         raceFunction: kasathaAdjustments
     },
-    {
+    'Lashunta':{
         raceSource: 'Core',
         raceName: 'Lashunta',
         raceScoreModifiers: '+2 Cha, +2 Str, -2 Wis (Korasha) or +2 Cha, +2 Int, -2 Con (Damaya)',
@@ -105,7 +105,7 @@ export let raceList: RaceListTypes[] = [
         ],
         raceFunction: (ref) => lashuntaAdjustments(ref)
     },
-    {
+    'Shirren':{
         raceSource: 'Core',
         raceName: 'Shirren',
         raceScoreModifiers: '+2 Con, +2 Wis, -2 Cha',
@@ -125,7 +125,7 @@ export let raceList: RaceListTypes[] = [
         optionArray: [[]],
         raceFunction: shirrenAdjustments
     },
-    {
+    'Vesk':{
         raceSource: 'Core',
         raceName: 'Vesk',
         raceScoreModifiers: '+2 Str, +2 Con, -2 Int',
@@ -145,7 +145,7 @@ export let raceList: RaceListTypes[] = [
         optionArray: [[]],
         raceFunction: veskAdjustments
     },
-    {
+    'Ysoki':{
         raceSource: 'Core',
         raceName: 'Ysoki',
         raceScoreModifiers: '+2 Dex, +2 Int, -2 Str',
@@ -165,4 +165,4 @@ export let raceList: RaceListTypes[] = [
         optionArray: [[]],
         raceFunction: ysokiAdjustments
     }
-]
+}

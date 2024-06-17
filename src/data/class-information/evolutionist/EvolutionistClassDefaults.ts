@@ -1,4 +1,3 @@
-import { ClassDefaultTypes } from "../../type-files/classDefaultTypes.type.ts"
 
 const EvolutionistClassDefaults: ClassDefaultTypes = {
 
