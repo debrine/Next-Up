@@ -1,4 +1,4 @@
-import {  useState } from 'react'
+import {  Dispatch, SetStateAction, createContext, useState } from 'react'
 import CreateCharacterOptions from '../../components/character-creation-components/CreateCharacterOptions/CreateCharacterOptions.tsx'
 import { raceList } from '../../data/race-information/raceList.ts'
 import { useLocalStorage } from '../../data/useLocalStorage.ts'
@@ -7,6 +7,29 @@ import CharacterCreationName from '../../components/character-creation-component
 import { themeList } from '../../data/theme-information/themeList.ts'
 import AddCharacterButton from '../../components/character-creation-components/AddCharacterButton/AddCharacterButton.tsx'
 import { classList } from '../../data/class-information/classList.ts'
+
+
+// Context to use in our character creation options
+export const CharacterCreationContext = createContext<{
+  setRace: Dispatch<SetStateAction<String>>,
+  raceOptionsSelected: {
+    optionValue: string;
+    optionSet: React.Dispatch<React.SetStateAction<string>>;
+  }[],
+  raceArray: string[],
+  setTheme: Dispatch<SetStateAction<String>>,
+  themeOptionsSelected: {
+    optionValue: string;
+    optionSet: React.Dispatch<React.SetStateAction<string>>;
+  }[],
+  themeArray: string[],
+  setChClass: Dispatch<SetStateAction<String>>,
+  classOptionsSelected: {
+    optionValue: string;
+    optionSet: React.Dispatch<React.SetStateAction<string>>;
+  }[],
+  classArray: string[]
+}>({} as any);
 
 
 function CreateCharacter() {
@@ -108,22 +131,13 @@ function CreateCharacter() {
   let componentArray: JSX.Element[] = [
     <CharacterCreationName setInputName={setInputName} inputName={inputName}/>,
     <CreateCharacterOptions 
-      optionType='Race' 
-      optionArray={raceArray} 
-      setFunction={setRace} 
-      creationOptionsSelected={raceOptionsSelected}
+      optionType='Race'
     />,
     <CreateCharacterOptions 
-      optionType='Class' 
-      optionArray={classArray} 
-      setFunction={setChClass} 
-      creationOptionsSelected={themeOptionsSelected}
+      optionType='Class'
     />,
     <CreateCharacterOptions 
-      optionType='Theme' 
-      optionArray={themeArray} 
-      setFunction={setTheme} 
-      creationOptionsSelected={themeOptionsSelected}
+      optionType='Theme'
     />
   ]
 
@@ -155,12 +169,27 @@ function CreateCharacter() {
     }
   }
 
+  // Multiple values:
+  //  race: [race, setRace]
   return (
-    <div className={styles.parentDiv}>
-      {componentArray[componentArrayPosition]}
-      <button onClick={handleBack}>Back</button>
-      {renderNext()}
-    </div>
+    <CharacterCreationContext.Provider value={{
+      setRace: setRace,
+      raceOptionsSelected: raceOptionsSelected,
+      raceArray: raceArray,
+      setTheme: setTheme,
+      themeOptionsSelected: themeOptionsSelected,
+      themeArray: themeArray,
+      setChClass: setChClass,
+      classOptionsSelected: themeOptionsSelected, // Until class is added.
+      classArray: classArray
+    }}>
+      <div className={styles.parentDiv}>
+        {componentArray[componentArrayPosition]}
+        <button onClick={handleBack}>Back</button>
+        {renderNext()}
+      </div>
+    </CharacterCreationContext.Provider>
+    
   )
 }
 
