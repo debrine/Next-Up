@@ -15,7 +15,7 @@ export let classList: { [key:string]: ClassListTypes}= {
     },
     'Evolutionist':{
         className: 'Evolutionist',
-        classDescription: '',
+        classDescription: 'Conflict drives innovation, and in a strange and dangerous galaxy you\'ve unlocked unparalleled means to adapt. By embracing mystic tradition, extensive augmentation, deliberate genetic mutation, or relying on other extraordinary means, you transform yourself into a powerful being better suited to achieving your goals. You might adopt characteristics of a ferocious chimera, an undead scion, a cybernetic paragon, or anything in between. Yet your evolution boasts a will of its own. Your abilities fight you for control in stressful situations, even while providing lethal instincts, an innate weapon, and spontaneous adaptations that help you outmaneuver, outwit, and outmatch your foes. No matter your niche, you are an adaptable combatant who forges your destiny in flesh, bone, or steel.',
         classDefaults: EvolutionistClassDefaults
     }
 }

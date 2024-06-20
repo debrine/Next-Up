@@ -1,23 +1,28 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { raceList } from '../../../data/race-information/raceList'
 import styles from './CharacterCreationRaceDisplay.module.css'
 import DropDownList from '../../DropDownList/DropDownList'
-
-type CharacterCreationRaceDisplayProps ={
-  raceSelected: string;
-  raceOptionsSelected: {
-    optionValue: string;
-    optionSet: React.Dispatch<React.SetStateAction<string>>;
-}[]
-}
-
-function CharacterCreationRaceDisplay(
-  props: CharacterCreationRaceDisplayProps
-) {
-  const { raceSelected, raceOptionsSelected } = props
+import { CharacterCreationContext } from '../../../states/CreateCharacter/CreateCharacter'
 
 
-  const [selectedRaceObject, setSelectedRaceObject] = useState<RaceListTypes>(
+function CharacterCreationRaceDisplay() {
+
+  const { setRace, raceArray, raceOptionsSelected } = useContext(CharacterCreationContext)
+
+  const [raceSelected, setRaceSelected] = useState<string>('');
+
+
+  const [{
+    raceScoreModifiers,
+    raceDescription,
+    raceSizeAndType,
+    raceHP,
+    raceAbilityName,
+    raceAbilityDescription,
+    hasOptions,
+    optionDescription,
+    optionArray,
+  }, setSelectedRaceObject] = useState<RaceListTypes>(
     {
       raceSource: '',
       raceName: '',
@@ -35,23 +40,26 @@ function CharacterCreationRaceDisplay(
     }
   )
 
-const {
-  raceScoreModifiers,
-  raceDescription,
-  raceSizeAndType,
-  raceHP,
-  raceAbilityName,
-  raceAbilityDescription,
-  hasOptions,
-  optionDescription,
-  optionArray,
-} = selectedRaceObject
+  function optionSelection(
+    option: string
+  ){
+    // Set the option to be shown as selected.
+    setRaceSelected(option)
+    // Set our values to the option selected (ex. race, chClass, theme....)
+    setRace(option)
+  }
 
-  // Set the Race object to display as user selects their race.
+  
+
   useEffect(()=>{
+    // Set the Race object to display as user selects their race.
     if(raceList[raceSelected] != undefined){
       setSelectedRaceObject(raceList[raceSelected])
     }
+    // Reset the options if you change the race selected.
+    raceOptionsSelected.forEach(i=>{
+      i.optionSet('')
+    })
   },[raceSelected])
 
 
@@ -59,17 +67,12 @@ const {
     (header, index)=>{
       return(
         <div className={styles.abilityDiv} key={`${header}${index}`}>
-                <h3>{header}</h3>
-                <div>{raceAbilityDescription[index]}</div>
-            </div>
+            <h3>{header}</h3>
+            <div>{raceAbilityDescription[index]}</div>
+        </div>
       )
     }
   )
-  useEffect(()=>{
-    raceOptionsSelected.forEach(i=>{
-      i.optionSet('')
-    })
-  },[raceSelected])
   
 
   // Sets values into an array to be used for character creation.
@@ -80,32 +83,32 @@ const {
     ){
       return(
         optionDescription.map(
-        (option: string, index: number)=>{
-          return(
-            <div className={styles.raceOptions} key={`raceOption${index}`}>
-              <div>
-                {/* Display the description of the option. */}
-                {option}
+          (option: string, index: number)=>{
+            return(
+              <div className={styles.raceOptions} key={`raceOption${index}`}>
+                <div>
+                  {/* Display the description of the option. */}
+                  {option}
+                </div>
+                  <DropDownList 
+                    optionsArray={optionArray[index]}
+                    optionSelection={raceOptionsSelected[index].optionSet}
+                    optionType='Option'
+                    selectedOption={raceOptionsSelected[index].optionValue}
+                  />
               </div>
-                <DropDownList 
-                  optionsArray={optionArray[index]}
-                  optionSelection={raceOptionsSelected[index].optionSet}
-                  optionType='Option'
-                  selectedOption={raceOptionsSelected[index].optionValue}
-                />
-            </div>
-          )
-        }
-      )
-      
+            )
+          }
+        )
       )
     }
   }
 
-  function renderRaceInformation(){
-    if(raceSelected != ''){
-      return(
-        <div className={styles.parentDiv}>
+  return(
+    <div className={styles.parentDiv}>
+      {
+        raceSelected != '' &&
+        <div className={styles.raceInformationDiv}>
           <div className={styles.raceDescription}>
             {raceDescription}
           </div>
@@ -130,12 +133,15 @@ const {
           {raceAbilityArray}
           {showOptions()}
         </div>
-      )
-    }
-  }
+      }
 
-  return(
-    renderRaceInformation()
+      <DropDownList 
+          optionType={'Race'}
+          optionsArray={raceArray}
+          optionSelection={optionSelection}
+          selectedOption={raceSelected}
+      />
+    </div>
   )
 }
 
