@@ -6,7 +6,6 @@ export let specializationList: {[key:string]:{
     trickAttackSkill: string,
     specializationExploit: {
         description: string,
-        debilitatingTrickEffect: boolean,
         actionType: string[],
         hasFeatOptions: boolean,
         featOptions: string[],

@@ -1,57 +1,52 @@
 import {  Dispatch, SetStateAction, createContext, useState } from 'react'
 import CreateCharacterOptions from '../../components/character-creation-components/CreateCharacterOptions/CreateCharacterOptions.tsx'
-import { raceList } from '../../data/race-information/raceList.ts'
-import { useLocalStorage } from '../../data/useLocalStorage.ts'
+// import { useLocalStorage } from '../../data/useLocalStorage.ts'
 import styles from './CreateCharacter.module.css'
 import CharacterCreationName from '../../components/character-creation-components/CharacterCreationName/CharacterCreationName.tsx'
-import { themeList } from '../../data/theme-information/themeList.ts'
-import AddCharacterButton from '../../components/character-creation-components/AddCharacterButton/AddCharacterButton.tsx'
-import { classList } from '../../data/class-information/classList.ts'
+// import AddCharacterButton from '../../components/character-creation-components/AddCharacterButton/AddCharacterButton.tsx'
 
 
 // Context to use in our character creation options
 export const CharacterCreationContext = createContext<{
-  setRace: Dispatch<SetStateAction<String>>,
+  // Pass on the races and race options.
+  race: string,
+  setRace: Dispatch<SetStateAction<string>>,
   raceOptionsSelected: {
     optionValue: string;
     optionSet: React.Dispatch<React.SetStateAction<string>>;
   }[],
-  raceArray: string[],
-  setTheme: Dispatch<SetStateAction<String>>,
+  // Pass on the themes and theme options.
+  theme: string,
+  setTheme: Dispatch<SetStateAction<string>>,
   themeOptionsSelected: {
     optionValue: string;
     optionSet: React.Dispatch<React.SetStateAction<string>>;
   }[],
-  themeArray: string[],
-  setChClass: Dispatch<SetStateAction<String>>,
+  // Pass on the classes and class options.
+  chClass: string,
+  setChClass: Dispatch<SetStateAction<string>>,
   classOptionsSelected: {
     optionValue: string;
     optionSet: React.Dispatch<React.SetStateAction<string>>;
   }[],
-  classArray: string[]
+  // Pass on for our back/next buttons
+  componentArrayPosition: number,
+  setComponentArrayPosition: Dispatch<SetStateAction<number>>
+  componentArray: JSX.Element[]
 }>({} as any);
 
 
 function CreateCharacter() {
 
-  let raceArray: string[] = Object.keys(raceList).map((key:string)=>{
-    return(key)
-  });
-
-  let classArray: string[] = Object.keys(classList).map((key:string)=>{
-    return(key)
-  })
-
-  let themeArray: string[] = Object.keys(themeList).map((key:string)=>{
-    return(key)
-  });
-
-  const [chClass, setChClass] = useState<String>('')
+  /*
+    Class
+  */
+  const [chClass, setChClass] = useState<string>('')
 
   /*
     Race
   */
-  const [race, setRace] = useState<String>('')
+  const [race, setRace] = useState<string>('')
   // Set the selected option if the race requires options.
   const [raceOptionOne, setRaceOptionOne] = useState<string>('')
   const [raceOptionTwo, setRaceOptionTwo] = useState<string>('')
@@ -79,7 +74,7 @@ function CreateCharacter() {
   /*
     Theme
   */
-    const [theme, setTheme] = useState<String>('')
+    const [theme, setTheme] = useState<string>('')
     // Set the selected option if the theme requires options.
     const [themeOptionOne, setThemeOptionOne] = useState<string>('')
     const [themeOptionTwo, setThemeOptionTwo] = useState<string>('')
@@ -107,7 +102,7 @@ function CreateCharacter() {
   const [componentArrayPosition, setComponentArrayPosition] = useState<number>(0)
 
   // Temporarily set values to be used before saving to local storage.
-  const [, setTempCharacterInfo] = useLocalStorage(`tempCharacterInfo`, {}) 
+  // const [, setTempCharacterInfo] = useLocalStorage(`tempCharacterInfo`, {}) 
   
 
   const [inputName, setInputName] = useState<string>('')
@@ -116,17 +111,17 @@ function CreateCharacter() {
   /*
     Function to add values temporarily
   */
-  function addTempValuesHandler(){
-    // Generate Key to point the character selected to.
-    const keyID: string = crypto.randomUUID()
-    setTempCharacterInfo({
-      inputName,
-      keyID,
-      race,
-      chClass,
-      theme
-    })
-  }
+  // function addTempValuesHandler(){
+  //   // Generate Key to point the character selected to.
+  //   const keyID: string = crypto.randomUUID()
+  //   setTempCharacterInfo({
+  //     inputName,
+  //     keyID,
+  //     race,
+  //     chClass,
+  //     theme
+  //   })
+  // }
 
   let componentArray: JSX.Element[] = [
     <CharacterCreationName setInputName={setInputName} inputName={inputName}/>,
@@ -141,55 +136,27 @@ function CreateCharacter() {
     />
   ]
 
-  function handleNext(){
-    if(componentArrayPosition < componentArray.length-1){
-      setComponentArrayPosition(componentArrayPosition+1)
-    }
-  }
-
-  function handleBack(){
-    if(componentArrayPosition > 0){
-      setComponentArrayPosition(componentArrayPosition-1)
-    }
-  }
-
-  function renderNext(){
-    if(componentArrayPosition === componentArray.length-1){
-      return(
-        <>
-          <button onClick={addTempValuesHandler}>Set Values (Temp)</button>
-          <AddCharacterButton />
-        </>
-      )
-      
-    } else {
-      return(
-        <button onClick={handleNext}>Next</button>
-      )
-    }
-  }
-
-  // Multiple values:
-  //  race: [race, setRace]
+  
   return (
     <CharacterCreationContext.Provider value={{
+      race: race,
       setRace: setRace,
       raceOptionsSelected: raceOptionsSelected,
-      raceArray: raceArray,
+      theme: theme,
       setTheme: setTheme,
       themeOptionsSelected: themeOptionsSelected,
-      themeArray: themeArray,
+      chClass:chClass,
       setChClass: setChClass,
       classOptionsSelected: themeOptionsSelected, // Until class is added.
-      classArray: classArray
+      componentArrayPosition: componentArrayPosition,
+      setComponentArrayPosition: setComponentArrayPosition,
+      componentArray: componentArray
     }}>
       <div className={styles.parentDiv}>
         {componentArray[componentArrayPosition]}
-        <button onClick={handleBack}>Back</button>
-        {renderNext()}
+        {/* {renderNext()} */}
       </div>
     </CharacterCreationContext.Provider>
-    
   )
 }
 

@@ -1,6 +1,7 @@
 import styles from './CreateCharacterOptions.module.css'
 import CharacterCreationRaceDisplay from '../CharacterCreationRaceDisplay/CharacterCreationRaceDisplay'
 import CharacterCreationThemeDisplay from '../CharacterCreationThemeDisplay/CharacterCreationThemeDisplay'
+import CharacterCreationClassDisplay from '../CharacterCreationClassDisplay/CharacterCreationClassDisplay'
 
 type createCharacterOptionsProps = {
     optionType: string
@@ -8,20 +9,7 @@ type createCharacterOptionsProps = {
 
 function CreateCharacterOptions({
     optionType
-    // setCreationOptionsSelected,
 }: createCharacterOptionsProps) {
-
-    // const [selectedOption, setSelectedOption] = useState<string>('');
-    
-
-    // // To clear the selected option between components.
-    // useEffect(()=>{
-    //     setSelectedOption('')
-    // },[optionType])
-
-    
-
-   
 
     return (
     <div className={styles.parentDiv}>
@@ -35,6 +23,10 @@ function CreateCharacterOptions({
         {
             optionType === 'Theme' &&
             <CharacterCreationThemeDisplay />
+        }
+        {
+            optionType === 'Class' &&
+            <CharacterCreationClassDisplay />
         }
     </div>
     )

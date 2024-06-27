@@ -3,14 +3,20 @@ import styles from './CharacterCreationThemeDisplay.module.css'
 import { themeList } from '../../../data/theme-information/themeList';
 import DropDownList from '../../DropDownList/DropDownList';
 import { CharacterCreationContext } from '../../../states/CreateCharacter/CreateCharacter';
+import BackButton from '../../../utils/BackButton/BackButton';
+import NextButtonValidation from '../../../utils/NextButtonValidation';
+import NextButton from '../../../utils/NextButton/NextButton';
+import ShowOptions from '../../../utils/character-creation-functions/ShowOptions/ShowOptions';
 
 
 function CharacterCreationThemeDisplay() {
   
-  const { setTheme, themeArray, themeOptionsSelected } = useContext(CharacterCreationContext)
+  const { theme, setTheme, themeOptionsSelected, componentArrayPosition, setComponentArrayPosition, componentArray } = useContext(CharacterCreationContext)
 
-  const [themeSelected, setThemeSelected] = useState<string>('');
-  
+  const themeArray: string[] = Object.keys(themeList).map((key:string)=>{
+    return(key)
+  });
+
   
   const [{
     themeScoreModifiers,
@@ -32,25 +38,17 @@ function CharacterCreationThemeDisplay() {
     optionArray: [[]],
   })
   
-  function optionSelection(
-    option: string
-  ){
-      // Set the option to be shown as selected.
-      setThemeSelected(option)
-      // Set our values to the option selected (ex. race, chClass, theme....)
-      setTheme(option)
-  }
   
   useEffect(()=>{
     // Set the theme object to display as user selects their theme.
-    if(themeList[themeSelected]){
-      setSelectedThemeObject(themeList[themeSelected])
+    if(themeList[theme]){
+      setSelectedThemeObject(themeList[theme])
     }
     // Reset the options when race changes.
     themeOptionsSelected.forEach(i=>{
       i.optionSet('')
     })
-  },[themeSelected])
+  },[theme])
   
   
   let themeAbilityArray = themeAbilityTitle.map(
@@ -66,43 +64,55 @@ function CharacterCreationThemeDisplay() {
       )
     }
   )
-  useEffect(()=>{
-  },[themeSelected])
     
   
-  // Sets values into an array to be used for character creation.
-  function showOptions(){
-    if(
-      // If the theme has options to select.
-      hasOptions
-    ){
-      return(
-        optionDescription.map(
-          (option: string, index: number)=>{
-            return(
-              <div className={styles.themeOptions} key={`themeOption${index}`}>
-                <div>
-                  {/* Display the description of the option. */}
-                  {option}
-                </div>
-                <DropDownList 
-                  optionsArray={optionArray[index]}
-                  optionSelection={themeOptionsSelected[index].optionSet}
-                  optionType='Option'
-                  selectedOption={themeOptionsSelected[index].optionValue}
-                />
-              </div>
-            )
-          }
-        )
-      )
-    }
-  }
+  // Commented out in case it needs to be different from other showOptions
+  // // Sets values into an array to be used for character creation.
+  // function showOptions(){
+  //   if(
+  //     // If the theme has options to select.
+  //     hasOptions
+  //   ){
+  //     return(
+  //       optionDescription.map(
+  //         (option: string, index: number)=>{
+  //           return(
+  //             <div className={styles.themeOptions} key={`themeOption${index}`}>
+  //               <div>
+  //                 {/* Display the description of the option. */}
+  //                 {option}
+  //               </div>
+  //               <DropDownList 
+  //                 optionsArray={optionArray[index]}
+  //                 optionSelection={themeOptionsSelected[index].optionSet}
+  //                 optionType='Option'
+  //                 selectedOption={themeOptionsSelected[index].optionValue}
+  //               />
+  //             </div>
+  //           )
+  //         }
+  //       )
+  //     )
+  //   }
+  // }
+
+  // Validation for the next button
+  const [moveOn, setMoveOn] = useState<boolean>(false)
+
+  useEffect(()=>{
+    NextButtonValidation({
+      optionType: theme,
+      hasOptions: hasOptions,
+      forEachOption: optionDescription,
+      individualOptions: themeOptionsSelected,
+      setMoveOn: setMoveOn
+    })
+  },[theme, hasOptions, themeOptionsSelected])
   
   return(
     <div className={styles.parentDiv}>
       {
-        themeSelected != '' &&
+        theme != '' &&
           <div className={styles.themeInformationDiv}>
             <div className={styles.descriptionDiv}>
               <h3 className={styles.modifierHeader}>
@@ -113,15 +123,31 @@ function CharacterCreationThemeDisplay() {
               </div>
             </div>
             {themeAbilityArray}
-            {showOptions()}
+            {ShowOptions({
+              hasOptions: hasOptions,
+              optionsToMap: optionDescription,
+              optionArray: optionArray,
+              optionsSelectedArray: themeOptionsSelected,
+              keyString: 'themeOptions',
+            })}
           </div>
       }
       
       <DropDownList 
           optionType={'Theme'}
           optionsArray={themeArray}
-          optionSelection={optionSelection}
-          selectedOption={themeSelected}
+          optionSelection={setTheme}
+          selectedOption={theme}
+      />
+      <BackButton
+        arrayPosition={componentArrayPosition}
+        setArrayPosition={setComponentArrayPosition}
+      />
+      <NextButton
+        arrayPosition={componentArrayPosition}
+        setArrayPosition={setComponentArrayPosition}
+        arrayToCycle={componentArray}
+        condition={moveOn}
       />
     </div>
   )
