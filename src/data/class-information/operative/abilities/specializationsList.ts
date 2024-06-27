@@ -39,15 +39,15 @@ export let specializationList: {[key:string]:{
         usesResolve: 0
     },
     'Daredevil':{
-            description: 'You specialize in missions requiring courage and athleticism.',
-            associatedSkills: ['Acrobatics','Athletics'],
-            trickAttackSkill: 'You can attempt an Acrobatics check to make a trick attack.',
-            specializationExploit: exploitList['10']['Versatile Movement'],
-            abilityName: 'Terrain Attack (Ex)',
-            abilityDescription: 'At 11th level, when you and a foe are both balancing, climbing, flying, or swimming, you automatically succeed at any Bluff check required to make a trick attack against that foe.',
-            actionType: 'None',
-            usesResolve: 0
-        },
+        description: 'You specialize in missions requiring courage and athleticism.',
+        associatedSkills: ['Acrobatics','Athletics'],
+        trickAttackSkill: 'You can attempt an Acrobatics check to make a trick attack.',
+        specializationExploit: exploitList['10']['Versatile Movement'],
+        abilityName: 'Terrain Attack (Ex)',
+        abilityDescription: 'At 11th level, when you and a foe are both balancing, climbing, flying, or swimming, you automatically succeed at any Bluff check required to make a trick attack against that foe.',
+        actionType: 'None',
+        usesResolve: 0
+    },
 }
 
 // '':{

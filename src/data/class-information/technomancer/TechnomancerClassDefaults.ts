@@ -8,6 +8,8 @@ const TechnomancerClassDefaults: ClassDefaultTypes = {
         'Intelligence'
     ],
 
+    keyAbilityDescription: 'Your Intelligence determines your spellcasting ability, the saving throw DCs of your spells, and the number of bonus spells you can cast per day, so Intelligence is your key ability score. Also, a high Dexterity score can help you fire your weapons more accurately and dodge incoming attacks.',
+
     classSkills: [
         'Computers',
         'Engineering',

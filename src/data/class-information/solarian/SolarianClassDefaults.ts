@@ -8,6 +8,8 @@ const SolarianClassDefaults: ClassDefaultTypes = {
         'Charisma'
     ],
 
+    keyAbilityDescription: 'Your Charisma lets you channel your connection to the cosmos, so Charisma is your key ability score. A high Strength score can make you better at melee attacks.',
+
     classSkills: [
         'Acrobatics',
         'Athletics',

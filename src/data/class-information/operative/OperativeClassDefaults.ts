@@ -8,6 +8,8 @@ const OperativeClassDefaults: ClassDefaultTypes = {
         'Dexterity'
     ],
 
+    keyAbilityDescription: 'Your Dexterity helps you to infiltrate, get into position, escape danger, and make decisive shots with your weapon, so Dexterity is your key ability score. High Intelligence boosts your skills, and Charisma aids in your interactions with other characters.',
+
     classSkills: [
         'Acrobatics',
         'Athletics',

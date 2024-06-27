@@ -5,28 +5,28 @@ const BiohackerClassDefaults: ClassDefaultTypes = {
     hitStaminaPoints: 6,
 
     keyAbilityScore: [
-        'Dexterity'
+        'Intelligence',
+        'Wisdom'
     ],
+
+    keyAbilityDescription: 'Your Intelligence helps you learn about the sciences, while your Wisdom helps you interpret facts and apply them to real-world situations. You should choose either Intelligence or Wisdom as your key ability score. Once made, this choice cannot be changed. A high Dexterity can help you better aid your allies and hinder your foes with your ranged biohacks.',
 
     classSkills: [
-        'Acrobatics',
-        'Athletics',
         'Bluff',
-        'Computers',
+        'Computers', 
         'Culture',
-        'Disguise',
+        'Diplomacy',
         'Engineering',
-        'Intimidate',
+        'Life Science',
         'Medicine',
         'Perception',
-        'Piloting',
+        'Physical Science',
+        'Profession',
         'Sense Motive',
-        'Sleight of Hand',
-        'Stealth',
-        'Survival'
+        'Sleight of Hand'
     ],
 
-    skillPointsPerLevel: 8,
+    skillPointsPerLevel: 4,
 
     armorProficiencies: [
         'light armor'
@@ -35,7 +35,7 @@ const BiohackerClassDefaults: ClassDefaultTypes = {
     weaponProficiencies: [
         'basic melee weapons',
         'small arms',
-        'sniper weapons'
+        'grenades'
     ],
 
     babAdvancement: 0.75,

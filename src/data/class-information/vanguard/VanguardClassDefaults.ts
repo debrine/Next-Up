@@ -8,6 +8,8 @@ const VanguardClassDefaults: ClassDefaultTypes = {
         'Constitution'
     ],
 
+    keyAbilityDescription: 'Your Constitution determines your ability to control matter at an atomic level, the DCs of your abilities, the damage dealt by your entropic strike, and your general hardiness, so Constitution is your key ability score. A high Dexterity helps you act early in combat, avoid damage when you need to, and successfully land blows with your entropic strike.',
+
     classSkills: [
         'Acrobatics',
         'Athletics',

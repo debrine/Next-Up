@@ -8,6 +8,8 @@ const EvolutionistClassDefaults: ClassDefaultTypes = {
         'Dexterity'
     ],
 
+    keyAbilityDescription: 'Your Strength helps you overpower foes with melee attacks, while your Dexterity helps you fight at range and dodge, so you should choose either Strength or Dexterity as your key ability score. Once made, this choice can\'t be changed.',
+
     classSkills: [
         'Acrobatics',
         'Athletics',

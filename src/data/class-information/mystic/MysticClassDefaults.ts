@@ -8,6 +8,8 @@ const MysticClassDefaults: ClassDefaultTypes = {
         'Wisdom'
     ],
 
+    keyAbilityDescription: 'Your Wisdom determines your spellcasting ability, the saving throw DCs of your spells, and the number of bonus spells you can cast per day, so Wisdom is your key ability score. A high Charisma score can also help you in social situations.',
+
     classSkills: [
         'Bluff',
         'Culture',

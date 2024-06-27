@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { classList } from "../../../data/class-information/classList"
 import BackButton from "../../../utils/BackButton/BackButton"
 import NextButton from "../../../utils/NextButton/NextButton"
@@ -9,15 +9,154 @@ import DropDownList from "../../DropDownList/DropDownList"
 
 function CharacterCreationClassDisplay() {
 
-    const { chClass, setChClass, classOptionsSelected, componentArrayPosition, setComponentArrayPosition, componentArray } = useContext(CharacterCreationContext)
+  const { chClass, setChClass, componentArrayPosition, setComponentArrayPosition, componentArray, keyAbilityScoreSelected, setKeyAbilityScoreSelected } = useContext(CharacterCreationContext)
 
-    let classArray: string[] = Object.keys(classList).map((key:string)=>{
-        return(key)
-    })
+  let classArray: string[] = Object.keys(classList).map((key:string)=>{
+    return(key)
+  })
+
+  const [{classDescription,
+    classDefaults:{
+      hitStaminaPoints,
+      keyAbilityScore,
+      keyAbilityDescription,
+      classSkills,
+      skillPointsPerLevel,
+      armorProficiencies,
+      weaponProficiencies,
+      goodSavingThrows,
+      badSavingThrows,
+    }
+  }, setSelectedClassObject] = useState<ClassListTypes>(
+    {
+      classDescription: '',
+      classDefaults:{
+        hitStaminaPoints: 0,
+        keyAbilityScore: [''],
+        keyAbilityDescription: '',
+        classSkills: [''],
+        skillPointsPerLevel: 0,
+        armorProficiencies: [''],
+        weaponProficiencies: [''],
+        babAdvancement: 0,
+        goodSavingThrows: [''],
+        badSavingThrows: [''],
+      }
+    }
+  )
+
+  useEffect(()=>{
+    // Reset the KeyAbilityScore Whenever a class is changed
+    setKeyAbilityScoreSelected('')
+    // Set the Class object to display as user selects their class.
+    if(classList[chClass] != undefined){
+      setSelectedClassObject(classList[chClass])
+      // Set the default Key Ability Score to the first in the list.
+      setKeyAbilityScoreSelected(classList[chClass].classDefaults.keyAbilityScore[0])
+    }
+  },[chClass])
     
   return (
     <div className={styles.parentDiv}>
-        CharacterCreationClassDisplay
+        {
+          chClass != '' &&
+          <div className={styles.classInformationDiv}>
+
+            <div className={styles.staminaHPBar}>
+              <div className={styles.staminaPoints}>
+                <div className={styles.staminaHead}>STAMINA POINTS</div>
+                <div>{hitStaminaPoints} + Constitution Modifier</div>
+              </div>
+              <div className={styles.hitPoints}>
+                {hitStaminaPoints} HP
+              </div>
+            </div>
+
+            <div className={styles.classDescription}>
+              <p>{classDescription}</p>
+            </div>
+
+            <div className={styles.otherClassInfoParent}>
+
+              <div className="otherClassInfo">
+                <div className={styles.otherClassInfoHeader}>
+                  KEY ABILITY SCORE
+                </div>
+                <div className={styles.otherClassInfoText}>
+                  {keyAbilityDescription}
+                </div>
+                {
+                  keyAbilityScore.length > 1 &&
+                  <div className={styles.selectAbilityScore}>
+                      <div className={styles.chooseOption}>Choose one:</div>
+                      <DropDownList
+                        optionType={'Key Ability Score'}
+                        optionsArray={keyAbilityScore}
+                        optionSelection={setKeyAbilityScoreSelected}
+                        selectedOption={keyAbilityScoreSelected}
+                      />
+                  </div>
+                }
+              </div>
+              
+              <div className="otherClassInfo">
+                <div className={styles.otherClassInfoHeader}>
+                  CLASS SKILLS
+                </div>
+                <div className={styles.otherClassInfoSubHeader}>
+                  SKILL RANKS PER LEVEL
+                </div>
+                <div className={styles.skillPointsPlusInt}>
+                  {skillPointsPerLevel} + INTELLIGENCE MODIFIER
+                </div>
+                <div className={styles.classSkillsList}>
+                  {classSkills.map((v:string, i:number)=>{
+                    return(<div className={styles.classSkill} key={`${v}${i}`}>{v}</div>)
+                  })}
+                </div>
+              </div>
+
+              <div className="otherClassInfo">
+                <div className={styles.otherClassInfoHeader}>
+                  PROFICIENCIES
+                </div>
+                <div className={styles.otherClassInfoSubHeader}>
+                  ARMOR PROFICIENCY
+                </div>
+                <div className={styles.otherClassInfoText}>
+                  {armorProficiencies.join(', ')}
+                </div>
+                <div className={styles.otherClassInfoSubHeader}>
+                  WEAPON PROFICIENCY
+                </div>
+                <div className={styles.otherClassInfoText}>
+                  {weaponProficiencies.join(', ')}
+                </div>
+              </div>
+
+              <div className="otherClassInfo">
+                <div className={styles.otherClassInfoHeader}>
+                  SAVING THROWS
+                </div>
+                <div className={styles.otherClassInfoSubHeader}>
+                  GOOD SAVING THROWS
+                </div>
+                <div className={styles.otherClassInfoText}>
+                  {goodSavingThrows.join(', ')}
+                </div>
+                <div className={styles.otherClassInfoSubHeader}>
+                  POOR SAVING THROWS
+                </div>
+                <div className={styles.otherClassInfoText}>
+                  {badSavingThrows.join(', ')}
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+          
+        }
         <DropDownList 
           optionType={'Class'}
           optionsArray={classArray}

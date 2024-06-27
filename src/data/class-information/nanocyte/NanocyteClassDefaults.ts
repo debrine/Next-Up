@@ -8,6 +8,8 @@ const NanocyteClassDefaults: ClassDefaultTypes = {
         'Constitution'
     ],
 
+    keyAbilityDescription: 'Your Constitution augments your nanites and helps you sustain a larger swarm, so Constitution is your key ability score. Strength and Dexterity can boost your combat effectiveness, whereas Intelligence greatly improves your skills.',
+
     classSkills: [
         'Acrobatics',
         'Athletics',

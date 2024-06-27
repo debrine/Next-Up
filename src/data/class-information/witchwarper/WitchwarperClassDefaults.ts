@@ -8,6 +8,8 @@ const WitchwarperClassDefaults: ClassDefaultTypes = {
         'Charisma'
     ],
 
+    keyAbilityDescription: 'Your Charisma score determines your spellcasting ability, the saving throw DCs of your spells, and the number of bonus spells you can cast per day, so Charisma is your key ability score. A high Dexterity score can help you fire weapons more accurately and dodge incoming attacks.',
+
     classSkills: [
         'Acrobatics',
         'Bluff',

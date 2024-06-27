@@ -8,6 +8,8 @@ const PrecogClassDefaults: ClassDefaultTypes = {
         'Dexterity'
     ],
 
+    keyAbilityDescription: 'Your Dexterity is your key ability score, and it determines the number of time-altering paradoxes you can use each day, as well as the saving throw DC of many precog abilities. Your Intelligence determines your spellcasting ability, the saving throw DC of your spells, and the number of bonus spells you can cast per day.',
+
     classSkills: [
         'Acrobatics',
         'Bluff',

@@ -8,6 +8,8 @@ const MechanicClassDefaults: ClassDefaultTypes = {
         'Intelligence'
     ],
 
+    keyAbilityDescription: 'You rely on your Intelligence for your knowledge, skills, and technical know-how, so Intelligence is your key ability score. A high Dexterity score makes your ranged attacks more accurate, should you engage in combat.',
+
     classSkills: [
         'Athletics',
         'Computers',

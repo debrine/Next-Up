@@ -25,10 +25,8 @@ export const CharacterCreationContext = createContext<{
   // Pass on the classes and class options.
   chClass: string,
   setChClass: Dispatch<SetStateAction<string>>,
-  classOptionsSelected: {
-    optionValue: string;
-    optionSet: React.Dispatch<React.SetStateAction<string>>;
-  }[],
+  keyAbilityScoreSelected: string,
+  setKeyAbilityScoreSelected: Dispatch<React.SetStateAction<string>>,
   // Pass on for our back/next buttons
   componentArrayPosition: number,
   setComponentArrayPosition: Dispatch<SetStateAction<number>>
@@ -39,9 +37,18 @@ export const CharacterCreationContext = createContext<{
 function CreateCharacter() {
 
   /*
+    Name
+  */
+  const [inputName, setInputName] = useState<string>('')
+
+
+
+  /*
     Class
   */
   const [chClass, setChClass] = useState<string>('')
+  // Set the Key Ability Score
+  const [keyAbilityScoreSelected, setKeyAbilityScoreSelected] = useState<string>('')
 
   /*
     Race
@@ -105,7 +112,6 @@ function CreateCharacter() {
   // const [, setTempCharacterInfo] = useLocalStorage(`tempCharacterInfo`, {}) 
   
 
-  const [inputName, setInputName] = useState<string>('')
 
 
   /*
@@ -147,14 +153,14 @@ function CreateCharacter() {
       themeOptionsSelected: themeOptionsSelected,
       chClass:chClass,
       setChClass: setChClass,
-      classOptionsSelected: themeOptionsSelected, // Until class is added.
+      keyAbilityScoreSelected: keyAbilityScoreSelected,
+      setKeyAbilityScoreSelected: setKeyAbilityScoreSelected,
       componentArrayPosition: componentArrayPosition,
       setComponentArrayPosition: setComponentArrayPosition,
       componentArray: componentArray
     }}>
       <div className={styles.parentDiv}>
         {componentArray[componentArrayPosition]}
-        {/* {renderNext()} */}
       </div>
     </CharacterCreationContext.Provider>
   )
