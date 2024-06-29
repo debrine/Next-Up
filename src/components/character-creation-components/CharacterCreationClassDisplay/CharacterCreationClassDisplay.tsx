@@ -9,7 +9,15 @@ import DropDownList from "../../DropDownList/DropDownList"
 
 function CharacterCreationClassDisplay() {
 
-  const { chClass, setChClass, componentArrayPosition, setComponentArrayPosition, componentArray, keyAbilityScoreSelected, setKeyAbilityScoreSelected } = useContext(CharacterCreationContext)
+  const { 
+    chClass,
+    setChClass,
+    componentArrayPosition,
+    setComponentArrayPosition,
+    componentArray,
+    keyAbilityScoreSelected,
+    setKeyAbilityScoreSelected 
+  } = useContext(CharacterCreationContext)
 
   let classArray: string[] = Object.keys(classList).map((key:string)=>{
     return(key)
@@ -45,6 +53,9 @@ function CharacterCreationClassDisplay() {
     }
   )
 
+  // Validation for the next button
+  const [moveOn, setMoveOn] = useState<boolean>(false)
+
   useEffect(()=>{
     // Reset the KeyAbilityScore Whenever a class is changed
     setKeyAbilityScoreSelected('')
@@ -53,6 +64,7 @@ function CharacterCreationClassDisplay() {
       setSelectedClassObject(classList[chClass])
       // Set the default Key Ability Score to the first in the list. This way it will be set even if it doesn't need to be picked.
       setKeyAbilityScoreSelected(classList[chClass].classDefaults.keyAbilityScore[0])
+      setMoveOn(true)
     }
   },[chClass])
     
@@ -173,7 +185,7 @@ function CharacterCreationClassDisplay() {
             arrayPosition={componentArrayPosition}
             setArrayPosition={setComponentArrayPosition}
             arrayToCycle={componentArray}
-            condition={true}
+            condition={moveOn}
         />
     </div>
   )
