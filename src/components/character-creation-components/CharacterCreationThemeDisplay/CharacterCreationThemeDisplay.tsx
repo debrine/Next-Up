@@ -11,7 +11,15 @@ import ShowOptions from '../../../utils/character-creation-functions/ShowOptions
 
 function CharacterCreationThemeDisplay() {
   
-  const { theme, setTheme, themeOptionsSelected, componentArrayPosition, setComponentArrayPosition, componentArray } = useContext(CharacterCreationContext)
+  const { 
+    theme,
+    setTheme,
+    themeOptionsSelected,
+    componentArrayPosition,
+    setComponentArrayPosition,
+    componentArray ,
+    addTempValuesHandler
+  } = useContext(CharacterCreationContext)
 
   const themeArray: string[] = Object.keys(themeList).map((key:string)=>{
     return(key)
@@ -123,13 +131,14 @@ function CharacterCreationThemeDisplay() {
               </div>
             </div>
             {themeAbilityArray}
-            {ShowOptions({
-              hasOptions: hasOptions,
-              optionsToMap: optionDescription,
-              optionArray: optionArray,
-              optionsSelectedArray: themeOptionsSelected,
-              keyString: 'themeOptions',
-            })}
+            {hasOptions &&
+              ShowOptions({
+                optionsToMap: optionDescription,
+                optionArray: optionArray,
+                optionsSelectedArray: themeOptionsSelected,
+                keyString: 'themeOptions',
+              })
+            }
           </div>
       }
       
@@ -144,10 +153,12 @@ function CharacterCreationThemeDisplay() {
         setArrayPosition={setComponentArrayPosition}
       />
       <NextButton
+        message='Next'
         arrayPosition={componentArrayPosition}
         setArrayPosition={setComponentArrayPosition}
         arrayToCycle={componentArray}
         condition={moveOn}
+        functionToRun={addTempValuesHandler}
       />
     </div>
   )

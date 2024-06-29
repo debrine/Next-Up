@@ -39,6 +39,7 @@ function CharacterCreationName({
             setArrayPosition={setComponentArrayPosition}
         />
         <NextButton
+            message="Next"
             arrayPosition={componentArrayPosition}
             setArrayPosition={setComponentArrayPosition}
             arrayToCycle={componentArray}

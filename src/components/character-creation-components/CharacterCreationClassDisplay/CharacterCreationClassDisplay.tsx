@@ -51,7 +51,7 @@ function CharacterCreationClassDisplay() {
     // Set the Class object to display as user selects their class.
     if(classList[chClass] != undefined){
       setSelectedClassObject(classList[chClass])
-      // Set the default Key Ability Score to the first in the list.
+      // Set the default Key Ability Score to the first in the list. This way it will be set even if it doesn't need to be picked.
       setKeyAbilityScoreSelected(classList[chClass].classDefaults.keyAbilityScore[0])
     }
   },[chClass])
@@ -86,6 +86,7 @@ function CharacterCreationClassDisplay() {
                   {keyAbilityDescription}
                 </div>
                 {
+                  // If there is a choice for Key Ability Score
                   keyAbilityScore.length > 1 &&
                   <div className={styles.selectAbilityScore}>
                       <div className={styles.chooseOption}>Choose one:</div>
@@ -168,6 +169,7 @@ function CharacterCreationClassDisplay() {
             setArrayPosition={setComponentArrayPosition}
         />
         <NextButton
+            message="Next"
             arrayPosition={componentArrayPosition}
             setArrayPosition={setComponentArrayPosition}
             arrayToCycle={componentArray}

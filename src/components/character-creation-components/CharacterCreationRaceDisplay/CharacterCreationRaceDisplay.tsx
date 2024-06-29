@@ -111,6 +111,19 @@ function CharacterCreationRaceDisplay() {
       individualOptions: raceOptionsSelected,
       setMoveOn: setMoveOn
     })
+    // Don't allow same option to be chosen twice
+    raceOptionsSelected.forEach((initial)=>{
+      raceOptionsSelected.forEach((compare)=>{
+        if(
+          // If the values are the same, and not in the same position, and not empty, don't allow moving on.
+          initial.optionValue === compare.optionValue &&
+          raceOptionsSelected.indexOf(initial) != raceOptionsSelected.indexOf(compare) &&
+          initial.optionValue != ''
+        ){
+          setMoveOn(false)
+        }
+      })
+    })
   },[race, hasOptions, raceOptionsSelected])
 
 
@@ -142,13 +155,14 @@ function CharacterCreationRaceDisplay() {
             </div>
           </div>
           {raceAbilityArray}
-          {ShowOptions({
-            hasOptions: hasOptions,
-            optionsToMap: optionDescription,
-            optionArray: optionArray,
-            optionsSelectedArray: raceOptionsSelected,
-            keyString: 'raceOptions',
-          })}
+          {hasOptions &&
+            ShowOptions({
+              optionsToMap: optionDescription,
+              optionArray: optionArray,
+              optionsSelectedArray: raceOptionsSelected,
+              keyString: 'raceOptions',
+            })
+          }
         </div>
       }
 
@@ -163,6 +177,7 @@ function CharacterCreationRaceDisplay() {
         setArrayPosition={setComponentArrayPosition}
       />
       <NextButton
+      message='Next'
         arrayPosition={componentArrayPosition}
         setArrayPosition={setComponentArrayPosition}
         arrayToCycle={componentArray}
