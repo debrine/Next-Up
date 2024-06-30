@@ -1,17 +1,18 @@
 import EditLocalStorageValue from "../../../EditLocalStorageValue"
 
 export default function lashuntaAdjustments(
-    option?: string[]
+    option?: string
 ){
-    if(option != undefined){
+    if(option != undefined && option != ''){
         // Ability Score adjustments
         // +2 to Charisma and Strength (Korasha). +2 to Intelligence and Constitution (Damaya)
-        // -2 to Wisdom
+        // -2 to Wisdom/Constitution repectively
     
-        // Charisma
-        EditLocalStorageValue(true, 2, 'Charisma')
 
-        if(option[0] === 'Korasha'){
+        if(option === 'Korasha'){
+            
+            // Charisma
+            EditLocalStorageValue(true, 2, 'Charisma')
         
             // Strength
             EditLocalStorageValue(true, 2, 'Strength')
@@ -19,7 +20,10 @@ export default function lashuntaAdjustments(
             // Wisdom
             EditLocalStorageValue(false, 2, 'Wisdom')
 
-        } else if(option[0] === 'Damaya'){
+        } else if(option === 'Damaya'){
+            
+            // Charisma
+            EditLocalStorageValue(true, 2, 'Charisma')
         
             // Intelligence
             EditLocalStorageValue(true, 2, 'Intelligence')
@@ -27,10 +31,9 @@ export default function lashuntaAdjustments(
             // Constitution
             EditLocalStorageValue(false, 2, 'Constitution')
             
+        } else{
+            // If option isn't for a sub-race, it will be +2 to any skills.
+            EditLocalStorageValue(true, 2, option)
         }
-
-        // Add +2 to any two skills.
-        EditLocalStorageValue(true, 2, option[1])
-        EditLocalStorageValue(true, 2, option[2])
     }
 }

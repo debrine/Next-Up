@@ -1,11 +1,11 @@
-import { useLocalStorage } from "../../../../data/useLocalStorage"
+// import { useLocalStorage } from "../../../../data/useLocalStorage"
 import styles from './OperativeLevelComponents.module.css'
 
 
 function firstLevelOperative() {
 
   // Store options saved in local storage temporarily.
-  const [, setOperativeTemp] = useLocalStorage('OperativeTemp')
+  // const [, setOperativeTemp] = useLocalStorage('OperativeTemp')
   return (
     <div className={styles.firstParentDiv}>
       <div className={styles.levelUpDescription}>

@@ -2,13 +2,11 @@ import { useContext, useEffect, useState } from 'react'
 import BackButton from '../../../utils/BackButton/BackButton'
 import styles from './ConfirmCreateCharacter.module.css'
 import { CharacterCreationContext } from '../../../states/CreateCharacter/CreateCharacter'
-import NextButton from '../../../utils/NextButton/NextButton'
-import AddCharacterFunction from '../../../utils/AddCharacterFunction'
+import AddCharacterButton from '../AddCharacterButton/AddCharacterButton'
 
 function ConfirmCreateCharacter() {
 
-  const { 
-    componentArray,
+  const {
     componentArrayPosition, 
     setComponentArrayPosition 
   } = useContext(CharacterCreationContext)
@@ -80,14 +78,7 @@ function ConfirmCreateCharacter() {
             arrayPosition={componentArrayPosition}
             setArrayPosition={setComponentArrayPosition}
         />
-        <NextButton
-          message='Add Character'
-          arrayToCycle={componentArray}
-          arrayPosition={componentArrayPosition}
-          setArrayPosition={setComponentArrayPosition}
-          condition={true}
-          functionToRun={AddCharacterFunction} // Invalid Hook Call. Will probably need to move this within the function itself and call the function here for the button.
-        />
+        <AddCharacterButton/>
     </div>
   )
 }

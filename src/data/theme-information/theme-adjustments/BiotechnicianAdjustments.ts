@@ -13,7 +13,7 @@ export default function BiotechnicianAdjustments(
     // Medicine
     let skill = JSON.parse(localStorage.getItem(`Medicine${keyID}`)!)
     if(skill.isClassSkill){
-        skill.skillValue++
+        skill.value++
     } else {
         skill.isClassSkill = true
     }

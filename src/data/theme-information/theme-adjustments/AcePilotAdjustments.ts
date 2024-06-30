@@ -12,8 +12,9 @@ export default function AcePilotAdjustments(
 
     // Piloting
     let skill = JSON.parse(localStorage.getItem(`Piloting${keyID}`)!)
+    console.log(skill)
     if(skill.isClassSkill){
-        skill.skillValue++
+        skill.value++
     } else {
         skill.isClassSkill = true
     }

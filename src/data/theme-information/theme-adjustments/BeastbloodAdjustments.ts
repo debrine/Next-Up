@@ -10,11 +10,11 @@ export default function BeastbloodAdjustments(
     
     // Survival
     if(
-        option!
+        !option
     ){
         let skill = JSON.parse(localStorage.getItem(`${option}${keyID}`)!)
         if(skill.isClassSkill){
-            skill.skillValue++
+            skill.value++
         } else {
             skill.isClassSkill = true
         }
@@ -23,6 +23,6 @@ export default function BeastbloodAdjustments(
         option !=''
     ){
         // Choice of Intelligence or Wisdom
-        EditLocalStorageValue(true, 1, option!)
+        EditLocalStorageValue(true, 1, option)
     }
 }

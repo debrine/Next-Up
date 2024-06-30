@@ -1,10 +1,13 @@
 import EditLocalStorageValue from "../../../EditLocalStorageValue";
 
 export default function humanAdjustments(
-    option?: string[],
+    option?: string,
 ){
     //  +2 to any one option
-    if(option != undefined){
+    if(
+        option != undefined &&
+        option != ''
+    ){
         EditLocalStorageValue(true, 2, option[0])
     }
 

@@ -12,6 +12,6 @@ type RaceListTypes = {
     optionDescription: string[],
     optionArray: Array<Array<string>>,
     raceFunction: (
-        option?: string[],
+        option?: string,
     ) => void
 }
