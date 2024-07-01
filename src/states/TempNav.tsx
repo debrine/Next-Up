@@ -9,6 +9,7 @@ function TempNav() {
         <Link to='/Next-Up/form' style={{margin: 10}}>Form</Link>
         <Link to='/Next-Up/create-character' style={{margin: 10}}>Create Character Test</Link>
         <Link to='/Next-Up/charactersheet' style={{margin: 10}}>Character Sheet</Link>
+        <Link to='/Next-Up/operative-first' style={{margin: 10}}>Temporary Operative First Level</Link>
     </div>
   )
 }

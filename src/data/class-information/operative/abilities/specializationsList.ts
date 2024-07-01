@@ -1,6 +1,6 @@
 import { exploitList } from "./exploitsList"
 
-export let specializationList: {[key:string]:{
+export const specializationList: {[key:string]:{
     description: string,
     associatedSkills: string[],
     trickAttackSkill: string,

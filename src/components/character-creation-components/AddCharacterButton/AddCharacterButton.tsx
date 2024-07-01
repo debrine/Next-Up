@@ -16,6 +16,13 @@ import { themeList } from "../../../data/theme-information/themeList";
     Race
     Theme
 
+  `Player level will be stored as a number.
+    Default 0, after character added, players will have to make their 1st level ability and feat choices.    
+  `Size does not need to be stored.
+  `Speed will be stored as a number.
+    Default 30
+  `Gender, Home World, Alignment, Diety, Player all stored as seperate strings.
+
   `Description will need to be saved as a string.
 
   `Ability Scores will need to be saved individually for race and theme functions.
@@ -53,7 +60,7 @@ import { themeList } from "../../../data/theme-information/themeList";
   `Spells will need to be added as a list from 0-6th level.
     Will be able to edit each list.
 
-  Card list to use for combat.
+  `Card list to use for combat.
     Initial values should be for player.
 */
 
@@ -115,7 +122,7 @@ function AddCharacterButton() {
 
 
     /*
-    Character Basic Info
+      Character Basic Info
     */
     // Values that will be saved to local storage. These values aren't meant to be changed.
 
@@ -127,14 +134,28 @@ function AddCharacterButton() {
       keyAbilityScoreSelected,
       theme
     })
+    // Level
+    localStorage.setItem(`Level${keyID}`, JSON.stringify(0))
     // Description
     localStorage.setItem(`Description${keyID}`, JSON.stringify(''))
+    // Speed
+    localStorage.setItem(`Speed${keyID}`, JSON.stringify(30))
+    // Gender
+    localStorage.setItem(`Gender${keyID}`, JSON.stringify(''))
+    // HomeWorld
+    localStorage.setItem(`HomeWorld${keyID}`, JSON.stringify(''))
+    // Alignment
+    localStorage.setItem(`Alignment${keyID}`, JSON.stringify(''))
+    // Speed
+    localStorage.setItem(`Diety${keyID}`, JSON.stringify(''))
+    // Player
+    localStorage.setItem(`Player${keyID}`, JSON.stringify(''))
 
 
 
 
     /*
-    Ability Scores
+      Ability Scores
     */
     Object.keys(abilityScoreList).forEach((key:string)=>{
       localStorage.setItem(`${abilityScoreList[key].aSName}${keyID}`, JSON.stringify(abilityScoreList[key]))
@@ -144,7 +165,7 @@ function AddCharacterButton() {
 
 
     /*
-    Skills
+      Skills
     */
     Object.keys(skillList).forEach((key:string)=>{
       localStorage.setItem(`${skillList[key].skillName}${keyID}`, JSON.stringify(skillList[key]))
@@ -170,7 +191,7 @@ function AddCharacterButton() {
 
 
     /*
-    Weapons, Armor, Abilities, Other Wealth, Languages
+      Weapons, Armor, Abilities, Other Wealth, Languages
     */
     localStorage.setItem(`Weapons${keyID}`, JSON.stringify([]))
     localStorage.setItem(`Armor${keyID}`, JSON.stringify([]))
@@ -185,7 +206,7 @@ function AddCharacterButton() {
 
 
     /*
-    Spells
+      Spells
     */
     localStorage.setItem(`Level0Spells${keyID}`, JSON.stringify([]))
     localStorage.setItem(`Level1Spells${keyID}`, JSON.stringify([]))
@@ -196,7 +217,7 @@ function AddCharacterButton() {
     localStorage.setItem(`Level6Spells${keyID}`, JSON.stringify([]))
 
     /*
-    Run Race and Theme functions to adjust stats.
+      Run Race and Theme functions to adjust stats.
     */
     raceList[race].raceFunction()
     if(raceList[race].hasOptions){
@@ -210,6 +231,34 @@ function AddCharacterButton() {
       themeList[theme].themeFunction(keyID, themeOptionTwo)
       themeList[theme].themeFunction(keyID, themeOptionThree)
     }
+
+
+
+
+    /*
+      Initiative Card values.
+      Temporary as values have not been confirmed yet.
+    */
+    const characterInitiative: {
+      name: string,
+      initiative: number,
+      noteArray: {
+        note: string,
+        expiry: number
+      }[],
+      cardColor: string,
+      inGroup: boolean,
+      groupName: string,
+    } = {
+      name: inputName,
+      initiative: 0,
+      noteArray: [],
+      cardColor: '',
+      inGroup: false,
+      groupName: '',
+    }
+
+    localStorage.setItem(`initiativeCards${keyID}`, JSON.stringify([characterInitiative]))
   }
 
 

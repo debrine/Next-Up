@@ -1,9 +1,11 @@
-import firstLevelOperative from "../components/character-class-components/operative-components/level-components/firstLevelOperative";
+import FirstLevelOperative from "../components/character-class-components/operative-components/level-components/FirstLevelOperative";
+
+
 
 export let levelUpList: {[key:string]: {[key:string]: {componentForClass: () => JSX.Element}}} = {
     '1':{
         'Operative':{
-            componentForClass: firstLevelOperative
+            componentForClass: FirstLevelOperative
         }
     }
 }

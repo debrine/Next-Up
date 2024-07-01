@@ -8,7 +8,7 @@ export default function humanAdjustments(
         option != undefined &&
         option != ''
     ){
-        EditLocalStorageValue(true, 2, option[0])
+        EditLocalStorageValue(true, 2, option)
     }
 
     // Humans also get an extra feat at 1st level, and bonus skill rank per level.

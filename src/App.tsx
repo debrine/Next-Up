@@ -5,6 +5,7 @@ import CharacterSheet from "./states/CharacterSheet/CharacterSheet.tsx"
 import MockForm from "./states/MockForm.tsx"
 import TempNav from "./states/TempNav.tsx"
 import CreateCharacter from "./states/CreateCharacter/CreateCharacter.tsx"
+import FirstLevelOperative from "./components/character-class-components/operative-components/level-components/FirstLevelOperative.tsx"
 
 const Dashboard = ()=>{
   return(
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: '/Next-Up/create-character',
         element: <CreateCharacter />
+      },
+      {
+        path: '/Next-Up/operative-first',
+        element: <FirstLevelOperative />
       }
     ]
   }
