@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { operativeAbilityList } from '../../../../data/class-information/operative/abilities/operativeAbilityList';
 import { specializationList } from '../../../../data/class-information/operative/abilities/specializationsList';
 import DropDownList from '../../../DropDownList/DropDownList';
@@ -20,16 +20,40 @@ function FirstLevelOperative() {
   const [specialization, setSpecialization] = useState<string>('')
 
   
-  const {
+  const [{
     description,
     associatedSkills,
     trickAttackSkill,
-    // specializationExploit,
-    // abilityName,
-    // abilityDescription,
+    specializationExploit,
+    abilityName,
+    abilityDescription,
     // actionType,
     // usesResolve
-  } = specializationList[specialization]
+  }, setSpecializationObject] = useState<SpecializationListTypes>({
+    description: '',
+    associatedSkills: [''],
+    trickAttackSkill: '',
+    specializationExploit: {
+        exploitName: '',
+        description: '',
+        actionType: [''],
+        hasFeatOptions: false,
+        featOptions: [''],
+        givesFeat: false,
+        featGiven: '',
+        usesResolve: 0
+    },
+    abilityName: '',
+    abilityDescription: '',
+    actionType: '',
+    usesResolve: 0
+  })
+
+  useEffect(()=>{
+    if(specializationList[specialization]){
+      setSpecializationObject(specializationList[specialization])
+    }
+  },[specialization])
 
   return (
     <div className={styles.firstParentDiv}>
@@ -39,7 +63,7 @@ function FirstLevelOperative() {
       <div className={styles.classAbilityList}>
         {operativeAbilityList['1'].abilityName.map((a: string, i: number)=>{
           return(
-            <div className={styles.classAbility}>
+            <div className={styles.classAbility} key={`classAbility${i}`}>
               <h3>{a}</h3>
               <div className={styles.abilityDescription}>
                 {operativeAbilityList['1'].abilityDescription[i]}
@@ -68,9 +92,13 @@ function FirstLevelOperative() {
               {description}
             </div>
             <ul>
-              <li><span>Associated Skills: </span> {associatedSkills[0]} and {associatedSkills[1]}. {trickAttackSkill}</li>
-              <li><span>Specialization Exploit: </span></li>
-              <li></li>
+              <li key={'AssociatedSkills'}><span>Associated Skills: </span> {associatedSkills[0]} and {associatedSkills[1]}. {trickAttackSkill}</li>
+              <li key={'SpecializationExploit'}>
+                <div>Specialization Exploit: </div>
+                <div className={styles.exploitHead}>{specializationExploit.exploitName}</div>
+                <ul><li>{specializationExploit.description}</li></ul>
+              </li>
+              <li key={'SpecializationAbility'}><span>{abilityName}: </span>{abilityDescription}</li>
             </ul>
           </div>
         }
