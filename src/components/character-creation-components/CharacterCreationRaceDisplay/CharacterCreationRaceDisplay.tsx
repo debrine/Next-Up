@@ -56,18 +56,6 @@ function CharacterCreationRaceDisplay() {
       i.optionSet('')
     })
   },[race])
-
-
-  let raceAbilityArray = raceAbilityName.map(
-    (header, index)=>{
-      return(
-        <div className={styles.abilityDiv} key={`${header}${index}`}>
-            <h3>{header}</h3>
-            <div>{raceAbilityDescription[index]}</div>
-        </div>
-      )
-    }
-  )
   
 
   // Commented out in case it needs to be different from other showOptions
@@ -154,7 +142,10 @@ function CharacterCreationRaceDisplay() {
               {raceSizeAndType}
             </div>
           </div>
-          {raceAbilityArray}
+          <RaceAbilityArray
+            raceAbilityName={raceAbilityName}
+            raceAbilityDescription={raceAbilityDescription}
+          />
           {hasOptions &&
             ShowOptions({
               optionsToMap: optionDescription,
@@ -184,6 +175,29 @@ function CharacterCreationRaceDisplay() {
         condition={moveOn}
       />
     </div>
+  )
+}
+
+type RaceAbilityArrayProps = {
+  raceAbilityName: string[],
+  raceAbilityDescription: string[]
+}
+
+function RaceAbilityArray({
+  raceAbilityName,
+  raceAbilityDescription
+}: RaceAbilityArrayProps){
+  return(
+    raceAbilityName.map(
+      (header, index)=>{
+        return(
+          <div className={styles.abilityDiv} key={`${header}${index}`}>
+              <h3>{header}</h3>
+              <div>{raceAbilityDescription[index]}</div>
+          </div>
+        )
+      }
+    )
   )
 }
 

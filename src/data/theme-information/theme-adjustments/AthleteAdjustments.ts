@@ -2,6 +2,7 @@
 // Ability Score - Str, Dex, or Con
 
 import EditLocalStorageValue from "../../EditLocalStorageValue"
+import IsClassSkillPlusOne from "../IsClassSkillPlusOne"
 
 export default function AthleteAdjustments(
     keyID: KeyIDType,
@@ -13,13 +14,7 @@ export default function AthleteAdjustments(
             option ==='Athletics' ||
             option === 'Acrobatics'
         ){
-            let skill = JSON.parse(localStorage.getItem(`${option}${keyID}`)!)
-            if(skill.isClassSkill){
-                skill.value++
-            } else {
-                skill.isClassSkill = true
-            }
-            localStorage.setItem(`${option}${keyID}`, JSON.stringify(skill))
+            IsClassSkillPlusOne(keyID, option)
         } else {
             // Str, Dex, or Con
             EditLocalStorageValue(true, 1, option)

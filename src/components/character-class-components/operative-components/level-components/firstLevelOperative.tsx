@@ -27,8 +27,6 @@ function FirstLevelOperative() {
     specializationExploit,
     abilityName,
     abilityDescription,
-    // actionType,
-    // usesResolve
   }, setSpecializationObject] = useState<SpecializationListTypes>({
     description: '',
     associatedSkills: [''],
@@ -37,10 +35,6 @@ function FirstLevelOperative() {
         exploitName: '',
         description: '',
         actionType: [''],
-        hasFeatOptions: false,
-        featOptions: [''],
-        givesFeat: false,
-        featGiven: '',
         usesResolve: 0
     },
     abilityName: '',

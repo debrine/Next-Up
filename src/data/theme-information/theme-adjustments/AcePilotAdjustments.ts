@@ -2,6 +2,7 @@
 // Ability Score - Dex
 
 import EditLocalStorageValue from "../../EditLocalStorageValue"
+import IsClassSkillPlusOne from "../IsClassSkillPlusOne"
 
 export default function AcePilotAdjustments(
     keyID: KeyIDType
@@ -11,12 +12,5 @@ export default function AcePilotAdjustments(
     EditLocalStorageValue(true, 1, 'Dexterity')
 
     // Piloting
-    let skill = JSON.parse(localStorage.getItem(`Piloting${keyID}`)!)
-    console.log(skill)
-    if(skill.isClassSkill){
-        skill.value++
-    } else {
-        skill.isClassSkill = true
-    }
-    localStorage.setItem(`Piloting${keyID}`, JSON.stringify(skill))
+    IsClassSkillPlusOne(keyID, 'Piloting')
 }

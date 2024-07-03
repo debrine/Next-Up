@@ -2,6 +2,7 @@
 // Ability Score - Choice of Intelligence or Wisdom
 
 import EditLocalStorageValue from "../../EditLocalStorageValue"
+import IsClassSkillPlusOne from "../IsClassSkillPlusOne"
 
 export default function BeastbloodAdjustments(
     keyID: KeyIDType,
@@ -12,14 +13,8 @@ export default function BeastbloodAdjustments(
         if(
             !option
         ){
-            let skill = JSON.parse(localStorage.getItem(`Survival${keyID}`)!)
-            if(skill.isClassSkill){
-                skill.value++
-            } else {
-                skill.isClassSkill = true
-            }
-            localStorage.setItem(`Survival${keyID}`, JSON.stringify(skill))
-        } else {
+            IsClassSkillPlusOne(keyID, 'Survival')
+        } else if(option && option !=''){
             // Choice of Intelligence or Wisdom
             EditLocalStorageValue(true, 1, option)
         }

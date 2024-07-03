@@ -57,21 +57,6 @@ function CharacterCreationThemeDisplay() {
       i.optionSet('')
     })
   },[theme])
-  
-  
-  let themeAbilityArray = themeAbilityTitle.map(
-    (header, index)=>{
-      return(
-        <div className={styles.abilityDiv} key={`${header}${index}`}>
-          <h3>{header}</h3>
-          {/* hr is temp, the div will be a red line like the offical book. */}
-          <hr />
-          <div className={styles.redSeparator}></div>
-          <div>{themeAbilityDescription[index]}</div>
-        </div>
-      )
-    }
-  )
     
   
   // Commented out in case it needs to be different from other showOptions
@@ -130,7 +115,10 @@ function CharacterCreationThemeDisplay() {
                 {themeDescription}
               </div>
             </div>
-            {themeAbilityArray}
+            <ThemeAbilityArray
+              themeAbilityTitle={themeAbilityTitle}
+              themeAbilityDescription={themeAbilityDescription}
+            />
             {hasOptions &&
               ShowOptions({
                 optionsToMap: optionDescription,
@@ -163,5 +151,28 @@ function CharacterCreationThemeDisplay() {
     </div>
   )
 }
+
+type ThemeAbilityArrayProps = {
+  themeAbilityTitle: string[],
+  themeAbilityDescription: string[]
+}
+
+function ThemeAbilityArray({
+  themeAbilityTitle,
+  themeAbilityDescription
+}:ThemeAbilityArrayProps){
+  return(themeAbilityTitle.map(
+  (header:string, index:number)=>{
+    return(
+      <div className={styles.abilityDiv} key={`${header}${index}`}>
+        <h3>{header}</h3>
+        {/* hr is temp, the div will be a red line like the offical book. */}
+        <hr />
+        <div className={styles.redSeparator}></div>
+        <div>{themeAbilityDescription[index]}</div>
+      </div>
+    )
+  }
+))}
 
 export default CharacterCreationThemeDisplay
