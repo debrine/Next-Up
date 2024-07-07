@@ -1,5 +1,7 @@
+import { useParams } from 'react-router-dom';
 import styles from './ScoreModifierInput.module.css'
 import { useForm } from 'react-hook-form'
+import { getItem } from '../../../../utils/getItem';
 
 type ScoreModifierInputProps = {
     heading: string,
@@ -12,6 +14,14 @@ function ScoreModifierInput({
     const {
         register
     } = useForm();
+    
+    let {characterID} = useParams()
+    let strengthObject:{
+        aSName: string
+        asBonus: number
+        asPenalty: number
+        value: number
+    } = getItem(`Strength${characterID}`)
 
     return(
         <div className={styles.parentDiv}>
@@ -22,9 +32,8 @@ function ScoreModifierInput({
                 type="number"
                 {
                     ...register('scoreStr')
-                    
                 }
-                defaultValue={defaultValue}
+                defaultValue={strengthObject.value}
             />
             <input 
                 type="number"

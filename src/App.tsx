@@ -3,7 +3,6 @@ import Login from "./states/Login/Login.tsx"
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom"
 import CharacterSheet from "./states/CharacterSheet/CharacterSheet.tsx"
 import MockForm from "./states/MockForm.tsx"
-import TempNav from "./states/TempNav.tsx"
 import CreateCharacter from "./states/CreateCharacter/CreateCharacter.tsx"
 import FirstLevelOperative from "./components/character-class-components/operative-components/level-components/FirstLevelOperative.tsx"
 import NavBar from "./states/NavBar/NavBar.tsx"
@@ -12,7 +11,6 @@ const Dashboard = ()=>{
   return(
     <div className="appParent">
       <div className="navBar"><NavBar /></div>
-      <TempNav />
       <Outlet />
     </div>
   )
@@ -36,7 +34,7 @@ const router = createBrowserRouter([
         element: <MockForm />
       },
       {
-        path: '/Next-Up/charactersheet',
+        path: '/Next-Up/charactersheet/:characterID',
         element: <CharacterSheet />
       },
       {

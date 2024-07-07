@@ -3,11 +3,12 @@ import CharacterInfo from '../../components/character-sheet-components/Character
 import DescriptionBlock from '../../components/character-sheet-components/DescriptionBlock/DescriptionBlock.tsx'
 import LeftSide from '../../components/character-sheet-components/LeftSide/LeftSide.tsx'
 import RightSide from '../../components/character-sheet-components/RightSide/RightSide.tsx'
-import { createContext, useEffect, useRef } from 'react'
-import { useLocation } from 'react-router-dom'
+import { createContext } from 'react'
+import { useParams } from 'react-router-dom'
+import { getItem } from '../../utils/getItem.ts'
 
 export const KeyIDContext = createContext<{
-    keyID: string,
+    keyID: string | undefined,
     characterInfoObject:{
         chClass: string
         id: string
@@ -19,45 +20,21 @@ export const KeyIDContext = createContext<{
 }>({} as any)
 
 function CharacterSheet(){
-    
-    const statePassed=useLocation()
 
-    const characterID = useRef<string>('')
+    let {characterID} = useParams()
 
-    const characterInfoObject = useRef<{
+    const characterInfoObject:{
         chClass: string
         id: string
         inputName: string
         keyAbilityScoreSelected: string
         race: string
         theme: string
-    }>({
-        chClass: '',
-        id: '',
-        inputName: '',
-        keyAbilityScoreSelected: '',
-        race: '',
-        theme: ''
-    })
-
-    function getFromLocalStorage(item: string){
-        return(
-            JSON.parse(localStorage.getItem(item)!)
-        )
-    }
-
-    useEffect(()=>{
-        console.log(statePassed.state.keyID)
-        
-        console.log(JSON.parse(localStorage.getItem(`characterBasicInfo${statePassed.state.keyID}`)!))
-        characterID.current = statePassed.state.keyID
-        
-        characterInfoObject.current = getFromLocalStorage(`characterBasicInfo${statePassed.state.keyID}`)
-    },[])
+    } = getItem(`characterBasicInfo${characterID}`)
 
 
     return(
-        <KeyIDContext.Provider value={{keyID:characterID.current, characterInfoObject:characterInfoObject.current}}>
+        <KeyIDContext.Provider value={{keyID:characterID, characterInfoObject:characterInfoObject}}>
             <div className={styles.characterSheetMainDiv}>
                 <div className={styles.characterInfoDescriptionBlock}>
 

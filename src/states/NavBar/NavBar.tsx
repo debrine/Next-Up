@@ -1,24 +1,27 @@
 import { Link } from 'react-router-dom'
 import styles from './NavBar.module.css'
-import { MutableRefObject, useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 
 
 
 function NavBar() {
   
-  const nameArray = useRef<NameArrayType>([])
-  // Find if the array exists.
+  const [nameArray, setNameArray] = useState<NameArrayType>(JSON.parse(localStorage.getItem('charactersAvailable')!))
+  
   useEffect(()=>{
     if(localStorage.getItem('charactersAvailable') != null){
-      nameArray.current = JSON.parse(localStorage.getItem('charactersAvailable')!)
+      setNameArray(JSON.parse(localStorage.getItem('charactersAvailable')!))
     }
-  })
+  },[])
 
   
 
   return (
     <nav className={styles.navBarParent}>
-      <ListOfCharacters nameArray={nameArray} />
+      {
+        nameArray &&
+        <ListOfCharacters nameArray={nameArray} />
+      }
       <div className={styles.navBarItem}>
           <Link to='/Next-Up/create-character'><span className={styles.plusCircle}>+</span> Add Character</Link>
       </div>
@@ -27,15 +30,15 @@ function NavBar() {
 }
 
 type ListOfCharactersProps = {
-  nameArray: MutableRefObject<NameArrayType>
+  nameArray: NameArrayType
 }
 
 function ListOfCharacters({nameArray}:ListOfCharactersProps){
   return(
-    nameArray.current.map(i=>{
+    nameArray.map(i=>{
       return(
         <div className={styles.navBarItem} key={`${i.characterName}${i.id}`}>
-          <Link to='/Next-Up/charactersheet' state={{ keyID: i.id }}>{i.characterName}</Link>
+          <Link to={`/Next-Up/charactersheet/${i.id}`}>{i.characterName}</Link>
         </div>
       )
     })
