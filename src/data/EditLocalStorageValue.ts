@@ -1,3 +1,6 @@
+import { getValue } from "../utils/getValue"
+import { setValue } from "../utils/setValue"
+
 export default function EditLocalStorageValue(
     isPositive: boolean,
     numberValue: number,
@@ -6,14 +9,14 @@ export default function EditLocalStorageValue(
 
     // Used to edit a value set in local storage.
 
-    let tempCharInfo = JSON.parse(localStorage.getItem('tempCharacterInfo')!)
+    let tempCharInfo = getValue('tempCharacterInfo')
 
-    let valueToAdjust =  JSON.parse(localStorage.getItem(`${parameterToEdit}${tempCharInfo.keyID}`)!)
+    let valueToAdjust =  getValue(`${parameterToEdit}${tempCharInfo.keyID}`)
 
     if(isPositive){
         valueToAdjust.value += numberValue
     } else{
         valueToAdjust.value -= numberValue
     }
-        localStorage.setItem(`${parameterToEdit}${tempCharInfo.keyID}`, JSON.stringify(valueToAdjust))
+    setValue(`${parameterToEdit}${tempCharInfo.keyID}`, valueToAdjust)
 }

@@ -3,6 +3,7 @@ import BackButton from '../../../utils/BackButton/BackButton'
 import styles from './ConfirmCreateCharacter.module.css'
 import { CharacterCreationContext } from '../../../states/CreateCharacter/CreateCharacter'
 import AddCharacterButton from '../AddCharacterButton/AddCharacterButton'
+import { getValue } from '../../../utils/getValue'
 
 function ConfirmCreateCharacter() {
 
@@ -23,10 +24,10 @@ function ConfirmCreateCharacter() {
     raceOptionOne,
     raceOptionTwo,
     raceOptionThree,
-  }, setTempCharacterInfo] = useState(JSON.parse(localStorage.getItem('tempCharacterInfo')!))
+  }, setTempCharacterInfo] = useState(getValue('tempCharacterInfo'))
 
   useEffect(()=>{
-    setTempCharacterInfo(JSON.parse(localStorage.getItem('tempCharacterInfo')!))
+    setTempCharacterInfo(getValue('tempCharacterInfo'))
   },[])
 
   return (

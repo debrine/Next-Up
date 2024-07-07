@@ -1,4 +1,4 @@
-export function getItem(item: string){
+export function getValue(item: string){
     return(
         JSON.parse(localStorage.getItem(item)!)
     )

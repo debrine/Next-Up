@@ -1,11 +1,14 @@
+import { getValue } from "../../utils/getValue"
+import { setValue } from "../../utils/setValue"
+
 function IsClassSkillPlusOne(keyID: string, skillName: string) {
-    let skill = JSON.parse(localStorage.getItem(`${skillName}${keyID}`)!)
+    let skill = getValue(`${skillName}${keyID}`)
     if(skill.isClassSkill){
         skill.value++
     } else {
         skill.isClassSkill = true
     }
-    localStorage.setItem(`${skillName}${keyID}`, JSON.stringify(skill))
+    setValue(`${skillName}${keyID}`, skill)
 }
 
 export default IsClassSkillPlusOne

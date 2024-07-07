@@ -1,9 +1,10 @@
 import {  Dispatch, SetStateAction, createContext, useState } from 'react'
 import CreateCharacterOptions from '../../components/character-creation-components/CreateCharacterOptions/CreateCharacterOptions.tsx'
-import { useLocalStorage } from '../../data/useLocalStorage.ts'
+// import { useLocalStorage } from '../../data/useLocalStorage.ts'
 import styles from './CreateCharacter.module.css'
 import CharacterCreationName from '../../components/character-creation-components/CharacterCreationName/CharacterCreationName.tsx'
 import ConfirmCreateCharacter from '../../components/character-creation-components/ConfirmCreateCharacter/ConfirmCreateCharacter.tsx'
+import { setValue } from '../../utils/setValue.ts'
 // import AddCharacterButton from '../../components/character-creation-components/AddCharacterButton/AddCharacterButton.tsx'
 
 
@@ -112,7 +113,7 @@ function CreateCharacter() {
   const [componentArrayPosition, setComponentArrayPosition] = useState<number>(0)
 
   // Temporarily set values to be used before saving to local storage.
-  const [, setTempCharacterInfo] = useLocalStorage(`tempCharacterInfo`, {}) 
+  // const [, setTempCharacterInfo] = useLocalStorage(`tempCharacterInfo`, {}) 
   
 
 
@@ -123,7 +124,7 @@ function CreateCharacter() {
   function addTempValuesHandler(){
     // Generate Key to point the character selected to.
     const keyID: string = crypto.randomUUID()
-    setTempCharacterInfo({
+    setValue(`tempCharacterInfo`, {
       inputName,
       keyID,
       race,

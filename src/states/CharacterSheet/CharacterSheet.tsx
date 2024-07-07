@@ -5,7 +5,7 @@ import LeftSide from '../../components/character-sheet-components/LeftSide/LeftS
 import RightSide from '../../components/character-sheet-components/RightSide/RightSide.tsx'
 import { createContext } from 'react'
 import { useParams } from 'react-router-dom'
-import { getItem } from '../../utils/getItem.ts'
+import { getValue } from '../../utils/getValue.ts'
 
 export const KeyIDContext = createContext<{
     keyID: string | undefined,
@@ -30,7 +30,7 @@ function CharacterSheet(){
         keyAbilityScoreSelected: string
         race: string
         theme: string
-    } = getItem(`characterBasicInfo${characterID}`)
+    } = getValue(`characterBasicInfo${characterID}`)
 
 
     return(

@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import styles from './ScoreModifierInput.module.css'
 import { useForm } from 'react-hook-form'
-import { getItem } from '../../../../utils/getItem';
+import { getValue } from '../../../../utils/getValue';
 
 type ScoreModifierInputProps = {
     heading: string,
@@ -21,7 +21,7 @@ function ScoreModifierInput({
         asBonus: number
         asPenalty: number
         value: number
-    } = getItem(`Strength${characterID}`)
+    } = getValue(`Strength${characterID}`)
 
     return(
         <div className={styles.parentDiv}>

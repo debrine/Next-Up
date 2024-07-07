@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import styles from './NavBar.module.css'
 import { useEffect, useState } from 'react'
+import { getValue } from '../../utils/getValue'
 
 
 
@@ -9,8 +10,8 @@ function NavBar() {
   const [nameArray, setNameArray] = useState<NameArrayType>(JSON.parse(localStorage.getItem('charactersAvailable')!))
   
   useEffect(()=>{
-    if(localStorage.getItem('charactersAvailable') != null){
-      setNameArray(JSON.parse(localStorage.getItem('charactersAvailable')!))
+    if(getValue('charactersAvailable') != null){
+      setNameArray(getValue('charactersAvailable'))
     }
   },[])
 

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef } from "react"
-import { useLocalStorage } from "../../../data/useLocalStorage";
+// import { useLocalStorage } from "../../../data/useLocalStorage";
 import { abilityScoreList } from "../../../data/abilityScoreList";
 import { skillList } from "../../../data/skillList";
 import { classList } from "../../../data/class-information/classList";
@@ -7,6 +7,8 @@ import NextButton from "../../../utils/NextButton/NextButton";
 import { CharacterCreationContext } from "../../../states/CreateCharacter/CreateCharacter";
 import { raceList } from "../../../data/race-information/raceList";
 import { themeList } from "../../../data/theme-information/themeList";
+import { getValue } from "../../../utils/getValue";
+import { setValue } from "../../../utils/setValue";
 
 /*
   Things to save:
@@ -82,7 +84,7 @@ function AddCharacterButton() {
     raceOptionOne,
     raceOptionTwo,
     raceOptionThree,
-  } = JSON.parse(localStorage.getItem('tempCharacterInfo')!)
+  } = getValue('tempCharacterInfo')
 
   /*
     Character Name
@@ -93,13 +95,13 @@ function AddCharacterButton() {
   // Find if the array exists.
   useEffect(()=>{
     if(localStorage.getItem('charactersAvailable') != null){
-      nameArray.current = JSON.parse(localStorage.getItem('charactersAvailable')!)
+      nameArray.current = getValue('charactersAvailable')
     }
   }, [])
-  const [, setCharacterNames] = useLocalStorage('charactersAvailable')
+  // const [, setCharacterNames] = useLocalStorage('charactersAvailable')
 
   // Character Basic Info useLocalStorage
-  const [, setCharacterBasicInfo] = useLocalStorage(`characterBasicInfo${keyID}`)
+  // const [, setCharacterBasicInfo] = useLocalStorage(`characterBasicInfo${keyID}`)
 
   function addCharacterhandler(){
 
@@ -110,7 +112,7 @@ function AddCharacterButton() {
       Character
     */
     // Needs a useRef to point to current and save that version.
-    setCharacterNames([
+    setValue('charactersAvailable', [
       ...nameArray.current,
       {
         characterName: inputName,
@@ -126,7 +128,7 @@ function AddCharacterButton() {
     */
     // Values that will be saved to local storage. These values aren't meant to be changed.
 
-    setCharacterBasicInfo({
+    setValue(`characterBasicInfo${keyID}`, {
       inputName,
       id: keyID,
       race,
@@ -135,21 +137,21 @@ function AddCharacterButton() {
       theme
     })
     // Level
-    localStorage.setItem(`Level${keyID}`, JSON.stringify(0))
+    setValue(`Level${keyID}`, 0)
     // Description
-    localStorage.setItem(`Description${keyID}`, JSON.stringify(''))
+    setValue(`Description${keyID}`, '')
     // Speed
-    localStorage.setItem(`Speed${keyID}`, JSON.stringify(30))
+    setValue(`Speed${keyID}`, 30)
     // Gender
-    localStorage.setItem(`Gender${keyID}`, JSON.stringify(''))
+    setValue(`Gender${keyID}`, '')
     // HomeWorld
-    localStorage.setItem(`HomeWorld${keyID}`, JSON.stringify(''))
+    setValue(`HomeWorld${keyID}`, '')
     // Alignment
-    localStorage.setItem(`Alignment${keyID}`, JSON.stringify(''))
+    setValue(`Alignment${keyID}`, '')
     // Speed
-    localStorage.setItem(`Diety${keyID}`, JSON.stringify(''))
+    setValue(`Diety${keyID}`, '')
     // Player
-    localStorage.setItem(`Player${keyID}`, JSON.stringify(''))
+    setValue(`Player${keyID}`, '')
 
 
 
@@ -158,7 +160,7 @@ function AddCharacterButton() {
       Ability Scores
     */
     Object.keys(abilityScoreList).forEach((key:string)=>{
-      localStorage.setItem(`${abilityScoreList[key].aSName}${keyID}`, JSON.stringify(abilityScoreList[key]))
+      setValue(`${abilityScoreList[key].aSName}${keyID}`, abilityScoreList[key])
     })
 
 
@@ -168,21 +170,21 @@ function AddCharacterButton() {
       Skills
     */
     Object.keys(skillList).forEach((key:string)=>{
-      localStorage.setItem(`${skillList[key].skillName}${keyID}`, JSON.stringify(skillList[key]))
+      setValue(`${skillList[key].skillName}${keyID}`, skillList[key])
     })
     // Skill notes
-    localStorage.setItem(`SkillNotes${keyID}`, JSON.stringify(''))
+    setValue(`SkillNotes${keyID}`, '')
     // Set Class Skills
     classList[chClass].classDefaults.classSkills.forEach(s=>{
 
       // const [classSkill, setClassSkill] = useLocalStorage<{}>(`${s}${keyID}`)
-      let classSkill:any = JSON.parse(localStorage.getItem(`${s}${keyID}`)!)
+      let classSkill:any = getValue(`${s}${keyID}`)
 
       if(classSkill != undefined){
         let tempSkill = Object.assign(classSkill)
         tempSkill.isClassSkill = true
         // setClassSkill(tempSkill)
-        localStorage.setItem(`${s}${keyID}`, JSON.stringify(tempSkill))
+        setValue(`${s}${keyID}`, tempSkill)
       }
 
     })
@@ -193,14 +195,14 @@ function AddCharacterButton() {
     /*
       Weapons, Armor, Abilities, Other Wealth, Languages
     */
-    localStorage.setItem(`Weapons${keyID}`, JSON.stringify([]))
-    localStorage.setItem(`Armor${keyID}`, JSON.stringify([]))
-    localStorage.setItem(`Abilities${keyID}`, JSON.stringify([]))
-    localStorage.setItem(`Feats${keyID}`, JSON.stringify([]))
-    localStorage.setItem(`Equipment${keyID}`, JSON.stringify([]))
-    localStorage.setItem(`OtherWealth${keyID}`, JSON.stringify(''))
-    localStorage.setItem(`Languages${keyID}`, JSON.stringify(''))
-    localStorage.setItem(`XPEarned${keyID}`, JSON.stringify(''))
+    setValue(`Weapons${keyID}`, [])
+    setValue(`Armor${keyID}`, [])
+    setValue(`Abilities${keyID}`, [])
+    setValue(`Feats${keyID}`, [])
+    setValue(`Equipment${keyID}`, [])
+    setValue(`OtherWealth${keyID}`, '')
+    setValue(`Languages${keyID}`, '')
+    setValue(`XPEarned${keyID}`, '')
 
 
 
@@ -208,13 +210,13 @@ function AddCharacterButton() {
     /*
       Spells
     */
-    localStorage.setItem(`Level0Spells${keyID}`, JSON.stringify([]))
-    localStorage.setItem(`Level1Spells${keyID}`, JSON.stringify([]))
-    localStorage.setItem(`Level2Spells${keyID}`, JSON.stringify([]))
-    localStorage.setItem(`Level3Spells${keyID}`, JSON.stringify([]))
-    localStorage.setItem(`Level4Spells${keyID}`, JSON.stringify([]))
-    localStorage.setItem(`Level5Spells${keyID}`, JSON.stringify([]))
-    localStorage.setItem(`Level6Spells${keyID}`, JSON.stringify([]))
+    setValue(`Level0Spells${keyID}`, [])
+    setValue(`Level1Spells${keyID}`, [])
+    setValue(`Level2Spells${keyID}`, [])
+    setValue(`Level3Spells${keyID}`, [])
+    setValue(`Level4Spells${keyID}`, [])
+    setValue(`Level5Spells${keyID}`, [])
+    setValue(`Level6Spells${keyID}`, [])
 
     /*
       Run Race and Theme functions to adjust stats.
@@ -258,7 +260,7 @@ function AddCharacterButton() {
       groupName: '',
     }
 
-    localStorage.setItem(`initiativeCards${keyID}`, JSON.stringify([characterInitiative]))
+    setValue(`initiativeCards${keyID}`, [characterInitiative])
   }
 
 
