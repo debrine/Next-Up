@@ -1,4 +1,4 @@
-function IsClassSkillPlusOne(keyID: KeyIDType, skillName: string) {
+function IsClassSkillPlusOne(keyID: string, skillName: string) {
     let skill = JSON.parse(localStorage.getItem(`${skillName}${keyID}`)!)
     if(skill.isClassSkill){
         skill.value++

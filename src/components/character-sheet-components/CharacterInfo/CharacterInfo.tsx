@@ -2,23 +2,16 @@ import styles from './CharacterInfo.module.css'
 import SheetLabel from '../labels/SheetLabel.tsx'
 // import { ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useContext } from 'react';
+import { KeyIDContext } from '../../../states/CharacterSheet/CharacterSheet.tsx';
 
 function CharacterInfo(){
     const {
         register
     } = useForm();
 
-    // Testing localStorage
-    const characterInfoObject = JSON.parse(localStorage.getItem('characterBasicInfo')!)
-
-    // const [speed, setSpeed] = useState<number>(30)
-
-    // const handleSpeed = (e: ChangeEvent<HTMLInputElement>) => {
-    //     if(e && +e.target.value){
-    //         //  && +e.target.value to stop it from defaulting to 0 when something other than a number is input.
-    //         setSpeed(+e.target.value)
-    //     }
-    // }
+    const { characterInfoObject} = useContext(KeyIDContext)
+    
 
     return(
         <div className={styles.parentDiv}>
@@ -31,6 +24,7 @@ function CharacterInfo(){
                     type="text" 
                     className={styles.characterNameBar}
                     spellCheck={false}
+                    value={characterInfoObject.inputName}
                 />
             </div>
 
@@ -44,7 +38,7 @@ function CharacterInfo(){
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
-                        value={characterInfoObject[0].chClass}
+                        value={characterInfoObject.chClass}
                     />
                     <div>CLASS/LEVEL</div>
                 </div>
@@ -56,7 +50,7 @@ function CharacterInfo(){
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
-                        value={characterInfoObject[0].race}
+                        value={characterInfoObject.race}
                     />
                     <div>RACE</div>
                 </div>
@@ -68,7 +62,7 @@ function CharacterInfo(){
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
-                        value={characterInfoObject[0].theme}
+                        value={characterInfoObject.theme}
                     />
                     <div>THEME</div>
                 </div>
@@ -107,7 +101,6 @@ function CharacterInfo(){
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
-                        value={characterInfoObject[0].gender}
                     />
                     <div>GENDER</div>
                 </div>
@@ -119,7 +112,6 @@ function CharacterInfo(){
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
-                        value={characterInfoObject[0].homeWorld}
                     />
                     <div>HOME WORLD</div>
                 </div>
@@ -136,7 +128,6 @@ function CharacterInfo(){
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
-                        value={characterInfoObject[0].alignment}
                     />
                     <div>ALIGNMENT</div>
                 </div>
@@ -148,7 +139,6 @@ function CharacterInfo(){
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
-                        value={characterInfoObject[0].diety}
                     />
                     <div>DIETY</div>
                 </div>

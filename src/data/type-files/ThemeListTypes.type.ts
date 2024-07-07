@@ -3,7 +3,7 @@ type ThemeListTypes = {
     themeScoreModifiers: string,
     themeDescription: string,
     themeFunction: (
-        keyID: KeyIDType,
+        keyID: string,
         option?: string,
     )=>void,
     themeAbilityTitle: string[],

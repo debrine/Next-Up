@@ -5,7 +5,7 @@ import EditLocalStorageValue from "../../EditLocalStorageValue"
 import IsClassSkillPlusOne from "../IsClassSkillPlusOne"
 
 export default function AcePilotAdjustments(
-    keyID: KeyIDType
+    keyID: string
 ){
     
     // Dexterity

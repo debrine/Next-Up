@@ -1,0 +1,12 @@
+.plusCircle{
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.navBarItem a{
+    text-decoration: none;
+    color: rgb(59, 4, 47);
+}
+.navBarItem a:hover{
+    color: rgba(59, 4, 47, 0.555);
+}

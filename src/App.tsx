@@ -6,12 +6,13 @@ import MockForm from "./states/MockForm.tsx"
 import TempNav from "./states/TempNav.tsx"
 import CreateCharacter from "./states/CreateCharacter/CreateCharacter.tsx"
 import FirstLevelOperative from "./components/character-class-components/operative-components/level-components/FirstLevelOperative.tsx"
+import NavBar from "./states/NavBar/NavBar.tsx"
 
 const Dashboard = ()=>{
   return(
-    <div>
+    <div className="appParent">
+      <div className="navBar"><NavBar /></div>
       <TempNav />
-      <hr />
       <Outlet />
     </div>
   )

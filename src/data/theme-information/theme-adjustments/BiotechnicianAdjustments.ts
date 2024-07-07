@@ -5,7 +5,7 @@ import EditLocalStorageValue from "../../EditLocalStorageValue"
 import IsClassSkillPlusOne from "../IsClassSkillPlusOne"
 
 export default function BiotechnicianAdjustments(
-    keyID: KeyIDType
+    keyID: string
 ){
     
     // Intelligence

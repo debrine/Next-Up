@@ -1,3 +1,0 @@
-type KeyIDType = {
-    keyID: 'string'
-}

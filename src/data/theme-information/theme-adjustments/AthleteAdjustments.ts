@@ -5,7 +5,7 @@ import EditLocalStorageValue from "../../EditLocalStorageValue"
 import IsClassSkillPlusOne from "../IsClassSkillPlusOne"
 
 export default function AthleteAdjustments(
-    keyID: KeyIDType,
+    keyID: string,
     option: string | undefined
 ){
     if(option && option != ''){
