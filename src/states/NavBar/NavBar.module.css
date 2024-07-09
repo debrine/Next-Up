@@ -10,3 +10,7 @@
 .navBarItem a:hover{
     color: rgba(59, 4, 47, 0.555);
 }
+
+.createCharacter a{
+    color: rgb(179, 27, 0);
+}

@@ -32,8 +32,9 @@ function FirstLevelOperative() {
     associatedSkills: [''],
     trickAttackSkill: '',
     specializationExploit: {
-        exploitName: '',
-        description: '',
+        abilityName: '',
+        abilityDescription: '',
+        abilitySource: '',
         actionType: [''],
         usesResolve: 0
     },
@@ -55,16 +56,18 @@ function FirstLevelOperative() {
         At first level you gain the following abilities. You must confirm all changes before you can view your Character Sheet
       </div>
       <div className={styles.classAbilityList}>
-        {operativeAbilityList['1'].abilityName.map((a: string, i: number)=>{
-          return(
-            <div className={styles.classAbility} key={`classAbility${i}`}>
-              <h3>{a}</h3>
-              <div className={styles.abilityDescription}>
-                {operativeAbilityList['1'].abilityDescription[i]}
+        {
+          Object.keys(operativeAbilityList['1']).map(i=>{
+            return(
+              <div className={styles.classAbility} key={`classAbility${i}`}>
+                <h3>{i}</h3>
+                <div className={styles.abilityDescription}>
+                  {operativeAbilityList['1'][i].abilityDescription}
+                </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          })
+        }
       </div>
       <div className={styles.specializationSelected}>
         <div className={styles.specializationMessage}>
@@ -89,8 +92,8 @@ function FirstLevelOperative() {
               <li key={'AssociatedSkills'}><span>Associated Skills: </span> {associatedSkills[0]} and {associatedSkills[1]}. {trickAttackSkill}</li>
               <li key={'SpecializationExploit'}>
                 <div>Specialization Exploit: </div>
-                <div className={styles.exploitHead}>{specializationExploit.exploitName}</div>
-                <ul><li>{specializationExploit.description}</li></ul>
+                <div className={styles.exploitHead}>{specializationExploit.abilityName}</div>
+                <ul><li>{specializationExploit.abilityDescription}</li></ul>
               </li>
               <li key={'SpecializationAbility'}><span>{abilityName}: </span>{abilityDescription}</li>
             </ul>

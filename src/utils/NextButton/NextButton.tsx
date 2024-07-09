@@ -32,7 +32,6 @@ function NextButton({
         return(
             <button className={styles.selected} onClick={handleNext}>{message}</button>
         )
-        
     }
 
   return (

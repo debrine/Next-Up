@@ -2,7 +2,7 @@ type SpecializationListTypes = {
     description: string,
     associatedSkills: string[],
     trickAttackSkill: string,
-    specializationExploit: ExploitTypes,
+    specializationExploit: AbilityListTypes,
     abilityName: string,
     abilityDescription: string,
     actionType: string,

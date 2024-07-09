@@ -11,7 +11,7 @@ const Dashboard = ()=>{
   return(
     <div className="appParent">
       <div className="navBar"><NavBar /></div>
-      <Outlet />
+      <div className="outletBody"><Outlet /></div>
     </div>
   )
 }

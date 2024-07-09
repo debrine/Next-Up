@@ -7,23 +7,22 @@ import { getValue } from '../../utils/getValue'
 
 function NavBar() {
   
-  const [nameArray, setNameArray] = useState<NameArrayType>(JSON.parse(localStorage.getItem('charactersAvailable')!))
+  const [nameArray, setNameArray] = useState<NameArrayType>(getValue('charactersAvailable'))
   
   useEffect(()=>{
     if(getValue('charactersAvailable') != null){
       setNameArray(getValue('charactersAvailable'))
     }
-  },[])
+  },[]) // Find a way to update the value
 
   
-
   return (
     <nav className={styles.navBarParent}>
       {
         nameArray &&
         <ListOfCharacters nameArray={nameArray} />
       }
-      <div className={styles.navBarItem}>
+      <div className={[styles.navBarItem, styles.createCharacter].join(' ')}>
           <Link to='/Next-Up/create-character'><span className={styles.plusCircle}>+</span> Add Character</Link>
       </div>
     </nav>

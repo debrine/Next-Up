@@ -1,14 +1,16 @@
-import { useContext, useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 // import { useLocalStorage } from "../../../data/useLocalStorage";
 import { abilityScoreList } from "../../../data/abilityScoreList";
 import { skillList } from "../../../data/skillList";
 import { classList } from "../../../data/class-information/classList";
-import NextButton from "../../../utils/NextButton/NextButton";
-import { CharacterCreationContext } from "../../../states/CreateCharacter/CreateCharacter";
+// import NextButton from "../../../utils/NextButton/NextButton";
+// import { CharacterCreationContext } from "../../../states/CreateCharacter/CreateCharacter";
 import { raceList } from "../../../data/race-information/raceList";
 import { themeList } from "../../../data/theme-information/themeList";
 import { getValue } from "../../../utils/getValue";
 import { setValue } from "../../../utils/setValue";
+import { Link } from "react-router-dom";
+import styles from './AddCharacterButton.module.css'
 
 /*
   Things to save:
@@ -68,7 +70,7 @@ import { setValue } from "../../../utils/setValue";
 
 function AddCharacterButton() {
 
-  const { componentArray, componentArrayPosition, setComponentArrayPosition } = useContext(CharacterCreationContext)
+  // const { componentArray, componentArrayPosition, setComponentArrayPosition } = useContext(CharacterCreationContext)
 
   // Get the temp info saved.
   const {
@@ -267,14 +269,17 @@ function AddCharacterButton() {
 
 
   return(
-    <NextButton
-      message='Add Character'
-      arrayToCycle={componentArray}
-      arrayPosition={componentArrayPosition}
-      setArrayPosition={setComponentArrayPosition}
-      condition={true}
-      functionToRun={addCharacterhandler}
-    />
+    // <NextButton
+    //   message='Add Character'
+    //   arrayToCycle={componentArray}
+    //   arrayPosition={componentArrayPosition}
+    //   setArrayPosition={setComponentArrayPosition}
+    //   condition={true}
+    //   functionToRun={addCharacterhandler}
+    // />
+    <div className={styles.navBarItem}>
+      <Link onClick={addCharacterhandler} to={`/Next-Up/charactersheet/${keyID}`}>Add Character</Link>
+    </div>
   )
 }
 
