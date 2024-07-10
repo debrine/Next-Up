@@ -19,7 +19,7 @@ export const operativeAbilityList: {[key:string]:{
             usesResolve: 0
         },
         'TRICK ATTACK [EX]':{
-            abilityName: 'TRICK ATTACK [EX]',
+            abilityName: 'TRICK ATTACK (EX)',
             abilityDescription: 'You can trick or startle a foe and then attack when they drop their guard. As a full action, you can move up to your speed. Whether or not you moved, you can then make an attack with a melee weapon with the operative special property or with any small arm. Just before making your attack, attempt a Bluff, Intimidate, or Stealth check (or a check associated with your specialization; see page 94 of the Core Rulebook) with a DC equal to 20 + your target\'s CR. If you succeed at the check, you deal 1d4 additional damage and the target is flat-footed against your attack. This damage increases to 1d8 at 3rd level, to 3d8 at 5th level, and by an additional 1d8 every 2 levels thereafter. You can\'t use this ability with a weapon that has the unwieldy special property or that requires a full action to make a single attack.',
             abilitySource: 'Operative',
             actionType:['Full Action'],

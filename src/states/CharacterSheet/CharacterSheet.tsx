@@ -6,6 +6,7 @@ import RightSide from '../../components/character-sheet-components/RightSide/Rig
 import { createContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { getValue } from '../../utils/getValue.ts'
+import { levelUpList } from '../../data/levelUpList.ts'
 
 export const KeyIDContext = createContext<{
     keyID: string | undefined,
@@ -32,30 +33,44 @@ function CharacterSheet(){
         theme: string
     } = getValue(`characterBasicInfo${characterID}`)
 
+    const characterLevel = getValue(`Level${characterID}`)
+
+    
+
+    
 
     return(
+        
         <KeyIDContext.Provider value={{keyID:characterID, characterInfoObject:characterInfoObject}}>
-            <div className={styles.characterSheetMainDiv}>
-                <div className={styles.characterInfoDescriptionBlock}>
+            {
+                characterLevel === 0 ?
+                // Confirm all first level selections based on class, which need to be handled uniquely.
+                levelUpList['1'][characterInfoObject.chClass].componentForClass(characterInfoObject.id) :
 
-                    <div className={styles.characterInfoBlock}>
-                        <CharacterInfo />
+                // Once character has confirmed choices, move on to sheet.
+                <div className={styles.characterSheetMainDiv}>
+                    <div className={styles.characterInfoDescriptionBlock}>
+
+                        <div className={styles.characterInfoBlock}>
+                            <CharacterInfo />
+                        </div>
+                        
+                        <div className={styles.characterDescriptionBlock}>
+                            <DescriptionBlock />
+                        </div>
                     </div>
-                    
-                    <div className={styles.characterDescriptionBlock}>
-                        <DescriptionBlock />
+                    <div className={styles.statArea}>
+                        <div className={styles.leftSide}>
+                            <LeftSide />
+                        </div>
+
+                        <div className={styles.rightSide}>
+                            <RightSide />
+                        </div>
                     </div>
                 </div>
-                <div className={styles.statArea}>
-                    <div className={styles.leftSide}>
-                        <LeftSide />
-                    </div>
-
-                    <div className={styles.rightSide}>
-                        <RightSide />
-                    </div>
-                </div>
-            </div>
+            }
+            
         </KeyIDContext.Provider>
         
     )

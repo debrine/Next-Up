@@ -4,7 +4,6 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom"
 import CharacterSheet from "./states/CharacterSheet/CharacterSheet.tsx"
 import MockForm from "./states/MockForm.tsx"
 import CreateCharacter from "./states/CreateCharacter/CreateCharacter.tsx"
-import FirstLevelOperative from "./components/character-class-components/operative-components/level-components/FirstLevelOperative.tsx"
 import NavBar from "./states/NavBar/NavBar.tsx"
 
 const Dashboard = ()=>{
@@ -41,10 +40,6 @@ const router = createBrowserRouter([
         path: '/Next-Up/create-character',
         element: <CreateCharacter />
       },
-      {
-        path: '/Next-Up/operative-first',
-        element: <FirstLevelOperative />
-      }
     ]
   }
   

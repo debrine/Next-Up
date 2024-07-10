@@ -4,20 +4,24 @@ import { operativeAbilityList } from '../../../../data/class-information/operati
 import { specializationList } from '../../../../data/class-information/operative/abilities/specializationsList';
 import DropDownList from '../../../DropDownList/DropDownList';
 import styles from './OperativeLevelComponents.module.css'
+import { setValue } from '../../../../utils/setValue';
+// import { KeyIDContext } from '../../../../states/CharacterSheet/CharacterSheet';
+import { Link } from 'react-router-dom';
+import { AddAbility } from '../../../../utils/AddAbility';
+import FirstLevelMessage from '../../FirstLevelMessage/FirstLevelMessage';
 
 
-function FirstLevelOperative() {
-
-  // For testing, we'll be using the first character in the charactersAvailable array.
-  // Typically, it'll be passed down from the AddCharacter.
-
-  // const keyID: string = 'c2a8a524-d808-44ca-994f-6d0dd127f320'
+function FirstLevelOperative(keyID: string) {
+  
+  // const { keyID } = useContext(KeyIDContext) getting undefined, likely due to it being passed through levelUpList.ts. Only ID is needed, so this might stay as a prop.
 
   const specializationArray = Object.keys(specializationList).map((key:string)=>{
     return (key)
   })
 
   const [specialization, setSpecialization] = useState<string>('')
+
+  const [moveOn, setMoveOn] = useState<boolean>(false)
 
   
   const [{
@@ -27,6 +31,8 @@ function FirstLevelOperative() {
     specializationExploit,
     abilityName,
     abilityDescription,
+    actionType,
+    usesResolve
   }, setSpecializationObject] = useState<SpecializationListTypes>({
     description: '',
     associatedSkills: [''],
@@ -40,15 +46,47 @@ function FirstLevelOperative() {
     },
     abilityName: '',
     abilityDescription: '',
-    actionType: '',
+    actionType: [''],
     usesResolve: 0
   })
 
   useEffect(()=>{
     if(specializationList[specialization]){
       setSpecializationObject(specializationList[specialization])
+      setMoveOn(true)
     }
   },[specialization])
+
+  function confirmFirstLevelChanges(){
+    // Set the default abilities given by Operative
+    Object.keys(operativeAbilityList['1']).forEach(i=>{
+      AddAbility(keyID, operativeAbilityList['1'][i])
+    })
+    
+    // Add the specialization as an object to the ability list.
+    let specializationAsAbility: AbilityListTypes = {
+      abilityName: `Specialization: ${specialization}`.toUpperCase(),
+      abilityDescription: `Associated Skills: ${associatedSkills[0]} and ${associatedSkills[1]}. ${trickAttackSkill}`,
+      abilitySource: 'Operative (Specialization)',
+      actionType: ['None'],
+      usesResolve: 0
+    }
+    AddAbility(keyID, specializationAsAbility)
+
+    // Set the specialization selected to the list so we can reference it again later when needed.
+    setValue(`OperativeSpecialization${keyID}`, {
+      description,
+      associatedSkills,
+      trickAttackSkill,
+      specializationExploit,
+      abilityName,
+      abilityDescription,
+      actionType,
+      usesResolve
+    })
+    // Set the level to 1 so it's no longer locked in the level 1 selection screen.
+    setValue(`Level${keyID}`, 1)
+  }
 
   return (
     <div className={styles.firstParentDiv}>
@@ -100,6 +138,13 @@ function FirstLevelOperative() {
           </div>
         }
       </div>
+      {
+        moveOn &&
+        <div className={styles.confirmFirstLevelChangesParent}>
+          <FirstLevelMessage />
+          <Link onClick={confirmFirstLevelChanges} to={`/Next-Up/charactersheet/${keyID}`}>Add Character</Link>
+        </div>
+      }
       
     </div>
   )

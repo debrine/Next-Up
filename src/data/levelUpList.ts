@@ -2,10 +2,10 @@ import FirstLevelOperative from "../components/character-class-components/operat
 
 
 
-export let levelUpList: {[key:string]: {[key:string]: {componentForClass: () => JSX.Element}}} = {
+export let levelUpList: {[key:string]: {[key:string]: {componentForClass: (key:string)=>JSX.Element}}} = {
     '1':{
         'Operative':{
-            componentForClass: FirstLevelOperative
+            componentForClass: (key)=>FirstLevelOperative(key)
         }
     }
 }

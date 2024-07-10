@@ -4,13 +4,14 @@ import SheetLabel from '../labels/SheetLabel.tsx'
 import { useForm } from 'react-hook-form'
 import { useContext } from 'react';
 import { KeyIDContext } from '../../../states/CharacterSheet/CharacterSheet.tsx';
+import { getValue } from '../../../utils/getValue.ts';
 
 function CharacterInfo(){
     const {
         register
     } = useForm();
 
-    const { characterInfoObject} = useContext(KeyIDContext)
+    const { keyID, characterInfoObject } = useContext(KeyIDContext)
     
 
     return(
@@ -38,7 +39,7 @@ function CharacterInfo(){
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
-                        value={characterInfoObject.chClass}
+                        value={`${characterInfoObject.chClass} ${getValue(`Level${keyID}`)}`}
                     />
                     <div>CLASS/LEVEL</div>
                 </div>

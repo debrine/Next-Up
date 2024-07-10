@@ -1,15 +1,4 @@
-export let skillList: {[key: string]:{
-    skillName: string,
-    isClassSkill: boolean,
-    trainingRequired: boolean,
-    value: number,
-    insightBonusToValue: number,
-    skillFocus: boolean,
-    racialBonusToValue: number,
-    ranks: number,
-    insightBonusToRank: number,
-    operativeEdgeSkill: boolean,
-}}= ({
+export let skillList: {[key: string]:SkillListType}= ({
     'Acrobatics':{
         skillName: 'Acrobatics',
         isClassSkill: false,
@@ -20,7 +9,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Athletics':{
         skillName: 'Athletics',
@@ -32,7 +21,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Bluff':{
         skillName: 'Bluff',
@@ -44,7 +33,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Computers':{
         skillName: 'Computers',
@@ -56,7 +45,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Culture':{
         skillName: 'Culture',
@@ -68,7 +57,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Diplomacy':{
         skillName: 'Diplomacy',
@@ -80,7 +69,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Disguise':{
         skillName: 'Disguise',
@@ -92,7 +81,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Engineering':{
         skillName: 'Engineering',
@@ -104,7 +93,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Intimidate':{
         skillName: 'Intimidate',
@@ -116,7 +105,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Life Science':{
         skillName: 'Life Science',
@@ -128,7 +117,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Medicine':{
         skillName: 'Medicine',
@@ -140,7 +129,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Mysticism':{
         skillName: 'Mysticism',
@@ -152,7 +141,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Perception':{
         skillName: 'Perception',
@@ -164,7 +153,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Physical Science':{
         skillName: 'Physical Science',
@@ -176,7 +165,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Piloting':{
         skillName: 'Piloting',
@@ -188,7 +177,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Profession':{
         skillName: 'Profession',
@@ -200,7 +189,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Sense Motive':{
         skillName: 'Sense Motive',
@@ -212,7 +201,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Sleight of Hand':{
         skillName: 'Sleight of Hand',
@@ -224,7 +213,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Stealth':{
         skillName: 'Stealth',
@@ -236,7 +225,7 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
     'Survival':{
         skillName: 'Survival',
@@ -248,6 +237,6 @@ export let skillList: {[key: string]:{
         racialBonusToValue: 0,
         ranks: 0,
         insightBonusToRank: 0,
-        operativeEdgeSkill: false,
+        operativeSpecializationSkill: false,
     },
 })

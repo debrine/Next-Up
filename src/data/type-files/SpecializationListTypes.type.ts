@@ -5,6 +5,6 @@ type SpecializationListTypes = {
     specializationExploit: AbilityListTypes,
     abilityName: string,
     abilityDescription: string,
-    actionType: string,
+    actionType: string[],
     usesResolve: number
 }

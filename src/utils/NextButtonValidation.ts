@@ -39,7 +39,7 @@ export default function NextButtonValidation({
             setMoveOn(true)
         }
     } else {
-        // If the race has been selected and has no options, allow next button functionality.
+        // If the optionType has been selected and has no options, allow next button functionality.
         setMoveOn(true);
     }
 }

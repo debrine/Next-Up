@@ -38,7 +38,9 @@ import styles from './AddCharacterButton.module.css'
   `Health and resolve will not need to be stored.
   `Saving Throws will not need to be stored.
   `Attack Bonuses will not need to be saved.
-  `Proficiencies will not need to be saved.
+  `Proficiencies will need to be saved. They will be saved as a string created from the list.
+    Weapon
+    Armor
 
   `Weapons will need to be saved as an array of weapon objects.
     Empty on creation.
@@ -178,14 +180,13 @@ function AddCharacterButton() {
     setValue(`SkillNotes${keyID}`, '')
     // Set Class Skills
     classList[chClass].classDefaults.classSkills.forEach(s=>{
-
-      // const [classSkill, setClassSkill] = useLocalStorage<{}>(`${s}${keyID}`)
+      // Get the object into a temp state.
       let classSkill:any = getValue(`${s}${keyID}`)
 
       if(classSkill != undefined){
+        // Change the isClassSkill value to true, and set it again.
         let tempSkill = Object.assign(classSkill)
         tempSkill.isClassSkill = true
-        // setClassSkill(tempSkill)
         setValue(`${s}${keyID}`, tempSkill)
       }
 
@@ -193,6 +194,12 @@ function AddCharacterButton() {
 
 
 
+
+    /*
+      Weapon and Armor proficiencies
+    */
+    setValue(`WeaponProficiencies${keyID}`, `${classList[chClass].classDefaults.weaponProficiencies.join(', ')}`)
+    setValue(`ArmorProficiencies${keyID}`, `${classList[chClass].classDefaults.armorProficiencies.join(', ')}`)
 
     /*
       Weapons, Armor, Abilities, Other Wealth, Languages
