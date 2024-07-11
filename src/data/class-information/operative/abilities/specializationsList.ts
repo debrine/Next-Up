@@ -1,4 +1,4 @@
-import { exploitList } from "./exploitsList"
+import { exploitList } from "./exploitsList.ts"
 
 export const specializationList: {[key:string]:SpecializationListTypes}= {
     'Bandit':{

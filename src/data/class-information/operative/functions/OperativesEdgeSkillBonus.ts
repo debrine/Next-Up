@@ -1,6 +1,6 @@
-import { getValue } from "../../../../utils/getValue";
-import { setValue } from "../../../../utils/setValue";
-import { skillList } from "../../../skillList";
+import { getValue } from "../../../../utils/getValue.ts";
+import { setValue } from "../../../../utils/setValue.ts";
+import { skillList } from "../../../skillList.ts";
 
 export function OperativesEdgeSkillBonus(keyID: string, bonus: number){
     Object.keys(skillList).forEach(i=>{

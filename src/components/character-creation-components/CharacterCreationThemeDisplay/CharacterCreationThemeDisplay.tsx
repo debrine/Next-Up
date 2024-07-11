@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import styles from './CharacterCreationThemeDisplay.module.css'
-import { themeList } from '../../../data/theme-information/themeList';
-import DropDownList from '../../DropDownList/DropDownList';
-import { CharacterCreationContext } from '../../../states/CreateCharacter/CreateCharacter';
-import BackButton from '../../../utils/BackButton/BackButton';
-import NextButtonValidation from '../../../utils/NextButtonValidation';
-import NextButton from '../../../utils/NextButton/NextButton';
-import ShowOptions from '../../../utils/character-creation-functions/ShowOptions/ShowOptions';
+import { themeList } from '../../../data/theme-information/themeList.ts';
+import DropDownList from '../../DropDownList/DropDownList.tsx';
+import { CharacterCreationContext } from '../../../states/CreateCharacter/CreateCharacter.tsx';
+import BackButton from '../../../utils/BackButton/BackButton.tsx';
+import NextButtonValidation from '../../../utils/NextButtonValidation.tsx';
+import NextButton from '../../../utils/NextButton/NextButton.tsx';
+import ShowOptions from '../../../utils/character-creation-functions/ShowOptions/ShowOptions.tsx';
 
 
 function CharacterCreationThemeDisplay() {

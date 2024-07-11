@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react'
-import BackButton from '../../../utils/BackButton/BackButton'
+import BackButton from '../../../utils/BackButton/BackButton.tsx'
 import styles from './ConfirmCreateCharacter.module.css'
-import { CharacterCreationContext } from '../../../states/CreateCharacter/CreateCharacter'
-import AddCharacterButton from '../AddCharacterButton/AddCharacterButton'
-import { getValue } from '../../../utils/getValue'
+import { CharacterCreationContext } from '../../../states/CreateCharacter/CreateCharacter.tsx'
+import AddCharacterButton from '../AddCharacterButton/AddCharacterButton.tsx'
+import { getValue } from '../../../utils/getValue.ts'
 
 function ConfirmCreateCharacter() {
 

@@ -1,14 +1,14 @@
 
 import { useEffect, useState } from 'react';
-import { operativeAbilityList } from '../../../../data/class-information/operative/abilities/operativeAbilityList';
-import { specializationList } from '../../../../data/class-information/operative/abilities/specializationsList';
-import DropDownList from '../../../DropDownList/DropDownList';
+import { operativeAbilityList } from '../../../../data/class-information/operative/abilities/operativeAbilityList.ts';
+import { specializationList } from '../../../../data/class-information/operative/abilities/specializationsList.ts';
+import DropDownList from '../../../DropDownList/DropDownList.tsx';
 import styles from './OperativeLevelComponents.module.css'
-import { setValue } from '../../../../utils/setValue';
-// import { KeyIDContext } from '../../../../states/CharacterSheet/CharacterSheet';
+import { setValue } from '../../../../utils/setValue.ts';
+// import { KeyIDContext } from '../../../../states/CharacterSheet/CharacterSheet.tsx';
 import { Link } from 'react-router-dom';
-import { AddAbility } from '../../../../utils/AddAbility';
-import FirstLevelMessage from '../../FirstLevelMessage/FirstLevelMessage';
+import { AddAbility } from '../../../../utils/AddAbility.ts';
+import FirstLevelMessage from '../../FirstLevelMessage/FirstLevelMessage.tsx';
 
 
 function FirstLevelOperative(keyID: string) {

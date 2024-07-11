@@ -1,7 +1,7 @@
 import styles from './CreateCharacterOptions.module.css'
-import CharacterCreationRaceDisplay from '../CharacterCreationRaceDisplay/CharacterCreationRaceDisplay'
-import CharacterCreationThemeDisplay from '../CharacterCreationThemeDisplay/CharacterCreationThemeDisplay'
-import CharacterCreationClassDisplay from '../CharacterCreationClassDisplay/CharacterCreationClassDisplay'
+import CharacterCreationRaceDisplay from '../CharacterCreationRaceDisplay/CharacterCreationRaceDisplay.tsx'
+import CharacterCreationThemeDisplay from '../CharacterCreationThemeDisplay/CharacterCreationThemeDisplay.tsx'
+import CharacterCreationClassDisplay from '../CharacterCreationClassDisplay/CharacterCreationClassDisplay.tsx'
 
 type createCharacterOptionsProps = {
     optionType: string

@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import styles from './ScoreModifierInput.module.css'
 import { useForm } from 'react-hook-form'
-import { getValue } from '../../../../utils/getValue';
+import { getValue } from '../../../../utils/getValue.ts';
 
 type ScoreModifierInputProps = {
     heading: string,

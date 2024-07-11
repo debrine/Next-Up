@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react"
-import { classList } from "../../../data/class-information/classList"
-import BackButton from "../../../utils/BackButton/BackButton"
-import NextButton from "../../../utils/NextButton/NextButton"
+import { classList } from "../../../data/class-information/classList.ts"
+import BackButton from "../../../utils/BackButton/BackButton.tsx"
+import NextButton from "../../../utils/NextButton/NextButton.tsx"
 import styles from './CharacterCreationClassDisplay.module.css'
-import { CharacterCreationContext } from "../../../states/CreateCharacter/CreateCharacter"
-import DropDownList from "../../DropDownList/DropDownList"
+import { CharacterCreationContext } from "../../../states/CreateCharacter/CreateCharacter.tsx"
+import DropDownList from "../../DropDownList/DropDownList.tsx"
 
 
 function CharacterCreationClassDisplay() {

@@ -1,14 +1,14 @@
 import { useEffect, useRef } from "react"
 // import { useLocalStorage } from "../../../data/useLocalStorage";
-import { abilityScoreList } from "../../../data/abilityScoreList";
-import { skillList } from "../../../data/skillList";
-import { classList } from "../../../data/class-information/classList";
-// import NextButton from "../../../utils/NextButton/NextButton";
-// import { CharacterCreationContext } from "../../../states/CreateCharacter/CreateCharacter";
-import { raceList } from "../../../data/race-information/raceList";
-import { themeList } from "../../../data/theme-information/themeList";
-import { getValue } from "../../../utils/getValue";
-import { setValue } from "../../../utils/setValue";
+import { abilityScoreList } from "../../../data/abilityScoreList.ts";
+import { skillList } from "../../../data/skillList.ts";
+import { classList } from "../../../data/class-information/classList.ts";
+// import NextButton from "../../../utils/NextButton/NextButton.tsx";
+// import { CharacterCreationContext } from "../../../states/CreateCharacter/CreateCharacter.tsx";
+import { raceList } from "../../../data/race-information/raceList.ts";
+import { themeList } from "../../../data/theme-information/themeList.ts";
+import { getValue } from "../../../utils/getValue.ts";
+import { setValue } from "../../../utils/setValue.ts";
 import { Link } from "react-router-dom";
 import styles from './AddCharacterButton.module.css'
 

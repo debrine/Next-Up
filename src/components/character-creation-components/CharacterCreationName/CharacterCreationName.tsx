@@ -1,7 +1,7 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react"
-import BackButton from "../../../utils/BackButton/BackButton"
-import NextButton from "../../../utils/NextButton/NextButton"
-import { CharacterCreationContext } from "../../../states/CreateCharacter/CreateCharacter"
+import BackButton from "../../../utils/BackButton/BackButton.tsx"
+import NextButton from "../../../utils/NextButton/NextButton.tsx"
+import { CharacterCreationContext } from "../../../states/CreateCharacter/CreateCharacter.tsx"
 
 type CharacterCreationNameProps = {
     setInputName: React.Dispatch<React.SetStateAction<string>>,

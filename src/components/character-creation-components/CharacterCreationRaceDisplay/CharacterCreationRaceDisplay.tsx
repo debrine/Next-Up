@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from 'react'
-import { raceList } from '../../../data/race-information/raceList'
+import { raceList } from '../../../data/race-information/raceList.ts'
 import styles from './CharacterCreationRaceDisplay.module.css'
-import DropDownList from '../../DropDownList/DropDownList'
-import { CharacterCreationContext } from '../../../states/CreateCharacter/CreateCharacter'
-import BackButton from '../../../utils/BackButton/BackButton'
-import NextButton from '../../../utils/NextButton/NextButton'
-import NextButtonValidation from '../../../utils/NextButtonValidation'
-import ShowOptions from '../../../utils/character-creation-functions/ShowOptions/ShowOptions'
+import DropDownList from '../../DropDownList/DropDownList.tsx'
+import { CharacterCreationContext } from '../../../states/CreateCharacter/CreateCharacter.tsx'
+import BackButton from '../../../utils/BackButton/BackButton.tsx'
+import NextButton from '../../../utils/NextButton/NextButton.tsx'
+import NextButtonValidation from '../../../utils/NextButtonValidation.tsx'
+import ShowOptions from '../../../utils/character-creation-functions/ShowOptions/ShowOptions.tsx'
 
 
 function CharacterCreationRaceDisplay() {

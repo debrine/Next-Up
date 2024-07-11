@@ -1,4 +1,4 @@
-import DropDownList from '../../../components/DropDownList/DropDownList'
+import DropDownList from '../../../components/DropDownList/DropDownList.tsx'
 import styles from './ShowOptions.module.css'
 
 type ShowOptionsTypes ={
