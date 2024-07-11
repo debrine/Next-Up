@@ -5,7 +5,6 @@ import { specializationList } from '../../../../data/class-information/operative
 import DropDownList from '../../../DropDownList/DropDownList.tsx';
 import styles from './OperativeLevelComponents.module.css'
 import { setValue } from '../../../../utils/setValue.ts';
-// import { KeyIDContext } from '../../../../states/CharacterSheet/CharacterSheet.tsx';
 import { Link } from 'react-router-dom';
 import { AddAbility } from '../../../../utils/AddAbility.ts';
 import FirstLevelMessage from '../../FirstLevelMessage/FirstLevelMessage.tsx';
@@ -13,7 +12,6 @@ import FirstLevelMessage from '../../FirstLevelMessage/FirstLevelMessage.tsx';
 
 function FirstLevelOperative(keyID: string) {
   
-  // const { keyID } = useContext(KeyIDContext) getting undefined, likely due to it being passed through levelUpList.ts. Only ID is needed, so this might stay as a prop.
 
   const specializationArray = Object.keys(specializationList).map((key:string)=>{
     return (key)
