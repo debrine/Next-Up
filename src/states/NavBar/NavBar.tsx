@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import styles from './NavBar.module.css'
 import { useEffect, useState } from 'react'
-import { getValue } from '../../utils/getValue'
+import { getValue } from '../../utils/getValue.ts'
 
 
 

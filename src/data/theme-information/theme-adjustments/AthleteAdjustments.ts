@@ -8,16 +8,16 @@ export default function AthleteAdjustments(
     keyID: string,
     option: string | undefined
 ){
-    if(option && option != ''){
-        // Choice of Actobatics or Athletics
-        if(
-            option ==='Athletics' ||
-            option === 'Acrobatics'
-        ){
-            setIsClassSkillOrPlusOne(keyID, option)
-        } else {
-            // Str, Dex, or Con
-            EditTempCharacterInfoValue(true, 1, option)
-        }
+    if( !option || option ==='' ){
+        return
+    }
+    if(
+        option ==='Athletics' ||
+        option === 'Acrobatics'
+    ){
+        setIsClassSkillOrPlusOne(keyID, option)
+    } else {
+        // Str, Dex, or Con
+        EditTempCharacterInfoValue(true, 1, option)
     }
 }
