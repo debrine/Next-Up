@@ -1,4 +1,4 @@
-import EditLocalStorageValue from "../../../EditLocalStorageValue";
+import EditTempCharacterInfoValue from "../../../EditTempCharacterInfoValue.ts";
 
 export default function humanAdjustments(
     option?: string,
@@ -8,7 +8,7 @@ export default function humanAdjustments(
         option != undefined &&
         option != ''
     ){
-        EditLocalStorageValue(true, 2, option)
+        EditTempCharacterInfoValue(true, 2, option)
     }
 
     // Humans also get an extra feat at 1st level, and bonus skill rank per level.

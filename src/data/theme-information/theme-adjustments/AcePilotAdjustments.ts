@@ -1,16 +1,16 @@
 // Skill - Piloting
 // Ability Score - Dex
 
-import EditLocalStorageValue from "../../EditLocalStorageValue"
-import IsClassSkillPlusOne from "../IsClassSkillPlusOne"
+import EditTempCharacterInfoValue from "../../EditTempCharacterInfoValue.ts"
+import setIsClassSkillOrPlusOne from "../setIsClassSkillOrPlusOne.ts"
 
 export default function AcePilotAdjustments(
     keyID: string
 ){
     
     // Dexterity
-    EditLocalStorageValue(true, 1, 'Dexterity')
+    EditTempCharacterInfoValue(true, 1, 'Dexterity')
 
     // Piloting
-    IsClassSkillPlusOne(keyID, 'Piloting')
+    setIsClassSkillOrPlusOne(keyID, 'Piloting')
 }

@@ -4,7 +4,7 @@ import BattleMedicAdjustments from "./theme-adjustments/BattleMedicAdjustments.t
 import BeastbloodAdjustments from "./theme-adjustments/BeastbloodAdjustments.ts"
 import BiotechnicianAdjustments from "./theme-adjustments/BiotechnicianAdjustments.ts"
 
-export let themeList: {[key:string]: ThemeListTypes} = {
+export const themeList: {[key:string]: ThemeListTypes} = {
     'Ace Pilot':{
         themeName: 'Ace Pilot',
         themeScoreModifiers: '+1 Dex',

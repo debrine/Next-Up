@@ -181,7 +181,7 @@ function AddCharacterButton() {
     // Set Class Skills
     classList[chClass].classDefaults.classSkills.forEach(s=>{
       // Get the object into a temp state.
-      let classSkill:any = getValue(`${s}${keyID}`)
+      const classSkill = getValue(`${s}${keyID}`)
 
       if(classSkill != undefined){
         // Change the isClassSkill value to true, and set it again.

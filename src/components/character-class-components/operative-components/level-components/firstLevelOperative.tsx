@@ -31,8 +31,6 @@ function FirstLevelOperative(keyID: string) {
     specializationExploit,
     abilityName,
     abilityDescription,
-    actionType,
-    usesResolve
   }, setSpecializationObject] = useState<SpecializationListTypes>({
     description: '',
     associatedSkills: [''],
@@ -64,7 +62,7 @@ function FirstLevelOperative(keyID: string) {
     })
     
     // Add the specialization as an object to the ability list.
-    let specializationAsAbility: AbilityListTypes = {
+    const specializationAsAbility: AbilityListTypes = {
       abilityName: `Specialization: ${specialization}`.toUpperCase(),
       abilityDescription: `Associated Skills: ${associatedSkills[0]} and ${associatedSkills[1]}. ${trickAttackSkill}`,
       abilitySource: 'Operative (Specialization)',
@@ -75,14 +73,7 @@ function FirstLevelOperative(keyID: string) {
 
     // Set the specialization selected to the list so we can reference it again later when needed.
     setValue(`OperativeSpecialization${keyID}`, {
-      description,
-      associatedSkills,
-      trickAttackSkill,
-      specializationExploit,
-      abilityName,
-      abilityDescription,
-      actionType,
-      usesResolve
+      specialization
     })
     // Set the level to 1 so it's no longer locked in the level 1 selection screen.
     setValue(`Level${keyID}`, 1)
@@ -95,12 +86,12 @@ function FirstLevelOperative(keyID: string) {
       </div>
       <div className={styles.classAbilityList}>
         {
-          Object.keys(operativeAbilityList['1']).map(i=>{
+          Object.keys(operativeAbilityList['1']).map(ability=>{
             return(
-              <div className={styles.classAbility} key={`classAbility${i}`}>
-                <h3>{i}</h3>
+              <div className={styles.classAbility} key={`classAbility${ability}`}>
+                <h3>{ability}</h3>
                 <div className={styles.abilityDescription}>
-                  {operativeAbilityList['1'][i].abilityDescription}
+                  {operativeAbilityList['1'][ability].abilityDescription}
                 </div>
               </div>
             )

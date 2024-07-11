@@ -19,7 +19,7 @@ function CharacterCreationClassDisplay() {
     setKeyAbilityScoreSelected 
   } = useContext(CharacterCreationContext)
 
-  let classArray: string[] = Object.keys(classList).map((key:string)=>{
+  const classArray: string[] = Object.keys(classList).map((key:string)=>{
     return(key)
   })
 

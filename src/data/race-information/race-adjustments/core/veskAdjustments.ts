@@ -1,14 +1,14 @@
-import EditLocalStorageValue from "../../../EditLocalStorageValue";
+import EditTempCharacterInfoValue from "../../../EditTempCharacterInfoValue.ts";
 
 
 export default function veskAdjustments(){
     
     // Strength
-    EditLocalStorageValue(true, 2, 'Strength')
+    EditTempCharacterInfoValue(true, 2, 'Strength')
     
     // Constitution
-    EditLocalStorageValue(true, 2, 'Constitution')
+    EditTempCharacterInfoValue(true, 2, 'Constitution')
     
     // Intelligence
-    EditLocalStorageValue(false, 2, 'Intelligence')
+    EditTempCharacterInfoValue(false, 2, 'Intelligence')
 }

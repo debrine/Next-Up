@@ -140,7 +140,7 @@ function CreateCharacter() {
     })
   }
 
-  let componentArray: JSX.Element[] = [
+  const componentArray: JSX.Element[] = [
     <CharacterCreationName setInputName={setInputName} inputName={inputName}/>,
     <CreateCharacterOptions 
       optionType='Race'

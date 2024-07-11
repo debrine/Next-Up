@@ -15,8 +15,8 @@ function ScoreModifierInput({
         register
     } = useForm();
     
-    let {characterID} = useParams()
-    let strengthObject:{
+    const {characterID} = useParams()
+    const strengthObject:{
         aSName: string
         asBonus: number
         asPenalty: number

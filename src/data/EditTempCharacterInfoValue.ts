@@ -1,7 +1,7 @@
-import { getValue } from "../utils/getValue"
-import { setValue } from "../utils/setValue"
+import { getValue } from "../utils/getValue.ts"
+import { setValue } from "../utils/setValue.ts"
 
-export default function EditLocalStorageValue(
+export default function EditTempCharacterInfoValue(
     isPositive: boolean,
     numberValue: number,
     parameterToEdit: string,
@@ -9,7 +9,7 @@ export default function EditLocalStorageValue(
 
     // Used to edit a value set in local storage.
 
-    let tempCharInfo = getValue('tempCharacterInfo')
+    const tempCharInfo = getValue('tempCharacterInfo')
 
     let valueToAdjust =  getValue(`${parameterToEdit}${tempCharInfo.keyID}`)
 

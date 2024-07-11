@@ -1,4 +1,4 @@
-import EditLocalStorageValue from "../../../EditLocalStorageValue"
+import EditTempCharacterInfoValue from "../../../EditTempCharacterInfoValue.ts"
 
 export default function androidAdjustments(
 ){
@@ -7,14 +7,14 @@ export default function androidAdjustments(
     // -2 to Charisma
 
     // Dexterity
-    EditLocalStorageValue(true, 2, 'Dexterity')
+    EditTempCharacterInfoValue(true, 2, 'Dexterity')
 
     // Intelligence
-    EditLocalStorageValue(true, 2, 'Intelligence')
+    EditTempCharacterInfoValue(true, 2, 'Intelligence')
 
     // Charisma
-    EditLocalStorageValue(false, 2, 'Charisma')
+    EditTempCharacterInfoValue(false, 2, 'Charisma')
 
     // -2 penalty to sense motive checks due to Flat Affect 
-    EditLocalStorageValue(false, 2, 'Sense Motive')
+    EditTempCharacterInfoValue(false, 2, 'Sense Motive')
 }

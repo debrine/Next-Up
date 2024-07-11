@@ -1,8 +1,8 @@
 // Skill - Choice of Actobatics or Athletes
 // Ability Score - Str, Dex, or Con
 
-import EditLocalStorageValue from "../../EditLocalStorageValue"
-import IsClassSkillPlusOne from "../IsClassSkillPlusOne"
+import EditTempCharacterInfoValue from "../../EditTempCharacterInfoValue.ts"
+import setIsClassSkillOrPlusOne from "../setIsClassSkillOrPlusOne.ts"
 
 export default function AthleteAdjustments(
     keyID: string,
@@ -14,10 +14,10 @@ export default function AthleteAdjustments(
             option ==='Athletics' ||
             option === 'Acrobatics'
         ){
-            IsClassSkillPlusOne(keyID, option)
+            setIsClassSkillOrPlusOne(keyID, option)
         } else {
             // Str, Dex, or Con
-            EditLocalStorageValue(true, 1, option)
+            EditTempCharacterInfoValue(true, 1, option)
         }
     }
 }

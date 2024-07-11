@@ -1,16 +1,16 @@
 // Skill - Medicine
 // Ability Score - Intelligence
 
-import EditLocalStorageValue from "../../EditLocalStorageValue"
-import IsClassSkillPlusOne from "../IsClassSkillPlusOne"
+import EditTempCharacterInfoValue from "../../EditTempCharacterInfoValue.ts"
+import setIsClassSkillOrPlusOne from "../setIsClassSkillOrPlusOne.ts"
 
 export default function BiotechnicianAdjustments(
     keyID: string
 ){
     
     // Intelligence
-    EditLocalStorageValue(true, 1, 'Intelligence')
+    EditTempCharacterInfoValue(true, 1, 'Intelligence')
 
     // Medicine
-    IsClassSkillPlusOne(keyID, 'Medicine')
+    setIsClassSkillOrPlusOne(keyID, 'Medicine')
 }

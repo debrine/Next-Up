@@ -1,23 +1,23 @@
-import EditLocalStorageValue from "../../../EditLocalStorageValue";
+import EditTempCharacterInfoValue from "../../../EditTempCharacterInfoValue.ts";
 
 export default function shirrenAdjustments(){
     
     // Constitution
-    EditLocalStorageValue(true, 2, 'Constitution')
+    EditTempCharacterInfoValue(true, 2, 'Constitution')
     
     // Wisdom
-    EditLocalStorageValue(true, 2, 'Wisdom')
+    EditTempCharacterInfoValue(true, 2, 'Wisdom')
     
     // Charisma
-    EditLocalStorageValue(false, 2, 'Charisma')
+    EditTempCharacterInfoValue(false, 2, 'Charisma')
 
     // +2 to Culture and Diplomacy
     
     // Culture
-    EditLocalStorageValue(true, 2, 'Culture')
+    EditTempCharacterInfoValue(true, 2, 'Culture')
     
     // Diplomacy
-    EditLocalStorageValue(true, 2, 'Diplomacy')
+    EditTempCharacterInfoValue(true, 2, 'Diplomacy')
 
     
 }

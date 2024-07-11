@@ -1,8 +1,8 @@
-import FirstLevelOperative from "../components/character-class-components/operative-components/level-components/FirstLevelOperative";
+import FirstLevelOperative from "../components/character-class-components/operative-components/level-components/FirstLevelOperative.tsx";
 
 
 
-export let levelUpList: {[key:string]: {[key:string]: {componentForClass: (key:string)=>JSX.Element}}} = {
+export const levelUpList: {[key:string]: {[key:string]: {componentForClass: (key:string)=>JSX.Element}}} = {
     '1':{
         'Operative':{
             componentForClass: (key)=>FirstLevelOperative(key)

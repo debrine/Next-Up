@@ -8,11 +8,11 @@ import veskAdjustments from "./race-adjustments/core/veskAdjustments.ts"
 import ysokiAdjustments from "./race-adjustments/core/ysokiAdjustments.ts"
 
 // When an option for any skill is needed.
-let skillNames: string[] = Object.keys(skillList).map((key: string)=>{
+const skillNames: string[] = Object.keys(skillList).map((key: string)=>{
     return(key)
 });
 
-export let raceList: {[key:string]: RaceListTypes} = {
+export const raceList: {[key:string]: RaceListTypes} = {
     'Android':{
         raceSource: 'Core',
         raceName:'Android',

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import CreateInitiativeCard from "../../components/combat-components/CreateInitiativeCard/CreateInitiativeCard"
+import CreateInitiativeCard from "../../components/combat-components/CreateInitiativeCard/CreateInitiativeCard.tsx"
 
 function GroundCombat(){
     const [combatantArray, setCombatantArray] = useState<JSX.Element[]>([<CreateInitiativeCard />])

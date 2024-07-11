@@ -1,4 +1,4 @@
-export let skillList: {[key: string]:SkillListType}= ({
+export const skillList: {[key: string]:SkillListType}= ({
     'Acrobatics':{
         skillName: 'Acrobatics',
         isClassSkill: false,

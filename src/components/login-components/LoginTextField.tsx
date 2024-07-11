@@ -10,7 +10,7 @@ function LoginTextField({
     loginStatus,
 }: LoginTextFieldProps){
 
-    let field = document.getElementById(styles.textAreaDiv + label)
+    const field = document.getElementById(styles.textAreaDiv + label)
     if(loginStatus){
         field?.style.setProperty('opacity', '0')
     } else{

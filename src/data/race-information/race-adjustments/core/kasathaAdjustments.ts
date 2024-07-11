@@ -1,4 +1,4 @@
-import EditLocalStorageValue from "../../../EditLocalStorageValue"
+import EditTempCharacterInfoValue from "../../../EditTempCharacterInfoValue.ts"
 
 export default function kasathaAdjustments(
 ){
@@ -7,22 +7,22 @@ export default function kasathaAdjustments(
     // -2 to Intelligence
 
     // Strength
-    EditLocalStorageValue(true, 2, 'Strength')
+    EditTempCharacterInfoValue(true, 2, 'Strength')
 
     // Wisdom
-    EditLocalStorageValue(true, 2, 'Wisdom')
+    EditTempCharacterInfoValue(true, 2, 'Wisdom')
 
     // Intelligence
-    EditLocalStorageValue(false, 2, 'Intelligence')
+    EditTempCharacterInfoValue(false, 2, 'Intelligence')
 
     // +2 bonus to Acrobatics, Athletics, and Culture
 
     // Acrobatics
-    EditLocalStorageValue(true, 2, 'Acrobatics')
+    EditTempCharacterInfoValue(true, 2, 'Acrobatics')
 
     // Athletics
-    EditLocalStorageValue(true, 2, 'Athletics')
+    EditTempCharacterInfoValue(true, 2, 'Athletics')
 
     // Culture
-    EditLocalStorageValue(true, 2, 'Culture')
+    EditTempCharacterInfoValue(true, 2, 'Culture')
 }

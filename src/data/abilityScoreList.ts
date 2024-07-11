@@ -1,4 +1,4 @@
-export let abilityScoreList: {[key:string]:{
+export const abilityScoreList: {[key:string]:{
     aSName: string,
     value: number,
     asPenalty: number,

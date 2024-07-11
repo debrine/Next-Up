@@ -26,7 +26,7 @@ export default function NextButtonValidation({
 
         // Check each option.
         forEachOption.forEach(i=>{
-            let index: number = forEachOption.indexOf(i);
+            const index: number = forEachOption.indexOf(i);
             // If the option hasn't been selected yet, return false for moveOn and optionCondition.
             if(individualOptions[index].optionValue === ''){
                 setMoveOn(false)

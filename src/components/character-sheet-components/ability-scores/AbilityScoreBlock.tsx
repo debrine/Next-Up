@@ -1,5 +1,5 @@
 
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 import SheetLabel from '../labels/SheetLabel'
 import styles from './AbilityScoreBlock.module.css'
 import AbilityScoreType from './AbilityScoreType/AbilityScoreType.tsx'
@@ -7,7 +7,7 @@ import ScoreModifierInput from './ScoreModifierInput/ScoreModifierInput.tsx'
 
 function AbilityScoreBlock(){
     
-    let {characterID} = useParams()
+    // const {characterID} = useParams()
     
 
     return(

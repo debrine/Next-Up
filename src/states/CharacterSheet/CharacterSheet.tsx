@@ -22,7 +22,7 @@ export const KeyIDContext = createContext<{
 
 function CharacterSheet(){
 
-    let {characterID} = useParams()
+    const {characterID} = useParams()
 
     const characterInfoObject:{
         chClass: string
