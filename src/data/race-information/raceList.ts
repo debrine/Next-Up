@@ -1,4 +1,5 @@
 import { skillList } from "../skillList.ts"
+import drowAdjustments from "./race-adjustments/alien-archive/drowAdjustments.ts"
 import androidAdjustments from "./race-adjustments/core/androidAdjustments.ts"
 import humanAdjustments from "./race-adjustments/core/humanAdjustments.ts"
 import kasathaAdjustments from "./race-adjustments/core/kasathaAdjustments.ts"
@@ -56,7 +57,7 @@ export const raceList: {[key:string]: RaceListTypes} = {
             'Wisdom',
             'Charisma']
         ],
-        raceFunction: (ref) => humanAdjustments(ref)
+        raceFunction: humanAdjustments
     },
     'Kasatha':{
         raceSource: 'Core',
@@ -103,7 +104,7 @@ export const raceList: {[key:string]: RaceListTypes} = {
             skillNames,
             skillNames
         ],
-        raceFunction: (ref) => lashuntaAdjustments(ref)
+        raceFunction: lashuntaAdjustments
     },
     'Shirren':{
         raceSource: 'Core',
@@ -164,5 +165,46 @@ export const raceList: {[key:string]: RaceListTypes} = {
         optionDescription: [],
         optionArray: [[]],
         raceFunction: ysokiAdjustments
-    }
+    },
+    'Drow':{
+        raceSource: 'Alien Archive',
+        raceName: 'Drow',
+        raceScoreModifiers: '+2 Dex, +2 Cha, -2 Con',
+        raceDescription: 'With purple skin and white hair, drow are physically beautiful but merciless. Common drow form the majority of civilian and military forces and are governed by more powerful drow nobles. This strictly matriarchal culture leaves few opportunities for a common male, and training as an enforcer for a noble house or arms dealer is one of only a few ways a drow male can secure a somewhat comfortable life—if not necessarily a long one.',
+        raceSizeAndType: 'Drow are Medium humanoids with the elf subtype.',
+        raceHP: 4,
+        raceSize: "Medium",
+        raceAbilityName: ['Darkvision', 'Drow Immunities', 'Drow Magic', 'Keen Senses', 'Light Blindness'],
+        raceAbilityDescription: [
+            'Drow have darkvision with a range of 60 feet.',
+            'Drow are immune to magical sleep effects and receive a +2 racial bonus to saving throws against enchantment spells and effects.',
+            'Drow gain the following spell-like abilities. The caster level for these effects is equal to the drow\'s level.\nAt will: dancing lights, detect magic\nIn addition, drow count as having the Minor Psychic Power feat for the purpose of meeting prerequisites, and if a drow takes the Psychic Power feat, they can add the drow noble\'s limning light supernatural ability to the list of spell-like abilities available to them.',
+            'Drow receive a +2 racial bonus to their Perception checks.',
+            'A drow exposed to bright light is blinded for 1 round, and dazzled as long as she remains in areas of bright light.'
+        ],
+        hasOptions: false,
+        optionDescription: [],
+        optionArray: [[]],
+        raceFunction: drowAdjustments
+    },
 }
+
+
+
+// '':{
+//     raceSource: '',
+//     raceName: '',
+//     raceScoreModifiers: '',
+//     raceDescription: '',
+//     raceSizeAndType: '',
+//     raceHP: 0,
+//     raceSize: "",
+//     raceAbilityName: [''],
+//     raceAbilityDescription: [
+//         ''
+//     ],
+//     hasOptions: false,
+//     optionDescription: [],
+//     optionArray: [[]],
+//     raceFunction: ()=>{}
+// },

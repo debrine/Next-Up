@@ -1,16 +1,14 @@
 import { useEffect, useRef } from "react"
-// import { useLocalStorage } from "../../../data/useLocalStorage";
 import { abilityScoreList } from "../../../data/abilityScoreList.ts";
 import { skillList } from "../../../data/skillList.ts";
 import { classList } from "../../../data/class-information/classList.ts";
-// import NextButton from "../../../utils/NextButton/NextButton.tsx";
-// import { CharacterCreationContext } from "../../../states/CreateCharacter/CreateCharacter.tsx";
 import { raceList } from "../../../data/race-information/raceList.ts";
 import { themeList } from "../../../data/theme-information/themeList.ts";
 import { getValue } from "../../../utils/getValue.ts";
 import { setValue } from "../../../utils/setValue.ts";
 import { Link } from "react-router-dom";
 import styles from './AddCharacterButton.module.css'
+import { AddAbility } from "../../../utils/AddAbility.ts";
 
 /*
   Things to save:
@@ -72,8 +70,6 @@ import styles from './AddCharacterButton.module.css'
 
 function AddCharacterButton() {
 
-  // const { componentArray, componentArrayPosition, setComponentArrayPosition } = useContext(CharacterCreationContext)
-
   // Get the temp info saved.
   const {
     inputName,
@@ -102,10 +98,7 @@ function AddCharacterButton() {
       nameArray.current = getValue('charactersAvailable')
     }
   }, [])
-  // const [, setCharacterNames] = useLocalStorage('charactersAvailable')
 
-  // Character Basic Info useLocalStorage
-  // const [, setCharacterBasicInfo] = useLocalStorage(`characterBasicInfo${keyID}`)
 
   function addCharacterhandler(){
 
@@ -130,32 +123,29 @@ function AddCharacterButton() {
     /*
       Character Basic Info
     */
-    // Values that will be saved to local storage. These values aren't meant to be changed.
-
+    // Values that will be saved to local storage that aren't meant to be changed.
     setValue(`characterBasicInfo${keyID}`, {
-      inputName,
       id: keyID,
       race,
       chClass,
       keyAbilityScoreSelected,
       theme
     })
+    // Values that will be saved to local storage that can be changed.
+    setValue(`characterBasicInfoDynamic${keyID}`, {
+      characterAlignment: '',
+      characterDiety: '',
+      characterGender: '',
+      characterHomeWorld: '',
+      characterName: inputName,
+      characterSize: raceList[race].raceSize,
+      characterSpeed: 30,
+      playerName: '',
+    })
     // Level
     setValue(`Level${keyID}`, 0)
     // Description
     setValue(`Description${keyID}`, '')
-    // Speed
-    setValue(`Speed${keyID}`, 30)
-    // Gender
-    setValue(`Gender${keyID}`, '')
-    // HomeWorld
-    setValue(`HomeWorld${keyID}`, '')
-    // Alignment
-    setValue(`Alignment${keyID}`, '')
-    // Speed
-    setValue(`Diety${keyID}`, '')
-    // Player
-    setValue(`Player${keyID}`, '')
 
 
 
@@ -202,16 +192,43 @@ function AddCharacterButton() {
     setValue(`ArmorProficiencies${keyID}`, `${classList[chClass].classDefaults.armorProficiencies.join(', ')}`)
 
     /*
-      Weapons, Armor, Abilities, Other Wealth, Languages
+      Weapons, Armor, Other Wealth, Languages
     */
     setValue(`Weapons${keyID}`, [])
     setValue(`Armor${keyID}`, [])
-    setValue(`Abilities${keyID}`, [])
     setValue(`Feats${keyID}`, [])
     setValue(`Equipment${keyID}`, [])
     setValue(`OtherWealth${keyID}`, '')
     setValue(`Languages${keyID}`, '')
     setValue(`XPEarned${keyID}`, '')
+
+
+
+
+    /*
+      Abilities
+    */
+    setValue(`Abilities${keyID}`, [])
+    // Abilities from Class will be added upon confirming 1st level.
+    // Add abilities from Race.
+    raceList[race].raceAbilityName.forEach((ability: String, index: number)=>{
+      AddAbility(keyID, {
+        abilityName: ability.toUpperCase(),
+        abilityDescription: raceList[race].raceAbilityDescription[index],
+        abilitySource: `Race (${race})`,
+        actionType: ['None'],
+        usesResolve: 0
+      })
+    })
+    // Add 1st level ability from Theme.
+    AddAbility(keyID, {
+      abilityName: themeList[theme].themeAbilityTitle[0].toUpperCase(),
+      abilityDescription: themeList[theme].themeAbilityDescription[0],
+      abilitySource: `Theme (${theme})`,
+      actionType: ['None'],
+      usesResolve: 0
+    })
+    
 
 
 
@@ -276,14 +293,6 @@ function AddCharacterButton() {
 
 
   return(
-    // <NextButton
-    //   message='Add Character'
-    //   arrayToCycle={componentArray}
-    //   arrayPosition={componentArrayPosition}
-    //   setArrayPosition={setComponentArrayPosition}
-    //   condition={true}
-    //   functionToRun={addCharacterhandler}
-    // />
     <div className={styles.navBarItem}>
       <Link onClick={addCharacterhandler} to={`/Next-Up/charactersheet/${keyID}`}>Add Character</Link>
     </div>

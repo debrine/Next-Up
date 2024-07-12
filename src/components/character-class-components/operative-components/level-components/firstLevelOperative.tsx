@@ -8,6 +8,7 @@ import { setValue } from '../../../../utils/setValue.ts';
 import { Link } from 'react-router-dom';
 import { AddAbility } from '../../../../utils/AddAbility.ts';
 import FirstLevelMessage from '../../FirstLevelMessage/FirstLevelMessage.tsx';
+import { OperativesEdgeSkillBonus } from '../../../../data/class-information/operative/functions/OperativesEdgeSkillBonus.ts';
 
 
 function FirstLevelOperative(keyID: string) {
@@ -73,6 +74,10 @@ function FirstLevelOperative(keyID: string) {
     setValue(`OperativeSpecialization${keyID}`, {
       specialization
     })
+
+    // Add Operative's Edge bonus of 1.
+    OperativesEdgeSkillBonus(keyID, 1)
+
     // Set the level to 1 so it's no longer locked in the level 1 selection screen.
     setValue(`Level${keyID}`, 1)
   }

@@ -31,6 +31,16 @@ export const specializationList: {[key:string]:SpecializationListTypes}= {
         actionType: ['None'],
         usesResolve: 0
     },
+    'Explorer':{
+        description: 'You\'re an expert in scouting out dangerous locations using your knowledge and survival skills.',
+        associatedSkills: ['Culture', 'Survival'],
+        trickAttackSkill: 'You can attempt a Survival check with a +4 bonus to make a trick attack by using your surroundings to your advantage.',
+        specializationExploit: exploitList['10']['Ever Vigilant (Ex)'],
+        abilityName: 'Into the Unknown (Ex)',
+        abilityDescription: 'At 11th level, you gain a +4 bonus to Culture and Survival checks. While you\'re outside both the Pact Worlds and your home star system (if different), you gain a +2 bonus to initiative checks. At the GM\'s discretion, in games centered around a different star system than the Pact Worlds, replace the Pact Worlds with that star system.',
+        actionType: [''],
+        usesResolve: 0
+    },
 }
 
 // '':{

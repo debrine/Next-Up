@@ -1,18 +1,48 @@
 import styles from './CharacterInfo.module.css'
 import SheetLabel from '../labels/SheetLabel.tsx'
-// import { ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { KeyIDContext } from '../../../states/CharacterSheet/CharacterSheet.tsx';
 import { getValue } from '../../../utils/getValue.ts';
+import { setValue } from '../../../utils/setValue.ts';
 
 function CharacterInfo(){
-    const {
-        register
-    } = useForm();
 
     const { keyID, characterInfoObject } = useContext(KeyIDContext)
+
+    const characterInfoDynamicObject:{
+        characterAlignment: string,
+        characterDiety: string,
+        characterGender: string,
+        characterHomeWorld: string,
+        characterName: string,
+        characterSize: string,
+        characterSpeed: number,
+        playerName: string,
+    } = getValue(`characterBasicInfoDynamic${keyID}`)
+
+    const {
+        register,
+        watch
+    } = useForm({
+        defaultValues: {
+            characterName: characterInfoDynamicObject.characterName,
+            characterSize: characterInfoDynamicObject.characterSize,
+            characterSpeed: characterInfoDynamicObject.characterSpeed,
+            characterGender: characterInfoDynamicObject.characterGender,
+            characterHomeWorld: characterInfoDynamicObject.characterHomeWorld,
+            characterAlignment: characterInfoDynamicObject.characterAlignment,
+            characterDiety: characterInfoDynamicObject.characterDiety,
+            playerName: characterInfoDynamicObject.playerName
+        }
+    });
     
+    useEffect(()=>{
+        const subscription = watch((data) =>
+            setValue(`characterBasicInfoDynamic${keyID}`, data)
+        )
+        return ()=>subscription.unsubscribe()
+    }, [watch])
 
     return(
         <div className={styles.parentDiv}>
@@ -25,7 +55,6 @@ function CharacterInfo(){
                     type="text" 
                     className={styles.characterNameBar}
                     spellCheck={false}
-                    value={characterInfoObject.inputName}
                 />
             </div>
 
@@ -33,37 +62,31 @@ function CharacterInfo(){
 
                 <div className={styles.infoInputDiv}>
                     <input 
-                        {
-                            ...register('classLevel')
-                        }
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
                         value={`${characterInfoObject.chClass} ${getValue(`Level${keyID}`)}`}
+                        readOnly
                     />
                     <div>CLASS/LEVEL</div>
                 </div>
                 <div className={styles.infoInputDiv}>
                     <input 
-                        {
-                            ...register('characterRace')
-                        }
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
                         value={characterInfoObject.race}
+                        readOnly
                     />
                     <div>RACE</div>
                 </div>
                 <div className={styles.infoInputDiv}>
-                    <input 
-                        {
-                            ...register('characterTheme')
-                        }
+                    <input
                         type="text" 
                         className={styles.infoInput}
                         spellCheck={false}
                         value={characterInfoObject.theme}
+                        readOnly
                     />
                     <div>THEME</div>
                 </div>
@@ -90,7 +113,6 @@ function CharacterInfo(){
                         }
                         type="number" 
                         className={styles.infoInput}
-                        defaultValue={30}
                     />
                     <div>SPEED</div>
                 </div>
@@ -108,7 +130,7 @@ function CharacterInfo(){
                 <div className={styles.infoInputDiv}>
                     <input 
                         {
-                            ...register('characterHome')
+                            ...register('characterHomeWorld')
                         }
                         type="text" 
                         className={styles.infoInput}
