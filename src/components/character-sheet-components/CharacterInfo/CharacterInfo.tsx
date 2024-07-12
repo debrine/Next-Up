@@ -2,13 +2,13 @@ import styles from './CharacterInfo.module.css'
 import SheetLabel from '../labels/SheetLabel.tsx'
 import { useForm } from 'react-hook-form'
 import { useContext, useEffect } from 'react';
-import { KeyIDContext } from '../../../states/CharacterSheet/CharacterSheet.tsx';
+import { CharacterSheetContext } from '../../../states/CharacterSheet/CharacterSheet.tsx';
 import { getValue } from '../../../utils/getValue.ts';
 import { setValue } from '../../../utils/setValue.ts';
 
 function CharacterInfo(){
 
-    const { keyID, characterInfoObject } = useContext(KeyIDContext)
+    const { keyID, characterInfoObject } = useContext(CharacterSheetContext)
 
     const characterInfoDynamicObject:{
         characterAlignment: string,

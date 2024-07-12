@@ -3,12 +3,12 @@ import SheetLabel from '../labels/SheetLabel.tsx'
 import { useForm } from 'react-hook-form'
 import { getValue } from '../../../utils/getValue.ts'
 import { useContext, useEffect } from 'react'
-import { KeyIDContext } from '../../../states/CharacterSheet/CharacterSheet.tsx'
+import { CharacterSheetContext } from '../../../states/CharacterSheet/CharacterSheet.tsx'
 import { setValue } from '../../../utils/setValue.ts'
 
 function DescriptionBlock(){
 
-    const{ keyID } = useContext(KeyIDContext)
+    const{ keyID } = useContext(CharacterSheetContext)
 
     const {
         register,
@@ -21,7 +21,6 @@ function DescriptionBlock(){
 
     useEffect(()=>{
         const subscription = watch((data)=>{
-            console.log(data)
             setValue(`Description${keyID}`, data.descriptionBlock)
         })
         return ()=>subscription.unsubscribe()
