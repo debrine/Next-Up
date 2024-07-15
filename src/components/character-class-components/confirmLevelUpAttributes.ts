@@ -1,6 +1,5 @@
 import { setValue } from "../../utils/setValue";
 import { getValue } from "../../utils/getValue";
-import { useParams } from "react-router-dom";
 
 function confirmLevelUpAttributes(keyID: string) {
   console.log(`In Function`);

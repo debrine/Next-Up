@@ -1,20 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { operativeAbilityList } from "../../../../data/class-information/operative/abilities/operativeAbilityList.ts";
 import { specializationList } from "../../../../data/class-information/operative/abilities/specializationsList.ts";
 import DropDownList from "../../../DropDownList/DropDownList.tsx";
 import styles from "./OperativeLevelComponents.module.css";
 import { setValue } from "../../../../utils/setValue.ts";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AddAbility } from "../../../../utils/AddAbility.ts";
-import FirstLevelMessage from "../../FirstLevelMessage/FirstLevelMessage.tsx";
 import { OperativesEdgeSkillBonus } from "../../../../data/class-information/operative/functions/OperativesEdgeSkillBonus.ts";
 import confirmLevelUpAttributes from "../../confirmLevelUpAttributes.ts";
-import { getValue } from "../../../../utils/getValue.ts";
-import { CharacterSheetContext } from "../../../../states/CharacterSheet/CharacterSheet.tsx";
 
 function OperativeFirstLevel(keyID: string) {
-  // const { keyID } = useContext(CharacterSheetContext);
-
   const specializationArray = Object.keys(specializationList).map(
     (key: string) => {
       return key;

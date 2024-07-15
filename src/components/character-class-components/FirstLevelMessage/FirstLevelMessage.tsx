@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import styles from "./FirstLevelMessage.module.css";
 import { CharacterSheetContext } from "../../../states/CharacterSheet/CharacterSheet";
 import { useForm } from "react-hook-form";
-import { getValue } from "../../../utils/getValue";
 import { setValue } from "../../../utils/setValue";
 
 function FirstLevelMessage() {
@@ -14,16 +13,6 @@ function FirstLevelMessage() {
     wisdomAbility,
     charismaAbility,
   } = useContext(CharacterSheetContext);
-
-  // //   Temp attribute information for confirming level-up changes.
-  // setValue("tempAbilityScores", {
-  //   strength: strengthAbility.value,
-  //   dexterity: dexterityAbility.value,
-  //   constitution: constitutionAbility.value,
-  //   intelligence: intelligenceAbility.value,
-  //   wisdom: wisdomAbility.value,
-  //   charisma: charismaAbility.value,
-  // });
 
   const [tempAbilityScores] = useState<TempAbilityScoreType>({
     strength: strengthAbility.value,
@@ -60,7 +49,9 @@ function FirstLevelMessage() {
     <div className={styles.parentDiv}>
       <div className={styles.attributesHeading}>
         Set your starting Attribute vlues. The adjustments from your race and
-        theme have already been applied.
+        theme have already been applied. You will not be able to adjust the base
+        value of your Attributes once your character is made from your sheet.
+        You can still apply bonuses and penalties as normal.
       </div>
       <div className={styles.attributesDiv}>
         <div className={styles.singleAttributeDivParent}>

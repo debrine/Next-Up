@@ -13,8 +13,6 @@ import {
 import { useParams } from "react-router-dom";
 import { getValue } from "../../utils/getValue.ts";
 import { levelUpList } from "../../data/levelUpList.ts";
-import { FormProvider, useForm } from "react-hook-form";
-import { setValue } from "../../utils/setValue.ts";
 import FirstLevelMessage from "../../components/character-class-components/FirstLevelMessage/FirstLevelMessage.tsx";
 
 export const CharacterSheetContext = createContext<{
@@ -95,7 +93,6 @@ function CharacterSheet() {
     setCharacterInfoDynamicObject(
       getValue(`characterBasicInfoDynamic${characterID}`)
     );
-    // reset();
   }, [characterID]);
   console.log(characterInfoObject);
 
