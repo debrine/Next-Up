@@ -11,7 +11,7 @@ import { OperativesEdgeSkillBonus } from "../../../../data/class-information/ope
 import confirmLevelUpAttributes from "../../confirmLevelUpAttributes.ts";
 import { getValue } from "../../../../utils/getValue.ts";
 
-function FirstLevelOperative() {
+function OperativeFirstLevel() {
   const { characterID } = useParams();
 
   const specializationArray = Object.keys(specializationList).map(
@@ -161,4 +161,4 @@ function FirstLevelOperative() {
   );
 }
 
-export default FirstLevelOperative;
+export default OperativeFirstLevel;
