@@ -15,8 +15,10 @@ import { getValue } from "../../utils/getValue.ts";
 import { levelUpList } from "../../data/levelUpList.ts";
 import { FormProvider, useForm } from "react-hook-form";
 import { setValue } from "../../utils/setValue.ts";
+import FirstLevelMessage from "../../components/character-class-components/FirstLevelMessage/FirstLevelMessage.tsx";
 
 export const CharacterSheetContext = createContext<{
+  keyID: string;
   strengthAbility: AbilityScoreType;
   setStrengthAbility: Dispatch<SetStateAction<AbilityScoreType>>;
   dexterityAbility: AbilityScoreType;
@@ -35,6 +37,14 @@ export const CharacterSheetContext = createContext<{
 
 function CharacterSheet() {
   const { characterID } = useParams();
+
+  const [keyID, setKeyID] = useState<string>("");
+
+  useEffect(() => {
+    if (characterID) {
+      setKeyID(characterID);
+    }
+  }, [characterID]);
 
   const [characterInfoObject, setCharacterInfoObject] =
     useState<CharacterInfoObjectType>(
@@ -80,27 +90,19 @@ function CharacterSheet() {
 
   const characterLevel = getValue(`Level${characterID}`);
 
-  // useEffect(() => {
-  //   setCharacterInfoObject(getValue(`characterBasicInfo${characterID}`));
-  //   setCharacterInfoDynamicObject(
-  //     getValue(`characterBasicInfoDynamic${characterID}`)
-  //   );
-  //   reset();
-  // }, [characterID]);
-
-  //   Temp attribute information for confirming level-up changes.
-  // setValue("tempAbilityScores", {
-  //   strength: strengthAbility.value,
-  //   dexterity: dexterityAbility.value,
-  //   constitution: constitutionAbility.value,
-  //   intelligence: intelligenceAbility.value,
-  //   wisdom: wisdomAbility.value,
-  //   charisma: charismaAbility.value,
-  // });
+  useEffect(() => {
+    setCharacterInfoObject(getValue(`characterBasicInfo${characterID}`));
+    setCharacterInfoDynamicObject(
+      getValue(`characterBasicInfoDynamic${characterID}`)
+    );
+    // reset();
+  }, [characterID]);
+  console.log(characterInfoObject);
 
   return (
     <CharacterSheetContext.Provider
       value={{
+        keyID: keyID,
         strengthAbility: strengthAbility,
         setStrengthAbility: setStrengthAbility,
         dexterityAbility: dexterityAbility,
@@ -120,7 +122,12 @@ function CharacterSheet() {
       {/* <FormProvider {...methods}> */}
       {characterLevel === 0 ? (
         // Confirm all first level selections based on class, which need to be handled uniquely.
-        levelUpList["1"][characterInfoObject.chClass].componentForClass()
+        <div className={styles.FirstLevelSelectionChanges}>
+          <FirstLevelMessage />
+          {levelUpList["1"][characterInfoObject.chClass].componentForClass(
+            keyID
+          )}
+        </div>
       ) : (
         // Once character has confirmed choices, move on to sheet.
         <div className={styles.characterSheetMainDiv}>

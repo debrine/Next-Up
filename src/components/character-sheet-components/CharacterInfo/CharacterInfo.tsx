@@ -8,21 +8,21 @@ import { setValue } from "../../../utils/setValue.ts";
 import { useParams } from "react-router-dom";
 
 function CharacterInfo() {
-  const { characterID } = useParams();
+  const { keyID } = useContext(CharacterSheetContext);
 
   const { characterInfoObject, characterInfoDynamicObject } = useContext(
     CharacterSheetContext
   );
   //   const [characterInfoDynamicObject, setCharacterInfoDynamicObject] =
   //     useState<CharacterBasicInfoDynamicType>(
-  //       getValue(`characterBasicInfoDynamic${characterID}`)
+  //       getValue(`characterBasicInfoDynamic${keyID}`)
   //     );
 
   // const { register, reset, watch } = useFormContext();
 
   // useEffect(() => {
   //   const subscription = watch((data) =>
-  //     setValue(`characterBasicInfoDynamic${characterID}`, data)
+  //     setValue(`characterBasicInfoDynamic${keyID}`, data)
   //   );
   //   return () => subscription.unsubscribe();
   // }, [watch]);
@@ -36,7 +36,7 @@ function CharacterInfo() {
           type="text"
           className={styles.characterNameBar}
           spellCheck={false}
-          //   defaultValue={characterInfoDynamicObject.characterName}
+          defaultValue={characterInfoDynamicObject.characterName}
         />
       </div>
 
@@ -47,7 +47,7 @@ function CharacterInfo() {
             className={styles.infoInput}
             spellCheck={false}
             value={`${characterInfoObject.chClass} ${getValue(
-              `Level${characterID}`
+              `Level${keyID}`
             )}`}
             readOnly
           />

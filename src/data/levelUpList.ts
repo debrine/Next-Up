@@ -1,13 +1,13 @@
 import OperativeFirstLevel from "../components/character-class-components/operative-components/level-components/OperativeFirstLevel.tsx";
-// Deployment failing:
-// Error: src/data/levelUpList.ts(1,33): error TS2307: Cannot find module '../components/character-class-components/operative-components/level-components/FirstLevelOperative.tsx' or its corresponding type declarations.
 
 export const levelUpList: {
-  [key: string]: { [key: string]: { componentForClass: () => JSX.Element } };
+  [key: string]: {
+    [key: string]: { componentForClass: (keyID: string) => JSX.Element };
+  };
 } = {
   "1": {
     Operative: {
-      componentForClass: OperativeFirstLevel,
+      componentForClass: (keyID) => OperativeFirstLevel(keyID), // When this was passed as simply OperativeFirstLevel, keyID would not be passed down and remain undefined. useContext does not work.
     },
   },
 };

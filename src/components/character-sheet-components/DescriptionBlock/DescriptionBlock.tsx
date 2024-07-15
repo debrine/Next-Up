@@ -8,17 +8,17 @@ import { setValue } from "../../../utils/setValue.ts";
 import { useParams } from "react-router-dom";
 
 function DescriptionBlock() {
-  const { characterID } = useParams();
+  const { keyID } = useContext(CharacterSheetContext);
 
   //   const { register, watch } = useForm({
   //     defaultValues: {
-  //       descriptionBlock: getValue(`Description${characterID}`),
+  //       descriptionBlock: getValue(`Description${keyID}`),
   //     },
   //   });
 
   //   useEffect(() => {
   //     const subscription = watch((data) => {
-  //       setValue(`Description${characterID}`, data.descriptionBlock);
+  //       setValue(`Description${keyID}`, data.descriptionBlock);
   //     });
   //     return () => subscription.unsubscribe();
   //   }, [watch]);

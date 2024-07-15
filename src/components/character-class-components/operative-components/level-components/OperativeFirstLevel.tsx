@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { operativeAbilityList } from "../../../../data/class-information/operative/abilities/operativeAbilityList.ts";
 import { specializationList } from "../../../../data/class-information/operative/abilities/specializationsList.ts";
 import DropDownList from "../../../DropDownList/DropDownList.tsx";
@@ -10,9 +10,10 @@ import FirstLevelMessage from "../../FirstLevelMessage/FirstLevelMessage.tsx";
 import { OperativesEdgeSkillBonus } from "../../../../data/class-information/operative/functions/OperativesEdgeSkillBonus.ts";
 import confirmLevelUpAttributes from "../../confirmLevelUpAttributes.ts";
 import { getValue } from "../../../../utils/getValue.ts";
+import { CharacterSheetContext } from "../../../../states/CharacterSheet/CharacterSheet.tsx";
 
-function OperativeFirstLevel() {
-  const { characterID } = useParams();
+function OperativeFirstLevel(keyID: string) {
+  // const { keyID } = useContext(CharacterSheetContext);
 
   const specializationArray = Object.keys(specializationList).map(
     (key: string) => {
@@ -61,7 +62,7 @@ function OperativeFirstLevel() {
   function confirmFirstLevelChanges() {
     // Set the default abilities given by Operative
     Object.keys(operativeAbilityList["1"]).forEach((i) => {
-      AddAbility(characterID!, operativeAbilityList["1"][i]);
+      AddAbility(keyID, operativeAbilityList["1"][i]);
     });
 
     // Add the specialization as an object to the ability list.
@@ -72,26 +73,25 @@ function OperativeFirstLevel() {
       actionType: ["None"],
       usesResolve: 0,
     };
-    AddAbility(characterID!, specializationAsAbility);
+    AddAbility(keyID, specializationAsAbility);
 
     // Set the specialization selected to the list so we can reference it again later when needed.
-    setValue(`OperativeSpecialization${characterID}`, {
+    setValue(`OperativeSpecialization${keyID}`, {
       specialization,
     });
 
     // Add Operative's Edge bonus of 1.
-    OperativesEdgeSkillBonus(characterID!, 1);
+    OperativesEdgeSkillBonus(keyID, 1);
 
     // Confirm Attributes.
-    // confirmLevelUpAttributes();
+    confirmLevelUpAttributes(keyID);
 
     // Set the level to 1 so it's no longer locked in the level 1 selection screen.
-    setValue(`Level${characterID}`, 1);
+    setValue(`Level${keyID}`, 1);
   }
 
   return (
     <div className={styles.firstParentDiv}>
-      {/* <FirstLevelMessage /> */}
       <div className={styles.levelUpDescription}>
         At first level you gain the following abilities. You must confirm all
         changes before you can view your Character Sheet
@@ -151,7 +151,7 @@ function OperativeFirstLevel() {
         <div className={styles.confirmFirstLevelChangesParent}>
           <Link
             onClick={confirmFirstLevelChanges}
-            to={`/Next-Up/charactersheet/${characterID}`}
+            to={`/Next-Up/charactersheet/${keyID}`}
           >
             Add Character
           </Link>

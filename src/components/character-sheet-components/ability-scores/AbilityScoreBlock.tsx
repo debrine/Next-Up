@@ -11,7 +11,7 @@ import { CharacterSheetContext } from "../../../states/CharacterSheet/CharacterS
 // Scores and modifiers not meant to be adjusted.
 
 function AbilityScoreBlock() {
-  const { characterID } = useParams();
+  const { keyID } = useContext(CharacterSheetContext);
 
   const {
     strengthAbility,
