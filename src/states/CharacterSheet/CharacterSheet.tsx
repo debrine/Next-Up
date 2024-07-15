@@ -14,6 +14,7 @@ import { useParams } from "react-router-dom";
 import { getValue } from "../../utils/getValue.ts";
 import { levelUpList } from "../../data/levelUpList.ts";
 import FirstLevelMessage from "../../components/character-class-components/FirstLevelMessage/FirstLevelMessage.tsx";
+import { FormProvider, useForm } from "react-hook-form";
 
 export const CharacterSheetContext = createContext<{
   keyID: string;
@@ -57,7 +58,7 @@ function CharacterSheet() {
       getValue(`characterBasicInfoDynamic${characterID}`)
     );
 
-  // const methods = useForm({ defaultValues: characterInfoDynamicObject });
+  const methods = useForm({ defaultValues: characterInfoDynamicObject });
   // const { reset } = methods;
 
   // Attribute information for sheet.
@@ -116,39 +117,39 @@ function CharacterSheet() {
         characterInfoDynamicObject: characterInfoDynamicObject,
       }}
     >
-      {/* <FormProvider {...methods}> */}
-      {characterLevel === 0 ? (
-        // Confirm all first level selections based on class, which need to be handled uniquely.
-        <div className={styles.FirstLevelSelectionChanges}>
-          <FirstLevelMessage />
-          {levelUpList["1"][characterInfoObject.chClass].componentForClass(
-            keyID
-          )}
-        </div>
-      ) : (
-        // Once character has confirmed choices, move on to sheet.
-        <div className={styles.characterSheetMainDiv}>
-          <div className={styles.characterInfoDescriptionBlock}>
-            <div className={styles.characterInfoBlock}>
-              <CharacterInfo />
-            </div>
+      <FormProvider {...methods}>
+        {characterLevel === 0 ? (
+          // Confirm all first level selections based on class, which need to be handled uniquely.
+          <div className={styles.FirstLevelSelectionChanges}>
+            <FirstLevelMessage />
+            {levelUpList["1"][characterInfoObject.chClass].componentForClass(
+              keyID
+            )}
+          </div>
+        ) : (
+          // Once character has confirmed choices, move on to sheet.
+          <div className={styles.characterSheetMainDiv}>
+            <div className={styles.characterInfoDescriptionBlock}>
+              <div className={styles.characterInfoBlock}>
+                <CharacterInfo />
+              </div>
 
-            <div className={styles.characterDescriptionBlock}>
-              <DescriptionBlock />
+              <div className={styles.characterDescriptionBlock}>
+                <DescriptionBlock />
+              </div>
+            </div>
+            <div className={styles.statArea}>
+              <div className={styles.leftSide}>
+                <LeftSide />
+              </div>
+
+              <div className={styles.rightSide}>
+                <RightSide />
+              </div>
             </div>
           </div>
-          <div className={styles.statArea}>
-            <div className={styles.leftSide}>
-              <LeftSide />
-            </div>
-
-            <div className={styles.rightSide}>
-              <RightSide />
-            </div>
-          </div>
-        </div>
-      )}
-      {/* </FormProvider> */}
+        )}
+      </FormProvider>
     </CharacterSheetContext.Provider>
   );
 }

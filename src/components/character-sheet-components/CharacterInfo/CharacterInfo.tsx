@@ -1,39 +1,39 @@
 import styles from "./CharacterInfo.module.css";
 import SheetLabel from "../labels/SheetLabel.tsx";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CharacterSheetContext } from "../../../states/CharacterSheet/CharacterSheet.tsx";
 import { getValue } from "../../../utils/getValue.ts";
+import { useFormContext } from "react-hook-form";
+import { setValue } from "../../../utils/setValue.ts";
 
 function CharacterInfo() {
   const { keyID } = useContext(CharacterSheetContext);
 
-  const { characterInfoObject, characterInfoDynamicObject } = useContext(
-    CharacterSheetContext
-  );
+  const { characterInfoObject } = useContext(CharacterSheetContext);
   //   const [characterInfoDynamicObject, setCharacterInfoDynamicObject] =
   //     useState<CharacterBasicInfoDynamicType>(
   //       getValue(`characterBasicInfoDynamic${keyID}`)
   //     );
 
-  // const { register, reset, watch } = useFormContext();
+  const { register, watch } = useFormContext();
 
-  // useEffect(() => {
-  //   const subscription = watch((data) =>
-  //     setValue(`characterBasicInfoDynamic${keyID}`, data)
-  //   );
-  //   return () => subscription.unsubscribe();
-  // }, [watch]);
+  useEffect(() => {
+    const subscription = watch((data) =>
+      setValue(`characterBasicInfoDynamic${keyID}`, data)
+    );
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   return (
     <div className={styles.parentDiv}>
       <div className={styles.characterNameDiv}>
         <SheetLabel sheetLabelText="CHARACTER NAME" />
         <input
-          // {...register("characterName")}
+          {...register("characterName")}
           type="text"
           className={styles.characterNameBar}
           spellCheck={false}
-          defaultValue={characterInfoDynamicObject.characterName}
+          // defaultValue={characterInfoDynamicObject.characterName}
         />
       </div>
 
@@ -75,7 +75,7 @@ function CharacterInfo() {
       <div className={styles.sizeSpeedGenderHomeDiv}>
         <div className={styles.infoInputDiv}>
           <input
-            // {...register("characterSize")}
+            {...register("characterSize")}
             type="text"
             className={styles.infoInput}
             spellCheck={false}
@@ -85,7 +85,7 @@ function CharacterInfo() {
         </div>
         <div className={styles.infoInputDiv}>
           <input
-            // {...register("characterSpeed")}
+            {...register("characterSpeed")}
             type="number"
             className={styles.infoInput}
             // defaultValue={characterInfoDynamicObject.characterSpeed}
@@ -94,7 +94,7 @@ function CharacterInfo() {
         </div>
         <div className={styles.infoInputDiv}>
           <input
-            // {...register("characterGender")}
+            {...register("characterGender")}
             type="text"
             className={styles.infoInput}
             spellCheck={false}
@@ -104,7 +104,7 @@ function CharacterInfo() {
         </div>
         <div className={styles.infoInputDiv}>
           <input
-            // {...register("characterHomeWorld")}
+            {...register("characterHomeWorld")}
             type="text"
             className={styles.infoInput}
             spellCheck={false}
@@ -117,7 +117,7 @@ function CharacterInfo() {
       <div className={styles.alignmentDietyPlayerDiv}>
         <div className={styles.infoInputDiv}>
           <input
-            // {...register("characterAlignment")}
+            {...register("characterAlignment")}
             type="text"
             className={styles.infoInput}
             spellCheck={false}
@@ -127,7 +127,7 @@ function CharacterInfo() {
         </div>
         <div className={styles.infoInputDiv}>
           <input
-            // {...register("characterDiety")}
+            {...register("characterDiety")}
             type="text"
             className={styles.infoInput}
             spellCheck={false}
@@ -137,7 +137,7 @@ function CharacterInfo() {
         </div>
         <div className={styles.infoInputDiv}>
           <input
-            // {...register("playerName")}
+            {...register("playerName")}
             type="text"
             className={styles.infoInput}
             spellCheck={false}
