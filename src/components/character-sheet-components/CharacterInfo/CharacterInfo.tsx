@@ -1,11 +1,8 @@
 import styles from "./CharacterInfo.module.css";
 import SheetLabel from "../labels/SheetLabel.tsx";
-import { useForm, useFormContext } from "react-hook-form";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { CharacterSheetContext } from "../../../states/CharacterSheet/CharacterSheet.tsx";
 import { getValue } from "../../../utils/getValue.ts";
-import { setValue } from "../../../utils/setValue.ts";
-import { useParams } from "react-router-dom";
 
 function CharacterInfo() {
   const { keyID } = useContext(CharacterSheetContext);

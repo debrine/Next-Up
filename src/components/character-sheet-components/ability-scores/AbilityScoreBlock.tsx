@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import SheetLabel from "../labels/SheetLabel";
 import styles from "./AbilityScoreBlock.module.css";
 import AbilityScoreType from "./AbilityScoreType/AbilityScoreType.tsx";
@@ -28,81 +27,81 @@ function AbilityScoreBlock() {
     setCharismaAbility,
   } = useContext(CharacterSheetContext);
 
-  // const { register, watch } = useForm({
-  //   defaultValues: {
-  //     bonusStr: strengthAbility.asBonus,
-  //     bonusDex: dexterityAbility.asBonus,
-  //     bonusCon: constitutionAbility.asBonus,
-  //     bonusInt: intelligenceAbility.asBonus,
-  //     bonusWis: wisdomAbility.asBonus,
-  //     bonusCha: charismaAbility.asBonus,
-  //     penaltyStr: strengthAbility.asPenalty,
-  //     penaltyDex: dexterityAbility.asPenalty,
-  //     penaltyCon: constitutionAbility.asPenalty,
-  //     penaltyInt: intelligenceAbility.asPenalty,
-  //     penaltyWis: wisdomAbility.asPenalty,
-  //     penaltyCha: charismaAbility.asPenalty,
-  //   },
-  // });
+  const { register, watch } = useForm({
+    defaultValues: {
+      bonusStr: strengthAbility.asBonus,
+      bonusDex: dexterityAbility.asBonus,
+      bonusCon: constitutionAbility.asBonus,
+      bonusInt: intelligenceAbility.asBonus,
+      bonusWis: wisdomAbility.asBonus,
+      bonusCha: charismaAbility.asBonus,
+      penaltyStr: strengthAbility.asPenalty,
+      penaltyDex: dexterityAbility.asPenalty,
+      penaltyCon: constitutionAbility.asPenalty,
+      penaltyInt: intelligenceAbility.asPenalty,
+      penaltyWis: wisdomAbility.asPenalty,
+      penaltyCha: charismaAbility.asPenalty,
+    },
+  });
 
-  // useEffect(() => {
-  //   const subscription = watch((data) => {
-  //     // Strength
-  //     setValue(`Strength${characterID}`, {
-  //       aSName: "Strength",
-  //       asBonus: data.bonusStr,
-  //       asPenalty: data.penaltyStr,
-  //       value: strengthAbility.value,
-  //     });
-  //     setStrengthAbility(getValue(`Strength${characterID}`));
+  useEffect(() => {
+    const subscription = watch((data) => {
+      // Strength
+      setValue(`Strength${keyID}`, {
+        aSName: "Strength",
+        asBonus: data.bonusStr,
+        asPenalty: data.penaltyStr,
+        value: strengthAbility.value,
+      });
+      setStrengthAbility(getValue(`Strength${keyID}`));
 
-  //     // Dexterity
-  //     setValue(`Dexterity${characterID}`, {
-  //       aSName: "Dexterity",
-  //       asBonus: data.bonusDex,
-  //       asPenalty: data.penaltyDex,
-  //       value: dexterityAbility.value,
-  //     });
-  //     setDexterityAbility(getValue(`Dexterity${characterID}`));
+      // Dexterity
+      setValue(`Dexterity${keyID}`, {
+        aSName: "Dexterity",
+        asBonus: data.bonusDex,
+        asPenalty: data.penaltyDex,
+        value: dexterityAbility.value,
+      });
+      setDexterityAbility(getValue(`Dexterity${keyID}`));
 
-  //     // Constitution
-  //     setValue(`Constitution${characterID}`, {
-  //       aSName: "Constitution",
-  //       asBonus: data.bonusCon,
-  //       asPenalty: data.penaltyCon,
-  //       value: constitutionAbility.value,
-  //     });
-  //     setConstitutionAbility(getValue(`Constitution${characterID}`));
+      // Constitution
+      setValue(`Constitution${keyID}`, {
+        aSName: "Constitution",
+        asBonus: data.bonusCon,
+        asPenalty: data.penaltyCon,
+        value: constitutionAbility.value,
+      });
+      setConstitutionAbility(getValue(`Constitution${keyID}`));
 
-  //     // Intelligence
-  //     setValue(`Intelligence${characterID}`, {
-  //       aSName: "Intelligence",
-  //       asBonus: data.bonusInt,
-  //       asPenalty: data.penaltyInt,
-  //       value: intelligenceAbility.value,
-  //     });
-  //     setIntelligenceAbility(getValue(`Intelligence${characterID}`));
+      // Intelligence
+      setValue(`Intelligence${keyID}`, {
+        aSName: "Intelligence",
+        asBonus: data.bonusInt,
+        asPenalty: data.penaltyInt,
+        value: intelligenceAbility.value,
+      });
+      setIntelligenceAbility(getValue(`Intelligence${keyID}`));
 
-  //     // Wisdom
-  //     setValue(`Wisdom${characterID}`, {
-  //       aSName: "Wisdom",
-  //       asBonus: data.bonusWis,
-  //       asPenalty: data.penaltyWis,
-  //       value: wisdomAbility.value,
-  //     });
-  //     setWisdomAbility(getValue(`Wisdom${characterID}`));
+      // Wisdom
+      setValue(`Wisdom${keyID}`, {
+        aSName: "Wisdom",
+        asBonus: data.bonusWis,
+        asPenalty: data.penaltyWis,
+        value: wisdomAbility.value,
+      });
+      setWisdomAbility(getValue(`Wisdom${keyID}`));
 
-  //     // Charisma
-  //     setValue(`Charisma${characterID}`, {
-  //       aSName: "Charisma",
-  //       asBonus: data.bonusCha,
-  //       asPenalty: data.penaltyCha,
-  //       value: charismaAbility.value,
-  //     });
-  //     setCharismaAbility(getValue(`Charisma${characterID}`));
-  //   });
-  //   return () => subscription.unsubscribe();
-  // }, [watch]);
+      // Charisma
+      setValue(`Charisma${keyID}`, {
+        aSName: "Charisma",
+        asBonus: data.bonusCha,
+        asPenalty: data.penaltyCha,
+        value: charismaAbility.value,
+      });
+      setCharismaAbility(getValue(`Charisma${keyID}`));
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   return (
     <div className={styles.parentDiv}>
@@ -245,33 +244,33 @@ function AbilityScoreBlock() {
           </div>
           <div className={styles.penDrainColumn}>
             <div className={styles.columnLabel}>BONUS</div>
+            {/* <input type="number" />
             <input type="number" />
             <input type="number" />
             <input type="number" />
             <input type="number" />
-            <input type="number" />
-            <input type="number" />
-            {/* <input type="number" {...register("bonusStr")} />
+            <input type="number" /> */}
+            <input type="number" {...register("bonusStr")} />
             <input type="number" {...register("bonusDex")} />
             <input type="number" {...register("bonusCon")} />
             <input type="number" {...register("bonusInt")} />
             <input type="number" {...register("bonusWis")} />
-            <input type="number" {...register("bonusCha")} /> */}
+            <input type="number" {...register("bonusCha")} />
           </div>
           <div className={styles.penDrainColumn}>
             <div className={styles.columnLabel}>PENALTY</div>
+            {/* <input type="number" />
             <input type="number" />
             <input type="number" />
             <input type="number" />
             <input type="number" />
-            <input type="number" />
-            <input type="number" />
-            {/* <input type="number" {...register("penaltyStr")} />
+            <input type="number" /> */}
+            <input type="number" {...register("penaltyStr")} />
             <input type="number" {...register("penaltyDex")} />
             <input type="number" {...register("penaltyCon")} />
             <input type="number" {...register("penaltyInt")} />
             <input type="number" {...register("penaltyWis")} />
-            <input type="number" {...register("penaltyCha")} /> */}
+            <input type="number" {...register("penaltyCha")} />
           </div>
         </div>
       </div>
