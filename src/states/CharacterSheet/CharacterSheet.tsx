@@ -29,15 +29,17 @@ export const CharacterSheetContext = createContext<{
   setWisdomAbility: Dispatch<SetStateAction<AbilityScoreType>>;
   charismaAbility: AbilityScoreType;
   setCharismaAbility: Dispatch<SetStateAction<AbilityScoreType>>;
+  characterInfoObject: CharacterInfoObjectType;
   characterInfoDynamicObject: CharacterBasicInfoDynamicType;
 }>({} as any);
 
 function CharacterSheet() {
   const { characterID } = useParams();
 
-  const [characterInfoObject, setCharacterInfoObject] = useState(
-    getValue(`characterBasicInfo${characterID}`)
-  );
+  const [characterInfoObject, setCharacterInfoObject] =
+    useState<CharacterInfoObjectType>(
+      getValue(`characterBasicInfo${characterID}`)
+    );
 
   /*
     States to be passed to children.*****************************************************************
@@ -47,7 +49,7 @@ function CharacterSheet() {
       getValue(`characterBasicInfoDynamic${characterID}`)
     );
 
-  const methods = useForm({ defaultValues: characterInfoDynamicObject });
+  // const methods = useForm({ defaultValues: characterInfoDynamicObject });
   // const { reset } = methods;
 
   // Attribute information for sheet.
@@ -87,14 +89,14 @@ function CharacterSheet() {
   // }, [characterID]);
 
   //   Temp attribute information for confirming level-up changes.
-  setValue("tempAbilityScores", {
-    strength: strengthAbility.value,
-    dexterity: dexterityAbility.value,
-    constitution: constitutionAbility.value,
-    intelligence: intelligenceAbility.value,
-    wisdom: wisdomAbility.value,
-    charisma: charismaAbility.value,
-  });
+  // setValue("tempAbilityScores", {
+  //   strength: strengthAbility.value,
+  //   dexterity: dexterityAbility.value,
+  //   constitution: constitutionAbility.value,
+  //   intelligence: intelligenceAbility.value,
+  //   wisdom: wisdomAbility.value,
+  //   charisma: charismaAbility.value,
+  // });
 
   return (
     <CharacterSheetContext.Provider
@@ -111,6 +113,7 @@ function CharacterSheet() {
         setWisdomAbility: setWisdomAbility,
         charismaAbility: charismaAbility,
         setCharismaAbility: setCharismaAbility,
+        characterInfoObject: characterInfoObject,
         characterInfoDynamicObject: characterInfoDynamicObject,
       }}
     >

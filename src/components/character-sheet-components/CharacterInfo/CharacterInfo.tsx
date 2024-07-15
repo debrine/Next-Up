@@ -10,19 +10,13 @@ import { useParams } from "react-router-dom";
 function CharacterInfo() {
   const { characterID } = useParams();
 
-  const { characterInfoDynamicObject } = useContext(CharacterSheetContext);
+  const { characterInfoObject, characterInfoDynamicObject } = useContext(
+    CharacterSheetContext
+  );
   //   const [characterInfoDynamicObject, setCharacterInfoDynamicObject] =
   //     useState<CharacterBasicInfoDynamicType>(
   //       getValue(`characterBasicInfoDynamic${characterID}`)
   //     );
-
-  const characterInfoObject: {
-    chClass: string;
-    id: string;
-    keyAbilityScoreSelected: string;
-    race: string;
-    theme: string;
-  } = getValue(`characterBasicInfo${characterID}`);
 
   // const { register, reset, watch } = useFormContext();
 

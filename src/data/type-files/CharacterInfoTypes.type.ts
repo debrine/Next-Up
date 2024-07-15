@@ -8,3 +8,11 @@ type CharacterBasicInfoDynamicType = {
   characterSpeed: number;
   playerName: string;
 };
+
+type CharacterInfoObjectType = {
+  chClass: string;
+  id: string;
+  keyAbilityScoreSelected: string;
+  race: string;
+  theme: string;
+};
