@@ -1,20 +1,20 @@
-import styles from "./CharacterSheet.module.css";
-import CharacterInfo from "../../components/character-sheet-components/CharacterInfo/CharacterInfo.tsx";
-import DescriptionBlock from "../../components/character-sheet-components/DescriptionBlock/DescriptionBlock.tsx";
-import LeftSide from "../../components/character-sheet-components/LeftSide/LeftSide.tsx";
-import RightSide from "../../components/character-sheet-components/RightSide/RightSide.tsx";
+import styles from './CharacterSheet.module.css';
+import CharacterInfo from '../../components/character-sheet-components/CharacterInfo/CharacterInfo.tsx';
+import DescriptionBlock from '../../components/character-sheet-components/DescriptionBlock/DescriptionBlock.tsx';
+import LeftSide from '../../components/character-sheet-components/LeftSide/LeftSide.tsx';
+import RightSide from '../../components/character-sheet-components/RightSide/RightSide.tsx';
 import {
   createContext,
   Dispatch,
   SetStateAction,
   useEffect,
   useState,
-} from "react";
-import { useParams } from "react-router-dom";
-import { getValue } from "../../utils/getValue.ts";
-import { levelUpList } from "../../data/levelUpList.ts";
-import FirstLevelMessage from "../../components/character-class-components/FirstLevelMessage/FirstLevelMessage.tsx";
-import { FormProvider, useForm } from "react-hook-form";
+} from 'react';
+import { useParams } from 'react-router-dom';
+import { getValue } from '../../utils/getValue.ts';
+import { levelUpList } from '../../data/levelUpList.ts';
+import FirstLevelMessage from '../../components/character-class-components/FirstLevelMessage/FirstLevelMessage.tsx';
+import { FormProvider, useForm } from 'react-hook-form';
 
 export const CharacterSheetContext = createContext<{
   keyID: string;
@@ -37,7 +37,7 @@ export const CharacterSheetContext = createContext<{
 function CharacterSheet() {
   const { characterID } = useParams();
 
-  const [keyID, setKeyID] = useState<string>("");
+  const [keyID, setKeyID] = useState<string>('');
 
   useEffect(() => {
     if (characterID) {
@@ -96,6 +96,9 @@ function CharacterSheet() {
     );
   }, [characterID]);
 
+  const Component =
+    levelUpList['1'][characterInfoObject.chClass]?.componentForClass;
+
   return (
     <CharacterSheetContext.Provider
       value={{
@@ -114,16 +117,13 @@ function CharacterSheet() {
         setCharismaAbility: setCharismaAbility,
         characterInfoObject: characterInfoObject,
         characterInfoDynamicObject: characterInfoDynamicObject,
-      }}
-    >
+      }}>
       <FormProvider {...methods}>
         {characterLevel === 0 ? (
           // Confirm all first level selections based on class, which need to be handled uniquely.
           <div className={styles.FirstLevelSelectionChanges}>
             <FirstLevelMessage />
-            {levelUpList["1"][characterInfoObject.chClass].componentForClass(
-              keyID
-            )}
+            <div>{Component ? <Component keyID={keyID} /> : null}</div>
           </div>
         ) : (
           // Once character has confirmed choices, move on to sheet.

@@ -1,13 +1,15 @@
-import OperativeFirstLevel from "../components/character-class-components/operative-components/level-components/OperativeFirstLevel.tsx";
+import OperativeFirstLevel from '../components/character-class-components/operative-components/level-components/OperativeFirstLevel';
 
 export const levelUpList: {
   [key: string]: {
-    [key: string]: { componentForClass: (keyID: string) => JSX.Element };
+    [key: string]: {
+      componentForClass: ({ keyID }: { keyID: string }) => JSX.Element;
+    };
   };
 } = {
-  "1": {
+  '1': {
     Operative: {
-      componentForClass: (keyID) => OperativeFirstLevel(keyID), // When this was passed as simply OperativeFirstLevel, keyID would not be passed down and remain undefined. useContext does not work.
+      componentForClass: OperativeFirstLevel,
     },
   },
 };
