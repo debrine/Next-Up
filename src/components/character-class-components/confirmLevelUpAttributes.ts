@@ -2,10 +2,7 @@ import { setValue } from "../../utils/setValue";
 import { getValue } from "../../utils/getValue";
 
 function confirmLevelUpAttributes(keyID: string) {
-  console.log(`In Function`);
-
   const tempAbilityScores: TempAbilityScoreType = getValue("tempAbilityScores");
-  console.log(`In function ${tempAbilityScores}`);
 
   const strengthAbility: AbilityScoreType = getValue(`Strength${keyID}`);
 
@@ -64,15 +61,6 @@ function confirmLevelUpAttributes(keyID: string) {
     asPenalty: charismaAbility.asPenalty,
     value: tempAbilityScores.charisma,
   });
-
-  console.log(
-    strengthAbility,
-    dexterityAbility,
-    constitutionAbility,
-    intelligenceAbility,
-    wisdomAbility,
-    charismaAbility
-  );
 }
 
 export default confirmLevelUpAttributes;

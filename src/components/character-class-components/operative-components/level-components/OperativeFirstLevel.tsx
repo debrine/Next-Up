@@ -144,12 +144,13 @@ function OperativeFirstLevel(keyID: string) {
       </div>
       {moveOn && (
         <div className={styles.confirmFirstLevelChangesParent}>
-          <Link
+          {/* <Link
             onClick={confirmFirstLevelChanges}
             to={`/Next-Up/charactersheet/${keyID}`}
           >
             Add Character
-          </Link>
+          </Link> */}
+          <button onClick={confirmFirstLevelChanges}>Confirm Changes</button>
         </div>
       )}
     </div>

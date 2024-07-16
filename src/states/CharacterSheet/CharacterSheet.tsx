@@ -95,7 +95,6 @@ function CharacterSheet() {
       getValue(`characterBasicInfoDynamic${characterID}`)
     );
   }, [characterID]);
-  console.log(characterInfoObject);
 
   return (
     <CharacterSheetContext.Provider
