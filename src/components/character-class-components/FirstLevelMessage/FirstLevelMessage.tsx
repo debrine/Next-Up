@@ -95,6 +95,10 @@ function FirstLevelMessage() {
           <input {...register("charisma")} type="number" />
         </div>
       </div>
+      <div className={styles.abilitiesDescription}>
+        At first level you gain the following abilities. You must confirm all
+        changes before you can view your Character Sheet.
+      </div>
     </div>
   );
 }

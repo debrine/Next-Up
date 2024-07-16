@@ -9,7 +9,9 @@ import { setValue } from "../../../utils/setValue.ts";
 function CharacterInfo() {
   const { keyID } = useContext(CharacterSheetContext);
 
-  const { characterInfoObject } = useContext(CharacterSheetContext);
+  const { characterInfoObject, characterInfoDynamicObject } = useContext(
+    CharacterSheetContext
+  );
   //   const [characterInfoDynamicObject, setCharacterInfoDynamicObject] =
   //     useState<CharacterBasicInfoDynamicType>(
   //       getValue(`characterBasicInfoDynamic${keyID}`)
@@ -33,7 +35,7 @@ function CharacterInfo() {
           type="text"
           className={styles.characterNameBar}
           spellCheck={false}
-          // defaultValue={characterInfoDynamicObject.characterName}
+          defaultValue={characterInfoDynamicObject.characterName}
         />
       </div>
 
@@ -79,7 +81,7 @@ function CharacterInfo() {
             type="text"
             className={styles.infoInput}
             spellCheck={false}
-            // defaultValue={characterInfoDynamicObject.characterSize}
+            defaultValue={characterInfoDynamicObject.characterSize}
           />
           <div>SIZE</div>
         </div>
@@ -88,7 +90,7 @@ function CharacterInfo() {
             {...register("characterSpeed")}
             type="number"
             className={styles.infoInput}
-            // defaultValue={characterInfoDynamicObject.characterSpeed}
+            defaultValue={characterInfoDynamicObject.characterSpeed}
           />
           <div>SPEED</div>
         </div>
@@ -98,7 +100,7 @@ function CharacterInfo() {
             type="text"
             className={styles.infoInput}
             spellCheck={false}
-            // defaultValue={characterInfoDynamicObject.characterGender}
+            defaultValue={characterInfoDynamicObject.characterGender}
           />
           <div>GENDER</div>
         </div>
@@ -108,7 +110,7 @@ function CharacterInfo() {
             type="text"
             className={styles.infoInput}
             spellCheck={false}
-            // defaultValue={characterInfoDynamicObject.characterHomeWorld}
+            defaultValue={characterInfoDynamicObject.characterHomeWorld}
           />
           <div>HOME WORLD</div>
         </div>
@@ -121,7 +123,7 @@ function CharacterInfo() {
             type="text"
             className={styles.infoInput}
             spellCheck={false}
-            // defaultValue={characterInfoDynamicObject.characterAlignment}
+            defaultValue={characterInfoDynamicObject.characterAlignment}
           />
           <div>ALIGNMENT</div>
         </div>
@@ -131,7 +133,7 @@ function CharacterInfo() {
             type="text"
             className={styles.infoInput}
             spellCheck={false}
-            // defaultValue={characterInfoDynamicObject.characterDiety}
+            defaultValue={characterInfoDynamicObject.characterDiety}
           />
           <div>DIETY</div>
         </div>
@@ -141,7 +143,7 @@ function CharacterInfo() {
             type="text"
             className={styles.infoInput}
             spellCheck={false}
-            // defaultValue={characterInfoDynamicObject.playerName}
+            defaultValue={characterInfoDynamicObject.playerName}
           />
           <div>PLAYER</div>
         </div>

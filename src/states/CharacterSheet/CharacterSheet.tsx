@@ -8,6 +8,7 @@ import {
   Dispatch,
   SetStateAction,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { useParams } from "react-router-dom";
@@ -15,6 +16,8 @@ import { getValue } from "../../utils/getValue.ts";
 import { levelUpList } from "../../data/levelUpList.ts";
 import FirstLevelMessage from "../../components/character-class-components/FirstLevelMessage/FirstLevelMessage.tsx";
 import { FormProvider, useForm } from "react-hook-form";
+
+// Should a reset be called as an onClick for the link itself? Something to look into.
 
 export const CharacterSheetContext = createContext<{
   keyID: string;
@@ -53,13 +56,40 @@ function CharacterSheet() {
   /*
     States to be passed to children.*****************************************************************
     */
-  const [characterInfoDynamicObject, setCharacterInfoDynamicObject] =
-    useState<CharacterBasicInfoDynamicType>(
-      getValue(`characterBasicInfoDynamic${characterID}`)
-    );
+  // const [characterInfoDynamicObject, setCharacterInfoDynamicObject] =
+  //   useState<CharacterBasicInfoDynamicType>(
+  //     getValue(`characterBasicInfoDynamic${characterID}`)
+  //   );
 
-  const methods = useForm({ defaultValues: characterInfoDynamicObject });
+  const characterInfoDynamicObject = useRef<CharacterBasicInfoDynamicType>(
+    getValue(`characterBasicInfoDynamic${characterID}`)
+  );
+
+  const methods = useForm({
+    // defaultValues: characterInfoDynamicObject.current,
+  });
+
   // const { reset } = methods;
+
+  useEffect(() => {
+    setCharacterInfoObject(getValue(`characterBasicInfo${characterID}`));
+    // setCharacterInfoDynamicObject(
+    //   getValue(`characterBasicInfoDynamic${characterID}`)
+    // );
+    characterInfoDynamicObject.current = getValue(
+      `characterBasicInfoDynamic${characterID}`
+    );
+    // reset({
+    //   characterAlignment: characterInfoDynamicObject.current.characterAlignment,
+    //   characterDiety: characterInfoDynamicObject.current.characterDiety,
+    //   characterGender: characterInfoDynamicObject.current.characterGender,
+    //   characterHomeWorld: characterInfoDynamicObject.current.characterHomeWorld,
+    //   characterName: characterInfoDynamicObject.current.characterName,
+    //   characterSize: characterInfoDynamicObject.current.characterSize,
+    //   characterSpeed: characterInfoDynamicObject.current.characterSpeed,
+    //   playerName: characterInfoDynamicObject.current.playerName,
+    // });
+  }, [characterID]);
 
   // Attribute information for sheet.
 
@@ -89,12 +119,10 @@ function CharacterSheet() {
 
   const characterLevel = getValue(`Level${characterID}`);
 
-  useEffect(() => {
-    setCharacterInfoObject(getValue(`characterBasicInfo${characterID}`));
-    setCharacterInfoDynamicObject(
-      getValue(`characterBasicInfoDynamic${characterID}`)
-    );
-  }, [characterID]);
+  useEffect(() => {}, [characterID]);
+
+  const Component =
+    levelUpList["1"][characterInfoObject.chClass]?.componentForClass;
 
   return (
     <CharacterSheetContext.Provider
@@ -113,7 +141,7 @@ function CharacterSheet() {
         charismaAbility: charismaAbility,
         setCharismaAbility: setCharismaAbility,
         characterInfoObject: characterInfoObject,
-        characterInfoDynamicObject: characterInfoDynamicObject,
+        characterInfoDynamicObject: characterInfoDynamicObject.current,
       }}
     >
       <FormProvider {...methods}>
@@ -121,9 +149,7 @@ function CharacterSheet() {
           // Confirm all first level selections based on class, which need to be handled uniquely.
           <div className={styles.FirstLevelSelectionChanges}>
             <FirstLevelMessage />
-            {levelUpList["1"][characterInfoObject.chClass].componentForClass(
-              keyID
-            )}
+            <div>{Component ? <Component keyID={keyID} /> : null}</div>
           </div>
         ) : (
           // Once character has confirmed choices, move on to sheet.

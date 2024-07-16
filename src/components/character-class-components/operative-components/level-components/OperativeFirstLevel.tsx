@@ -9,7 +9,7 @@ import { AddAbility } from "../../../../utils/AddAbility.ts";
 import { OperativesEdgeSkillBonus } from "../../../../data/class-information/operative/functions/OperativesEdgeSkillBonus.ts";
 import confirmLevelUpAttributes from "../../confirmLevelUpAttributes.ts";
 
-function OperativeFirstLevel(keyID: string) {
+function OperativeFirstLevel({ keyID }: { keyID: string }) {
   const specializationArray = Object.keys(specializationList).map(
     (key: string) => {
       return key;
@@ -87,10 +87,6 @@ function OperativeFirstLevel(keyID: string) {
 
   return (
     <div className={styles.firstParentDiv}>
-      <div className={styles.levelUpDescription}>
-        At first level you gain the following abilities. You must confirm all
-        changes before you can view your Character Sheet
-      </div>
       <div className={styles.classAbilityList}>
         {Object.keys(operativeAbilityList["1"]).map((ability) => {
           return (
@@ -144,13 +140,12 @@ function OperativeFirstLevel(keyID: string) {
       </div>
       {moveOn && (
         <div className={styles.confirmFirstLevelChangesParent}>
-          {/* <Link
+          <Link
             onClick={confirmFirstLevelChanges}
             to={`/Next-Up/charactersheet/${keyID}`}
           >
             Add Character
-          </Link> */}
-          <button onClick={confirmFirstLevelChanges}>Confirm Changes</button>
+          </Link>
         </div>
       )}
     </div>
