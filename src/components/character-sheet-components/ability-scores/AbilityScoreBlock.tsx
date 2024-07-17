@@ -10,6 +10,7 @@ import { CharacterSheetContext } from "../../../states/CharacterSheet/CharacterS
 // Scores and modifiers not meant to be adjusted.
 
 function AbilityScoreBlock() {
+  // Won't update dynamically if pulled from the same useContext?????
   const { keyID } = useContext(CharacterSheetContext);
 
   const {

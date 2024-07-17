@@ -33,7 +33,9 @@ import { AddAbility } from "../../../utils/AddAbility.ts";
 
   `Skill notes will need to be saved as a string.
 
-  `Health and resolve will not need to be stored.
+  `Initiative misc modifier will be stored as a number for adding custom amounts to initiative.
+
+  `Total Stamina, Health, and Resolve will not need to be stored, but current will.
   `Saving Throws will not need to be stored.
   `Attack Bonuses will not need to be saved.
   `Proficiencies will need to be saved. They will be saved as a string created from the list.
@@ -182,8 +184,19 @@ function AddCharacterButton() {
     );
 
     /*
-      Weapons, Armor, Other Wealth, Languages
+    Current and Temp Stamina, Health, and Resolve
     */
+    setValue(`CurrentSP${keyID}`, 0);
+    setValue(`CurrentHP${keyID}`, 0);
+    setValue(`CurrentRP${keyID}`, 0);
+    setValue(`TempSP${keyID}`, 0);
+    setValue(`TempHP${keyID}`, 0);
+    setValue(`TempRP${keyID}`, 0);
+
+    /*
+      Initiative Misc Modifier, Weapons, Armor, Other Wealth, Languages
+    */
+    setValue(`InitiativeMiscModifier${keyID}`, 0);
     setValue(`Weapons${keyID}`, []);
     setValue(`Armor${keyID}`, []);
     setValue(`Feats${keyID}`, []);

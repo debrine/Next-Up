@@ -1,8 +1,8 @@
 import styles from "./CharacterSheet.module.css";
 import CharacterInfo from "../../components/character-sheet-components/CharacterInfo/CharacterInfo.tsx";
 import DescriptionBlock from "../../components/character-sheet-components/DescriptionBlock/DescriptionBlock.tsx";
-import LeftSide from "../../components/character-sheet-components/LeftSide/LeftSide.tsx";
-import RightSide from "../../components/character-sheet-components/RightSide/RightSide.tsx";
+import LeftSide from "../../components/character-sheet-components/left-side-components/LeftSide/LeftSide.tsx";
+import RightSide from "../../components/character-sheet-components/right-side-components/RightSide/RightSide.tsx";
 import {
   createContext,
   Dispatch,
@@ -15,7 +15,6 @@ import { useParams } from "react-router-dom";
 import { getValue } from "../../utils/getValue.ts";
 import { levelUpList } from "../../data/levelUpList.ts";
 import FirstLevelMessage from "../../components/character-class-components/FirstLevelMessage/FirstLevelMessage.tsx";
-import { FormProvider, useForm } from "react-hook-form";
 
 // Should a reset be called as an onClick for the link itself? Something to look into.
 
@@ -33,6 +32,18 @@ export const CharacterSheetContext = createContext<{
   setWisdomAbility: Dispatch<SetStateAction<AbilityScoreType>>;
   charismaAbility: AbilityScoreType;
   setCharismaAbility: Dispatch<SetStateAction<AbilityScoreType>>;
+  currentSP: number;
+  setCurrentSP: Dispatch<SetStateAction<number>>;
+  currentHP: number;
+  setCurrentHP: Dispatch<SetStateAction<number>>;
+  currentRP: number;
+  setCurrentRP: Dispatch<SetStateAction<number>>;
+  tempSP: number;
+  setTempSP: Dispatch<SetStateAction<number>>;
+  tempHP: number;
+  setTempHP: Dispatch<SetStateAction<number>>;
+  tempRP: number;
+  setTempRP: Dispatch<SetStateAction<number>>;
   characterInfoObject: CharacterInfoObjectType;
   characterInfoDynamicObject: CharacterBasicInfoDynamicType;
 }>({} as any);
@@ -64,12 +75,6 @@ function CharacterSheet() {
   const characterInfoDynamicObject = useRef<CharacterBasicInfoDynamicType>(
     getValue(`characterBasicInfoDynamic${characterID}`)
   );
-
-  const methods = useForm({
-    // defaultValues: characterInfoDynamicObject.current,
-  });
-
-  // const { reset } = methods;
 
   useEffect(() => {
     setCharacterInfoObject(getValue(`characterBasicInfo${characterID}`));
@@ -119,7 +124,21 @@ function CharacterSheet() {
 
   const characterLevel = getValue(`Level${characterID}`);
 
-  useEffect(() => {}, [characterID]);
+  /*
+    Stamina, Health, and Resolve
+  */
+  const [currentSP, setCurrentSP] = useState<number>(
+    getValue(`CurrentSP${keyID}`)
+  );
+  const [currentHP, setCurrentHP] = useState<number>(
+    getValue(`CurrentHP${keyID}`)
+  );
+  const [currentRP, setCurrentRP] = useState<number>(
+    getValue(`CurrentRP${keyID}`)
+  );
+  const [tempSP, setTempSP] = useState<number>(getValue(`TempSP${keyID}`));
+  const [tempHP, setTempHP] = useState<number>(getValue(`TempHP${keyID}`));
+  const [tempRP, setTempRP] = useState<number>(getValue(`TempRP${keyID}`));
 
   const Component =
     levelUpList["1"][characterInfoObject.chClass]?.componentForClass;
@@ -140,41 +159,51 @@ function CharacterSheet() {
         setWisdomAbility: setWisdomAbility,
         charismaAbility: charismaAbility,
         setCharismaAbility: setCharismaAbility,
+        currentSP: currentSP,
+        setCurrentSP: setCurrentSP,
+        currentHP: currentHP,
+        setCurrentHP: setCurrentHP,
+        currentRP: currentRP,
+        setCurrentRP: setCurrentRP,
+        tempSP: tempSP,
+        setTempSP: setTempSP,
+        tempHP: tempHP,
+        setTempHP: setTempHP,
+        tempRP: tempRP,
+        setTempRP: setTempRP,
         characterInfoObject: characterInfoObject,
         characterInfoDynamicObject: characterInfoDynamicObject.current,
       }}
     >
-      <FormProvider {...methods}>
-        {characterLevel === 0 ? (
-          // Confirm all first level selections based on class, which need to be handled uniquely.
-          <div className={styles.FirstLevelSelectionChanges}>
-            <FirstLevelMessage />
-            <div>{Component ? <Component keyID={keyID} /> : null}</div>
-          </div>
-        ) : (
-          // Once character has confirmed choices, move on to sheet.
-          <div className={styles.characterSheetMainDiv}>
-            <div className={styles.characterInfoDescriptionBlock}>
-              <div className={styles.characterInfoBlock}>
-                <CharacterInfo />
-              </div>
-
-              <div className={styles.characterDescriptionBlock}>
-                <DescriptionBlock />
-              </div>
+      {characterLevel === 0 ? (
+        // Confirm all first level selections based on class, which need to be handled uniquely.
+        <div className={styles.FirstLevelSelectionChanges}>
+          <FirstLevelMessage />
+          <div>{Component ? <Component keyID={keyID} /> : null}</div>
+        </div>
+      ) : (
+        // Once character has confirmed choices, move on to sheet.
+        <div className={styles.characterSheetMainDiv}>
+          <div className={styles.characterInfoDescriptionBlock}>
+            <div className={styles.characterInfoBlock}>
+              <CharacterInfo />
             </div>
-            <div className={styles.statArea}>
-              <div className={styles.leftSide}>
-                <LeftSide />
-              </div>
 
-              <div className={styles.rightSide}>
-                <RightSide />
-              </div>
+            <div className={styles.characterDescriptionBlock}>
+              <DescriptionBlock />
             </div>
           </div>
-        )}
-      </FormProvider>
+          <div className={styles.statArea}>
+            <div className={styles.leftSide}>
+              <LeftSide />
+            </div>
+
+            <div className={styles.rightSide}>
+              <RightSide />
+            </div>
+          </div>
+        </div>
+      )}
     </CharacterSheetContext.Provider>
   );
 }

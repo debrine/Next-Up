@@ -3,7 +3,7 @@ import SheetLabel from "../labels/SheetLabel.tsx";
 import { useContext, useEffect } from "react";
 import { CharacterSheetContext } from "../../../states/CharacterSheet/CharacterSheet.tsx";
 import { getValue } from "../../../utils/getValue.ts";
-import { useFormContext } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { setValue } from "../../../utils/setValue.ts";
 
 function CharacterInfo() {
@@ -17,7 +17,7 @@ function CharacterInfo() {
   //       getValue(`characterBasicInfoDynamic${keyID}`)
   //     );
 
-  const { register, watch } = useFormContext();
+  const { register, watch } = useForm();
 
   useEffect(() => {
     const subscription = watch((data) =>
