@@ -156,8 +156,10 @@ function AddCharacterButton() {
     Object.keys(skillList).forEach((key: string) => {
       setValue(`${skillList[key].skillName}${keyID}`, skillList[key]);
     });
+
     // Skill notes
     setValue(`SkillNotes${keyID}`, "");
+
     // Set Class Skills
     classList[chClass].classDefaults.classSkills.forEach((s) => {
       // Get the object into a temp state.
@@ -170,6 +172,9 @@ function AddCharacterButton() {
         setValue(`${s}${keyID}`, tempSkill);
       }
     });
+
+    // Set a name for the Profession.
+    setValue(`ProfessionName${keyID}`, "");
 
     /*
       Weapon and Armor proficiencies

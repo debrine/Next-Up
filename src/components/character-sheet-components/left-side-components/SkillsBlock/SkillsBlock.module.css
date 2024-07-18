@@ -1,0 +1,45 @@
+.parentDiv {
+  padding-top: 5px;
+}
+
+.skillsHead {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+  padding-bottom: 8px;
+}
+
+.skillsHeadRight {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.skillsHeadRightTextDiv {
+  font-size: 0.8em;
+}
+
+.individualSkillDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+}
+.individualSkillDiv {
+  justify-content: space-between;
+}
+.skillRightSide,
+.classAndName {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.professionName input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin-left: 16px;
+  width: 165px;
+  text-align: center;
+}

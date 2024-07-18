@@ -6,6 +6,7 @@ import { getValue } from "../../../../utils/getValue";
 import { useForm } from "react-hook-form";
 import { setValue } from "../../../../utils/setValue";
 import { useParams } from "react-router-dom";
+import { GetModifier } from "../../../../utils/GetModifier";
 
 function InitiativeBlock() {
   const { dexterityAbility } = useContext(CharacterSheetContext);
@@ -36,14 +37,13 @@ function InitiativeBlock() {
         <div>TOTAL</div>
         <input
           type="number"
-          value={Math.floor(
-            (Number(dexterityAbility.value) +
-              Number(dexterityAbility.asBonus) -
-              Number(dexterityAbility.asPenalty)) /
-              2 -
-              5 +
-              initMisc
-          ).toString()}
+          value={
+            GetModifier(
+              Number(dexterityAbility.value),
+              Number(dexterityAbility.asBonus),
+              Number(dexterityAbility.asPenalty)
+            ) + initMisc
+          }
           readOnly
         />
       </div>
@@ -51,12 +51,10 @@ function InitiativeBlock() {
         <div>DEX MODIFIER</div>
         <input
           type="number"
-          value={Math.floor(
-            (Number(dexterityAbility.value) +
-              Number(dexterityAbility.asBonus) -
-              Number(dexterityAbility.asPenalty)) /
-              2 -
-              5
+          value={GetModifier(
+            Number(dexterityAbility.value),
+            Number(dexterityAbility.asBonus),
+            Number(dexterityAbility.asPenalty)
           ).toString()}
           readOnly
         />

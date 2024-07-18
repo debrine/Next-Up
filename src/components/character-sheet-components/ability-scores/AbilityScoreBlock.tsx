@@ -6,12 +6,13 @@ import { getValue } from "../../../utils/getValue.ts";
 import { useContext, useEffect } from "react";
 import { setValue } from "../../../utils/setValue.ts";
 import { CharacterSheetContext } from "../../../states/CharacterSheet/CharacterSheet.tsx";
+import { useParams } from "react-router-dom";
 
 // Scores and modifiers not meant to be adjusted.
 
 function AbilityScoreBlock() {
   // Won't update dynamically if pulled from the same useContext?????
-  const { keyID } = useContext(CharacterSheetContext);
+  const { characterID } = useParams();
 
   const {
     strengthAbility,
@@ -48,58 +49,58 @@ function AbilityScoreBlock() {
   useEffect(() => {
     const subscription = watch((data) => {
       // Strength
-      setValue(`Strength${keyID}`, {
+      setValue(`Strength${characterID}`, {
         aSName: "Strength",
         asBonus: data.bonusStr,
         asPenalty: data.penaltyStr,
         value: strengthAbility.value,
       });
-      setStrengthAbility(getValue(`Strength${keyID}`));
+      setStrengthAbility(getValue(`Strength${characterID}`));
 
       // Dexterity
-      setValue(`Dexterity${keyID}`, {
+      setValue(`Dexterity${characterID}`, {
         aSName: "Dexterity",
         asBonus: data.bonusDex,
         asPenalty: data.penaltyDex,
         value: dexterityAbility.value,
       });
-      setDexterityAbility(getValue(`Dexterity${keyID}`));
+      setDexterityAbility(getValue(`Dexterity${characterID}`));
 
       // Constitution
-      setValue(`Constitution${keyID}`, {
+      setValue(`Constitution${characterID}`, {
         aSName: "Constitution",
         asBonus: data.bonusCon,
         asPenalty: data.penaltyCon,
         value: constitutionAbility.value,
       });
-      setConstitutionAbility(getValue(`Constitution${keyID}`));
+      setConstitutionAbility(getValue(`Constitution${characterID}`));
 
       // Intelligence
-      setValue(`Intelligence${keyID}`, {
+      setValue(`Intelligence${characterID}`, {
         aSName: "Intelligence",
         asBonus: data.bonusInt,
         asPenalty: data.penaltyInt,
         value: intelligenceAbility.value,
       });
-      setIntelligenceAbility(getValue(`Intelligence${keyID}`));
+      setIntelligenceAbility(getValue(`Intelligence${characterID}`));
 
       // Wisdom
-      setValue(`Wisdom${keyID}`, {
+      setValue(`Wisdom${characterID}`, {
         aSName: "Wisdom",
         asBonus: data.bonusWis,
         asPenalty: data.penaltyWis,
         value: wisdomAbility.value,
       });
-      setWisdomAbility(getValue(`Wisdom${keyID}`));
+      setWisdomAbility(getValue(`Wisdom${characterID}`));
 
       // Charisma
-      setValue(`Charisma${keyID}`, {
+      setValue(`Charisma${characterID}`, {
         aSName: "Charisma",
         asBonus: data.bonusCha,
         asPenalty: data.penaltyCha,
         value: charismaAbility.value,
       });
-      setCharismaAbility(getValue(`Charisma${keyID}`));
+      setCharismaAbility(getValue(`Charisma${characterID}`));
     });
     return () => subscription.unsubscribe();
   }, [watch]);
