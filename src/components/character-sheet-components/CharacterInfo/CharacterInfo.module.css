@@ -1,32 +1,33 @@
-.parentDiv{
-    display: block;
-    margin-right: 8px;
-    text-align: start;
+.parentDiv {
+  display: block;
+  margin-right: 8px;
+  text-align: start;
+  width: 750px;
 }
 
-.characterNameDiv{
-    display: flex;
-    padding-bottom: 2px;
+.characterNameDiv {
+  display: flex;
+  padding-bottom: 2px;
 }
 
 /* Character Info lines */
-.classRaceThemeDiv{
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    column-gap: 1em;
-    padding-bottom: 2px;
+.classRaceThemeDiv {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  column-gap: 1em;
+  padding-bottom: 2px;
 }
 
-.sizeSpeedGenderHomeDiv{
-    display: grid;
-    grid-template-columns: 0.5fr 0.3fr 0.3fr 2.9fr;
-    column-gap: 1em;
-    padding-bottom: 2px;
+.sizeSpeedGenderHomeDiv {
+  display: grid;
+  grid-template-columns: 0.5fr 0.3fr 0.3fr 2.9fr;
+  column-gap: 1em;
+  padding-bottom: 2px;
 }
 
-.alignmentDietyPlayerDiv{
-    display: grid;
-    grid-template-columns: 0.3fr 1.85fr 1.85fr;
-    column-gap: 1em;
-    padding-bottom: 2px;
+.alignmentDietyPlayerDiv {
+  display: grid;
+  grid-template-columns: 0.3fr 1.85fr 1.85fr;
+  column-gap: 1em;
+  padding-bottom: 2px;
 }

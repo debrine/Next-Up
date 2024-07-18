@@ -52,7 +52,7 @@ function HealthAndResolveBlock() {
   //   Max SP is based off value given from class plus your constitution modifier, all multiplied by character level.
   const maxSP: number =
     (classList[characterInfoObject.chClass].classDefaults.hitStaminaPoints +
-      GetModifier(Number(getValue(`Constitution${characterID}`).value), 0, 0)) *
+      GetModifier(getValue(`Constitution${characterID}`))) *
     getValue(`Level${characterID}`);
 
   //   Max HP is based off value given from class multiplied by character level and value give by race (only once).
@@ -67,18 +67,13 @@ function HealthAndResolveBlock() {
   if (Math.floor(getValue(`Level${characterID}`) / 2) > 0) {
     mathFloorHalfLevel = Math.floor(getValue(`Level${characterID}`)) / 2;
   }
+
   const keyAbilityObject: AbilityScoreType = getValue(
     `${characterInfoObject.keyAbilityScoreSelected}${characterID}`
   );
 
   //   Add your Key Ability Score Modifier. If this results negative, then it will be set to a minimum of 1 where the value is called below.
-  const maxRP: number =
-    mathFloorHalfLevel +
-    GetModifier(
-      keyAbilityObject.value,
-      keyAbilityObject.asBonus,
-      keyAbilityObject.asPenalty
-    );
+  const maxRP: number = mathFloorHalfLevel + GetModifier(keyAbilityObject);
 
   const { register, watch } = useForm();
 

@@ -1,6 +1,7 @@
 type SkillListType = {
   skillName: string;
   isClassSkill: boolean;
+  classSkillBonus: number;
   trainingRequired: boolean;
   value: number;
   insightBonusToValue: number;

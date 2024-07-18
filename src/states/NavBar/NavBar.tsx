@@ -12,7 +12,7 @@ function NavBar() {
     if (getValue("charactersAvailable") != null) {
       setNameArray(getValue("charactersAvailable"));
     }
-  }, []); // Find a way to update the value
+  }, []);
 
   addEventListener("Character Created", () => {
     setNameArray(getValue("charactersAvailable"));

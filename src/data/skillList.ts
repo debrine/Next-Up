@@ -2,6 +2,7 @@ export const skillList: { [key: string]: SkillListType } = {
   Acrobatics: {
     skillName: "Acrobatics",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: false,
     value: 0,
     insightBonusToValue: 0,
@@ -16,6 +17,7 @@ export const skillList: { [key: string]: SkillListType } = {
   Athletics: {
     skillName: "Athletics",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: false,
     value: 0,
     insightBonusToValue: 0,
@@ -30,6 +32,7 @@ export const skillList: { [key: string]: SkillListType } = {
   Bluff: {
     skillName: "Bluff",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: false,
     value: 0,
     insightBonusToValue: 0,
@@ -44,6 +47,7 @@ export const skillList: { [key: string]: SkillListType } = {
   Computers: {
     skillName: "Computers",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: true,
     value: 0,
     insightBonusToValue: 0,
@@ -58,6 +62,7 @@ export const skillList: { [key: string]: SkillListType } = {
   Culture: {
     skillName: "Culture",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: true,
     value: 0,
     insightBonusToValue: 0,
@@ -72,6 +77,7 @@ export const skillList: { [key: string]: SkillListType } = {
   Diplomacy: {
     skillName: "Diplomacy",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: false,
     value: 0,
     insightBonusToValue: 0,
@@ -86,6 +92,7 @@ export const skillList: { [key: string]: SkillListType } = {
   Disguise: {
     skillName: "Disguise",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: false,
     value: 0,
     insightBonusToValue: 0,
@@ -100,6 +107,7 @@ export const skillList: { [key: string]: SkillListType } = {
   Engineering: {
     skillName: "Engineering",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: true,
     value: 0,
     insightBonusToValue: 0,
@@ -114,6 +122,7 @@ export const skillList: { [key: string]: SkillListType } = {
   Intimidate: {
     skillName: "Intimidate",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: false,
     value: 0,
     insightBonusToValue: 0,
@@ -128,6 +137,7 @@ export const skillList: { [key: string]: SkillListType } = {
   "Life Science": {
     skillName: "Life Science",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: true,
     value: 0,
     insightBonusToValue: 0,
@@ -142,6 +152,7 @@ export const skillList: { [key: string]: SkillListType } = {
   Medicine: {
     skillName: "Medicine",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: true,
     value: 0,
     insightBonusToValue: 0,
@@ -156,6 +167,7 @@ export const skillList: { [key: string]: SkillListType } = {
   Mysticism: {
     skillName: "Mysticism",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: true,
     value: 0,
     insightBonusToValue: 0,
@@ -170,6 +182,7 @@ export const skillList: { [key: string]: SkillListType } = {
   Perception: {
     skillName: "Perception",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: false,
     value: 0,
     insightBonusToValue: 0,
@@ -184,6 +197,7 @@ export const skillList: { [key: string]: SkillListType } = {
   "Physical Science": {
     skillName: "Physical Science",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: true,
     value: 0,
     insightBonusToValue: 0,
@@ -198,6 +212,7 @@ export const skillList: { [key: string]: SkillListType } = {
   Piloting: {
     skillName: "Piloting",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: true,
     value: 0,
     insightBonusToValue: 0,
@@ -212,6 +227,7 @@ export const skillList: { [key: string]: SkillListType } = {
   Profession: {
     skillName: "Profession",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: false,
     value: 0,
     insightBonusToValue: 0,
@@ -226,6 +242,7 @@ export const skillList: { [key: string]: SkillListType } = {
   "Sense Motive": {
     skillName: "Sense Motive",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: false,
     value: 0,
     insightBonusToValue: 0,
@@ -240,6 +257,7 @@ export const skillList: { [key: string]: SkillListType } = {
   "Sleight of Hand": {
     skillName: "Sleight of Hand",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: true,
     value: 0,
     insightBonusToValue: 0,
@@ -254,6 +272,7 @@ export const skillList: { [key: string]: SkillListType } = {
   Stealth: {
     skillName: "Stealth",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: false,
     value: 0,
     insightBonusToValue: 0,
@@ -268,6 +287,7 @@ export const skillList: { [key: string]: SkillListType } = {
   Survival: {
     skillName: "Survival",
     isClassSkill: false,
+    classSkillBonus: 0,
     trainingRequired: false,
     value: 0,
     insightBonusToValue: 0,

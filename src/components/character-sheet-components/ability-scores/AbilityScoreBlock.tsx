@@ -51,54 +51,54 @@ function AbilityScoreBlock() {
       // Strength
       setValue(`Strength${characterID}`, {
         aSName: "Strength",
-        asBonus: data.bonusStr,
-        asPenalty: data.penaltyStr,
-        value: strengthAbility.value,
+        asBonus: Number(data.bonusStr),
+        asPenalty: Number(data.penaltyStr),
+        value: Number(strengthAbility.value),
       });
       setStrengthAbility(getValue(`Strength${characterID}`));
 
       // Dexterity
       setValue(`Dexterity${characterID}`, {
         aSName: "Dexterity",
-        asBonus: data.bonusDex,
-        asPenalty: data.penaltyDex,
-        value: dexterityAbility.value,
+        asBonus: Number(data.bonusDex),
+        asPenalty: Number(data.penaltyDex),
+        value: Number(dexterityAbility.value),
       });
       setDexterityAbility(getValue(`Dexterity${characterID}`));
 
       // Constitution
       setValue(`Constitution${characterID}`, {
         aSName: "Constitution",
-        asBonus: data.bonusCon,
-        asPenalty: data.penaltyCon,
-        value: constitutionAbility.value,
+        asBonus: Number(data.bonusCon),
+        asPenalty: Number(data.penaltyCon),
+        value: Number(constitutionAbility.value),
       });
       setConstitutionAbility(getValue(`Constitution${characterID}`));
 
       // Intelligence
       setValue(`Intelligence${characterID}`, {
         aSName: "Intelligence",
-        asBonus: data.bonusInt,
-        asPenalty: data.penaltyInt,
-        value: intelligenceAbility.value,
+        asBonus: Number(data.bonusInt),
+        asPenalty: Number(data.penaltyInt),
+        value: Number(intelligenceAbility.value),
       });
       setIntelligenceAbility(getValue(`Intelligence${characterID}`));
 
       // Wisdom
       setValue(`Wisdom${characterID}`, {
         aSName: "Wisdom",
-        asBonus: data.bonusWis,
-        asPenalty: data.penaltyWis,
-        value: wisdomAbility.value,
+        asBonus: Number(data.bonusWis),
+        asPenalty: Number(data.penaltyWis),
+        value: Number(wisdomAbility.value),
       });
       setWisdomAbility(getValue(`Wisdom${characterID}`));
 
       // Charisma
       setValue(`Charisma${characterID}`, {
         aSName: "Charisma",
-        asBonus: data.bonusCha,
-        asPenalty: data.penaltyCha,
-        value: charismaAbility.value,
+        asBonus: Number(data.bonusCha),
+        asPenalty: Number(data.penaltyCha),
+        value: Number(charismaAbility.value),
       });
       setCharismaAbility(getValue(`Charisma${characterID}`));
     });

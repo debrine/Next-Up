@@ -32,40 +32,36 @@ function InitiativeBlock() {
 
   return (
     <div className={styles.parentDiv}>
-      <SheetLabel sheetLabelText="INITIATIVE" />
-      <div className={styles.initiativeDiv}>
-        <div>TOTAL</div>
-        <input
-          type="number"
-          value={
-            GetModifier(
-              Number(dexterityAbility.value),
-              Number(dexterityAbility.asBonus),
-              Number(dexterityAbility.asPenalty)
-            ) + initMisc
-          }
-          readOnly
-        />
+      <div className={styles.leftSide}>
+        <SheetLabel sheetLabelText="INITIATIVE" />
       </div>
-      <div className={styles.initiativeDiv}>
-        <div>DEX MODIFIER</div>
-        <input
-          type="number"
-          value={GetModifier(
-            Number(dexterityAbility.value),
-            Number(dexterityAbility.asBonus),
-            Number(dexterityAbility.asPenalty)
-          ).toString()}
-          readOnly
-        />
-      </div>
-      <div className={styles.initiativeDiv}>
-        <div>MISC MODIFIER</div>
-        <input
-          type="number"
-          {...register(`InitiativeMiscModifier`)}
-          defaultValue={initMisc}
-        />
+      <div className={styles.rightSide}>
+        <div className={styles.initiativeDiv}>
+          <div className={styles.initHead}>TOTAL</div>
+          <input
+            type="number"
+            value={GetModifier(dexterityAbility) + initMisc}
+            readOnly
+          />
+        </div>
+        <div className={styles.plusEquals}> = </div>
+        <div className={styles.initiativeDiv}>
+          <div className={styles.initHead}>DEX MODIFIER</div>
+          <input
+            type="number"
+            value={GetModifier(dexterityAbility).toString()}
+            readOnly
+          />
+        </div>
+        <div className={styles.plusEquals}> + </div>
+        <div className={styles.initiativeDiv}>
+          <div className={styles.initHead}>MISC MODIFIER</div>
+          <input
+            type="number"
+            {...register(`InitiativeMiscModifier`)}
+            defaultValue={initMisc}
+          />
+        </div>
       </div>
     </div>
   );
