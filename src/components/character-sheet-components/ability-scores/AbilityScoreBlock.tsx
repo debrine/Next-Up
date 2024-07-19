@@ -252,12 +252,12 @@ function AbilityScoreBlock() {
             <input type="number" />
             <input type="number" />
             <input type="number" /> */}
-            <input type="number" {...register("bonusStr")} />
-            <input type="number" {...register("bonusDex")} />
-            <input type="number" {...register("bonusCon")} />
-            <input type="number" {...register("bonusInt")} />
-            <input type="number" {...register("bonusWis")} />
-            <input type="number" {...register("bonusCha")} />
+            <input type="number" {...register("bonusStr")} min={0} />
+            <input type="number" {...register("bonusDex")} min={0} />
+            <input type="number" {...register("bonusCon")} min={0} />
+            <input type="number" {...register("bonusInt")} min={0} />
+            <input type="number" {...register("bonusWis")} min={0} />
+            <input type="number" {...register("bonusCha")} min={0} />
           </div>
           <div className={styles.penDrainColumn}>
             <div className={styles.columnLabel}>PENALTY</div>
@@ -267,12 +267,12 @@ function AbilityScoreBlock() {
             <input type="number" />
             <input type="number" />
             <input type="number" /> */}
-            <input type="number" {...register("penaltyStr")} />
-            <input type="number" {...register("penaltyDex")} />
-            <input type="number" {...register("penaltyCon")} />
-            <input type="number" {...register("penaltyInt")} />
-            <input type="number" {...register("penaltyWis")} />
-            <input type="number" {...register("penaltyCha")} />
+            <input type="number" {...register("penaltyStr")} min={0} />
+            <input type="number" {...register("penaltyDex")} min={0} />
+            <input type="number" {...register("penaltyCon")} min={0} />
+            <input type="number" {...register("penaltyInt")} min={0} />
+            <input type="number" {...register("penaltyWis")} min={0} />
+            <input type="number" {...register("penaltyCha")} min={0} />
           </div>
         </div>
       </div>

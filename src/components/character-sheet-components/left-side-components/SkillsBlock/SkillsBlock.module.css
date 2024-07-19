@@ -18,6 +18,19 @@
 
 .skillsHeadRightTextDiv {
   font-size: 0.8em;
+  text-align: right;
+}
+
+.skillInputLabels {
+  display: flex;
+  justify-content: end;
+}
+
+.IndividualSkillInputLabel {
+  align-self: flex-end;
+  width: 60px;
+  margin-left: 26px;
+  text-align: center;
 }
 
 .individualSkillDiv {

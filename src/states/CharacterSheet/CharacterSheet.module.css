@@ -27,7 +27,7 @@ textarea {
 }
 
 /* Remove arrows on number input */
-input[type="number"]::-webkit-inner-spin-button {
+/* input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
+} */
