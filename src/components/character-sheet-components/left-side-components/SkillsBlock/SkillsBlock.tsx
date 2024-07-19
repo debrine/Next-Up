@@ -36,12 +36,13 @@ function SkillsBlock() {
   };
 
   // Function to edit Skill Ranks
-  function editSkill(rank: number, classSkillBonus: number, skill: string) {
+  function editSkill(rank: number, attributeModBonus: number, skill: string) {
     tempSkill = getValue(`${skill}${characterID}`);
     tempSkill.ranks = rank;
     tempSkill.value =
       rank +
-      classSkillBonus +
+      attributeModBonus +
+      getValue(`${skill}${characterID}`).classSkillBonus +
       getValue(`${skill}${characterID}`).insightBonusToValue +
       getValue(`${skill}${characterID}`).racialBonusToValue;
     setValue(`${skill}${characterID}`, tempSkill);
@@ -77,7 +78,7 @@ function SkillsBlock() {
       skillArray.forEach((skill) => {
         editSkill(
           Number(data[`${skill}Ranks`]),
-          Number(data[`${skill}ClassBonus`]),
+          Number(data[`${skill}ModifierBonus`]),
           skill
         );
       });
