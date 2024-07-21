@@ -1,0 +1,10 @@
+.parentDiv {
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  align-self: center;
+  text-align: center;
+  border: 2px solid red;
+  margin: auto;
+  width: 50%;
+}

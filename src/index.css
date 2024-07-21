@@ -1,46 +1,54 @@
-
-
-body{
-    /* background-image: url('./assets/starfinder-pact-worlds.jpeg'); */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    font-family: "Orbitron", sans-serif;
-    margin: 0;
-    padding: 0;
+body {
+  /* background-image: url('./assets/starfinder-pact-worlds.jpeg'); */
+  /* background-color: #051626; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: "Orbitron", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.appParent{
-    display: flex;
-    flex-direction: row;
+.appParent {
+  display: flex;
+  /* flex-direction: row; */
+  flex-direction: column;
 }
 
+.outletBody {
+  width: 50%;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
 
-
-.navBar{
-    margin: 0;
-    background-color: hsl(182, 48%, 62%);
-    top: 0;
-    left: 0;
-    bottom: 0;
-    max-width: 180px;
-    min-width: 180px;
-    min-height: 100vh; /* Need to do this without vh, since it stretches with the page. */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transform: translate(0, 0);
-    border-radius: 0 16px 16px 0;
+.navBar {
+  margin: 0;
+  background-color: hsl(182, 48%, 62%);
+  /* top: 0;
+  left: 0;
+  bottom: 0;
+  max-width: 180px;
+  min-width: 180px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translate(0, 0);
+  border-radius: 0 16px 16px 0; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 /* 
 <uniquifier>: Use a unique and descriptive class name
 <weight>: Use a value from 400 to 900 
 */
-
-
 
 /* .backgroundDiv::before{
     content: '';

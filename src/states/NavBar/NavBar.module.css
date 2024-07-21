@@ -1,16 +1,23 @@
-.plusCircle{
-    font-weight: bold;
-    font-size: 30px;
+.plusCircle {
+  font-weight: bold;
+  font-size: 30px;
 }
 
-.navBarItem a{
-    text-decoration: none;
-    color: rgb(59, 4, 47);
+.navBarItem a {
+  text-decoration: none;
+  color: rgb(59, 4, 47);
 }
-.navBarItem a:hover{
-    color: rgba(59, 4, 47, 0.555);
+.navBarItem a:hover {
+  color: rgba(59, 4, 47, 0.555);
 }
 
-.createCharacter a{
-    color: rgb(179, 27, 0);
+.createCharacter a {
+  color: rgb(179, 27, 0);
+}
+
+.navBarParent {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }

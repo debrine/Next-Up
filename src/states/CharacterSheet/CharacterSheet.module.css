@@ -1,12 +1,19 @@
+.parentDiv {
+  width: 50%;
+  margin: auto;
+  position: absolute;
+  justify-content: center;
+}
+
 .characterSheetMainDiv {
   font-size: 0.8rem;
-  width: 1120px;
-  margin: 16px 0px 0px 8px;
+  width: 100%;
+  margin: 16px 0px 0px 0px;
 }
 
 .characterInfoDescriptionBlock {
   display: flex;
-  width: 100%;
+  justify-content: center;
 }
 .characterInfoDescriptionBlock input {
   border: none;
@@ -21,9 +28,8 @@ textarea {
 }
 
 .statArea {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 50px;
+  display: flex;
+  justify-content: center;
 }
 
 /* Remove arrows on number input */
