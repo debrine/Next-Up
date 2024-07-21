@@ -116,35 +116,52 @@ function HealthAndResolveBlock() {
           <div className={styles.head}>CURRENT</div>
           <div className={styles.head}>TEMP</div>
         </div>
-        <div className={styles.labelValueDiv}>
-          <div className={styles.label}>STAMINA POINTS</div>
-          <input type="number" value={maxSP} readOnly />
-          <input
-            type="number"
-            {...register("currentSP")}
-            defaultValue={currentSP}
-          />
-          <input type="number" {...register("tempSP")} defaultValue={tempSP} />
-        </div>
-        <div className={styles.labelValueDiv}>
-          <div className={styles.label}>HIT POINTS</div>
-          <input type="number" value={maxHP} readOnly />
-          <input
-            type="number"
-            {...register("currentHP")}
-            defaultValue={currentHP}
-          />
-          <input type="number" {...register("tempHP")} defaultValue={tempHP} />
-        </div>
-        <div className={styles.labelValueDiv}>
-          <div className={styles.label}>RESOLVE POINTS</div>
-          <input type="number" value={maxRP > 0 ? maxRP : 1} readOnly />
-          <input
-            type="number"
-            {...register("currentRP")}
-            defaultValue={currentRP}
-          />
-          <input type="number" {...register("tempRP")} defaultValue={tempRP} />
+        <div className={styles.inputDiv}>
+          <div className={styles.labelValueColumn}>
+            <div className={styles.label}>STAMINA POINTS</div>
+            <input type="number" value={maxSP} readOnly />
+            <input
+              type="number"
+              {...register("currentSP")}
+              defaultValue={currentSP}
+              max={maxSP}
+            />
+            <input
+              type="number"
+              {...register("tempSP")}
+              defaultValue={tempSP}
+            />
+          </div>
+          <div className={styles.labelValueColumn}>
+            <div className={styles.label}>HIT POINTS</div>
+            <input type="number" value={maxHP} readOnly />
+            <input
+              type="number"
+              {...register("currentHP")}
+              defaultValue={currentHP}
+              max={maxHP}
+            />
+            <input
+              type="number"
+              {...register("tempHP")}
+              defaultValue={tempHP}
+            />
+          </div>
+          <div className={styles.labelValueColumn}>
+            <div className={styles.label}>RESOLVE POINTS</div>
+            <input type="number" value={maxRP > 0 ? maxRP : 1} readOnly />
+            <input
+              type="number"
+              {...register("currentRP")}
+              defaultValue={currentRP}
+              max={maxRP}
+            />
+            <input
+              type="number"
+              {...register("tempRP")}
+              defaultValue={tempRP}
+            />
+          </div>
         </div>
       </div>
     </div>

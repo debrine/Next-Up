@@ -13,7 +13,9 @@ import { useForm } from "react-hook-form";
 function SkillsBlock() {
   const { characterID } = useParams();
 
-  const { characterInfoObject } = useContext(CharacterSheetContext);
+  const { characterInfoObject, SkillBlockStatesList } = useContext(
+    CharacterSheetContext
+  );
 
   const skillArray: string[] = Object.keys(skillList).map((key: string) => {
     return key;
@@ -35,43 +37,63 @@ function SkillsBlock() {
     attributeAffecting: "",
   };
 
+  // Skill ranks used
+  function getUsedRanks() {
+    let tempRanks: number = 0;
+    skillArray.forEach((skill) => {
+      tempRanks += getValue(`${skill}${characterID}`).ranks;
+    });
+
+    return tempRanks;
+  }
+
+  // Max Skill ranks (Don't use GetModifier, as bonuses and Penalties do not affect skill ranks per level.)
+  function getMaxRanks() {
+    return (
+      (Math.floor(getValue(`Intelligence${characterID}`).value / 2 - 5) +
+        classList[characterInfoObject.chClass].classDefaults
+          .skillPointsPerLevel) *
+      Number(getValue(`Level${characterID}`))
+    );
+  }
+
   // Function to edit Skill Ranks
   function editSkill(rank: number, attributeModBonus: number, skill: string) {
-    tempSkill = getValue(`${skill}${characterID}`);
+    tempSkill = SkillBlockStatesList[skill].skillState;
     tempSkill.ranks = rank;
     tempSkill.value =
       rank +
       attributeModBonus +
-      getValue(`${skill}${characterID}`).classSkillBonus +
-      getValue(`${skill}${characterID}`).insightBonusToValue +
-      getValue(`${skill}${characterID}`).racialBonusToValue;
+      SkillBlockStatesList[skill].skillState.classSkillBonus +
+      SkillBlockStatesList[skill].skillState.insightBonusToValue +
+      SkillBlockStatesList[skill].skillState.racialBonusToValue;
+    SkillBlockStatesList[skill].setSkill(tempSkill);
     setValue(`${skill}${characterID}`, tempSkill);
   }
 
-  // Function to add or remove the 3 to class skills
-  function addClassSkillBonus(skill: string) {
-    tempSkill = getValue(`${skill}${characterID}`);
-    if (tempSkill.isClassSkill && tempSkill.ranks > 0) {
-      tempSkill.classSkillBonus = 3;
-    } else {
-      tempSkill.classSkillBonus = 0;
-    }
-    setValue(`${skill}${characterID}`, tempSkill);
-  }
+  // function handleRankChanges(e: ChangeEvent<HTMLInputElement>, skill: string) {
+  //   tempSkill = SkillBlockStatesList[skill].skillState;
+  //   tempSkill.ranks = Number(e.target.value);
+  //   setValue(`${skill}${characterID}`, tempSkill);
+  // }
 
   function handleClassSkill(skill: string) {
-    tempSkill = getValue(`${skill}${characterID}`);
+    tempSkill = SkillBlockStatesList[skill].skillState;
     tempSkill.isClassSkill = !tempSkill.isClassSkill;
     if (tempSkill.isClassSkill && tempSkill.ranks > 0) {
       tempSkill.classSkillBonus = 3;
     } else {
       tempSkill.classSkillBonus = 0;
     }
+    SkillBlockStatesList[skill].setSkill(tempSkill);
     setValue(`${skill}${characterID}`, tempSkill);
   }
 
-  //   Turn this into watch individual registers for ranks only to see if it will update
   const { register, watch } = useForm();
+
+  useEffect(() => {
+    console.log(SkillBlockStatesList[`Acrobatics`].skillState);
+  }, [SkillBlockStatesList[`Acrobatics`].skillState]);
 
   useEffect(() => {
     const subscription = watch((data) => {
@@ -82,6 +104,7 @@ function SkillsBlock() {
           skill
         );
       });
+      setValue(`ProfessionName${characterID}`, data.ProfessionName);
     });
     return () => subscription.unsubscribe();
   }, [watch]);
@@ -93,28 +116,32 @@ function SkillsBlock() {
         <div className={styles.skillsHeadRight}>
           <div className={styles.skillsHeadRightTextDiv}>
             <div className={styles.skillsHeadRightText}>SKILL RANKS</div>
+            <div className={styles.skillsHeadRightText}>USED</div>
+          </div>
+          <div className={styles.skillsHeadRightRanks}>
+            <input type="number" readOnly value={getUsedRanks()} />
+          </div>
+          <div className={styles.skillsHeadRightTextDiv}>
+            <div className={styles.skillsHeadRightText}>SKILL RANKS</div>
             <div className={styles.skillsHeadRightText}>PER LEVEL</div>
           </div>
           <div className={styles.skillsHeadRightRanks}>
-            <input
-              type="number"
-              readOnly
-              value={
-                (GetModifier(getValue(`Intelligence${characterID}`)) +
-                  classList[characterInfoObject.chClass].classDefaults
-                    .skillPointsPerLevel) *
-                Number(getValue(`Level${characterID}`))
-              }
-            />
+            <input type="number" readOnly value={getMaxRanks()} />
           </div>
         </div>
+      </div>
+      <div className={styles.skillInputLabels}>
+        <div className={styles.IndividualSkillInputLabel}>TOTAL</div>
+        <div className={styles.IndividualSkillInputLabel}>RANKS</div>
+        <div className={styles.IndividualSkillInputLabel}>CLASS BONUS</div>
+        <div className={styles.IndividualSkillInputLabel}>ABILITY MOD</div>
       </div>
       {skillArray.map((skill) => {
         return (
           <div className={styles.individualSkillDiv} key={skill}>
             <div className={styles.skillLeftSide}>
               <div className={styles.classAndName}>
-                {getValue(`${skill}${characterID}`).isClassSkill ? (
+                {SkillBlockStatesList[skill].skillState.isClassSkill ? (
                   <input
                     type="checkbox"
                     {...register(`${skill}Checkbox`)}
@@ -127,12 +154,16 @@ function SkillsBlock() {
                     onClick={() => handleClassSkill(skill)}
                   />
                 )}{" "}
-                {skill}
+                {skill.toUpperCase()}
               </div>
 
               {skill === "Profession" && (
                 <div className={styles.professionName}>
-                  <input type="text" />
+                  <input
+                    type="text"
+                    {...register(`ProfessionName`)}
+                    defaultValue={getValue(`ProfessionName${characterID}`)}
+                  />
                 </div>
               )}
             </div>
@@ -141,21 +172,35 @@ function SkillsBlock() {
               <input
                 type="number"
                 {...register(`${skill}Total`)}
-                defaultValue={getValue(`${skill}${characterID}`).value}
+                value={SkillBlockStatesList[skill].skillState.value}
                 readOnly
               />{" "}
               ={/* Ranks */}
               <input
                 type="number"
                 {...register(`${skill}Ranks`)}
-                defaultValue={getValue(`${skill}${characterID}`).ranks}
+                value={
+                  SkillBlockStatesList[skill].skillState
+                    .operativeSpecializationSkill
+                    ? getValue(`Level${characterID}`)
+                    : SkillBlockStatesList[skill].skillState.ranks
+                }
+                readOnly={
+                  SkillBlockStatesList[skill].skillState
+                    .operativeSpecializationSkill
+                    ? true
+                    : false
+                }
+                defaultValue={SkillBlockStatesList[skill].skillState.ranks}
+                max={getValue(`Level${characterID}`)}
+                min={0}
               />{" "}
               +{/* Class Bonus */}
               <input
                 type="number"
                 {...register(`${skill}ClassBonus`)}
                 defaultValue={
-                  getValue(`${skill}${characterID}`).classSkillBonus
+                  SkillBlockStatesList[skill].skillState.classSkillBonus
                 }
                 readOnly
               />{" "}
@@ -163,7 +208,7 @@ function SkillsBlock() {
               <input
                 type="number"
                 {...register(`${skill}ModifierBonus`)}
-                defaultValue={GetModifier(
+                value={GetModifier(
                   getValue(
                     `${skillList[skill].attributeAffecting}${characterID}`
                   )

@@ -1,34 +1,34 @@
-.attributeBox{
-    display: flex;
-    border: 2px solid black;
-    width: 100%;
-    border-radius: 4px;
-    margin: -4px 0 0 10px;
-    padding: 0 10px 0 10px;
-    align-items: flex-end;
+.attributeBox {
+  display: flex;
+  border: 2px solid black;
+  width: 100%;
+  border-radius: 4px;
+  margin: -4px 0 0 10px;
+  padding: 0 10px 0 10px;
+  align-items: flex-end;
+  justify-content: space-evenly;
 }
 
-
-
-.inputDiv{
-    display: flex;
+.inputDiv {
+  display: flex;
 }
 
-.scoreModifierColumn, .penDrainColumn{
-    text-align: center;
+.scoreModifierColumn,
+.penDrainColumn {
+  text-align: center;
 }
 
-input{
-    display: block;
-    text-align: center;
-    width: 60px;
-    margin: 4px;
-    border-radius: 4px;
-    font-size: 1.2rem;
-    height: 30px;
+input {
+  display: block;
+  text-align: center;
+  width: 60px;
+  margin: 4px;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  height: 30px;
 }
 
-.scoreModifierColumn input{
-    border: 3px solid black;
-    height: 28px;
+.scoreModifierColumn input {
+  border: 3px solid black;
+  height: 28px;
 }

@@ -18,6 +18,13 @@ import FirstLevelMessage from "../../components/character-class-components/First
 
 // Should a reset be called as an onClick for the link itself? Something to look into.
 
+type SkillBlockStatesListType = {
+  [key: string]: {
+    skillState: SkillListType;
+    setSkill: Dispatch<SetStateAction<SkillListType>>;
+  };
+};
+
 export const CharacterSheetContext = createContext<{
   keyID: string;
   strengthAbility: AbilityScoreType;
@@ -44,6 +51,7 @@ export const CharacterSheetContext = createContext<{
   setTempHP: Dispatch<SetStateAction<number>>;
   tempRP: number;
   setTempRP: Dispatch<SetStateAction<number>>;
+  SkillBlockStatesList: SkillBlockStatesListType;
   characterInfoObject: CharacterInfoObjectType;
   characterInfoDynamicObject: CharacterBasicInfoDynamicType;
 }>({} as any);
@@ -53,10 +61,157 @@ function CharacterSheet() {
 
   const [keyID, setKeyID] = useState<string>("");
 
+  const [skillAcrobatics, setSkillAcrobatics] = useState<SkillListType>(
+    getValue(`Acrobatics${characterID}`)
+  );
+  const [skillAthletics, setSkillAthletics] = useState<SkillListType>(
+    getValue(`Athletics${characterID}`)
+  );
+  const [skillBluff, setSkillBluff] = useState<SkillListType>(
+    getValue(`Bluff${characterID}`)
+  );
+  const [skillComputers, setSkillComputers] = useState<SkillListType>(
+    getValue(`Computers${characterID}`)
+  );
+  const [skillCulture, setSkillCulture] = useState<SkillListType>(
+    getValue(`Culture${characterID}`)
+  );
+  const [skillDiplomacy, setSkillDiplomacy] = useState<SkillListType>(
+    getValue(`Diplomacy${characterID}`)
+  );
+  const [skillDisguise, setSkillDisguise] = useState<SkillListType>(
+    getValue(`Disguise${characterID}`)
+  );
+  const [skillEngineering, setSkillEngineering] = useState<SkillListType>(
+    getValue(`Engineering${characterID}`)
+  );
+  const [skillIntimidate, setSkillIntimidate] = useState<SkillListType>(
+    getValue(`Intimidate${characterID}`)
+  );
+  const [skillLifeScience, setSkillLifeScience] = useState<SkillListType>(
+    getValue(`Life Science${characterID}`)
+  );
+  const [skillMedicine, setSkillMedicine] = useState<SkillListType>(
+    getValue(`Medicine${characterID}`)
+  );
+  const [skillMysticism, setSkillMysticism] = useState<SkillListType>(
+    getValue(`Mysticism${characterID}`)
+  );
+  const [skillPerception, setSkillPerception] = useState<SkillListType>(
+    getValue(`Perception${characterID}`)
+  );
+  const [skillPhysicalScience, setSkillPhysicalScience] =
+    useState<SkillListType>(getValue(`Physical Science${characterID}`));
+  const [skillPiloting, setSkillPiloting] = useState<SkillListType>(
+    getValue(`Piloting${characterID}`)
+  );
+  const [skillProfession, setSkillProfession] = useState<SkillListType>(
+    getValue(`Profession${characterID}`)
+  );
+  const [skillSenseMotive, setSkillSenseMotive] = useState<SkillListType>(
+    getValue(`Sense Motive${characterID}`)
+  );
+  const [skillSleightOfHand, setSkillSleightOfHand] = useState<SkillListType>(
+    getValue(`Sleight of Hand${characterID}`)
+  );
+  const [skillStealth, setSkillStealth] = useState<SkillListType>(
+    getValue(`Stealth${characterID}`)
+  );
+  const [skillSurvival, setSkillSurvival] = useState<SkillListType>(
+    getValue(`Survival${characterID}`)
+  );
+
+  const SkillBlockStatesList: SkillBlockStatesListType = {
+    Acrobatics: {
+      skillState: skillAcrobatics,
+      setSkill: setSkillAcrobatics,
+    },
+    Athletics: {
+      skillState: skillAthletics,
+      setSkill: setSkillAthletics,
+    },
+    Bluff: {
+      skillState: skillBluff,
+      setSkill: setSkillBluff,
+    },
+    Computers: {
+      skillState: skillComputers,
+      setSkill: setSkillComputers,
+    },
+    Culture: {
+      skillState: skillCulture,
+      setSkill: setSkillCulture,
+    },
+    Diplomacy: {
+      skillState: skillDiplomacy,
+      setSkill: setSkillDiplomacy,
+    },
+    Disguise: {
+      skillState: skillDisguise,
+      setSkill: setSkillDisguise,
+    },
+    Engineering: {
+      skillState: skillEngineering,
+      setSkill: setSkillEngineering,
+    },
+    Intimidate: {
+      skillState: skillIntimidate,
+      setSkill: setSkillIntimidate,
+    },
+    "Life Science": {
+      skillState: skillLifeScience,
+      setSkill: setSkillLifeScience,
+    },
+    Medicine: {
+      skillState: skillMedicine,
+      setSkill: setSkillMedicine,
+    },
+    Mysticism: {
+      skillState: skillMysticism,
+      setSkill: setSkillMysticism,
+    },
+    Perception: {
+      skillState: skillPerception,
+      setSkill: setSkillPerception,
+    },
+    "Physical Science": {
+      skillState: skillPhysicalScience,
+      setSkill: setSkillPhysicalScience,
+    },
+    Piloting: {
+      skillState: skillPiloting,
+      setSkill: setSkillPiloting,
+    },
+    Profession: {
+      skillState: skillProfession,
+      setSkill: setSkillProfession,
+    },
+    "Sense Motive": {
+      skillState: skillSenseMotive,
+      setSkill: setSkillSenseMotive,
+    },
+    "Sleight of Hand": {
+      skillState: skillSleightOfHand,
+      setSkill: setSkillSleightOfHand,
+    },
+    Stealth: {
+      skillState: skillStealth,
+      setSkill: setSkillStealth,
+    },
+    Survival: {
+      skillState: skillSurvival,
+      setSkill: setSkillSurvival,
+    },
+  };
+
   useEffect(() => {
     if (characterID) {
       setKeyID(characterID);
     }
+
+    Object.keys(SkillBlockStatesList).forEach((key) => {
+      SkillBlockStatesList[key].setSkill(getValue(`${key}${characterID}`));
+    });
   }, [characterID]);
 
   const [characterInfoObject, setCharacterInfoObject] =
@@ -171,6 +326,7 @@ function CharacterSheet() {
         setTempHP: setTempHP,
         tempRP: tempRP,
         setTempRP: setTempRP,
+        SkillBlockStatesList: SkillBlockStatesList,
         characterInfoObject: characterInfoObject,
         characterInfoDynamicObject: characterInfoDynamicObject.current,
       }}
