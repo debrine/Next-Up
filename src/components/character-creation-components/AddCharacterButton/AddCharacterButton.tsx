@@ -161,15 +161,16 @@ function AddCharacterButton() {
     setValue(`SkillNotes${keyID}`, "");
 
     // Set Class Skills
-    classList[chClass].classDefaults.classSkills.forEach((s) => {
+    classList[chClass].classDefaults.classSkills.forEach((skill) => {
       // Get the object into a temp state.
-      const classSkill = getValue(`${s}${keyID}`);
+      const classSkill = getValue(`${skill}${keyID}`);
 
       if (classSkill != undefined) {
         // Change the isClassSkill value to true, and set it again.
-        let tempSkill = Object.assign(classSkill);
+        let tempSkill: SkillListType = Object.assign(classSkill);
         tempSkill.isClassSkill = true;
-        setValue(`${s}${keyID}`, tempSkill);
+        tempSkill.classSkillBonus = 3;
+        setValue(`${skill}${keyID}`, tempSkill);
       }
     });
 

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { AddAbility } from "../../../../utils/AddAbility.ts";
 import { OperativesEdgeSkillBonus } from "../../../../data/class-information/operative/functions/OperativesEdgeSkillBonus.ts";
 import confirmLevelUpAttributes from "../../confirmLevelUpAttributes.ts";
+import { getValue } from "../../../../utils/getValue.ts";
 
 function OperativeFirstLevel({ keyID }: { keyID: string }) {
   const specializationArray = Object.keys(specializationList).map(
@@ -80,6 +81,13 @@ function OperativeFirstLevel({ keyID }: { keyID: string }) {
 
     // Confirm Attributes.
     confirmLevelUpAttributes(keyID);
+
+    // Set the associated skills for the Operative Specialization
+    associatedSkills.forEach((skill) => {
+      let tempSkill: SkillListType = getValue(`${skill}${keyID}`);
+      tempSkill.operativeSpecializationSkill = true;
+      setValue(`${skill}${keyID}`, tempSkill);
+    });
 
     // Set the level to 1 so it's no longer locked in the level 1 selection screen.
     setValue(`Level${keyID}`, 1);

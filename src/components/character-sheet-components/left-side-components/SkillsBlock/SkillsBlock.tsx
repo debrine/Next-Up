@@ -17,25 +17,33 @@ function SkillsBlock() {
     CharacterSheetContext
   );
 
+  const { register, watch } = useForm();
+
+  useEffect(() => {
+    const subscription = watch((data) => {
+      // Set the values as they change.
+      skillArray.forEach((skill) => {
+        // If it's a Specialization Skill, don't add the rank. It's not supposed to count to the total ranks per level, and always equal to the level of the character.
+        if (
+          SkillBlockStatesList[skill].skillState.operativeSpecializationSkill
+        ) {
+          editSkill(0, Number(data[`${skill}ModifierBonus`]), skill);
+        } else {
+          editSkill(
+            Number(data[`${skill}Ranks`]),
+            Number(data[`${skill}ModifierBonus`]),
+            skill
+          );
+        }
+      });
+      setValue(`ProfessionName${characterID}`, data.ProfessionName);
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
+
   const skillArray: string[] = Object.keys(skillList).map((key: string) => {
     return key;
   });
-
-  let tempSkill: SkillListType = {
-    skillName: "",
-    isClassSkill: false,
-    classSkillBonus: 0,
-    trainingRequired: false,
-    value: 0,
-    insightBonusToValue: 0,
-    skillFocus: false,
-    racialBonusToValue: 0,
-    ranks: 0,
-    insightBonusToRank: 0,
-    operativeSpecializationSkill: false,
-    armorCheckPenalty: false,
-    attributeAffecting: "",
-  };
 
   // Skill ranks used
   function getUsedRanks() {
@@ -59,7 +67,7 @@ function SkillsBlock() {
 
   // Function to edit Skill Ranks
   function editSkill(rank: number, attributeModBonus: number, skill: string) {
-    tempSkill = SkillBlockStatesList[skill].skillState;
+    let tempSkill: SkillListType = SkillBlockStatesList[skill].skillState;
     tempSkill.ranks = rank;
     tempSkill.value =
       rank +
@@ -78,7 +86,7 @@ function SkillsBlock() {
   // }
 
   function handleClassSkill(skill: string) {
-    tempSkill = SkillBlockStatesList[skill].skillState;
+    let tempSkill: SkillListType = SkillBlockStatesList[skill].skillState;
     tempSkill.isClassSkill = !tempSkill.isClassSkill;
     if (tempSkill.isClassSkill && tempSkill.ranks > 0) {
       tempSkill.classSkillBonus = 3;
@@ -89,25 +97,9 @@ function SkillsBlock() {
     setValue(`${skill}${characterID}`, tempSkill);
   }
 
-  const { register, watch } = useForm();
-
   useEffect(() => {
     console.log(SkillBlockStatesList[`Acrobatics`].skillState);
   }, [SkillBlockStatesList[`Acrobatics`].skillState]);
-
-  useEffect(() => {
-    const subscription = watch((data) => {
-      skillArray.forEach((skill) => {
-        editSkill(
-          Number(data[`${skill}Ranks`]),
-          Number(data[`${skill}ModifierBonus`]),
-          skill
-        );
-      });
-      setValue(`ProfessionName${characterID}`, data.ProfessionName);
-    });
-    return () => subscription.unsubscribe();
-  }, [watch]);
 
   return (
     <div className={styles.parentDiv}>
@@ -145,7 +137,11 @@ function SkillsBlock() {
                   <input
                     type="checkbox"
                     {...register(`${skill}Checkbox`)}
-                    defaultChecked
+                    defaultChecked={
+                      SkillBlockStatesList[skill].skillState.isClassSkill
+                        ? true
+                        : false
+                    }
                     onClick={() => handleClassSkill(skill)}
                   />
                 ) : (
@@ -191,7 +187,7 @@ function SkillsBlock() {
                     ? true
                     : false
                 }
-                defaultValue={SkillBlockStatesList[skill].skillState.ranks}
+                // defaultValue={SkillBlockStatesList[skill].skillState.ranks}
                 max={getValue(`Level${characterID}`)}
                 min={0}
               />{" "}
@@ -199,9 +195,7 @@ function SkillsBlock() {
               <input
                 type="number"
                 {...register(`${skill}ClassBonus`)}
-                defaultValue={
-                  SkillBlockStatesList[skill].skillState.classSkillBonus
-                }
+                value={SkillBlockStatesList[skill].skillState.classSkillBonus}
                 readOnly
               />{" "}
               +{/* Ability Mod */}

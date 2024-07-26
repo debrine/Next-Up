@@ -30,6 +30,15 @@ function HealthAndResolveBlock() {
     // setTempRP,
   } = useContext(CharacterSheetContext);
 
+  useEffect(() => {
+    setCurrentSP(getValue(`CurrentSP${characterID}`));
+    setTempSP(getValue(`TempSP${characterID}`));
+    setCurrentHP(getValue(`CurrentHP${characterID}`));
+    setTempHP(getValue(`TempHP${characterID}`));
+    setCurrentRP(getValue(`CurrentRP${characterID}`));
+    setTempRP(getValue(`TempRP${characterID}`));
+  }, [characterID]);
+
   const [currentSP, setCurrentSP] = useState<number>(
     getValue(`CurrentSP${characterID}`)
   );
@@ -123,14 +132,10 @@ function HealthAndResolveBlock() {
             <input
               type="number"
               {...register("currentSP")}
-              defaultValue={currentSP}
+              value={currentSP}
               max={maxSP}
             />
-            <input
-              type="number"
-              {...register("tempSP")}
-              defaultValue={tempSP}
-            />
+            <input type="number" {...register("tempSP")} value={tempSP} />
           </div>
           <div className={styles.labelValueColumn}>
             <div className={styles.label}>HIT POINTS</div>
@@ -138,14 +143,10 @@ function HealthAndResolveBlock() {
             <input
               type="number"
               {...register("currentHP")}
-              defaultValue={currentHP}
+              value={currentHP}
               max={maxHP}
             />
-            <input
-              type="number"
-              {...register("tempHP")}
-              defaultValue={tempHP}
-            />
+            <input type="number" {...register("tempHP")} value={tempHP} />
           </div>
           <div className={styles.labelValueColumn}>
             <div className={styles.label}>RESOLVE POINTS</div>
@@ -153,14 +154,10 @@ function HealthAndResolveBlock() {
             <input
               type="number"
               {...register("currentRP")}
-              defaultValue={currentRP}
+              value={currentRP}
               max={maxRP}
             />
-            <input
-              type="number"
-              {...register("tempRP")}
-              defaultValue={tempRP}
-            />
+            <input type="number" {...register("tempRP")} value={tempRP} />
           </div>
         </div>
       </div>
