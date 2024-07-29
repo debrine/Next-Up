@@ -15,6 +15,7 @@ function CharacterInfo() {
 	);
 
 	// Store our characterID in a useRef. This is needed to not overwrite the data in the previously selected character.
+	// Only works if in each individual component and not passed through context.
 	const currentID = useRef<string>(characterID!);
 
 	const { register, watch, reset } = useForm({});
@@ -22,6 +23,7 @@ function CharacterInfo() {
 	useEffect(() => {
 		// Change the currentID to the params.
 		currentID.current = characterID!;
+
 		// Set default values based on character selected.
 		let defaultValues: CharacterBasicInfoDynamicType =
 			characterInfoDynamicObject;

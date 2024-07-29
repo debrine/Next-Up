@@ -43,32 +43,6 @@ function HealthAndResolveBlock() {
 		getValue(`TempRP${characterID}`)
 	);
 
-	//   Max SP is based off value given from class plus your constitution modifier, all multiplied by character level.
-	const maxSP: number =
-		(classList[characterInfoObject.chClass].classDefaults.hitStaminaPoints +
-			GetModifier(getValue(`Constitution${characterID}`))) *
-		getValue(`Level${characterID}`);
-
-	//   Max HP is based off value given from class multiplied by character level and value give by race (only once).
-	const maxHP: number =
-		classList[characterInfoObject.chClass].classDefaults.hitStaminaPoints *
-			getValue(`Level${characterID}`) +
-		raceList[characterInfoObject.race].raceHP;
-
-	// Max RP equal to half your character level (rounded down and minimum of 1) plus key ability score modifier.
-	let mathFloorHalfLevel = 1;
-
-	if (Math.floor(getValue(`Level${characterID}`) / 2) > 0) {
-		mathFloorHalfLevel = Math.floor(getValue(`Level${characterID}`)) / 2;
-	}
-
-	const keyAbilityObject: AbilityScoreType = getValue(
-		`${characterInfoObject.keyAbilityScoreSelected}${characterID}`
-	);
-
-	//   Add your Key Ability Score Modifier. If this results negative, then it will be set to a minimum of 1 where the value is called below.
-	const maxRP: number = mathFloorHalfLevel + GetModifier(keyAbilityObject);
-
 	const { register, watch } = useForm();
 
 	useEffect(() => {
@@ -100,6 +74,32 @@ function HealthAndResolveBlock() {
 		});
 		return () => subscription.unsubscribe();
 	}, [watch]);
+
+	//   Max SP is based off value given from class plus your constitution modifier, all multiplied by character level.
+	const maxSP: number =
+		(classList[characterInfoObject.chClass].classDefaults.hitStaminaPoints +
+			GetModifier(getValue(`Constitution${characterID}`))) *
+		getValue(`Level${characterID}`);
+
+	//   Max HP is based off value given from class multiplied by character level and value give by race (only once).
+	const maxHP: number =
+		classList[characterInfoObject.chClass].classDefaults.hitStaminaPoints *
+			getValue(`Level${characterID}`) +
+		raceList[characterInfoObject.race].raceHP;
+
+	// Max RP equal to half your character level (rounded down and minimum of 1) plus key ability score modifier.
+	let mathFloorHalfLevel = 1;
+
+	if (Math.floor(getValue(`Level${characterID}`) / 2) > 0) {
+		mathFloorHalfLevel = Math.floor(getValue(`Level${characterID}`)) / 2;
+	}
+
+	const keyAbilityObject: AbilityScoreType = getValue(
+		`${characterInfoObject.keyAbilityScoreSelected}${characterID}`
+	);
+
+	//   Add your Key Ability Score Modifier. If this results negative, then it will be set to a minimum of 1 where the value is called below.
+	const maxRP: number = mathFloorHalfLevel + GetModifier(keyAbilityObject);
 
 	return (
 		<div className={styles.parentDiv}>

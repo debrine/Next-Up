@@ -28,7 +28,6 @@ type SkillBlockStatesListType = {
 };
 
 export const CharacterSheetContext = createContext<{
-	// keyID: string;
 	strengthAbility: AbilityScoreType;
 	setStrengthAbility: (newValues: AbilityScoreType) => void;
 	dexterityAbility: AbilityScoreType;
@@ -56,15 +55,10 @@ export const CharacterSheetContext = createContext<{
 	SkillBlockStatesList: SkillBlockStatesListType;
 	characterInfoObject: CharacterInfoObjectType;
 	characterInfoDynamicObject: CharacterBasicInfoDynamicType;
-	// setCharacterInfoDynamicObject: Dispatch<
-	// 	SetStateAction<CharacterBasicInfoDynamicType>
-	// >;
 }>({} as any);
 
 function CharacterSheet() {
 	const { characterID } = useParams();
-
-	// const [keyID, setKeyID] = useState<string>('');
 
 	const {
 		strength: strengthAbility,
@@ -137,7 +131,6 @@ function CharacterSheet() {
 	return (
 		<CharacterSheetContext.Provider
 			value={{
-				// keyID: keyID,
 				strengthAbility: strengthAbility,
 				setStrengthAbility: setStrengthAbility,
 				dexterityAbility: dexterityAbility,
