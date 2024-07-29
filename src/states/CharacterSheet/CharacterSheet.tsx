@@ -222,7 +222,7 @@ function CharacterSheet() {
 			}
 		});
 		return () => subscription.unsubscribe();
-	}, [watch]);
+	}, [characterID, watch]);
 
 	const characterInfoDynamicObject: CharacterBasicInfoDynamicType = useMemo(
 		() => getValue(`characterBasicInfoDynamic${characterID}`),
