@@ -8,6 +8,7 @@ import {
 	Dispatch,
 	SetStateAction,
 	useEffect,
+	useMemo,
 	useState,
 } from 'react';
 import { useParams } from 'react-router-dom';
@@ -27,7 +28,7 @@ type SkillBlockStatesListType = {
 };
 
 export const CharacterSheetContext = createContext<{
-	keyID: string;
+	// keyID: string;
 	strengthAbility: AbilityScoreType;
 	setStrengthAbility: (newValues: AbilityScoreType) => void;
 	dexterityAbility: AbilityScoreType;
@@ -55,12 +56,15 @@ export const CharacterSheetContext = createContext<{
 	SkillBlockStatesList: SkillBlockStatesListType;
 	characterInfoObject: CharacterInfoObjectType;
 	characterInfoDynamicObject: CharacterBasicInfoDynamicType;
+	// setCharacterInfoDynamicObject: Dispatch<
+	// 	SetStateAction<CharacterBasicInfoDynamicType>
+	// >;
 }>({} as any);
 
 function CharacterSheet() {
 	const { characterID } = useParams();
 
-	const [keyID, setKeyID] = useState<string>('');
+	// const [keyID, setKeyID] = useState<string>('');
 
 	const {
 		strength: strengthAbility,
@@ -79,7 +83,18 @@ function CharacterSheet() {
 
 	const { SkillBlockStatesList } = useSkills();
 
-	useEffect(() => {}, [characterID]);
+	useEffect(() => {
+		setCharacterInfoObject(getValue(`characterBasicInfo${characterID}`));
+
+		Object.keys(SkillBlockStatesList).forEach((key) => {
+			SkillBlockStatesList[key].setSkill(getValue(`${key}${characterID}`));
+		});
+	}, [characterID]);
+
+	const characterInfoDynamicObject: CharacterBasicInfoDynamicType = useMemo(
+		() => getValue(`characterBasicInfoDynamic${characterID}`),
+		[characterID]
+	);
 
 	const [characterInfoObject, setCharacterInfoObject] =
 		useState<CharacterInfoObjectType>(
@@ -89,10 +104,6 @@ function CharacterSheet() {
 	/*
     States to be passed to children.*****************************************************************
     */
-	const [characterInfoDynamicObject, setCharacterInfoDynamicObject] =
-		useState<CharacterBasicInfoDynamicType>(
-			getValue(`characterBasicInfoDynamic${characterID}`)
-		);
 
 	// Character Level
 
@@ -102,44 +113,31 @@ function CharacterSheet() {
     Stamina, Health, and Resolve
   */
 	const [currentSP, setCurrentSP] = useState<number>(
-		getValue(`CurrentSP${keyID}`)
+		getValue(`CurrentSP${characterID}`)
 	);
 	const [currentHP, setCurrentHP] = useState<number>(
-		getValue(`CurrentHP${keyID}`)
+		getValue(`CurrentHP${characterID}`)
 	);
 	const [currentRP, setCurrentRP] = useState<number>(
-		getValue(`CurrentRP${keyID}`)
+		getValue(`CurrentRP${characterID}`)
 	);
-	const [tempSP, setTempSP] = useState<number>(getValue(`TempSP${keyID}`));
-	const [tempHP, setTempHP] = useState<number>(getValue(`TempHP${keyID}`));
-	const [tempRP, setTempRP] = useState<number>(getValue(`TempRP${keyID}`));
+	const [tempSP, setTempSP] = useState<number>(
+		getValue(`TempSP${characterID}`)
+	);
+	const [tempHP, setTempHP] = useState<number>(
+		getValue(`TempHP${characterID}`)
+	);
+	const [tempRP, setTempRP] = useState<number>(
+		getValue(`TempRP${characterID}`)
+	);
 
 	const Component =
 		levelUpList['1'][characterInfoObject.chClass]?.componentForClass;
 
-	useEffect(() => {
-		if (characterID) {
-			setKeyID(characterID);
-		}
-
-		setCharacterInfoObject(getValue(`characterBasicInfo${characterID}`));
-
-		setCharacterInfoDynamicObject(
-			getValue(`characterBasicInfoDynamic${characterID}`)
-		);
-		// characterInfoDynamicObject.current = getValue(
-		//   `characterBasicInfoDynamic${characterID}`
-		// );
-
-		Object.keys(SkillBlockStatesList).forEach((key) => {
-			SkillBlockStatesList[key].setSkill(getValue(`${key}${characterID}`));
-		});
-	}, [characterID]);
-
 	return (
 		<CharacterSheetContext.Provider
 			value={{
-				keyID: keyID,
+				// keyID: keyID,
 				strengthAbility: strengthAbility,
 				setStrengthAbility: setStrengthAbility,
 				dexterityAbility: dexterityAbility,
@@ -167,13 +165,14 @@ function CharacterSheet() {
 				SkillBlockStatesList: SkillBlockStatesList,
 				characterInfoObject: characterInfoObject,
 				characterInfoDynamicObject: characterInfoDynamicObject,
+				// setCharacterInfoDynamicObject: setCharacterInfoDynamicObject,
 			}}
 		>
-			{characterLevel === 0 ? (
+			{characterLevel === 0 && characterID ? (
 				// Confirm all first level selections based on class, which need to be handled uniquely.
 				<div className={styles.FirstLevelSelectionChanges}>
 					<FirstLevelMessage />
-					<div>{Component ? <Component keyID={keyID} /> : null}</div>
+					<div>{Component ? <Component keyID={characterID} /> : null}</div>
 				</div>
 			) : (
 				// Once character has confirmed choices, move on to sheet.

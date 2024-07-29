@@ -4,7 +4,7 @@ import { setValue } from '../utils/setValue';
 import { useParams } from 'react-router-dom';
 
 export function useAbilityScores() {
-	const characterID = useParams();
+	const { characterID } = useParams();
 
 	// Strength
 	const [strength, setStrength] = useState<AbilityScoreType>(

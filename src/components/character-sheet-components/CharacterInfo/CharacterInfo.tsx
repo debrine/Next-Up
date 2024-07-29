@@ -1,172 +1,160 @@
-import styles from "./CharacterInfo.module.css";
-import SheetLabel from "../labels/SheetLabel.tsx";
-import { useContext, useEffect, useState } from "react";
-import { CharacterSheetContext } from "../../../states/CharacterSheet/CharacterSheet.tsx";
-import { getValue } from "../../../utils/getValue.ts";
-import { useForm } from "react-hook-form";
-import { setValue } from "../../../utils/setValue.ts";
-import { useParams } from "react-router-dom";
+import styles from './CharacterInfo.module.css';
+import SheetLabel from '../labels/SheetLabel.tsx';
+import { useContext, useEffect, useRef } from 'react';
+import { CharacterSheetContext } from '../../../states/CharacterSheet/CharacterSheet.tsx';
+import { getValue } from '../../../utils/getValue.ts';
+import { useForm } from 'react-hook-form';
+import { setValue } from '../../../utils/setValue.ts';
+import { useParams } from 'react-router-dom';
 
 function CharacterInfo() {
-  const { characterID } = useParams();
+	const { characterID } = useParams();
 
-  const { characterInfoObject } = useContext(CharacterSheetContext);
+	const { characterInfoObject, characterInfoDynamicObject } = useContext(
+		CharacterSheetContext
+	);
 
-  const [characterInfoDynamicObject, setCharacterInfoDynamicObject] =
-    useState<CharacterBasicInfoDynamicType>(
-      getValue(`characterBasicInfoDynamic${characterID}`)
-    );
+	// Store our characterID in a useRef. This is needed to not overwrite the data in the previously selected character.
+	const currentID = useRef<string>(characterID!);
 
-  const { register, watch } = useForm({});
+	const { register, watch, reset } = useForm({});
 
-  useEffect(() => {
-    setCharacterInfoDynamicObject(
-      getValue(`characterBasicInfoDynamic${characterID}`)
-    );
-  }, [characterID]);
+	useEffect(() => {
+		// Change the currentID to the params.
+		currentID.current = characterID!;
+		// Set default values based on character selected.
+		let defaultValues: CharacterBasicInfoDynamicType =
+			characterInfoDynamicObject;
 
-  useEffect(() => {
-    const subscription = watch((data) => {
-      setCharacterInfoDynamicObject({
-        characterAlignment: data.characterAlignment,
-        characterDiety: data.characterDiety,
-        characterGender: data.characterGender,
-        characterHomeWorld: data.characterHomeWorld,
-        characterName: data.characterName,
-        characterSize: data.characterSize,
-        characterSpeed: data.characterSpeed,
-        playerName: data.playerName,
-      });
-      setValue(`characterBasicInfoDynamic${characterID}`, data);
-    });
-    return () => subscription.unsubscribe();
-  }, [watch]);
+		// Reset the defaultValues
+		reset({ ...defaultValues });
+	}, [characterID]);
 
-  return (
-    <div className={styles.parentDiv}>
-      <div className={styles.characterNameDiv}>
-        <SheetLabel sheetLabelText="CHARACTER NAME" />
-        <input
-          {...register("characterName")}
-          type="text"
-          className={styles.characterNameBar}
-          spellCheck={false}
-          value={characterInfoDynamicObject.characterName}
-          // defaultValue={characterInfoDynamicObject.characterName}
-        />
-      </div>
+	useEffect(() => {
+		const subscription = watch((data) => {
+			if (characterID === currentID.current) {
+				setValue(`characterBasicInfoDynamic${characterID}`, data);
+			}
+		});
+		return () => subscription.unsubscribe();
+	}, [watch]);
 
-      <div className={styles.classRaceThemeDiv}>
-        <div className={styles.infoInputDiv}>
-          <input
-            type="text"
-            className={styles.infoInput}
-            spellCheck={false}
-            value={`${characterInfoObject.chClass} ${getValue(
-              `Level${characterID}`
-            )}`}
-            readOnly
-          />
-          <div>CLASS/LEVEL</div>
-        </div>
-        <div className={styles.infoInputDiv}>
-          <input
-            type="text"
-            className={styles.infoInput}
-            spellCheck={false}
-            value={characterInfoObject.race}
-            readOnly
-          />
-          <div>RACE</div>
-        </div>
-        <div className={styles.infoInputDiv}>
-          <input
-            type="text"
-            className={styles.infoInput}
-            spellCheck={false}
-            value={characterInfoObject.theme}
-            readOnly
-          />
-          <div>THEME</div>
-        </div>
-      </div>
+	return (
+		<div className={styles.parentDiv}>
+			<div className={styles.characterNameDiv}>
+				<SheetLabel sheetLabelText='CHARACTER NAME' />
+				<input
+					{...register('characterName')}
+					type='text'
+					className={styles.characterNameBar}
+					spellCheck={false}
+				/>
+			</div>
 
-      <div className={styles.sizeSpeedGenderHomeDiv}>
-        <div className={styles.infoInputDiv}>
-          <input
-            {...register("characterSize")}
-            type="text"
-            className={styles.infoInput}
-            spellCheck={false}
-            value={characterInfoDynamicObject.characterSize}
-          />
-          <div>SIZE</div>
-        </div>
-        <div className={styles.infoInputDiv}>
-          <input
-            {...register("characterSpeed")}
-            type="number"
-            className={styles.infoInput}
-            value={characterInfoDynamicObject.characterSpeed}
-          />
-          <div>SPEED</div>
-        </div>
-        <div className={styles.infoInputDiv}>
-          <input
-            {...register("characterGender")}
-            type="text"
-            className={styles.infoInput}
-            spellCheck={false}
-            value={characterInfoDynamicObject.characterGender}
-          />
-          <div>GENDER</div>
-        </div>
-        <div className={styles.infoInputDiv}>
-          <input
-            {...register("characterHomeWorld")}
-            type="text"
-            className={styles.infoInput}
-            spellCheck={false}
-            value={characterInfoDynamicObject.characterHomeWorld}
-          />
-          <div>HOME WORLD</div>
-        </div>
-      </div>
+			<div className={styles.classRaceThemeDiv}>
+				<div className={styles.infoInputDiv}>
+					<input
+						type='text'
+						className={styles.infoInput}
+						spellCheck={false}
+						value={`${characterInfoObject.chClass} ${getValue(
+							`Level${characterID}`
+						)}`}
+						readOnly
+					/>
+					<div>CLASS/LEVEL</div>
+				</div>
+				<div className={styles.infoInputDiv}>
+					<input
+						type='text'
+						className={styles.infoInput}
+						spellCheck={false}
+						value={characterInfoObject.race}
+						readOnly
+					/>
+					<div>RACE</div>
+				</div>
+				<div className={styles.infoInputDiv}>
+					<input
+						type='text'
+						className={styles.infoInput}
+						spellCheck={false}
+						value={characterInfoObject.theme}
+						readOnly
+					/>
+					<div>THEME</div>
+				</div>
+			</div>
 
-      <div className={styles.alignmentDietyPlayerDiv}>
-        <div className={styles.infoInputDiv}>
-          <input
-            {...register("characterAlignment")}
-            type="text"
-            className={styles.infoInput}
-            spellCheck={false}
-            value={characterInfoDynamicObject.characterAlignment}
-          />
-          <div>ALIGNMENT</div>
-        </div>
-        <div className={styles.infoInputDiv}>
-          <input
-            {...register("characterDiety")}
-            type="text"
-            className={styles.infoInput}
-            spellCheck={false}
-            value={characterInfoDynamicObject.characterDiety}
-          />
-          <div>DIETY</div>
-        </div>
-        <div className={styles.infoInputDiv}>
-          <input
-            {...register("playerName")}
-            type="text"
-            className={styles.infoInput}
-            spellCheck={false}
-            value={characterInfoDynamicObject.playerName}
-          />
-          <div>PLAYER</div>
-        </div>
-      </div>
-    </div>
-  );
+			<div className={styles.sizeSpeedGenderHomeDiv}>
+				<div className={styles.infoInputDiv}>
+					<input
+						{...register('characterSize')}
+						type='text'
+						className={styles.infoInput}
+						spellCheck={false}
+					/>
+					<div>SIZE</div>
+				</div>
+				<div className={styles.infoInputDiv}>
+					<input
+						{...register('characterSpeed')}
+						type='number'
+						className={styles.infoInput}
+					/>
+					<div>SPEED</div>
+				</div>
+				<div className={styles.infoInputDiv}>
+					<input
+						{...register('characterGender')}
+						type='text'
+						className={styles.infoInput}
+						spellCheck={false}
+					/>
+					<div>GENDER</div>
+				</div>
+				<div className={styles.infoInputDiv}>
+					<input
+						{...register('characterHomeWorld')}
+						type='text'
+						className={styles.infoInput}
+						spellCheck={false}
+					/>
+					<div>HOME WORLD</div>
+				</div>
+			</div>
+
+			<div className={styles.alignmentDietyPlayerDiv}>
+				<div className={styles.infoInputDiv}>
+					<input
+						{...register('characterAlignment')}
+						type='text'
+						className={styles.infoInput}
+						spellCheck={false}
+					/>
+					<div>ALIGNMENT</div>
+				</div>
+				<div className={styles.infoInputDiv}>
+					<input
+						{...register('characterDiety')}
+						type='text'
+						className={styles.infoInput}
+						spellCheck={false}
+					/>
+					<div>DIETY</div>
+				</div>
+				<div className={styles.infoInputDiv}>
+					<input
+						{...register('playerName')}
+						type='text'
+						className={styles.infoInput}
+						spellCheck={false}
+					/>
+					<div>PLAYER</div>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default CharacterInfo;
