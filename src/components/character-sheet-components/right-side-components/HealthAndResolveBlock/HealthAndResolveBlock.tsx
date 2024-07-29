@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import SheetLabel from '../../labels/SheetLabel';
 import styles from './HealthAndResolveBlock.module.css';
 import { useForm } from 'react-hook-form';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { CharacterSheetContext } from '../../../../states/CharacterSheet/CharacterSheet';
 import { classList } from '../../../../data/class-information/classList';
 import { getValue } from '../../../../utils/getValue';
@@ -13,64 +13,91 @@ import { GetModifier } from '../../../../utils/GetModifier';
 function HealthAndResolveBlock() {
 	const { characterID } = useParams();
 
-	const { characterInfoObject } = useContext(CharacterSheetContext);
+	const {
+		characterInfoObject,
+		currentSP,
+		currentHP,
+		currentRP,
+		tempSP,
+		tempHP,
+		tempRP,
+	} = useContext(CharacterSheetContext);
+
+	// Store our characterID in a useRef. This is needed to not overwrite the data in the previously selected character.
+	// Only works if in each individual component and not passed through context.
+	const currentID = useRef<string>(characterID!);
+
+	const { register, watch, reset } = useForm();
 
 	useEffect(() => {
-		setCurrentSP(getValue(`CurrentSP${characterID}`));
-		setTempSP(getValue(`TempSP${characterID}`));
-		setCurrentHP(getValue(`CurrentHP${characterID}`));
-		setTempHP(getValue(`TempHP${characterID}`));
-		setCurrentRP(getValue(`CurrentRP${characterID}`));
-		setTempRP(getValue(`TempRP${characterID}`));
+		// Change the currentID to the params.
+		currentID.current = characterID!;
+
+		// Set default values based on character selected.
+		// let defaultValues = {
+		// 	descriptionBlock: getValue(`Description${characterID}`),
+		// };
+
+		// // Reset the defaultValues
+		// reset({ ...defaultValues });
 	}, [characterID]);
 
-	const [currentSP, setCurrentSP] = useState<number>(
-		getValue(`CurrentSP${characterID}`)
-	);
-	const [currentHP, setCurrentHP] = useState<number>(
-		getValue(`CurrentHP${characterID}`)
-	);
-	const [currentRP, setCurrentRP] = useState<number>(
-		getValue(`CurrentRP${characterID}`)
-	);
-	const [tempSP, setTempSP] = useState<number>(
-		getValue(`TempSP${characterID}`)
-	);
-	const [tempHP, setTempHP] = useState<number>(
-		getValue(`TempHP${characterID}`)
-	);
-	const [tempRP, setTempRP] = useState<number>(
-		getValue(`TempRP${characterID}`)
-	);
+	// useEffect(() => {
+	// 	setCurrentSP(getValue(`CurrentSP${characterID}`));
+	// 	setTempSP(getValue(`TempSP${characterID}`));
+	// 	setCurrentHP(getValue(`CurrentHP${characterID}`));
+	// 	setTempHP(getValue(`TempHP${characterID}`));
+	// 	setCurrentRP(getValue(`CurrentRP${characterID}`));
+	// 	setTempRP(getValue(`TempRP${characterID}`));
+	// }, [characterID]);
 
-	const { register, watch } = useForm();
+	// const [currentSP, setCurrentSP] = useState<number>(
+	// 	getValue(`CurrentSP${characterID}`)
+	// );
+	// const [currentHP, setCurrentHP] = useState<number>(
+	// 	getValue(`CurrentHP${characterID}`)
+	// );
+	// const [currentRP, setCurrentRP] = useState<number>(
+	// 	getValue(`CurrentRP${characterID}`)
+	// );
+	// const [tempSP, setTempSP] = useState<number>(
+	// 	getValue(`TempSP${characterID}`)
+	// );
+	// const [tempHP, setTempHP] = useState<number>(
+	// 	getValue(`TempHP${characterID}`)
+	// );
+	// const [tempRP, setTempRP] = useState<number>(
+	// 	getValue(`TempRP${characterID}`)
+	// );
+
+	// const { register, watch } = useForm();
 
 	useEffect(() => {
 		const subscription = watch((data) => {
 			if (data.currentSP <= maxSP) {
 				setValue(`CurrentSP${characterID}`, Number(data.currentSP));
-				setCurrentSP(Number(data.currentSP));
+				// setCurrentSP(Number(data.currentSP));
 			}
 
 			if (data.currentHP <= maxHP) {
 				setValue(`CurrentHP${characterID}`, Number(data.currentHP));
-				setCurrentHP(data.currentHP);
+				// setCurrentHP(data.currentHP);
 			}
 
 			if (data.currentRP <= maxRP) {
 				setValue(`CurrentRP${characterID}`, Number(data.currentRP));
-				setCurrentRP(data.currentRP);
+				// setCurrentRP(data.currentRP);
 			}
 
 			//   Temp Values
 			setValue(`TempSP${characterID}`, Number(data.tempSP));
-			setTempSP(data.tempSP);
+			// setTempSP(data.tempSP);
 
 			setValue(`TempHP${characterID}`, Number(data.tempHP));
-			setTempHP(data.tempHP);
+			// setTempHP(data.tempHP);
 
 			setValue(`TempRP${characterID}`, Number(data.tempRP));
-			setTempRP(data.tempRP);
+			// setTempRP(data.tempRP);
 		});
 		return () => subscription.unsubscribe();
 	}, [watch]);

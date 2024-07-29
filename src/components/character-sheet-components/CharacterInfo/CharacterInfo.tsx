@@ -1,45 +1,17 @@
 import styles from './CharacterInfo.module.css';
 import SheetLabel from '../labels/SheetLabel.tsx';
-import { useContext, useEffect, useRef } from 'react';
+import { useContext } from 'react';
 import { CharacterSheetContext } from '../../../states/CharacterSheet/CharacterSheet.tsx';
 import { getValue } from '../../../utils/getValue.ts';
-import { useForm } from 'react-hook-form';
-import { setValue } from '../../../utils/setValue.ts';
+import { useFormContext } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
 function CharacterInfo() {
 	const { characterID } = useParams();
 
-	const { characterInfoObject, characterInfoDynamicObject } = useContext(
-		CharacterSheetContext
-	);
+	const { characterInfoObject } = useContext(CharacterSheetContext);
 
-	// Store our characterID in a useRef. This is needed to not overwrite the data in the previously selected character.
-	// Only works if in each individual component and not passed through context.
-	const currentID = useRef<string>(characterID!);
-
-	const { register, watch, reset } = useForm({});
-
-	useEffect(() => {
-		// Change the currentID to the params.
-		currentID.current = characterID!;
-
-		// Set default values based on character selected.
-		let defaultValues: CharacterBasicInfoDynamicType =
-			characterInfoDynamicObject;
-
-		// Reset the defaultValues
-		reset({ ...defaultValues });
-	}, [characterID]);
-
-	useEffect(() => {
-		const subscription = watch((data) => {
-			if (characterID === currentID.current) {
-				setValue(`characterBasicInfoDynamic${characterID}`, data);
-			}
-		});
-		return () => subscription.unsubscribe();
-	}, [watch]);
+	const { register } = useFormContext();
 
 	return (
 		<div className={styles.parentDiv}>
