@@ -13,6 +13,7 @@ import { useSkills } from '../../hooks/useSkills.ts';
 import { useStaminaHealthResolve } from '../../hooks/useStaminaHealthResolve.ts';
 import { FormProvider, useForm } from 'react-hook-form';
 import { setValue } from '../../utils/setValue.ts';
+import { GetModifier } from '../../utils/GetModifier.ts';
 
 type SkillBlockStatesListType = {
 	[key: string]: {
@@ -61,27 +62,18 @@ function CharacterSheet() {
 	const { reset, watch } = methods;
 
 	const {
-		// strength: strengthAbility,
-		editStrength: setStrengthAbility,
-		dexterity: dexterityAbility,
-		editDexterity: setDexterityAbility,
-		constitution: constitutionAbility,
-		editConstitution: setConstitutionAbility,
-		intelligence: intelligenceAbility,
-		editIntelligence: setIntelligenceAbility,
-		wisdom: wisdomAbility,
-		editWisdom: setWisdomAbility,
-		charisma: charismaAbility,
-		editCharisma: setCharismaAbility,
-		fetchAbilityScores,
-	} = useAbilityScores();
-	const {
 		strengthAbility,
-		// dexterityAbility,
-		// constitutionAbility,
-		// intelligenceAbility,
-		// wisdomAbility,
-		// charismaAbility,
+		setStrengthAbility,
+		dexterityAbility,
+		setDexterityAbility,
+		constitutionAbility,
+		setConstitutionAbility,
+		intelligenceAbility,
+		setIntelligenceAbility,
+		wisdomAbility,
+		setWisdomAbility,
+		charismaAbility,
+		setCharismaAbility,
 	} = useAbilityScores();
 
 	const { currentSP, currentHP, currentRP, tempSP, tempHP, tempRP } =
@@ -93,15 +85,11 @@ function CharacterSheet() {
 	useEffect(() => {
 		// Change the currentID to the params.
 		currentID.current = characterID;
-		console.log(
-			'Inside the use effect for characterID param: ' + currentID.current
-		);
-
-		fetchAbilityScores();
 
 		// Set default values based on character selected.
 		let values = {
 			// CharacterInfo registers
+
 			characterAlignment: characterInfoDynamicObject.characterAlignment,
 			characterDiety: characterInfoDynamicObject.characterDiety,
 			characterGender: characterInfoDynamicObject.characterGender,
@@ -112,16 +100,26 @@ function CharacterSheet() {
 			playerName: characterInfoDynamicObject.playerName,
 
 			// DescriptionBlock registers
+
 			descriptionBlock: getValue(`Description${characterID}`),
 
 			// AbilityScoreBlock registers.
-			bonusStr: strengthAbility.current.asBonus,
+
+			strengthModifier: GetModifier(strengthAbility).toString(),
+			dexterityModifier: GetModifier(dexterityAbility).toString(),
+			constitutionModifier: GetModifier(constitutionAbility).toString(),
+			intelligenceModifier: GetModifier(intelligenceAbility).toString(),
+			wisdomModifier: GetModifier(wisdomAbility).toString(),
+			charismaModifier: GetModifier(charismaAbility).toString(),
+
+			bonusStr: strengthAbility.asBonus,
 			bonusDex: dexterityAbility.asBonus,
 			bonusCon: constitutionAbility.asBonus,
 			bonusInt: intelligenceAbility.asBonus,
 			bonusWis: wisdomAbility.asBonus,
 			bonusCha: charismaAbility.asBonus,
-			penaltyStr: strengthAbility.current.asPenalty,
+
+			penaltyStr: strengthAbility.asPenalty,
 			penaltyDex: dexterityAbility.asPenalty,
 			penaltyCon: constitutionAbility.asPenalty,
 			penaltyInt: intelligenceAbility.asPenalty,
@@ -132,19 +130,24 @@ function CharacterSheet() {
 		// Reset the defaultValues and values.
 		reset({ ...values });
 
+		// Ability Scores set on change.
+
+		setStrengthAbility(getValue(`Strength${characterID}`));
 		setCharacterInfoObject(getValue(`characterBasicInfo${characterID}`));
+		setDexterityAbility(getValue(`Dexterity${characterID}`));
+		setConstitutionAbility(getValue(`Constitution${characterID}`));
+		setIntelligenceAbility(getValue(`Intelligence${characterID}`));
+		setWisdomAbility(getValue(`Wisdom${characterID}`));
+		setCharismaAbility(getValue(`Charisma${characterID}`));
 
 		Object.keys(SkillBlockStatesList).forEach((key) => {
 			SkillBlockStatesList[key].setSkill(getValue(`${key}${characterID}`));
 		});
-	}, [characterID]);
+	}, [characterID, strengthAbility]);
 
-	// Need to refresh in order to affect the current character.
 	useEffect(() => {
 		const subscription = watch((data) => {
-			console.log('Outside the if statement: ' + currentID.current);
 			if (characterID === currentID.current) {
-				console.log('Inside the if statement: ' + currentID.current);
 				// CharacterInfo registers
 				setValue(`characterBasicInfoDynamic${characterID}`, {
 					characterAlignment: data.characterAlignment,
@@ -161,19 +164,15 @@ function CharacterSheet() {
 				setValue(`Description${characterID}`, data.descriptionBlock);
 
 				// AbilityScoreBlock registers.
+
 				// Strength
-				// setValue(`Strength${characterID}`, {
-				// 	aSName: 'Strength',
-				// 	asBonus: Number(data.bonusStr),
-				// 	asPenalty: Number(data.penaltyStr),
-				// 	value: Number(strengthAbility.value),
-				// });
-				setStrengthAbility({
+				setValue(`Strength${characterID}`, {
 					aSName: 'Strength',
 					asBonus: Number(data.bonusStr),
 					asPenalty: Number(data.penaltyStr),
-					value: Number(strengthAbility.current.value),
+					value: Number(strengthAbility.value),
 				});
+				setStrengthAbility(getValue(`Strength${characterID}`));
 
 				// Dexterity
 				setValue(`Dexterity${characterID}`, {
@@ -252,7 +251,7 @@ function CharacterSheet() {
 	return (
 		<CharacterSheetContext.Provider
 			value={{
-				strengthAbility: strengthAbility.current,
+				strengthAbility: strengthAbility,
 				// setStrengthAbility: setStrengthAbility,
 				dexterityAbility: dexterityAbility,
 				// setDexterityAbility: setDexterityAbility,
