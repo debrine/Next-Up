@@ -1,9 +1,9 @@
-import SheetLabel from '../labels/SheetLabel';
+import SheetLabel from '../../../labels/SheetLabel.tsx';
 import styles from './AbilityScoreBlock.module.css';
-import AbilityScoreType from './AbilityScoreType/AbilityScoreType.tsx';
+import AbilityScoreType from '../AbilityScoreType/AbilityScoreType.tsx';
 import { useFormContext } from 'react-hook-form';
 import { useContext, useEffect } from 'react';
-import { CharacterSheetContext } from '../../../states/CharacterSheet/CharacterSheet.tsx';
+import { CharacterSheetContext } from '../../../../../states/CharacterSheet/CharacterSheet.tsx';
 
 // Scores and modifiers not meant to be adjusted.
 
@@ -94,20 +94,20 @@ function AbilityScoreBlock() {
 					</div>
 					<div className={styles.scoreModifierColumn}>
 						<div className={styles.columnLabel}>MODIFIER</div>
-						<input type='number' {...register('strengthModifier')} readOnly />
-						<input type='number' {...register('dexterityModifier')} readOnly />
+						<input type='number' {...register('StrengthModifier')} readOnly />
+						<input type='number' {...register('DexterityModifier')} readOnly />
 						<input
 							type='number'
-							{...register('constitutionModifier')}
+							{...register('ConstitutionModifier')}
 							readOnly
 						/>
 						<input
 							type='number'
-							{...register('intelligenceModifier')}
+							{...register('IntelligenceModifier')}
 							readOnly
 						/>
-						<input type='number' {...register('wisdomModifier')} readOnly />
-						<input type='number' {...register('charismaModifier')} readOnly />
+						<input type='number' {...register('WisdomModifier')} readOnly />
+						<input type='number' {...register('CharismaModifier')} readOnly />
 					</div>
 					<div className={styles.penDrainColumn}>
 						<div className={styles.columnLabel}>BONUS</div>

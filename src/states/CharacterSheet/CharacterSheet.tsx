@@ -14,6 +14,7 @@ import { useStaminaHealthResolve } from '../../hooks/useStaminaHealthResolve.ts'
 import { FormProvider, useForm } from 'react-hook-form';
 import { setValue } from '../../utils/setValue.ts';
 import { GetModifier } from '../../utils/GetModifier.ts';
+import { useInitiativeScore } from '../../hooks/useInitiativeScore.ts';
 
 type SkillBlockStatesListType = {
 	[key: string]: {
@@ -24,17 +25,12 @@ type SkillBlockStatesListType = {
 
 export const CharacterSheetContext = createContext<{
 	strengthAbility: AbilityScoreType;
-	// setStrengthAbility: (newValues: AbilityScoreType) => void;
 	dexterityAbility: AbilityScoreType;
-	// setDexterityAbility: (newValues: AbilityScoreType) => void;
 	constitutionAbility: AbilityScoreType;
-	// setConstitutionAbility: (newValues: AbilityScoreType) => void;
 	intelligenceAbility: AbilityScoreType;
-	// setIntelligenceAbility: (newValues: AbilityScoreType) => void;
 	wisdomAbility: AbilityScoreType;
-	// setWisdomAbility: (newValues: AbilityScoreType) => void;
 	charismaAbility: AbilityScoreType;
-	// setCharismaAbility: (newValues: AbilityScoreType) => void;
+	initMisc: number;
 	currentSP: number;
 	// setCurrentSP: Dispatch<SetStateAction<number>>;
 	currentHP: number;
@@ -76,6 +72,8 @@ function CharacterSheet() {
 		setCharismaAbility,
 	} = useAbilityScores();
 
+	const { initMisc, setInitMisc } = useInitiativeScore();
+
 	const { currentSP, currentHP, currentRP, tempSP, tempHP, tempRP } =
 		useStaminaHealthResolve();
 
@@ -103,14 +101,14 @@ function CharacterSheet() {
 
 			descriptionBlock: getValue(`Description${characterID}`),
 
-			// AbilityScoreBlock registers.
+			// AbilityScoreBlock registers
 
-			strengthModifier: GetModifier(strengthAbility).toString(),
-			dexterityModifier: GetModifier(dexterityAbility).toString(),
-			constitutionModifier: GetModifier(constitutionAbility).toString(),
-			intelligenceModifier: GetModifier(intelligenceAbility).toString(),
-			wisdomModifier: GetModifier(wisdomAbility).toString(),
-			charismaModifier: GetModifier(charismaAbility).toString(),
+			StrengthModifier: GetModifier(strengthAbility).toString(),
+			DexterityModifier: GetModifier(dexterityAbility).toString(),
+			ConstitutionModifier: GetModifier(constitutionAbility).toString(),
+			IntelligenceModifier: GetModifier(intelligenceAbility).toString(),
+			WisdomModifier: GetModifier(wisdomAbility).toString(),
+			CharismaModifier: GetModifier(charismaAbility).toString(),
 
 			bonusStr: strengthAbility.asBonus,
 			bonusDex: dexterityAbility.asBonus,
@@ -125,6 +123,9 @@ function CharacterSheet() {
 			penaltyInt: intelligenceAbility.asPenalty,
 			penaltyWis: wisdomAbility.asPenalty,
 			penaltyCha: charismaAbility.asPenalty,
+
+			// InitiativeBlock registers
+			InitiativeMiscModifier: initMisc,
 		};
 
 		// Reset the defaultValues and values.
@@ -139,6 +140,9 @@ function CharacterSheet() {
 		setIntelligenceAbility(getValue(`Intelligence${characterID}`));
 		setWisdomAbility(getValue(`Wisdom${characterID}`));
 		setCharismaAbility(getValue(`Charisma${characterID}`));
+
+		// Initiative Misc set on change
+		setInitMisc(getValue(`InitiativeMiscModifier${characterID}`));
 
 		Object.keys(SkillBlockStatesList).forEach((key) => {
 			SkillBlockStatesList[key].setSkill(getValue(`${key}${characterID}`));
@@ -218,6 +222,13 @@ function CharacterSheet() {
 					value: Number(charismaAbility.value),
 				});
 				setCharismaAbility(getValue(`Charisma${characterID}`));
+
+				// InitiativeBlock registers.
+				setValue(
+					`InitiativeMiscModifier${characterID}`,
+					Number(data.InitiativeMiscModifier)
+				);
+				setInitMisc(getValue(`InitiativeMiscModifier${characterID}`));
 			}
 		});
 		return () => subscription.unsubscribe();
@@ -252,17 +263,13 @@ function CharacterSheet() {
 		<CharacterSheetContext.Provider
 			value={{
 				strengthAbility: strengthAbility,
-				// setStrengthAbility: setStrengthAbility,
 				dexterityAbility: dexterityAbility,
-				// setDexterityAbility: setDexterityAbility,
 				constitutionAbility: constitutionAbility,
-				// setConstitutionAbility: setConstitutionAbility,
 				intelligenceAbility: intelligenceAbility,
-				// setIntelligenceAbility: setIntelligenceAbility,
 				wisdomAbility: wisdomAbility,
-				// setWisdomAbility: setWisdomAbility,
 				charismaAbility: charismaAbility,
-				// setCharismaAbility: setCharismaAbility,
+
+				initMisc: initMisc,
 				currentSP: currentSP,
 				// setCurrentSP: setCurrentSP,
 				currentHP: currentHP,
