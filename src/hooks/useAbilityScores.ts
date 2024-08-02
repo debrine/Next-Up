@@ -15,7 +15,7 @@ export function useAbilityScores() {
 	);
 
 	// Dexterity
-	const [dexterityAbility, setDexterityAbility] = useState<AbilityScoreType>(
+	const dexterityAbility = useRef<AbilityScoreType>(
 		getValue(`Dexterity${currentID}`)
 	);
 
@@ -37,11 +37,17 @@ export function useAbilityScores() {
 		getValue(`Charisma${currentID}`)
 	);
 
+	// Must be changed both in and out of hook. In the CharacterSheet.tsx, call it after setting the data to update it's current value.
+	useEffect(() => {
+		dexterityAbility.current = getValue(`Dexterity${currentID}`);
+		console.log('In useEffect');
+	}, [currentID]);
+
 	return {
 		strengthAbility,
 		// setStrengthAbility,
 		dexterityAbility,
-		setDexterityAbility,
+		// setDexterityAbility,
 		constitutionAbility,
 		setConstitutionAbility,
 		intelligenceAbility,

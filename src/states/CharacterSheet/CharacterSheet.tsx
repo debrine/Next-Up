@@ -65,7 +65,7 @@ function CharacterSheet() {
 		strengthAbility,
 		// setStrengthAbility,
 		dexterityAbility,
-		setDexterityAbility,
+		// setDexterityAbility,
 		constitutionAbility,
 		setConstitutionAbility,
 		intelligenceAbility,
@@ -94,7 +94,7 @@ function CharacterSheet() {
 		// Ability Scores set on change.
 
 		// setStrengthAbility(getValue(`Strength${characterID}`));
-		setDexterityAbility(getValue(`Dexterity${characterID}`));
+		// setDexterityAbility(getValue(`Dexterity${characterID}`));
 		setConstitutionAbility(getValue(`Constitution${characterID}`));
 		setIntelligenceAbility(getValue(`Intelligence${characterID}`));
 		setWisdomAbility(getValue(`Wisdom${characterID}`));
@@ -122,14 +122,14 @@ function CharacterSheet() {
 			totalStr: GetAbilityScoreTotal(strengthAbility),
 
 			bonusStr: strengthAbility.asBonus,
-			bonusDex: dexterityAbility.asBonus,
+			bonusDex: dexterityAbility.current.asBonus,
 			bonusCon: constitutionAbility.asBonus,
 			bonusInt: intelligenceAbility.asBonus,
 			bonusWis: wisdomAbility.asBonus,
 			bonusCha: charismaAbility.asBonus,
 
 			penaltyStr: strengthAbility.asPenalty,
-			penaltyDex: dexterityAbility.asPenalty,
+			penaltyDex: dexterityAbility.current.asPenalty,
 			penaltyCon: constitutionAbility.asPenalty,
 			penaltyInt: intelligenceAbility.asPenalty,
 			penaltyWis: wisdomAbility.asPenalty,
@@ -187,9 +187,10 @@ function CharacterSheet() {
 				aSName: 'Dexterity',
 				asBonus: Number(data.bonusDex),
 				asPenalty: Number(data.penaltyDex),
-				value: Number(dexterityAbility.value),
+				value: Number(dexterityAbility.current.value),
 			});
-			setDexterityAbility(getValue(`Dexterity${characterID}`));
+			// setDexterityAbility(getValue(`Dexterity${characterID}`));
+			dexterityAbility.current = getValue(`Dexterity${characterID}`);
 
 			// Constitution
 			setValue(`Constitution${characterID}`, {
@@ -234,8 +235,6 @@ function CharacterSheet() {
 			);
 			setInitMisc(getValue(`InitiativeMiscModifier${characterID}`));
 		});
-		console.log('ID change in Watch');
-		console.log(currentID);
 		return () => subscription.unsubscribe();
 	}, [currentID, watch]);
 
@@ -268,7 +267,7 @@ function CharacterSheet() {
 		<CharacterSheetContext.Provider
 			value={{
 				strengthAbility: strengthAbility,
-				dexterityAbility: dexterityAbility,
+				dexterityAbility: dexterityAbility.current,
 				constitutionAbility: constitutionAbility,
 				intelligenceAbility: intelligenceAbility,
 				wisdomAbility: wisdomAbility,
