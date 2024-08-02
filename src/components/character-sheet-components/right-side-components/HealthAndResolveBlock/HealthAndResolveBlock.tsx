@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import SheetLabel from '../../labels/SheetLabel';
 import styles from './HealthAndResolveBlock.module.css';
 import { useForm } from 'react-hook-form';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { CharacterSheetContext } from '../../../../states/CharacterSheet/CharacterSheet';
 import { classList } from '../../../../data/class-information/classList';
 import { getValue } from '../../../../utils/getValue';
@@ -27,7 +27,7 @@ function HealthAndResolveBlock() {
 	// Only works if in each individual component and not passed through context.
 	const currentID = useRef<string>(characterID!);
 
-	const { register, watch, reset } = useForm();
+	const { register, watch } = useForm();
 
 	useEffect(() => {
 		// Change the currentID to the params.
@@ -76,28 +76,22 @@ function HealthAndResolveBlock() {
 		const subscription = watch((data) => {
 			if (data.currentSP <= maxSP) {
 				setValue(`CurrentSP${characterID}`, Number(data.currentSP));
-				// setCurrentSP(Number(data.currentSP));
 			}
 
 			if (data.currentHP <= maxHP) {
 				setValue(`CurrentHP${characterID}`, Number(data.currentHP));
-				// setCurrentHP(data.currentHP);
 			}
 
 			if (data.currentRP <= maxRP) {
 				setValue(`CurrentRP${characterID}`, Number(data.currentRP));
-				// setCurrentRP(data.currentRP);
 			}
 
 			//   Temp Values
 			setValue(`TempSP${characterID}`, Number(data.tempSP));
-			// setTempSP(data.tempSP);
 
 			setValue(`TempHP${characterID}`, Number(data.tempHP));
-			// setTempHP(data.tempHP);
 
 			setValue(`TempRP${characterID}`, Number(data.tempRP));
-			// setTempRP(data.tempRP);
 		});
 		return () => subscription.unsubscribe();
 	}, [watch]);
@@ -141,35 +135,20 @@ function HealthAndResolveBlock() {
 					<div className={styles.labelValueColumn}>
 						<div className={styles.label}>STAMINA POINTS</div>
 						<input type='number' value={maxSP} readOnly />
-						<input
-							type='number'
-							{...register('currentSP')}
-							value={currentSP}
-							max={maxSP}
-						/>
-						<input type='number' {...register('tempSP')} value={tempSP} />
+						<input type='number' {...register('currentSP')} max={maxSP} />
+						<input type='number' {...register('tempSP')} />
 					</div>
 					<div className={styles.labelValueColumn}>
 						<div className={styles.label}>HIT POINTS</div>
 						<input type='number' value={maxHP} readOnly />
-						<input
-							type='number'
-							{...register('currentHP')}
-							value={currentHP}
-							max={maxHP}
-						/>
-						<input type='number' {...register('tempHP')} value={tempHP} />
+						<input type='number' {...register('currentHP')} max={maxHP} />
+						<input type='number' {...register('tempHP')} />
 					</div>
 					<div className={styles.labelValueColumn}>
 						<div className={styles.label}>RESOLVE POINTS</div>
 						<input type='number' value={maxRP > 0 ? maxRP : 1} readOnly />
-						<input
-							type='number'
-							{...register('currentRP')}
-							value={currentRP}
-							max={maxRP}
-						/>
-						<input type='number' {...register('tempRP')} value={tempRP} />
+						<input type='number' {...register('currentRP')} max={maxRP} />
+						<input type='number' {...register('tempRP')} />
 					</div>
 				</div>
 			</div>

@@ -15,6 +15,8 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { setValue } from '../../utils/setValue.ts';
 import { GetModifier } from '../../utils/GetModifier.ts';
 import { useInitiativeScore } from '../../hooks/useInitiativeScore.ts';
+import { useCurrentID } from '../../utils/useCurrentID.ts';
+import { GetAbilityScoreTotal } from '../../utils/GetAbilityScoreTotal.ts';
 
 type SkillBlockStatesListType = {
 	[key: string]: {
@@ -51,15 +53,17 @@ export const CharacterSheetContext = createContext<{
 function CharacterSheet() {
 	const { characterID } = useParams();
 
-	// Store the characterID in a useRef. This is needed to not overwrite the data in the previously selected character.
-	const currentID = useRef<string | undefined>(characterID);
+	// This is needed to not overwrite the data in the previously selected character. Form will write data before the characterID from useParams would update.
+	const { currentID } = useCurrentID();
 
+	// React-hook-form methods.
 	const methods = useForm();
 	const { reset, watch } = methods;
 
+	// Custom hook states.
 	const {
 		strengthAbility,
-		setStrengthAbility,
+		// setStrengthAbility,
 		dexterityAbility,
 		setDexterityAbility,
 		constitutionAbility,
@@ -79,12 +83,24 @@ function CharacterSheet() {
 
 	const { SkillBlockStatesList } = useSkills();
 
+	// Change the currentID to the params.
+	useEffect(() => {
+		// currentID.current = characterID;
+		console.log(currentID);
+	}, [characterID]);
+
 	// useEffect for all changes related to swapping characters
 	useEffect(() => {
-		// Change the currentID to the params.
-		currentID.current = characterID;
+		// Ability Scores set on change.
 
-		// Set default values based on character selected.
+		// setStrengthAbility(getValue(`Strength${characterID}`));
+		setDexterityAbility(getValue(`Dexterity${characterID}`));
+		setConstitutionAbility(getValue(`Constitution${characterID}`));
+		setIntelligenceAbility(getValue(`Intelligence${characterID}`));
+		setWisdomAbility(getValue(`Wisdom${characterID}`));
+		setCharismaAbility(getValue(`Charisma${characterID}`));
+
+		// // Set default values based on character selected.
 		let values = {
 			// CharacterInfo registers
 
@@ -103,12 +119,7 @@ function CharacterSheet() {
 
 			// AbilityScoreBlock registers
 
-			StrengthModifier: GetModifier(strengthAbility).toString(),
-			DexterityModifier: GetModifier(dexterityAbility).toString(),
-			ConstitutionModifier: GetModifier(constitutionAbility).toString(),
-			IntelligenceModifier: GetModifier(intelligenceAbility).toString(),
-			WisdomModifier: GetModifier(wisdomAbility).toString(),
-			CharismaModifier: GetModifier(charismaAbility).toString(),
+			totalStr: GetAbilityScoreTotal(strengthAbility),
 
 			bonusStr: strengthAbility.asBonus,
 			bonusDex: dexterityAbility.asBonus,
@@ -131,15 +142,7 @@ function CharacterSheet() {
 		// Reset the defaultValues and values.
 		reset({ ...values });
 
-		// Ability Scores set on change.
-
-		setStrengthAbility(getValue(`Strength${characterID}`));
 		setCharacterInfoObject(getValue(`characterBasicInfo${characterID}`));
-		setDexterityAbility(getValue(`Dexterity${characterID}`));
-		setConstitutionAbility(getValue(`Constitution${characterID}`));
-		setIntelligenceAbility(getValue(`Intelligence${characterID}`));
-		setWisdomAbility(getValue(`Wisdom${characterID}`));
-		setCharismaAbility(getValue(`Charisma${characterID}`));
 
 		// Initiative Misc set on change
 		setInitMisc(getValue(`InitiativeMiscModifier${characterID}`));
@@ -147,92 +150,94 @@ function CharacterSheet() {
 		Object.keys(SkillBlockStatesList).forEach((key) => {
 			SkillBlockStatesList[key].setSkill(getValue(`${key}${characterID}`));
 		});
-	}, [characterID, strengthAbility]);
+	}, [currentID]);
 
 	useEffect(() => {
 		const subscription = watch((data) => {
-			if (characterID === currentID.current) {
-				// CharacterInfo registers
-				setValue(`characterBasicInfoDynamic${characterID}`, {
-					characterAlignment: data.characterAlignment,
-					characterDiety: data.characterDiety,
-					characterGender: data.characterGender,
-					characterHomeWorld: data.characterHomeWorld,
-					characterName: data.characterName,
-					characterSize: data.characterSize,
-					characterSpeed: data.characterSpeed,
-					playerName: data.playerName,
-				});
+			// Check if formData is different from the data.
+			// if (characterID === currentID.current) {
+			// CharacterInfo registers
+			setValue(`characterBasicInfoDynamic${characterID}`, {
+				characterAlignment: data.characterAlignment,
+				characterDiety: data.characterDiety,
+				characterGender: data.characterGender,
+				characterHomeWorld: data.characterHomeWorld,
+				characterName: data.characterName,
+				characterSize: data.characterSize,
+				characterSpeed: data.characterSpeed,
+				playerName: data.playerName,
+			});
 
-				// DescriptionBlock registers.
-				setValue(`Description${characterID}`, data.descriptionBlock);
+			// DescriptionBlock registers.
+			setValue(`Description${characterID}`, data.descriptionBlock);
 
-				// AbilityScoreBlock registers.
+			// AbilityScoreBlock registers.
 
-				// Strength
-				setValue(`Strength${characterID}`, {
-					aSName: 'Strength',
-					asBonus: Number(data.bonusStr),
-					asPenalty: Number(data.penaltyStr),
-					value: Number(strengthAbility.value),
-				});
-				setStrengthAbility(getValue(`Strength${characterID}`));
+			// Strength
+			setValue(`Strength${characterID}`, {
+				aSName: 'Strength',
+				asBonus: Number(data.bonusStr),
+				asPenalty: Number(data.penaltyStr),
+				value: Number(strengthAbility.value),
+			});
+			// setStrengthAbility(getValue(`Strength${characterID}`));
 
-				// Dexterity
-				setValue(`Dexterity${characterID}`, {
-					aSName: 'Dexterity',
-					asBonus: Number(data.bonusDex),
-					asPenalty: Number(data.penaltyDex),
-					value: Number(dexterityAbility.value),
-				});
-				setDexterityAbility(getValue(`Dexterity${characterID}`));
+			// Dexterity
+			setValue(`Dexterity${characterID}`, {
+				aSName: 'Dexterity',
+				asBonus: Number(data.bonusDex),
+				asPenalty: Number(data.penaltyDex),
+				value: Number(dexterityAbility.value),
+			});
+			setDexterityAbility(getValue(`Dexterity${characterID}`));
 
-				// Constitution
-				setValue(`Constitution${characterID}`, {
-					aSName: 'Constitution',
-					asBonus: Number(data.bonusCon),
-					asPenalty: Number(data.penaltyCon),
-					value: Number(constitutionAbility.value),
-				});
-				setConstitutionAbility(getValue(`Constitution${characterID}`));
+			// Constitution
+			setValue(`Constitution${characterID}`, {
+				aSName: 'Constitution',
+				asBonus: Number(data.bonusCon),
+				asPenalty: Number(data.penaltyCon),
+				value: Number(constitutionAbility.value),
+			});
+			setConstitutionAbility(getValue(`Constitution${characterID}`));
 
-				// Intelligence
-				setValue(`Intelligence${characterID}`, {
-					aSName: 'Intelligence',
-					asBonus: Number(data.bonusInt),
-					asPenalty: Number(data.penaltyInt),
-					value: Number(intelligenceAbility.value),
-				});
-				setIntelligenceAbility(getValue(`Intelligence${characterID}`));
+			// Intelligence
+			setValue(`Intelligence${characterID}`, {
+				aSName: 'Intelligence',
+				asBonus: Number(data.bonusInt),
+				asPenalty: Number(data.penaltyInt),
+				value: Number(intelligenceAbility.value),
+			});
+			setIntelligenceAbility(getValue(`Intelligence${characterID}`));
 
-				// Wisdom
-				setValue(`Wisdom${characterID}`, {
-					aSName: 'Wisdom',
-					asBonus: Number(data.bonusWis),
-					asPenalty: Number(data.penaltyWis),
-					value: Number(wisdomAbility.value),
-				});
-				setWisdomAbility(getValue(`Wisdom${characterID}`));
+			// Wisdom
+			setValue(`Wisdom${characterID}`, {
+				aSName: 'Wisdom',
+				asBonus: Number(data.bonusWis),
+				asPenalty: Number(data.penaltyWis),
+				value: Number(wisdomAbility.value),
+			});
+			setWisdomAbility(getValue(`Wisdom${characterID}`));
 
-				// Charisma
-				setValue(`Charisma${characterID}`, {
-					aSName: 'Charisma',
-					asBonus: Number(data.bonusCha),
-					asPenalty: Number(data.penaltyCha),
-					value: Number(charismaAbility.value),
-				});
-				setCharismaAbility(getValue(`Charisma${characterID}`));
+			// Charisma
+			setValue(`Charisma${characterID}`, {
+				aSName: 'Charisma',
+				asBonus: Number(data.bonusCha),
+				asPenalty: Number(data.penaltyCha),
+				value: Number(charismaAbility.value),
+			});
+			setCharismaAbility(getValue(`Charisma${characterID}`));
 
-				// InitiativeBlock registers.
-				setValue(
-					`InitiativeMiscModifier${characterID}`,
-					Number(data.InitiativeMiscModifier)
-				);
-				setInitMisc(getValue(`InitiativeMiscModifier${characterID}`));
-			}
+			// InitiativeBlock registers.
+			setValue(
+				`InitiativeMiscModifier${characterID}`,
+				Number(data.InitiativeMiscModifier)
+			);
+			setInitMisc(getValue(`InitiativeMiscModifier${characterID}`));
 		});
+		console.log('ID change in Watch');
+		console.log(currentID);
 		return () => subscription.unsubscribe();
-	}, [characterID, watch]);
+	}, [currentID, watch]);
 
 	const characterInfoDynamicObject: CharacterBasicInfoDynamicType = useMemo(
 		() => getValue(`characterBasicInfoDynamic${characterID}`),

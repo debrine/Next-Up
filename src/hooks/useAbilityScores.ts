@@ -1,71 +1,45 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { getValue } from '../utils/getValue';
 import { useParams } from 'react-router-dom';
+import { useCurrentID } from '../utils/useCurrentID';
+import { GetAbilityScoreTotal } from '../utils/GetAbilityScoreTotal';
+import { GetModifier } from '../utils/GetModifier';
 
 export function useAbilityScores() {
 	const { characterID } = useParams();
+	const { currentID } = useCurrentID();
 
-	// // Strength
-	// const strengthAbility = useRef<AbilityScoreType>(
-	// 	getValue(`Strength${characterID}`)
-	// );
-
-	// // Dexterity
-	// const dexterityAbility = useRef<AbilityScoreType>(
-	// 	getValue(`Dexterity${characterID}`)
-	// );
-
-	// // Constitution
-	// const constitutionAbility = useRef<AbilityScoreType>(
-	// 	getValue(`Constitution${characterID}`)
-	// );
-
-	// // Intelligence
-	// const intelligenceAbility = useRef<AbilityScoreType>(
-	// 	getValue(`Intelligence${characterID}`)
-	// );
-
-	// // Wisdom
-	// const wisdomAbility = useRef<AbilityScoreType>(
-	// 	getValue(`Wisdom${characterID}`)
-	// );
-
-	// // Charisma
-	// const charismaAbility = useRef<AbilityScoreType>(
-	// 	getValue(`Charisma${characterID}`)
-	// );
-
-	// Strength
-	const [strengthAbility, setStrengthAbility] = useState<AbilityScoreType>(
-		getValue(`Strength${characterID}`)
+	let strengthAbility: AbilityScoreType = useMemo(
+		() => getValue(`Strength${currentID}`),
+		[currentID]
 	);
 
 	// Dexterity
 	const [dexterityAbility, setDexterityAbility] = useState<AbilityScoreType>(
-		getValue(`Dexterity${characterID}`)
+		getValue(`Dexterity${currentID}`)
 	);
 
 	// Constitution
 	const [constitutionAbility, setConstitutionAbility] =
-		useState<AbilityScoreType>(getValue(`Constitution${characterID}`));
+		useState<AbilityScoreType>(getValue(`Constitution${currentID}`));
 
 	// Intelligence
 	const [intelligenceAbility, setIntelligenceAbility] =
-		useState<AbilityScoreType>(getValue(`Intelligence${characterID}`));
+		useState<AbilityScoreType>(getValue(`Intelligence${currentID}`));
 
 	// Wisdom
 	const [wisdomAbility, setWisdomAbility] = useState<AbilityScoreType>(
-		getValue(`Wisdom${characterID}`)
+		getValue(`Wisdom${currentID}`)
 	);
 
 	// Charisma
 	const [charismaAbility, setCharismaAbility] = useState<AbilityScoreType>(
-		getValue(`Charisma${characterID}`)
+		getValue(`Charisma${currentID}`)
 	);
 
 	return {
 		strengthAbility,
-		setStrengthAbility,
+		// setStrengthAbility,
 		dexterityAbility,
 		setDexterityAbility,
 		constitutionAbility,

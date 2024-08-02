@@ -2,8 +2,9 @@ import SheetLabel from '../../../labels/SheetLabel.tsx';
 import styles from './AbilityScoreBlock.module.css';
 import AbilityScoreType from '../AbilityScoreType/AbilityScoreType.tsx';
 import { useFormContext } from 'react-hook-form';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { CharacterSheetContext } from '../../../../../states/CharacterSheet/CharacterSheet.tsx';
+import { GetModifier } from '../../../../../utils/GetModifier.ts';
 
 // Scores and modifiers not meant to be adjusted.
 
@@ -17,11 +18,8 @@ function AbilityScoreBlock() {
 		charismaAbility,
 	} = useContext(CharacterSheetContext);
 
-	useEffect(() => {
-		console.log('Strength Object changed');
-	}, [strengthAbility]);
-
 	const { register } = useFormContext();
+
 	return (
 		<div className={styles.parentDiv}>
 			<SheetLabel sheetLabelText='ABILITY SCORES' />
@@ -39,11 +37,12 @@ function AbilityScoreBlock() {
 						<div className={styles.columnLabel}>SCORE</div>
 						<input
 							type='number'
-							value={(
-								Number(strengthAbility.value) +
-								Number(strengthAbility.asBonus) -
-								Number(strengthAbility.asPenalty)
-							).toString()}
+							{...register('totalStr')}
+							// value={(
+							// 	Number(strengthAbility.value) +
+							// 	Number(strengthAbility.asBonus) -
+							// 	Number(strengthAbility.asPenalty)
+							// ).toString()}
 							readOnly
 						/>
 						<input
@@ -94,20 +93,32 @@ function AbilityScoreBlock() {
 					</div>
 					<div className={styles.scoreModifierColumn}>
 						<div className={styles.columnLabel}>MODIFIER</div>
-						<input type='number' {...register('StrengthModifier')} readOnly />
-						<input type='number' {...register('DexterityModifier')} readOnly />
 						<input
 							type='number'
-							{...register('ConstitutionModifier')}
+							value={GetModifier(strengthAbility)}
 							readOnly
 						/>
 						<input
 							type='number'
-							{...register('IntelligenceModifier')}
+							value={GetModifier(dexterityAbility)}
 							readOnly
 						/>
-						<input type='number' {...register('WisdomModifier')} readOnly />
-						<input type='number' {...register('CharismaModifier')} readOnly />
+						<input
+							type='number'
+							value={GetModifier(constitutionAbility)}
+							readOnly
+						/>
+						<input
+							type='number'
+							value={GetModifier(intelligenceAbility)}
+							readOnly
+						/>
+						<input type='number' value={GetModifier(wisdomAbility)} readOnly />
+						<input
+							type='number'
+							value={GetModifier(charismaAbility)}
+							readOnly
+						/>
 					</div>
 					<div className={styles.penDrainColumn}>
 						<div className={styles.columnLabel}>BONUS</div>

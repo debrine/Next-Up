@@ -1,109 +1,103 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getValue } from '../utils/getValue';
-import { setValue } from '../utils/setValue';
+import { classList } from '../data/class-information/classList';
+import { useCharacterInfoObject } from './useCharacterInfoObject';
+import { GetModifier } from '../utils/GetModifier';
+import { raceList } from '../data/race-information/raceList';
 
 export function useStaminaHealthResolve() {
 	const { characterID } = useParams();
 
-	// const [currentSP, setCurrentSP] = useState<number>(
-	// 	getValue(`CurrentSP${characterID}`)
-	// );
+	const { characterInfoObject } = useCharacterInfoObject();
 
-	// function editCurrentSP(newValues: number) {
-	// 	setCurrentSP(newValues);
+	const [currentSP, setCurrentSP] = useState<number>(
+		getValue(`CurrentSP${characterID}`)
+	);
 
-	// 	setValue(`CurrentSP${characterID}`, newValues);
-	// }
+	const [currentHP, setCurrentHP] = useState<number>(
+		getValue(`CurrentHP${characterID}`)
+	);
 
-	// const [currentHP, setCurrentHP] = useState<number>(
-	// 	getValue(`CurrentHP${characterID}`)
-	// );
+	const [currentRP, setCurrentRP] = useState<number>(
+		getValue(`CurrentRP${characterID}`)
+	);
 
-	// function editCurrentHP(newValues: number) {
-	// 	setCurrentHP(newValues);
+	const [tempSP, setTempSP] = useState<number>(
+		getValue(`TempSP${characterID}`)
+	);
 
-	// 	setValue(`CurrentHP${characterID}`, newValues);
-	// }
-	// const [currentRP, setCurrentRP] = useState<number>(
-	// 	getValue(`CurrentRP${characterID}`)
-	// );
+	const [tempHP, setTempHP] = useState<number>(
+		getValue(`TempHP${characterID}`)
+	);
 
-	// function editCurrentRP(newValues: number) {
-	// 	setCurrentRP(newValues);
+	const [tempRP, setTempRP] = useState<number>(
+		getValue(`TempRP${characterID}`)
+	);
 
-	// 	setValue(`CurrentRP${characterID}`, newValues);
-	// }
-	// const [tempSP, setTempSP] = useState<number>(
-	// 	getValue(`TempSP${characterID}`)
-	// );
-
-	// function editTempSP(newValues: number) {
-	// 	setTempSP(newValues);
-
-	// 	setValue(`TempSP${characterID}`, newValues);
-	// }
-	// const [tempHP, setTempHP] = useState<number>(
-	// 	getValue(`TempHP${characterID}`)
-	// );
-
-	// function editTempHP(newValues: number) {
-	// 	setTempHP(newValues);
-
-	// 	setValue(`TempHP${characterID}`, newValues);
-	// }
-	// const [tempRP, setTempRP] = useState<number>(
-	// 	getValue(`TempRP${characterID}`)
-	// );
-
-	// function editTempRP(newValues: number) {
-	// 	setTempRP(newValues);
-
-	// 	setValue(`TempRP${characterID}`, newValues);
-	// }
-
-	const currentSP = useMemo<number>(
-		() => getValue(`CurrentSP${characterID}`),
+	//   Max SP is based off value given from class plus your constitution modifier, all multiplied by character level.
+	const maxSP: number = useMemo(
+		() =>
+			(classList[characterInfoObject.chClass].classDefaults.hitStaminaPoints +
+				GetModifier(getValue(`Constitution${characterID}`))) *
+			getValue(`Level${characterID}`),
 		[characterID]
 	);
 
-	const currentHP = useMemo<number>(
-		() => getValue(`CurrentHP${characterID}`),
+	//   Max HP is based off value given from class multiplied by character level and value give by race (only once).
+	const maxHP: number = useMemo(
+		() =>
+			classList[characterInfoObject.chClass].classDefaults.hitStaminaPoints *
+				getValue(`Level${characterID}`) +
+			raceList[characterInfoObject.race].raceHP,
 		[characterID]
 	);
 
-	const currentRP = useMemo<number>(
-		() => getValue(`CurrentRP${characterID}`),
+	// Max RP equal to half your character level (rounded down and minimum of 1) plus key ability score modifier.
+	const mathFloorHalfLevel = useMemo(() => {
+		if (Math.floor(getValue(`Level${characterID}`) / 2) > 0) {
+			return Math.floor(getValue(`Level${characterID}`)) / 2;
+		} else {
+			return 1;
+		}
+	}, [characterID]);
+
+	const keyAbilityObject: AbilityScoreType = useMemo(
+		() =>
+			getValue(`${characterInfoObject.keyAbilityScoreSelected}${characterID}`),
 		[characterID]
 	);
 
-	const tempSP = useMemo<number>(
-		() => getValue(`TempSP${characterID}`),
+	//   Add your Key Ability Score Modifier. If this results negative, then it will be set to a minimum of 1 where the value is called where the register is initiated in CharacterSheet.tsx.
+	const maxRP: number = useMemo(
+		() => mathFloorHalfLevel + GetModifier(keyAbilityObject),
 		[characterID]
 	);
 
-	const tempHP = useMemo<number>(
-		() => getValue(`TempHP${characterID}`),
-		[characterID]
-	);
-
-	const tempRP = useMemo<number>(
-		() => getValue(`TempRP${characterID}`),
-		[characterID]
-	);
+	useEffect(() => {
+		setCurrentSP(getValue(`CurrentSP${characterID}`));
+		setCurrentHP(getValue(`CurrentHP${characterID}`));
+		setCurrentRP(getValue(`CurrentRP${characterID}`));
+		setTempSP(getValue(`TempSP${characterID}`));
+		setTempHP(getValue(`TempHP${characterID}`));
+		setTempRP(getValue(`TempRP${characterID}`));
+	}, [characterID]);
 
 	return {
 		currentSP,
-		// editCurrentSP,
+		setCurrentSP,
 		currentHP,
-		// editCurrentHP,
+		setCurrentHP,
 		currentRP,
-		// editCurrentRP,
+		setCurrentRP,
 		tempSP,
-		// editTempSP,
+		setTempSP,
 		tempHP,
-		// editTempHP,
+		setTempHP,
 		tempRP,
-		// editTempRP,
+		setTempRP,
+		maxSP,
+		maxHP,
+		maxRP,
 	};
 }
