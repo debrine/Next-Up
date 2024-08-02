@@ -67,13 +67,13 @@ function CharacterSheet() {
 		dexterityAbility,
 		// setDexterityAbility,
 		constitutionAbility,
-		setConstitutionAbility,
+		// setConstitutionAbility,
 		intelligenceAbility,
-		setIntelligenceAbility,
+		// setIntelligenceAbility,
 		wisdomAbility,
 		setWisdomAbility,
 		charismaAbility,
-		setCharismaAbility,
+		// setCharismaAbility,
 	} = useAbilityScores();
 
 	const { initMisc, setInitMisc } = useInitiativeScore();
@@ -95,10 +95,10 @@ function CharacterSheet() {
 
 		// setStrengthAbility(getValue(`Strength${characterID}`));
 		// setDexterityAbility(getValue(`Dexterity${characterID}`));
-		setConstitutionAbility(getValue(`Constitution${characterID}`));
-		setIntelligenceAbility(getValue(`Intelligence${characterID}`));
-		setWisdomAbility(getValue(`Wisdom${characterID}`));
-		setCharismaAbility(getValue(`Charisma${characterID}`));
+		// setConstitutionAbility(getValue(`Constitution${characterID}`));
+		// setIntelligenceAbility(getValue(`Intelligence${characterID}`));
+		// setWisdomAbility(getValue(`Wisdom${characterID}`));
+		// setCharismaAbility(getValue(`Charisma${characterID}`));
 
 		// // Set default values based on character selected.
 		let values = {
@@ -119,21 +119,21 @@ function CharacterSheet() {
 
 			// AbilityScoreBlock registers
 
-			totalStr: GetAbilityScoreTotal(strengthAbility),
+			// totalStr: GetAbilityScoreTotal(strengthAbility),
 
-			bonusStr: strengthAbility.asBonus,
+			bonusStr: strengthAbility.current.asBonus,
 			bonusDex: dexterityAbility.current.asBonus,
-			bonusCon: constitutionAbility.asBonus,
-			bonusInt: intelligenceAbility.asBonus,
+			bonusCon: constitutionAbility.current.asBonus,
+			bonusInt: intelligenceAbility.current.asBonus,
 			bonusWis: wisdomAbility.asBonus,
-			bonusCha: charismaAbility.asBonus,
+			bonusCha: charismaAbility.current.asBonus,
 
-			penaltyStr: strengthAbility.asPenalty,
+			penaltyStr: strengthAbility.current.asPenalty,
 			penaltyDex: dexterityAbility.current.asPenalty,
-			penaltyCon: constitutionAbility.asPenalty,
-			penaltyInt: intelligenceAbility.asPenalty,
+			penaltyCon: constitutionAbility.current.asPenalty,
+			penaltyInt: intelligenceAbility.current.asPenalty,
 			penaltyWis: wisdomAbility.asPenalty,
-			penaltyCha: charismaAbility.asPenalty,
+			penaltyCha: charismaAbility.current.asPenalty,
 
 			// InitiativeBlock registers
 			InitiativeMiscModifier: initMisc,
@@ -178,9 +178,10 @@ function CharacterSheet() {
 				aSName: 'Strength',
 				asBonus: Number(data.bonusStr),
 				asPenalty: Number(data.penaltyStr),
-				value: Number(strengthAbility.value),
+				value: Number(strengthAbility.current.value),
 			});
 			// setStrengthAbility(getValue(`Strength${characterID}`));
+			strengthAbility.current = getValue(`Strength${characterID}`);
 
 			// Dexterity
 			setValue(`Dexterity${characterID}`, {
@@ -197,18 +198,20 @@ function CharacterSheet() {
 				aSName: 'Constitution',
 				asBonus: Number(data.bonusCon),
 				asPenalty: Number(data.penaltyCon),
-				value: Number(constitutionAbility.value),
+				value: Number(constitutionAbility.current.value),
 			});
-			setConstitutionAbility(getValue(`Constitution${characterID}`));
+			// setConstitutionAbility(getValue(`Constitution${characterID}`));
+			constitutionAbility.current = getValue(`Constitution${characterID}`);
 
 			// Intelligence
 			setValue(`Intelligence${characterID}`, {
 				aSName: 'Intelligence',
 				asBonus: Number(data.bonusInt),
 				asPenalty: Number(data.penaltyInt),
-				value: Number(intelligenceAbility.value),
+				value: Number(intelligenceAbility.current.value),
 			});
-			setIntelligenceAbility(getValue(`Intelligence${characterID}`));
+			// setIntelligenceAbility(getValue(`Intelligence${characterID}`));
+			intelligenceAbility.current = getValue(`Intelligence${characterID}`);
 
 			// Wisdom
 			setValue(`Wisdom${characterID}`, {
@@ -218,15 +221,17 @@ function CharacterSheet() {
 				value: Number(wisdomAbility.value),
 			});
 			setWisdomAbility(getValue(`Wisdom${characterID}`));
+			// wisdomAbility.current = getValue(`Wisdom${characterID}`);
 
 			// Charisma
 			setValue(`Charisma${characterID}`, {
 				aSName: 'Charisma',
 				asBonus: Number(data.bonusCha),
 				asPenalty: Number(data.penaltyCha),
-				value: Number(charismaAbility.value),
+				value: Number(charismaAbility.current.value),
 			});
-			setCharismaAbility(getValue(`Charisma${characterID}`));
+			// setCharismaAbility(getValue(`Charisma${characterID}`));
+			charismaAbility.current = getValue(`Charisma${characterID}`);
 
 			// InitiativeBlock registers.
 			setValue(
@@ -266,12 +271,12 @@ function CharacterSheet() {
 	return (
 		<CharacterSheetContext.Provider
 			value={{
-				strengthAbility: strengthAbility,
+				strengthAbility: strengthAbility.current,
 				dexterityAbility: dexterityAbility.current,
-				constitutionAbility: constitutionAbility,
-				intelligenceAbility: intelligenceAbility,
+				constitutionAbility: constitutionAbility.current,
+				intelligenceAbility: intelligenceAbility.current,
 				wisdomAbility: wisdomAbility,
-				charismaAbility: charismaAbility,
+				charismaAbility: charismaAbility.current,
 
 				initMisc: initMisc,
 				currentSP: currentSP,

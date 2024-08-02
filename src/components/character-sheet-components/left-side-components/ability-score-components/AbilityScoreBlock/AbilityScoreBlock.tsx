@@ -37,12 +37,12 @@ function AbilityScoreBlock() {
 						<div className={styles.columnLabel}>SCORE</div>
 						<input
 							type='number'
-							{...register('totalStr')}
-							// value={(
-							// 	Number(strengthAbility.value) +
-							// 	Number(strengthAbility.asBonus) -
-							// 	Number(strengthAbility.asPenalty)
-							// ).toString()}
+							// {...register('totalStr')}
+							value={(
+								Number(strengthAbility.value) +
+								Number(strengthAbility.asBonus) -
+								Number(strengthAbility.asPenalty)
+							).toString()}
 							readOnly
 						/>
 						<input

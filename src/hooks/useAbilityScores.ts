@@ -9,9 +9,8 @@ export function useAbilityScores() {
 	const { characterID } = useParams();
 	const { currentID } = useCurrentID();
 
-	let strengthAbility: AbilityScoreType = useMemo(
-		() => getValue(`Strength${currentID}`),
-		[currentID]
+	const strengthAbility = useRef<AbilityScoreType>(
+		getValue(`Strength${currentID}`)
 	);
 
 	// Dexterity
@@ -20,41 +19,56 @@ export function useAbilityScores() {
 	);
 
 	// Constitution
-	const [constitutionAbility, setConstitutionAbility] =
-		useState<AbilityScoreType>(getValue(`Constitution${currentID}`));
+	const constitutionAbility = useRef<AbilityScoreType>(
+		getValue(`Constitution${currentID}`)
+	);
 
-	// Intelligence
-	const [intelligenceAbility, setIntelligenceAbility] =
-		useState<AbilityScoreType>(getValue(`Intelligence${currentID}`));
-
-	// Wisdom
 	const [wisdomAbility, setWisdomAbility] = useState<AbilityScoreType>(
 		getValue(`Wisdom${currentID}`)
 	);
 
+	// const [charismaAbility, setCharismaAbility] = useState<AbilityScoreType>(
+	// 	getValue(`Charisma${currentID}`)
+	// );
+
+	// Intelligence
+	const intelligenceAbility = useRef<AbilityScoreType>(
+		getValue(`Intelligence${currentID}`)
+	);
+
+	// // Wisdom
+	// const wisdomAbility = useRef<AbilityScoreType>(
+	// 	getValue(`Wisdom${currentID}`)
+	// );
+
 	// Charisma
-	const [charismaAbility, setCharismaAbility] = useState<AbilityScoreType>(
+	const charismaAbility = useRef<AbilityScoreType>(
 		getValue(`Charisma${currentID}`)
 	);
 
 	// Must be changed both in and out of hook. In the CharacterSheet.tsx, call it after setting the data to update it's current value.
 	useEffect(() => {
+		strengthAbility.current = getValue(`Strength${currentID}`);
+
 		dexterityAbility.current = getValue(`Dexterity${currentID}`);
-		console.log('In useEffect');
+
+		constitutionAbility.current = getValue(`Constitution${currentID}`);
+
+		intelligenceAbility.current = getValue(`Intelligence${currentID}`);
+
+		// wisdomAbility.current = getValue(`Wisdom${currentID}`);
+
+		charismaAbility.current = getValue(`Charisma${currentID}`);
 	}, [currentID]);
 
 	return {
 		strengthAbility,
-		// setStrengthAbility,
 		dexterityAbility,
-		// setDexterityAbility,
 		constitutionAbility,
-		setConstitutionAbility,
 		intelligenceAbility,
-		setIntelligenceAbility,
 		wisdomAbility,
 		setWisdomAbility,
 		charismaAbility,
-		setCharismaAbility,
+		// setCharismaAbility,
 	};
 }
