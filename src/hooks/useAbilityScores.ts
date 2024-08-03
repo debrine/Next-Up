@@ -1,65 +1,52 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { getValue } from '../utils/getValue';
 import { useParams } from 'react-router-dom';
-import { useCurrentID } from '../utils/useCurrentID';
-import { GetAbilityScoreTotal } from '../utils/GetAbilityScoreTotal';
-import { GetModifier } from '../utils/GetModifier';
 
 export function useAbilityScores() {
 	const { characterID } = useParams();
-	const { currentID } = useCurrentID();
 
 	const strengthAbility = useRef<AbilityScoreType>(
-		getValue(`Strength${currentID}`)
+		getValue(`Strength${characterID}`)
 	);
 
 	// Dexterity
 	const dexterityAbility = useRef<AbilityScoreType>(
-		getValue(`Dexterity${currentID}`)
+		getValue(`Dexterity${characterID}`)
 	);
 
 	// Constitution
 	const constitutionAbility = useRef<AbilityScoreType>(
-		getValue(`Constitution${currentID}`)
+		getValue(`Constitution${characterID}`)
 	);
-
-	const [wisdomAbility, setWisdomAbility] = useState<AbilityScoreType>(
-		getValue(`Wisdom${currentID}`)
-	);
-
-	// const [charismaAbility, setCharismaAbility] = useState<AbilityScoreType>(
-	// 	getValue(`Charisma${currentID}`)
-	// );
 
 	// Intelligence
 	const intelligenceAbility = useRef<AbilityScoreType>(
-		getValue(`Intelligence${currentID}`)
+		getValue(`Intelligence${characterID}`)
 	);
 
-	// // Wisdom
-	// const wisdomAbility = useRef<AbilityScoreType>(
-	// 	getValue(`Wisdom${currentID}`)
-	// );
+	// Wisdom
+	const wisdomAbility = useRef<AbilityScoreType>(
+		getValue(`Wisdom${characterID}`)
+	);
 
 	// Charisma
 	const charismaAbility = useRef<AbilityScoreType>(
-		getValue(`Charisma${currentID}`)
+		getValue(`Charisma${characterID}`)
 	);
 
-	// Must be changed both in and out of hook. In the CharacterSheet.tsx, call it after setting the data to update it's current value.
 	useEffect(() => {
-		strengthAbility.current = getValue(`Strength${currentID}`);
+		strengthAbility.current = getValue(`Strength${characterID}`);
 
-		dexterityAbility.current = getValue(`Dexterity${currentID}`);
+		dexterityAbility.current = getValue(`Dexterity${characterID}`);
 
-		constitutionAbility.current = getValue(`Constitution${currentID}`);
+		constitutionAbility.current = getValue(`Constitution${characterID}`);
 
-		intelligenceAbility.current = getValue(`Intelligence${currentID}`);
+		intelligenceAbility.current = getValue(`Intelligence${characterID}`);
 
-		// wisdomAbility.current = getValue(`Wisdom${currentID}`);
+		wisdomAbility.current = getValue(`Wisdom${characterID}`);
 
-		charismaAbility.current = getValue(`Charisma${currentID}`);
-	}, [currentID]);
+		charismaAbility.current = getValue(`Charisma${characterID}`);
+	}, [characterID]);
 
 	return {
 		strengthAbility,
@@ -67,8 +54,6 @@ export function useAbilityScores() {
 		constitutionAbility,
 		intelligenceAbility,
 		wisdomAbility,
-		setWisdomAbility,
 		charismaAbility,
-		// setCharismaAbility,
 	};
 }

@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { getValue } from '../utils/getValue';
 import { useParams } from 'react-router-dom';
 
 export function useInitiativeScore() {
 	const { characterID } = useParams();
 
-	const [initMisc, setInitMisc] = useState<number>(
+	const initMisc = useRef<number>(
 		getValue(`InitiativeMiscModifier${characterID}`)
 	);
 
 	useEffect(() => {
-		setInitMisc(getValue(`InitiativeMiscModifier${characterID}`));
+		initMisc.current = getValue(`InitiativeMiscModifier${characterID}`);
 	}, [characterID]);
 
-	return { initMisc, setInitMisc };
+	return { initMisc };
 }

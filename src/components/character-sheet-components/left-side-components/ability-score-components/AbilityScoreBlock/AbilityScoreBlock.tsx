@@ -5,6 +5,7 @@ import { useFormContext } from 'react-hook-form';
 import { useContext } from 'react';
 import { CharacterSheetContext } from '../../../../../states/CharacterSheet/CharacterSheet.tsx';
 import { GetModifier } from '../../../../../utils/GetModifier.ts';
+import { GetAbilityScoreTotal } from '../../../../../utils/GetAbilityScoreTotal.ts';
 
 // Scores and modifiers not meant to be adjusted.
 
@@ -37,57 +38,32 @@ function AbilityScoreBlock() {
 						<div className={styles.columnLabel}>SCORE</div>
 						<input
 							type='number'
-							// {...register('totalStr')}
-							value={(
-								Number(strengthAbility.value) +
-								Number(strengthAbility.asBonus) -
-								Number(strengthAbility.asPenalty)
-							).toString()}
+							value={GetAbilityScoreTotal(strengthAbility).toString()}
 							readOnly
 						/>
 						<input
 							type='number'
-							value={(
-								Number(dexterityAbility.value) +
-								Number(dexterityAbility.asBonus) -
-								Number(dexterityAbility.asPenalty)
-							).toString()}
+							value={GetAbilityScoreTotal(dexterityAbility).toString()}
 							readOnly
 						/>
 						<input
 							type='number'
-							value={(
-								Number(constitutionAbility.value) +
-								Number(constitutionAbility.asBonus) -
-								Number(constitutionAbility.asPenalty)
-							).toString()}
+							value={GetAbilityScoreTotal(constitutionAbility).toString()}
 							readOnly
 						/>
 						<input
 							type='number'
-							value={(
-								Number(intelligenceAbility.value) +
-								Number(intelligenceAbility.asBonus) -
-								Number(intelligenceAbility.asPenalty)
-							).toString()}
+							value={GetAbilityScoreTotal(intelligenceAbility).toString()}
 							readOnly
 						/>
 						<input
 							type='number'
-							value={(
-								Number(wisdomAbility.value) +
-								Number(wisdomAbility.asBonus) -
-								Number(wisdomAbility.asPenalty)
-							).toString()}
+							value={GetAbilityScoreTotal(wisdomAbility).toString()}
 							readOnly
 						/>
 						<input
 							type='number'
-							value={(
-								Number(charismaAbility.value) +
-								Number(charismaAbility.asBonus) -
-								Number(charismaAbility.asPenalty)
-							).toString()}
+							value={GetAbilityScoreTotal(charismaAbility).toString()}
 							readOnly
 						/>
 					</div>

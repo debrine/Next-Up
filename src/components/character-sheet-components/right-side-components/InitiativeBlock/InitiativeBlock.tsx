@@ -27,7 +27,11 @@ function InitiativeBlock() {
 				<div className={styles.plusEquals}> = </div>
 				<div className={styles.initiativeDiv}>
 					<div className={styles.initHead}>DEX MODIFIER</div>
-					<input type='number' {...register('DexterityModifier')} readOnly />
+					<input
+						type='number'
+						value={GetModifier(dexterityAbility).toString()}
+						readOnly
+					/>
 				</div>
 				<div className={styles.plusEquals}> + </div>
 				<div className={styles.initiativeDiv}>
