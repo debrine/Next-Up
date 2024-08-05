@@ -1,59 +1,102 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getValue } from '../utils/getValue';
 import { useParams } from 'react-router-dom';
+import { setValue } from '../utils/setValue';
 
 export function useAbilityScores() {
-	const { characterID } = useParams();
+  const { characterID } = useParams();
 
-	const strengthAbility = useRef<AbilityScoreType>(
-		getValue(`Strength${characterID}`)
-	);
+  const [strength, setStrength] = useState(getValue(`Strength${characterID}`));
+  const [dexterity, setDexterity] = useState(
+    getValue(`Dexterity${characterID}`)
+  );
+  const [constitution, setConstitution] = useState(
+    getValue(`Constitution${characterID}`)
+  );
+  const [intelligence, setIntelligence] = useState(
+    getValue(`Intelligence${characterID}`)
+  );
+  const [wisdom, setWisdom] = useState(getValue(`Wisdom${characterID}`));
+  const [charisma, setCharisma] = useState(getValue(`Charisma${characterID}`));
+  const [currentCharacterID, setCurrentCharacterID] = useState(characterID);
 
-	// Dexterity
-	const dexterityAbility = useRef<AbilityScoreType>(
-		getValue(`Dexterity${characterID}`)
-	);
+  // we store characterID in state here as well, as the param in URL
+  // can cause the use effect to be triggered before values are updated
+  // whenever the character changes, we update all our values off the new ID
+  useEffect(() => {
+    setStrength(getValue(`Strength${characterID}`));
+    setDexterity(getValue(`Dexterity${characterID}`));
+    setConstitution(getValue(`Constitution${characterID}`));
+    setIntelligence(getValue(`Intelligence${characterID}`));
+    setWisdom(getValue(`Wisdom${characterID}`));
+    setCharisma(getValue(`Charisma${characterID}`));
+    setCurrentCharacterID(characterID);
+  }, [characterID]);
 
-	// Constitution
-	const constitutionAbility = useRef<AbilityScoreType>(
-		getValue(`Constitution${characterID}`)
-	);
+  // update callbacks that update state + localStorage.
+  // state update is important, as it will trigger a component
+  // re-render
+  const updateStrength = useCallback(
+    (newStrength) => {
+      setStrength(newStrength);
+      setValue(`Strength${characterID}`, newStrength);
+    },
+    [characterID]
+  );
 
-	// Intelligence
-	const intelligenceAbility = useRef<AbilityScoreType>(
-		getValue(`Intelligence${characterID}`)
-	);
+  const updateWisdom = useCallback(
+    (newWisdom) => {
+      setWisdom(newWisdom);
+      setValue(`Wisdom${characterID}`, newWisdom);
+    },
+    [characterID]
+  );
 
-	// Wisdom
-	const wisdomAbility = useRef<AbilityScoreType>(
-		getValue(`Wisdom${characterID}`)
-	);
+  const updateConstitution = useCallback(
+    (newConstitution) => {
+      setConstitution(newConstitution);
+      setValue(`Constitution${characterID}`, newConstitution);
+    },
+    [characterID]
+  );
 
-	// Charisma
-	const charismaAbility = useRef<AbilityScoreType>(
-		getValue(`Charisma${characterID}`)
-	);
+  const updateCharisma = useCallback(
+    (newCharisma) => {
+      setCharisma(newCharisma);
+      setValue(`Charisma${characterID}`, newCharisma);
+    },
+    [characterID]
+  );
 
-	useEffect(() => {
-		strengthAbility.current = getValue(`Strength${characterID}`);
+  const updateIntelligence = useCallback(
+    (newIntelligence) => {
+      setIntelligence(newIntelligence);
+      setValue(`Intelligence${characterID}`, newIntelligence);
+    },
+    [characterID]
+  );
 
-		dexterityAbility.current = getValue(`Dexterity${characterID}`);
+  const updateDexterity = useCallback(
+    (newDexterity) => {
+      setDexterity(newDexterity);
+      setValue(`Dexterity${characterID}`, newDexterity);
+    },
+    [characterID]
+  );
 
-		constitutionAbility.current = getValue(`Constitution${characterID}`);
-
-		intelligenceAbility.current = getValue(`Intelligence${characterID}`);
-
-		wisdomAbility.current = getValue(`Wisdom${characterID}`);
-
-		charismaAbility.current = getValue(`Charisma${characterID}`);
-	}, [characterID]);
-
-	return {
-		strengthAbility,
-		dexterityAbility,
-		constitutionAbility,
-		intelligenceAbility,
-		wisdomAbility,
-		charismaAbility,
-	};
+  return {
+    strengthAbility: strength,
+    dexterityAbility: dexterity,
+    constitutionAbility: constitution,
+    intelligenceAbility: intelligence,
+    wisdomAbility: wisdom,
+    charismaAbility: charisma,
+    updateStrength,
+    updateCharisma,
+    updateConstitution,
+    updateDexterity,
+    updateWisdom,
+    updateIntelligence,
+    currentCharacterID,
+  };
 }
