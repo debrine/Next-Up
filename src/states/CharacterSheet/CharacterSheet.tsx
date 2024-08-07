@@ -327,10 +327,6 @@ function CharacterSheet() {
 
 	const characterLevel = getValue(`Level${characterID}`);
 
-	/*
-    Stamina, Health, and Resolve
-  */
-
 	const Component =
 		levelUpList['1'][characterInfoObject.chClass]?.componentForClass;
 
