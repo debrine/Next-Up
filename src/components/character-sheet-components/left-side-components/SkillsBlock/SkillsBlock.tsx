@@ -8,7 +8,7 @@ import { setValue } from '../../../../utils/setValue';
 import SheetLabel from '../../labels/SheetLabel';
 import { GetModifier } from '../../../../utils/GetModifier';
 import { classList } from '../../../../data/class-information/classList';
-import { useForm } from 'react-hook-form';
+import { useForm, useFormContext } from 'react-hook-form';
 
 function SkillsBlock() {
 	const { characterID } = useParams();
@@ -17,29 +17,29 @@ function SkillsBlock() {
 		CharacterSheetContext
 	);
 
-	const { register, watch } = useForm();
+	const { register, watch } = useFormContext();
 
-	useEffect(() => {
-		const subscription = watch((data) => {
-			// Set the values as they change.
-			skillArray.forEach((skill) => {
-				// If it's a Specialization Skill, don't add the rank. It's not supposed to count to the total ranks per level, and always equal to the level of the character.
-				if (
-					SkillBlockStatesList[skill].skillState.operativeSpecializationSkill
-				) {
-					editSkill(0, Number(data[`${skill}ModifierBonus`]), skill);
-				} else {
-					editSkill(
-						Number(data[`${skill}Ranks`]),
-						Number(data[`${skill}ModifierBonus`]),
-						skill
-					);
-				}
-			});
-			setValue(`ProfessionName${characterID}`, data.ProfessionName);
-		});
-		return () => subscription.unsubscribe();
-	}, [watch]);
+	// useEffect(() => {
+	// 	const subscription = watch((data) => {
+	// 		// Set the values as they change.
+	// 		skillArray.forEach((skill) => {
+	// 			// If it's a Specialization Skill, don't add the rank. It's not supposed to count to the total ranks per level, and always equal to the level of the character.
+	// 			if (
+	// 				SkillBlockStatesList[skill].skillState.current
+	// 					.operativeSpecializationSkill
+	// 			) {
+	// 				editSkill(0, Number(data[`${skill}ModifierBonus`]), skill);
+	// 			} else {
+	// 				editSkill(
+	// 					Number(data[`${skill}Ranks`]),
+	// 					Number(data[`${skill}ModifierBonus`]),
+	// 					skill
+	// 				);
+	// 			}
+	// 		});
+	// 	});
+	// 	return () => subscription.unsubscribe();
+	// }, [watch]);
 
 	const skillArray: string[] = Object.keys(skillList).map((key: string) => {
 		return key;
@@ -65,19 +65,20 @@ function SkillsBlock() {
 		);
 	}
 
-	// Function to edit Skill Ranks
-	function editSkill(rank: number, attributeModBonus: number, skill: string) {
-		let tempSkill: SkillListType = SkillBlockStatesList[skill].skillState;
-		tempSkill.ranks = rank;
-		tempSkill.value =
-			rank +
-			attributeModBonus +
-			SkillBlockStatesList[skill].skillState.classSkillBonus +
-			SkillBlockStatesList[skill].skillState.insightBonusToValue +
-			SkillBlockStatesList[skill].skillState.racialBonusToValue;
-		SkillBlockStatesList[skill].setSkill(tempSkill);
-		setValue(`${skill}${characterID}`, tempSkill);
-	}
+	// // Function to edit Skill Ranks
+	// function editSkill(rank: number, attributeModBonus: number, skill: string) {
+	// 	let tempSkill: SkillListType =
+	// 		SkillBlockStatesList[skill].skillState.current;
+	// 	tempSkill.ranks = rank;
+	// 	tempSkill.value =
+	// 		rank +
+	// 		attributeModBonus +
+	// 		SkillBlockStatesList[skill].skillState.current.classSkillBonus +
+	// 		SkillBlockStatesList[skill].skillState.current.insightBonusToValue +
+	// 		SkillBlockStatesList[skill].skillState.current.racialBonusToValue;
+	// 	SkillBlockStatesList[skill].skillState.current = tempSkill;
+	// 	setValue(`${skill}${characterID}`, tempSkill);
+	// }
 
 	function handleClassSkill(skill: string) {
 		let tempSkill: SkillListType = SkillBlockStatesList[skill].skillState;
@@ -87,7 +88,7 @@ function SkillsBlock() {
 		} else {
 			tempSkill.classSkillBonus = 0;
 		}
-		SkillBlockStatesList[skill].setSkill(tempSkill);
+		SkillBlockStatesList[skill].skillState = tempSkill;
 		setValue(`${skill}${characterID}`, tempSkill);
 	}
 
@@ -145,11 +146,7 @@ function SkillsBlock() {
 
 							{skill === 'Profession' && (
 								<div className={styles.professionName}>
-									<input
-										type='text'
-										{...register(`ProfessionName`)}
-										defaultValue={getValue(`ProfessionName${characterID}`)}
-									/>
+									<input type='text' {...register(`ProfessionName`)} />
 								</div>
 							)}
 						</div>
@@ -157,8 +154,8 @@ function SkillsBlock() {
 							{/* Total */}
 							<input
 								type='number'
-								{...register(`${skill}Total`)}
-								value={SkillBlockStatesList[skill].skillState.value}
+								value={SkillBlockStatesList[skill].skillState.value.toString()}
+								// value={1}
 								readOnly
 							/>{' '}
 							={/* Ranks */}
@@ -183,14 +180,12 @@ function SkillsBlock() {
 							+{/* Class Bonus */}
 							<input
 								type='number'
-								{...register(`${skill}ClassBonus`)}
 								value={SkillBlockStatesList[skill].skillState.classSkillBonus}
 								readOnly
 							/>{' '}
 							+{/* Ability Mod */}
 							<input
 								type='number'
-								{...register(`${skill}ModifierBonus`)}
 								value={GetModifier(
 									getValue(
 										`${skillList[skill].attributeAffecting}${characterID}`

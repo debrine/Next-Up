@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getValue } from '../utils/getValue';
-import { setValue } from '../utils/setValue';
 import { useParams } from 'react-router-dom';
+import { setValue } from '../utils/setValue';
 
 type SkillBlockStatesListType = {
 	[key: string]: {
 		skillState: SkillListType;
-		setSkill: (newValues: SkillListType) => void;
+		updateState: (newValue: SkillListType) => void;
 	};
 };
 
@@ -18,326 +18,362 @@ export function useSkills() {
 		getValue(`Acrobatics${characterID}`)
 	);
 
-	function editAcrobaticsValue(newValues: SkillListType) {
-		setAcrobatics(newValues);
-
-		setValue(`Acrobatics${characterID}`, newValues);
-	}
+	const updateAcrobatics = useCallback(
+		(newValue: SkillListType) => {
+			setAcrobatics(newValue);
+			setValue(`Acrobatics${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Athletics
 	const [athletics, setAthletics] = useState<SkillListType>(
 		getValue(`Athletics${characterID}`)
 	);
 
-	function editAthleticsValue(newValues: SkillListType) {
-		setAthletics(newValues);
-
-		setValue(`Athletics${characterID}`, newValues);
-	}
+	const updateAthletics = useCallback(
+		(newValue: SkillListType) => {
+			setAthletics(newValue);
+			setValue(`Athletics${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Bluff
 	const [bluff, setBluff] = useState<SkillListType>(
 		getValue(`Bluff${characterID}`)
 	);
 
-	function editBluffValue(newValues: SkillListType) {
-		setBluff(newValues);
-
-		setValue(`Bluff${characterID}`, newValues);
-	}
+	const updateBluff = useCallback(
+		(newValue: SkillListType) => {
+			setBluff(newValue);
+			setValue(`Bluff${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Computers
 	const [computers, setComputers] = useState<SkillListType>(
 		getValue(`Computers${characterID}`)
 	);
 
-	function editComputersValue(newValues: SkillListType) {
-		setComputers(newValues);
-
-		setValue(`Computers${characterID}`, newValues);
-	}
+	const updateComputers = useCallback(
+		(newValue: SkillListType) => {
+			setComputers(newValue);
+			setValue(`Computers${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Culture
 	const [culture, setCulture] = useState<SkillListType>(
 		getValue(`Culture${characterID}`)
 	);
 
-	function editCultureValue(newValues: SkillListType) {
-		setCulture(newValues);
-
-		setValue(`Culture${characterID}`, newValues);
-	}
+	const updateCulture = useCallback(
+		(newValue: SkillListType) => {
+			setCulture(newValue);
+			setValue(`Culture${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Diplomacy
 	const [diplomacy, setDiplomacy] = useState<SkillListType>(
 		getValue(`Diplomacy${characterID}`)
 	);
 
-	function editDiplomacyValue(newValues: SkillListType) {
-		setDiplomacy(newValues);
-
-		setValue(`Diplomacy${characterID}`, newValues);
-	}
+	const updateDiplomacy = useCallback(
+		(newValue: SkillListType) => {
+			setDiplomacy(newValue);
+			setValue(`Diplomacy${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Disguise
 	const [disguise, setDisguise] = useState<SkillListType>(
 		getValue(`Disguise${characterID}`)
 	);
 
-	function editDisguiseValue(newValues: SkillListType) {
-		setDisguise(newValues);
-
-		setValue(`Disguise${characterID}`, newValues);
-	}
+	const updateDisguise = useCallback(
+		(newValue: SkillListType) => {
+			setDisguise(newValue);
+			setValue(`Disguise${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Engineering
 	const [engineering, setEngineering] = useState<SkillListType>(
 		getValue(`Engineering${characterID}`)
 	);
 
-	function editEngineeringValue(newValues: SkillListType) {
-		setEngineering(newValues);
-
-		setValue(`Engineering${characterID}`, newValues);
-	}
+	const updateEngineering = useCallback(
+		(newValue: SkillListType) => {
+			setEngineering(newValue);
+			setValue(`Engineering${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Intimidate
 	const [intimidate, setIntimidate] = useState<SkillListType>(
 		getValue(`Intimidate${characterID}`)
 	);
 
-	function editIntimidateValue(newValues: SkillListType) {
-		setIntimidate(newValues);
-
-		setValue(`Intimidate${characterID}`, newValues);
-	}
+	const updateIntimidate = useCallback(
+		(newValue: SkillListType) => {
+			setIntimidate(newValue);
+			setValue(`Intimidate${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Life Science
 	const [lifeScience, setLifeScience] = useState<SkillListType>(
 		getValue(`Life Science${characterID}`)
 	);
 
-	function editLifeScienceValue(newValues: SkillListType) {
-		setLifeScience(newValues);
-
-		setValue(`Life Science${characterID}`, newValues);
-	}
+	const updateLifeScience = useCallback(
+		(newValue: SkillListType) => {
+			setLifeScience(newValue);
+			setValue(`Life Science${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Medicine
 	const [medicine, setMedicine] = useState<SkillListType>(
 		getValue(`Medicine${characterID}`)
 	);
 
-	function editMedicineValue(newValues: SkillListType) {
-		setMedicine(newValues);
-
-		setValue(`Medicine${characterID}`, newValues);
-	}
+	const updateMedicine = useCallback(
+		(newValue: SkillListType) => {
+			setMedicine(newValue);
+			setValue(`Medicine${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Mysticism
 	const [mysticism, setMysticism] = useState<SkillListType>(
 		getValue(`Mysticism${characterID}`)
 	);
 
-	function editMysticismValue(newValues: SkillListType) {
-		setMysticism(newValues);
-
-		setValue(`Mysticism${characterID}`, newValues);
-	}
+	const updateMysticism = useCallback(
+		(newValue: SkillListType) => {
+			setMysticism(newValue);
+			setValue(`Mysticism${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Perception
 	const [perception, setPerception] = useState<SkillListType>(
 		getValue(`Perception${characterID}`)
 	);
 
-	function editPerceptionValue(newValues: SkillListType) {
-		setPerception(newValues);
-
-		setValue(`Perception${characterID}`, newValues);
-	}
+	const updatePerception = useCallback(
+		(newValue: SkillListType) => {
+			setPerception(newValue);
+			setValue(`Perception${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Physical Science
 	const [physicalScience, setPhysicalScience] = useState<SkillListType>(
 		getValue(`Physical Science${characterID}`)
 	);
 
-	function editPhysicalScienceValue(newValues: SkillListType) {
-		setPhysicalScience(newValues);
-
-		setValue(`Physical Science${characterID}`, newValues);
-	}
+	const updatePhysicalScience = useCallback(
+		(newValue: SkillListType) => {
+			setPhysicalScience(newValue);
+			setValue(`Physical Science${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Piloting
 	const [piloting, setPiloting] = useState<SkillListType>(
 		getValue(`Piloting${characterID}`)
 	);
 
-	function editPilotingValue(newValues: SkillListType) {
-		setPiloting(newValues);
-
-		setValue(`Piloting${characterID}`, newValues);
-	}
+	const updatePiloting = useCallback(
+		(newValue: SkillListType) => {
+			setPiloting(newValue);
+			setValue(`Piloting${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Profession
 	const [profession, setProfession] = useState<SkillListType>(
 		getValue(`Profession${characterID}`)
 	);
 
-	function editProfessionValue(newValues: SkillListType) {
-		setProfession(newValues);
-
-		setValue(`Profession${characterID}`, newValues);
-	}
+	const updateProfession = useCallback(
+		(newValue: SkillListType) => {
+			setProfession(newValue);
+			setValue(`Profession${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Sense Motive
 	const [senseMotive, setSenseMotive] = useState<SkillListType>(
 		getValue(`Sense Motive${characterID}`)
 	);
 
-	function editSenseMotiveValue(newValues: SkillListType) {
-		setSenseMotive(newValues);
-
-		setValue(`Sense Motive${characterID}`, newValues);
-	}
+	const updateSenseMotive = useCallback(
+		(newValue: SkillListType) => {
+			setSenseMotive(newValue);
+			setValue(`Sense Motive${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Sleight of Hand
 	const [sleightOfHand, setSleightOfHand] = useState<SkillListType>(
 		getValue(`Sleight of Hand${characterID}`)
 	);
 
-	function editSleightOfHandValue(newValues: SkillListType) {
-		setSleightOfHand(newValues);
-
-		setValue(`Sleight of Hand${characterID}`, newValues);
-	}
+	const updateSleightOfHand = useCallback(
+		(newValue: SkillListType) => {
+			setSleightOfHand(newValue);
+			setValue(`Sleight of Hand${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Stealth
 	const [stealth, setStealth] = useState<SkillListType>(
 		getValue(`Stealth${characterID}`)
 	);
 
-	function editStealthValue(newValues: SkillListType) {
-		setStealth(newValues);
-
-		setValue(`Stealth${characterID}`, newValues);
-	}
+	const updateStealth = useCallback(
+		(newValue: SkillListType) => {
+			setStealth(newValue);
+			setValue(`Stealth${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
 	//Survival
 	const [survival, setSurvival] = useState<SkillListType>(
 		getValue(`Survival${characterID}`)
 	);
 
-	function editSurvivalValue(newValues: SkillListType) {
-		setSurvival(newValues);
+	const updateSurvival = useCallback(
+		(newValue: SkillListType) => {
+			setSurvival(newValue);
+			setValue(`Survival${characterID}`, newValue);
+		},
+		[characterID]
+	);
 
-		setValue(`Survival${characterID}`, newValues);
-	}
-
-	function fetchSkills() {
-		setAcrobatics(getValue(`Acrobatics${characterID}`));
-		setAthletics(getValue(`Athletics${characterID}`));
-		setBluff(getValue(`Bluff${characterID}`));
-		setComputers(getValue(`Computers${characterID}`));
-		setCulture(getValue(`Culture${characterID}`));
-		setDiplomacy(getValue(`Diplomacy${characterID}`));
-		setDisguise(getValue(`Disguise${characterID}`));
-		setEngineering(getValue(`Engineering${characterID}`));
-		setIntimidate(getValue(`Intimidate${characterID}`));
-		setLifeScience(getValue(`Life Science${characterID}`));
-		setMedicine(getValue(`Medicine${characterID}`));
-		setMysticism(getValue(`Mysticism${characterID}`));
-		setPerception(getValue(`Perception${characterID}`));
-		setPhysicalScience(getValue(`Physical Science${characterID}`));
-		setPiloting(getValue(`Piloting${characterID}`));
-		setProfession(getValue(`Profession${characterID}`));
-		setSenseMotive(getValue(`Sense Motive${characterID}`));
-		setSleightOfHand(getValue(`Sleight of Hand${characterID}`));
-		setStealth(getValue(`Stealth${characterID}`));
-		setSurvival(getValue(`Survival${characterID}`));
-	}
+	useEffect(() => {
+		Object.keys(SkillBlockStatesList).forEach((key) => {
+			SkillBlockStatesList[key].updateState(getValue(`${key}${characterID}`));
+		});
+	}, [characterID]);
 
 	const SkillBlockStatesList: SkillBlockStatesListType = {
 		Acrobatics: {
 			skillState: acrobatics,
-			setSkill: editAcrobaticsValue,
+			updateState: updateAcrobatics,
 		},
 		Athletics: {
 			skillState: athletics,
-			setSkill: editAthleticsValue,
+			updateState: updateAthletics,
 		},
 		Bluff: {
 			skillState: bluff,
-			setSkill: editBluffValue,
+			updateState: updateBluff,
 		},
 		Computers: {
 			skillState: computers,
-			setSkill: editComputersValue,
+			updateState: updateComputers,
 		},
 		Culture: {
 			skillState: culture,
-			setSkill: editCultureValue,
+			updateState: updateCulture,
 		},
 		Diplomacy: {
 			skillState: diplomacy,
-			setSkill: editDiplomacyValue,
+			updateState: updateDiplomacy,
 		},
 		Disguise: {
 			skillState: disguise,
-			setSkill: editDisguiseValue,
+			updateState: updateDisguise,
 		},
 		Engineering: {
 			skillState: engineering,
-			setSkill: editEngineeringValue,
+			updateState: updateEngineering,
 		},
 		Intimidate: {
 			skillState: intimidate,
-			setSkill: editIntimidateValue,
+			updateState: updateIntimidate,
 		},
 		'Life Science': {
 			skillState: lifeScience,
-			setSkill: editLifeScienceValue,
+			updateState: updateLifeScience,
 		},
 		Medicine: {
 			skillState: medicine,
-			setSkill: editMedicineValue,
+			updateState: updateMedicine,
 		},
 		Mysticism: {
 			skillState: mysticism,
-			setSkill: editMysticismValue,
+			updateState: updateMysticism,
 		},
 		Perception: {
 			skillState: perception,
-			setSkill: editPerceptionValue,
+			updateState: updatePerception,
 		},
 		'Physical Science': {
 			skillState: physicalScience,
-			setSkill: editPhysicalScienceValue,
+			updateState: updatePhysicalScience,
 		},
 		Piloting: {
 			skillState: piloting,
-			setSkill: editPilotingValue,
+			updateState: updatePiloting,
 		},
 		Profession: {
 			skillState: profession,
-			setSkill: editProfessionValue,
+			updateState: updateProfession,
 		},
 		'Sense Motive': {
 			skillState: senseMotive,
-			setSkill: editSenseMotiveValue,
+			updateState: updateSenseMotive,
 		},
 		'Sleight of Hand': {
 			skillState: sleightOfHand,
-			setSkill: editSleightOfHandValue,
+			updateState: updateSleightOfHand,
 		},
 		Stealth: {
 			skillState: stealth,
-			setSkill: editStealthValue,
+			updateState: updateStealth,
 		},
 		Survival: {
 			skillState: survival,
-			setSkill: editSurvivalValue,
+			updateState: updateSurvival,
 		},
 	};
 
-	return { fetchSkills, SkillBlockStatesList };
+	// // Function to set Skill Ranks
+	function setSkill(rank: number, attributeModBonus: number, skill: string) {
+		let tempSkill: SkillListType = getValue(`${skill}${characterID}`);
+		tempSkill.ranks = rank;
+		tempSkill.value =
+			rank +
+			attributeModBonus +
+			tempSkill.classSkillBonus +
+			tempSkill.insightBonusToValue +
+			tempSkill.racialBonusToValue;
+		SkillBlockStatesList[skill].updateState(tempSkill);
+	}
+
+	return { SkillBlockStatesList, setSkill };
 }

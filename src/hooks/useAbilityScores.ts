@@ -1,59 +1,96 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getValue } from '../utils/getValue';
 import { useParams } from 'react-router-dom';
+import { setValue } from '../utils/setValue';
 
 export function useAbilityScores() {
 	const { characterID } = useParams();
 
-	const strengthAbility = useRef<AbilityScoreType>(
-		getValue(`Strength${characterID}`)
-	);
-
-	// Dexterity
-	const dexterityAbility = useRef<AbilityScoreType>(
+	const [strength, setStrength] = useState(getValue(`Strength${characterID}`));
+	const [dexterity, setDexterity] = useState(
 		getValue(`Dexterity${characterID}`)
 	);
-
-	// Constitution
-	const constitutionAbility = useRef<AbilityScoreType>(
+	const [constitution, setConstitution] = useState(
 		getValue(`Constitution${characterID}`)
 	);
-
-	// Intelligence
-	const intelligenceAbility = useRef<AbilityScoreType>(
+	const [intelligence, setIntelligence] = useState(
 		getValue(`Intelligence${characterID}`)
 	);
-
-	// Wisdom
-	const wisdomAbility = useRef<AbilityScoreType>(
-		getValue(`Wisdom${characterID}`)
-	);
-
-	// Charisma
-	const charismaAbility = useRef<AbilityScoreType>(
-		getValue(`Charisma${characterID}`)
-	);
+	const [wisdom, setWisdom] = useState(getValue(`Wisdom${characterID}`));
+	const [charisma, setCharisma] = useState(getValue(`Charisma${characterID}`));
 
 	useEffect(() => {
-		strengthAbility.current = getValue(`Strength${characterID}`);
-
-		dexterityAbility.current = getValue(`Dexterity${characterID}`);
-
-		constitutionAbility.current = getValue(`Constitution${characterID}`);
-
-		intelligenceAbility.current = getValue(`Intelligence${characterID}`);
-
-		wisdomAbility.current = getValue(`Wisdom${characterID}`);
-
-		charismaAbility.current = getValue(`Charisma${characterID}`);
+		setStrength(getValue(`Strength${characterID}`));
+		setDexterity(getValue(`Dexterity${characterID}`));
+		setConstitution(getValue(`Constitution${characterID}`));
+		setIntelligence(getValue(`Intelligence${characterID}`));
+		setWisdom(getValue(`Wisdom${characterID}`));
+		setCharisma(getValue(`Charisma${characterID}`));
 	}, [characterID]);
 
+	// update callbacks that update state + localStorage.
+	// state update is important, as it will trigger a component
+	// re-render
+	const updateStrength = useCallback(
+		(newStrength: AbilityScoreType) => {
+			setStrength(newStrength);
+			setValue(`Strength${characterID}`, newStrength);
+		},
+		[characterID]
+	);
+
+	const updateWisdom = useCallback(
+		(newWisdom: AbilityScoreType) => {
+			setWisdom(newWisdom);
+			setValue(`Wisdom${characterID}`, newWisdom);
+		},
+		[characterID]
+	);
+
+	const updateConstitution = useCallback(
+		(newConstitution: AbilityScoreType) => {
+			setConstitution(newConstitution);
+			setValue(`Constitution${characterID}`, newConstitution);
+		},
+		[characterID]
+	);
+
+	const updateCharisma = useCallback(
+		(newCharisma: AbilityScoreType) => {
+			setCharisma(newCharisma);
+			setValue(`Charisma${characterID}`, newCharisma);
+		},
+		[characterID]
+	);
+
+	const updateIntelligence = useCallback(
+		(newIntelligence: AbilityScoreType) => {
+			setIntelligence(newIntelligence);
+			setValue(`Intelligence${characterID}`, newIntelligence);
+		},
+		[characterID]
+	);
+
+	const updateDexterity = useCallback(
+		(newDexterity: AbilityScoreType) => {
+			setDexterity(newDexterity);
+			setValue(`Dexterity${characterID}`, newDexterity);
+		},
+		[characterID]
+	);
+
 	return {
-		strengthAbility,
-		dexterityAbility,
-		constitutionAbility,
-		intelligenceAbility,
-		wisdomAbility,
-		charismaAbility,
+		strengthAbility: strength,
+		dexterityAbility: dexterity,
+		constitutionAbility: constitution,
+		intelligenceAbility: intelligence,
+		wisdomAbility: wisdom,
+		charismaAbility: charisma,
+		updateStrength,
+		updateCharisma,
+		updateConstitution,
+		updateDexterity,
+		updateWisdom,
+		updateIntelligence,
 	};
 }

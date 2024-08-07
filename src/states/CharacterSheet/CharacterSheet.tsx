@@ -5,6 +5,7 @@ import LeftSide from '../../components/character-sheet-components/left-side-comp
 import RightSide from '../../components/character-sheet-components/right-side-components/RightSide/RightSide.tsx';
 import {
 	createContext,
+	MutableRefObject,
 	useCallback,
 	useEffect,
 	useMemo,
@@ -20,12 +21,13 @@ import { useStaminaHealthResolve } from '../../hooks/useStaminaHealthResolve.ts'
 import { FormProvider, useForm } from 'react-hook-form';
 import { setValue } from '../../utils/setValue.ts';
 import { useInitiativeScore } from '../../hooks/useInitiativeScore.ts';
-import { useCurrentID } from '../../utils/useCurrentID.ts';
+import { useCurrentID } from '../../hooks/useCurrentID.ts';
+import { GetModifier } from '../../utils/GetModifier.ts';
 
 type SkillBlockStatesListType = {
 	[key: string]: {
 		skillState: SkillListType;
-		setSkill: (newValues: SkillListType) => void;
+		updateState: (newValue: SkillListType) => void;
 	};
 };
 
@@ -38,17 +40,11 @@ export const CharacterSheetContext = createContext<{
 	charismaAbility: AbilityScoreType;
 	initMisc: number;
 	currentSP: number;
-	// setCurrentSP: Dispatch<SetStateAction<number>>;
 	currentHP: number;
-	// setCurrentHP: Dispatch<SetStateAction<number>>;
 	currentRP: number;
-	// setCurrentRP: Dispatch<SetStateAction<number>>;
 	tempSP: number;
-	// setTempSP: Dispatch<SetStateAction<number>>;
 	tempHP: number;
-	// setTempHP: Dispatch<SetStateAction<number>>;
 	tempRP: number;
-	// setTempRP: Dispatch<SetStateAction<number>>;
 	SkillBlockStatesList: SkillBlockStatesListType;
 	characterInfoObject: CharacterInfoObjectType;
 	characterInfoDynamicObject: CharacterBasicInfoDynamicType;
@@ -71,6 +67,7 @@ function CharacterSheet() {
 	const { reset, watch } = methods;
 
 	// Custom hook states.
+
 	const {
 		strengthAbility,
 		dexterityAbility,
@@ -78,27 +75,36 @@ function CharacterSheet() {
 		intelligenceAbility,
 		wisdomAbility,
 		charismaAbility,
+		updateCharisma,
+		updateConstitution,
+		updateDexterity,
+		updateIntelligence,
+		updateStrength,
+		updateWisdom,
 	} = useAbilityScores();
 
-	const { initMisc } = useInitiativeScore();
+	const { initMisc, updateInitMisc } = useInitiativeScore();
 
 	const {
 		currentSP,
+		updateCurrentSP,
 		currentHP,
+		updateCurrentHP,
 		currentRP,
+		updateCurrentRP,
 		tempSP,
+		updateTempSP,
 		tempHP,
+		updateTempHP,
 		tempRP,
-		// maxSP,
-		// maxHP,
-		// maxRP,
+		updateTempRP,
 	} = useStaminaHealthResolve();
 
-	const { SkillBlockStatesList } = useSkills();
+	const { SkillBlockStatesList, setSkill } = useSkills();
 
 	// useEffect for all changes related to swapping characters
 	useEffect(() => {
-		// // Set default values based on character selected.
+		// Set default values based on character selected.
 		let defaultValues = {
 			// CharacterInfo registers
 
@@ -117,30 +123,33 @@ function CharacterSheet() {
 
 			// AbilityScoreBlock registers
 
-			bonusStr: strengthAbility.current.asBonus,
-			bonusDex: dexterityAbility.current.asBonus,
-			bonusCon: constitutionAbility.current.asBonus,
-			bonusInt: intelligenceAbility.current.asBonus,
-			bonusWis: wisdomAbility.current.asBonus,
-			bonusCha: charismaAbility.current.asBonus,
+			bonusStr: strengthAbility.asBonus,
+			bonusDex: dexterityAbility.asBonus,
+			bonusCon: constitutionAbility.asBonus,
+			bonusInt: intelligenceAbility.asBonus,
+			bonusWis: wisdomAbility.asBonus,
+			bonusCha: charismaAbility.asBonus,
 
-			penaltyStr: strengthAbility.current.asPenalty,
-			penaltyDex: dexterityAbility.current.asPenalty,
-			penaltyCon: constitutionAbility.current.asPenalty,
-			penaltyInt: intelligenceAbility.current.asPenalty,
-			penaltyWis: wisdomAbility.current.asPenalty,
-			penaltyCha: charismaAbility.current.asPenalty,
+			penaltyStr: strengthAbility.asPenalty,
+			penaltyDex: dexterityAbility.asPenalty,
+			penaltyCon: constitutionAbility.asPenalty,
+			penaltyInt: intelligenceAbility.asPenalty,
+			penaltyWis: wisdomAbility.asPenalty,
+			penaltyCha: charismaAbility.asPenalty,
 
 			// InitiativeBlock registers
-			InitiativeMiscModifier: initMisc.current,
+			InitiativeMiscModifier: initMisc,
 
 			// HealthAndResolveBlock registers
-			currentSP: currentSP.current,
-			currentHP: currentHP.current,
-			currentRP: currentRP.current,
-			tempSP: tempSP.current,
-			tempHP: tempHP.current,
-			tempRP: tempRP.current,
+			currentSP: currentSP,
+			currentHP: currentHP,
+			currentRP: currentRP,
+			tempSP: tempSP,
+			tempHP: tempHP,
+			tempRP: tempRP,
+
+			// SkillsBlock registers
+			ProfessionName: getValue(`ProfessionName${characterID}`),
 		};
 
 		// Reset the defaultValues.
@@ -148,10 +157,25 @@ function CharacterSheet() {
 
 		setCharacterInfoObject(getValue(`characterBasicInfo${characterID}`));
 
-		Object.keys(SkillBlockStatesList).forEach((key) => {
-			SkillBlockStatesList[key].setSkill(getValue(`${key}${characterID}`));
-		});
-	}, [currentID]);
+		// Object.keys(SkillBlockStatesList).forEach((key) => {
+		// 	SkillBlockStatesList[key].setSkill(getValue(`${key}${characterID}`));
+		// });
+	}, [
+		currentID,
+		strengthAbility,
+		constitutionAbility,
+		dexterityAbility,
+		wisdomAbility,
+		intelligenceAbility,
+		charismaAbility,
+		initMisc,
+		currentSP,
+		currentHP,
+		currentRP,
+		tempSP,
+		tempHP,
+		tempRP,
+	]);
 
 	// useEffect to save data to local storage.
 	useEffect(() => {
@@ -173,72 +197,122 @@ function CharacterSheet() {
 
 			// AbilityScoreBlock registers.
 
-			// Strength
-			setValue(`Strength${characterID}`, {
+			updateStrength({
 				aSName: 'Strength',
 				asBonus: Number(data.bonusStr),
 				asPenalty: Number(data.penaltyStr),
-				value: Number(strengthAbility.current.value),
+				value: Number(strengthAbility.value),
 			});
 
-			// Dexterity
-			setValue(`Dexterity${characterID}`, {
+			updateDexterity({
 				aSName: 'Dexterity',
 				asBonus: Number(data.bonusDex),
 				asPenalty: Number(data.penaltyDex),
-				value: Number(dexterityAbility.current.value),
+				value: Number(dexterityAbility.value),
 			});
 
-			// Constitution
-			setValue(`Constitution${characterID}`, {
+			updateConstitution({
 				aSName: 'Constitution',
 				asBonus: Number(data.bonusCon),
 				asPenalty: Number(data.penaltyCon),
-				value: Number(constitutionAbility.current.value),
+				value: Number(constitutionAbility.value),
 			});
 
-			// Intelligence
-			setValue(`Intelligence${characterID}`, {
+			updateIntelligence({
 				aSName: 'Intelligence',
 				asBonus: Number(data.bonusInt),
 				asPenalty: Number(data.penaltyInt),
-				value: Number(intelligenceAbility.current.value),
+				value: Number(intelligenceAbility.value),
 			});
 
-			// Wisdom
-			setValue(`Wisdom${characterID}`, {
+			updateWisdom({
 				aSName: 'Wisdom',
 				asBonus: Number(data.bonusWis),
 				asPenalty: Number(data.penaltyWis),
-				value: Number(wisdomAbility.current.value),
+				value: Number(wisdomAbility.value),
 			});
 
-			// Charisma
-			setValue(`Charisma${characterID}`, {
+			updateCharisma({
 				aSName: 'Charisma',
 				asBonus: Number(data.bonusCha),
 				asPenalty: Number(data.penaltyCha),
-				value: Number(charismaAbility.current.value),
+				value: Number(charismaAbility.value),
 			});
 
 			// InitiativeBlock registers.
-			setValue(
-				`InitiativeMiscModifier${characterID}`,
-				Number(data.InitiativeMiscModifier)
-			);
+			updateInitMisc(Number(data.InitiativeMiscModifier));
 
 			// HealthAndResolveBlock registers.
-			setValue(`CurrentSP${characterID}`, data.currentSP);
-			setValue(`CurrentHP${characterID}`, data.currentHP);
-			setValue(`CurrentRP${characterID}`, data.currentRP);
-			setValue(`TempSP${characterID}`, data.tempSP);
-			setValue(`TempHP${characterID}`, data.tempHP);
-			setValue(`TempRP${characterID}`, data.tempRP);
+			updateCurrentSP(Number(data.currentSP));
+			updateCurrentHP(Number(data.currentHP));
+			updateCurrentRP(Number(data.currentRP));
+			updateTempSP(Number(data.tempSP));
+			updateTempHP(Number(data.tempHP));
+			updateTempRP(Number(data.tempRP));
+
+			// SkillsBlock registers.
+			setValue(`ProfessionName${characterID}`, data.ProfessionName);
+
+			Object.keys(SkillBlockStatesList).forEach((skill) => {
+				// If it's a Specialization Skill, don't add the rank. It's not supposed to count to the total ranks per level, and always equal to the level of the character.
+				if (
+					SkillBlockStatesList[skill].skillState.operativeSpecializationSkill
+				) {
+					setSkill(
+						0,
+						GetModifier(
+							getValue(
+								`${SkillBlockStatesList[skill].skillState.attributeAffecting}${characterID}`
+							)
+						),
+						skill
+					);
+				} else {
+					setSkill(
+						Number(data[`${skill}Ranks`]),
+						GetModifier(
+							getValue(
+								`${SkillBlockStatesList[skill].skillState.attributeAffecting}${characterID}`
+							)
+						),
+						skill
+					);
+				}
+			});
 
 			forceUpdate();
 		});
 		return () => subscription.unsubscribe();
-	}, [currentID, watch]);
+	}, [
+		currentID,
+		watch,
+		updateCharisma,
+		updateConstitution,
+		updateStrength,
+		updateDexterity,
+		updateIntelligence,
+		updateWisdom,
+		strengthAbility,
+		wisdomAbility,
+		charismaAbility,
+		dexterityAbility,
+		constitutionAbility,
+		intelligenceAbility,
+		updateInitMisc,
+		initMisc,
+		currentSP,
+		updateCurrentSP,
+		currentHP,
+		updateCurrentHP,
+		currentRP,
+		updateCurrentRP,
+		tempSP,
+		updateTempSP,
+		tempHP,
+		updateTempHP,
+		tempRP,
+		updateTempRP,
+	]);
 
 	const characterInfoDynamicObject: CharacterBasicInfoDynamicType = useMemo(
 		() => getValue(`characterBasicInfoDynamic${characterID}`),
@@ -268,20 +342,21 @@ function CharacterSheet() {
 	return (
 		<CharacterSheetContext.Provider
 			value={{
-				strengthAbility: strengthAbility.current,
-				dexterityAbility: dexterityAbility.current,
-				constitutionAbility: constitutionAbility.current,
-				intelligenceAbility: intelligenceAbility.current,
-				wisdomAbility: wisdomAbility.current,
-				charismaAbility: charismaAbility.current,
+				strengthAbility: strengthAbility,
+				dexterityAbility: dexterityAbility,
+				constitutionAbility: constitutionAbility,
+				intelligenceAbility: intelligenceAbility,
+				wisdomAbility: wisdomAbility,
+				charismaAbility: charismaAbility,
 
-				initMisc: initMisc.current,
-				currentSP: currentSP.current,
-				currentHP: currentHP.current,
-				currentRP: currentRP.current,
-				tempSP: tempSP.current,
-				tempHP: tempHP.current,
-				tempRP: tempRP.current,
+				initMisc: initMisc,
+
+				currentSP: currentSP,
+				currentHP: currentHP,
+				currentRP: currentRP,
+				tempSP: tempSP,
+				tempHP: tempHP,
+				tempRP: tempRP,
 
 				SkillBlockStatesList: SkillBlockStatesList,
 
