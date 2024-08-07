@@ -366,6 +366,12 @@ export function useSkills() {
 	function setSkill(rank: number, attributeModBonus: number, skill: string) {
 		let tempSkill: SkillListType = getValue(`${skill}${characterID}`);
 		tempSkill.ranks = rank;
+		// Check if skill is a class skill or not.
+		if (tempSkill.isClassSkill && rank > 0) {
+			tempSkill.classSkillBonus = 3;
+		} else {
+			tempSkill.classSkillBonus = 0;
+		}
 		tempSkill.value =
 			rank +
 			attributeModBonus +

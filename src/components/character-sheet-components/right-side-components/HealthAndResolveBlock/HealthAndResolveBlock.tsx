@@ -57,19 +57,34 @@ function HealthAndResolveBlock() {
 					<div className={styles.labelValueColumn}>
 						<div className={styles.label}>STAMINA POINTS</div>
 						<input type='number' value={maxSP} readOnly />
-						<input type='number' {...register('currentSP')} max={maxSP} />
+						<input
+							type='number'
+							{...register('currentSP')}
+							max={maxSP}
+							min={0}
+						/>
 						<input type='number' {...register('tempSP')} min={0} />
 					</div>
 					<div className={styles.labelValueColumn}>
 						<div className={styles.label}>HIT POINTS</div>
 						<input type='number' value={maxHP} readOnly />
-						<input type='number' {...register('currentHP')} max={maxHP} />
+						<input
+							type='number'
+							{...register('currentHP')}
+							max={maxHP}
+							min={0}
+						/>
 						<input type='number' {...register('tempHP')} min={0} />
 					</div>
 					<div className={styles.labelValueColumn}>
 						<div className={styles.label}>RESOLVE POINTS</div>
 						<input type='number' value={maxRP > 0 ? maxRP : 1} readOnly />
-						<input type='number' {...register('currentRP')} max={maxRP} />
+						<input
+							type='number'
+							{...register('currentRP')}
+							max={maxRP}
+							min={0}
+						/>
 						<input type='number' {...register('tempRP')} min={0} />
 					</div>
 				</div>

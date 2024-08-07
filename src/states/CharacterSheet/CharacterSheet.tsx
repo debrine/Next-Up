@@ -5,7 +5,6 @@ import LeftSide from '../../components/character-sheet-components/left-side-comp
 import RightSide from '../../components/character-sheet-components/right-side-components/RightSide/RightSide.tsx';
 import {
 	createContext,
-	MutableRefObject,
 	useCallback,
 	useEffect,
 	useMemo,
@@ -156,10 +155,6 @@ function CharacterSheet() {
 		reset({ ...defaultValues });
 
 		setCharacterInfoObject(getValue(`characterBasicInfo${characterID}`));
-
-		// Object.keys(SkillBlockStatesList).forEach((key) => {
-		// 	SkillBlockStatesList[key].setSkill(getValue(`${key}${characterID}`));
-		// });
 	}, [
 		currentID,
 		strengthAbility,

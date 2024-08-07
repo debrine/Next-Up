@@ -1,14 +1,13 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import styles from './SkillsBlock.module.css';
 import { CharacterSheetContext } from '../../../../states/CharacterSheet/CharacterSheet';
 import { skillList } from '../../../../data/skillList';
 import { getValue } from '../../../../utils/getValue';
 import { useParams } from 'react-router-dom';
-import { setValue } from '../../../../utils/setValue';
 import SheetLabel from '../../labels/SheetLabel';
 import { GetModifier } from '../../../../utils/GetModifier';
 import { classList } from '../../../../data/class-information/classList';
-import { useForm, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 
 function SkillsBlock() {
 	const { characterID } = useParams();
@@ -17,29 +16,7 @@ function SkillsBlock() {
 		CharacterSheetContext
 	);
 
-	const { register, watch } = useFormContext();
-
-	// useEffect(() => {
-	// 	const subscription = watch((data) => {
-	// 		// Set the values as they change.
-	// 		skillArray.forEach((skill) => {
-	// 			// If it's a Specialization Skill, don't add the rank. It's not supposed to count to the total ranks per level, and always equal to the level of the character.
-	// 			if (
-	// 				SkillBlockStatesList[skill].skillState.current
-	// 					.operativeSpecializationSkill
-	// 			) {
-	// 				editSkill(0, Number(data[`${skill}ModifierBonus`]), skill);
-	// 			} else {
-	// 				editSkill(
-	// 					Number(data[`${skill}Ranks`]),
-	// 					Number(data[`${skill}ModifierBonus`]),
-	// 					skill
-	// 				);
-	// 			}
-	// 		});
-	// 	});
-	// 	return () => subscription.unsubscribe();
-	// }, [watch]);
+	const { register } = useFormContext();
 
 	const skillArray: string[] = Object.keys(skillList).map((key: string) => {
 		return key;
@@ -65,31 +42,11 @@ function SkillsBlock() {
 		);
 	}
 
-	// // Function to edit Skill Ranks
-	// function editSkill(rank: number, attributeModBonus: number, skill: string) {
-	// 	let tempSkill: SkillListType =
-	// 		SkillBlockStatesList[skill].skillState.current;
-	// 	tempSkill.ranks = rank;
-	// 	tempSkill.value =
-	// 		rank +
-	// 		attributeModBonus +
-	// 		SkillBlockStatesList[skill].skillState.current.classSkillBonus +
-	// 		SkillBlockStatesList[skill].skillState.current.insightBonusToValue +
-	// 		SkillBlockStatesList[skill].skillState.current.racialBonusToValue;
-	// 	SkillBlockStatesList[skill].skillState.current = tempSkill;
-	// 	setValue(`${skill}${characterID}`, tempSkill);
-	// }
-
+	// Checkbox function to make skill a class skill/not.
 	function handleClassSkill(skill: string) {
 		let tempSkill: SkillListType = SkillBlockStatesList[skill].skillState;
 		tempSkill.isClassSkill = !tempSkill.isClassSkill;
-		if (tempSkill.isClassSkill && tempSkill.ranks > 0) {
-			tempSkill.classSkillBonus = 3;
-		} else {
-			tempSkill.classSkillBonus = 0;
-		}
-		SkillBlockStatesList[skill].skillState = tempSkill;
-		setValue(`${skill}${characterID}`, tempSkill);
+		SkillBlockStatesList[skill].updateState(tempSkill);
 	}
 
 	return (
@@ -124,7 +81,8 @@ function SkillsBlock() {
 					<div className={styles.individualSkillDiv} key={skill}>
 						<div className={styles.skillLeftSide}>
 							<div className={styles.classAndName}>
-								{SkillBlockStatesList[skill].skillState.isClassSkill ? (
+								{/* Why did I do this??? */}
+								{/* {SkillBlockStatesList[skill].skillState.isClassSkill ? (
 									<input
 										type='checkbox'
 										{...register(`${skill}Checkbox`)}
@@ -140,7 +98,17 @@ function SkillsBlock() {
 										type='checkbox'
 										onClick={() => handleClassSkill(skill)}
 									/>
-								)}{' '}
+								)} */}
+								<input
+									type='checkbox'
+									{...register(`${skill}Checkbox`)}
+									defaultChecked={
+										SkillBlockStatesList[skill].skillState.isClassSkill
+											? true
+											: false
+									}
+									onClick={() => handleClassSkill(skill)}
+								/>{' '}
 								{skill.toUpperCase()}
 							</div>
 
