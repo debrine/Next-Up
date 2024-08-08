@@ -1,0 +1,74 @@
+.ACDiv {
+	display: flex;
+	flex-direction: column;
+	border: 2px solid black;
+	border-radius: 4px;
+	margin: -4px 0 0 10px;
+	/* padding: 0 10px 0 10px; */
+	justify-content: space-evenly;
+}
+
+.ACRow {
+	display: flex;
+	flex-direction: row;
+	border-bottom: 2px solid black;
+	align-items: end;
+	padding: 4px;
+}
+
+.ACRow input {
+	margin-bottom: -2px;
+	width: 52px;
+}
+
+.ACTypeBox {
+	background-color: black;
+	color: white;
+	width: fit-content;
+	padding: 2px 7px;
+	font-weight: bold;
+	font-size: 1.1rem;
+	font-family: monospace;
+}
+
+.ACTypeText {
+	padding-left: 2px;
+	padding-right: 4px;
+}
+
+.inputDiv {
+	text-align: center;
+}
+
+.CombManLabel {
+	margin-right: 43px;
+}
+
+.plusEqualsNumber {
+	margin-bottom: 5px;
+	padding: 4px;
+}
+
+.kacBlock {
+	margin-bottom: 4px;
+}
+
+.ResistancesDR {
+	display: flex;
+	flex-direction: row;
+	padding: 8px;
+}
+.ResistancesDR div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.ResistancesDRInput {
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	margin-left: 16px;
+	width: 160px;
+	text-align: center;
+}
