@@ -81,24 +81,6 @@ function SkillsBlock() {
 					<div className={styles.individualSkillDiv} key={skill}>
 						<div className={styles.skillLeftSide}>
 							<div className={styles.classAndName}>
-								{/* Why did I do this??? */}
-								{/* {SkillBlockStatesList[skill].skillState.isClassSkill ? (
-									<input
-										type='checkbox'
-										{...register(`${skill}Checkbox`)}
-										defaultChecked={
-											SkillBlockStatesList[skill].skillState.isClassSkill
-												? true
-												: false
-										}
-										onClick={() => handleClassSkill(skill)}
-									/>
-								) : (
-									<input
-										type='checkbox'
-										onClick={() => handleClassSkill(skill)}
-									/>
-								)} */}
 								<input
 									type='checkbox'
 									{...register(`${skill}Checkbox`)}

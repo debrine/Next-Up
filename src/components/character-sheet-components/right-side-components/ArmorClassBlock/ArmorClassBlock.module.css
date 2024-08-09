@@ -18,7 +18,7 @@
 
 .ACRow input {
 	margin-bottom: -2px;
-	width: 52px;
+	width: 50px;
 }
 
 .ACTypeBox {
@@ -71,4 +71,9 @@
 	margin-left: 16px;
 	width: 160px;
 	text-align: center;
+}
+
+.parentDiv input:read-only {
+	border: 3px solid black;
+	height: 28px;
 }

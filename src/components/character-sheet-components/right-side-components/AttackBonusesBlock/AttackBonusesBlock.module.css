@@ -1,0 +1,54 @@
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: end;
+}
+
+.rightHeader {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding-bottom: 2px;
+}
+
+.rightHeaderText {
+	text-align: right;
+}
+
+.attackBonusesBlockContent {
+	display: flex;
+	flex-direction: column;
+	border: 2px solid black;
+	border-radius: 4px;
+	margin: -4px 0 0 10px;
+	justify-content: space-evenly;
+}
+
+.attackRow {
+	display: flex;
+	flex-direction: row;
+	justify-content: end;
+	align-items: end;
+}
+
+.attackType {
+	padding: 0px 10px 15px 0px;
+}
+
+.plusEqualsDiv {
+	padding-bottom: 15px;
+}
+
+.inputDiv {
+	text-align: center;
+}
+
+.borderLine {
+	border-bottom: 2px solid black;
+}
+
+.parentDiv input:read-only {
+	border: 3px solid black;
+	height: 28px;
+}

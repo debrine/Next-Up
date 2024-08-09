@@ -1,58 +1,63 @@
 .parentDiv {
-  padding-top: 5px;
+	padding-top: 5px;
 }
 
 .skillsHead {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: end;
-  padding-bottom: 8px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: end;
+	padding-bottom: 8px;
 }
 
 .skillsHeadRight {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .skillsHeadRightTextDiv {
-  font-size: 0.8em;
-  text-align: right;
+	font-size: 0.8em;
+	text-align: right;
 }
 
 .skillInputLabels {
-  display: flex;
-  justify-content: end;
+	display: flex;
+	justify-content: end;
 }
 
 .IndividualSkillInputLabel {
-  align-self: flex-end;
-  width: 60px;
-  margin-left: 26px;
-  text-align: center;
+	align-self: flex-end;
+	width: 60px;
+	margin-left: 26px;
+	text-align: center;
 }
 
 .individualSkillDiv {
-  display: flex;
-  flex-direction: row;
-  align-items: start;
+	display: flex;
+	flex-direction: row;
+	align-items: start;
 }
 .individualSkillDiv {
-  justify-content: space-between;
+	justify-content: space-between;
 }
 .skillRightSide,
 .classAndName {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .professionName input {
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  margin-left: 16px;
-  width: 165px;
-  text-align: center;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	margin-left: 16px;
+	width: 165px;
+	text-align: center;
+}
+
+.parentDiv input:read-only {
+	border: 3px solid black;
+	height: 28px;
 }

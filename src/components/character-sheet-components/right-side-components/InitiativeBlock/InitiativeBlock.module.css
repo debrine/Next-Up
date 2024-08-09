@@ -1,26 +1,31 @@
 .parentDiv {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: end;
-  min-width: 100%;
-  margin-bottom: 8px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: end;
+	min-width: 100%;
+	margin-bottom: 8px;
 }
 
 .rightSide {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: end;
-  text-align: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: end;
+	text-align: center;
 }
 
 .initiativeDiv {
-  max-width: min-content;
-  align-items: center;
-  text-align: center;
+	max-width: min-content;
+	align-items: center;
+	text-align: center;
 }
 
 .plusEquals {
-  margin-bottom: 14px;
+	margin-bottom: 14px;
+}
+
+.parentDiv input:read-only {
+	border: 3px solid black;
+	height: 28px;
 }

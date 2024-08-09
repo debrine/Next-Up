@@ -1,4 +1,5 @@
 import ArmorClassBlock from '../ArmorClassBlock/ArmorClassBlock';
+import AttackBonusesBlock from '../AttackBonusesBlock/AttackBonusesBlock';
 import HealthAndResolveBlock from '../HealthAndResolveBlock/HealthAndResolveBlock';
 import InitiativeBlock from '../InitiativeBlock/InitiativeBlock';
 import SavingThrowsBlock from '../SavingThrowsBlock/SavingThrowsBlock';
@@ -11,6 +12,7 @@ function RightSide() {
 			<HealthAndResolveBlock />
 			<ArmorClassBlock />
 			<SavingThrowsBlock />
+			<AttackBonusesBlock />
 		</div>
 	);
 }
