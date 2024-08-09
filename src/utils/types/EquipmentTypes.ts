@@ -3,12 +3,10 @@ type ArmorType = {
 	armorType: string;
 	armorProficiency: string;
 	armorLevel: number;
-	armorBulk: string;
-	armorCost: number;
 	armorEAC: number;
 	armorKAC: number;
 	maxDexBonus: number;
-	armorNotes: string;
+	isEquipped: boolean;
 };
 
 type WeaponType = {

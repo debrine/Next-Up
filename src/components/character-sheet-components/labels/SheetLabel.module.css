@@ -1,4 +1,6 @@
 .labelBox {
+	position: relative;
+	z-index: 1;
 	color: hsl(190, 100%, 95%);
 	display: flex;
 	width: fit-content;

@@ -224,12 +224,10 @@ function AddCharacterButton() {
 				armorType: '',
 				armorProficiency: '',
 				armorLevel: 0,
-				armorBulk: '',
-				armorCost: '',
-				armorEAC: '',
-				armorKAC: '',
+				armorEAC: 0,
+				armorKAC: 0,
 				maxDexBonus: 0,
-				armorNotes: '',
+				isEquipped: false,
 			},
 		]);
 		setValue(`ArmorMiscMods${keyID}`, { energy: 0, kenetic: 0 });
@@ -240,12 +238,10 @@ function AddCharacterButton() {
 			armorType: '',
 			armorProficiency: '',
 			armorLevel: 0,
-			armorBulk: '',
-			armorCost: '',
-			armorEAC: '',
-			armorKAC: '',
+			armorEAC: 0,
+			armorKAC: 0,
 			maxDexBonus: 0,
-			armorNotes: '',
+			isEquipped: false,
 		});
 
 		/*
