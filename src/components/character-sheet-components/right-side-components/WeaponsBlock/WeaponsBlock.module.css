@@ -3,6 +3,7 @@
 }
 
 .individualWeapon {
+	position: relative;
 	border: 2px solid black;
 	border-radius: 4px;
 	margin: -4px 0 0 10px;
