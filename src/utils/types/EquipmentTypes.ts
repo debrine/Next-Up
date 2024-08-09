@@ -16,16 +16,11 @@ type WeaponType = {
 	weaponType: string;
 	weaponRange: string;
 	weaponCritical: string;
-	usesAmmo: boolean;
 	weaponAmmoTotal: number;
 	weaponAmmoCurrent: number;
 	weaponProficiency: string;
 	weaponLevel: number;
-	weaponBulk: string;
-	weaponCost: number;
+	weaponToHit: number;
 	weaponDamageType: string;
-	weaponDamageDice: string;
-	weaponDamageBonus: number;
-	isOperativeWeapon: boolean;
-	weaponNotes: string;
+	weaponDamageRoll: string;
 };

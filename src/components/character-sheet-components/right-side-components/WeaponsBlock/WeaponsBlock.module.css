@@ -1,0 +1,70 @@
+.parentDiv input {
+	padding: 0;
+}
+
+.individualWeapon {
+	border: 2px solid black;
+	border-radius: 4px;
+	margin: -4px 0 0 10px;
+	justify-content: space-evenly;
+	margin-bottom: 6px;
+}
+
+.topRow {
+	display: grid;
+	grid-template-columns: 1fr 0fr 0.6fr 0fr 0.1fr;
+	border-bottom: 2px solid black;
+}
+
+.middleRow {
+	display: grid;
+	grid-template-columns: 0.4fr 1fr 0.7fr 0.7fr;
+	border-bottom: 2px solid black;
+}
+
+.bottomRow {
+	display: grid;
+	grid-template-columns: 0.8fr 0fr 0.3fr 0fr 1fr;
+}
+
+.numberInput {
+	width: 36px;
+}
+
+.ammoInput {
+	width: 23px;
+	font-size: 1em;
+	font-weight: bold;
+	border: none;
+	border-bottom: 1px solid black;
+}
+
+.inputDiv {
+	display: flex;
+	flex-direction: row;
+	align-items: end;
+}
+
+.inputLabel {
+	font-size: smaller;
+	font-weight: bold;
+	padding-bottom: 4px;
+}
+
+.textInput {
+	font-size: 1.2em;
+	font-weight: bold;
+	border: none;
+	border-bottom: 1px solid black;
+	width: 100%;
+}
+
+.ammoInput::-webkit-outer-spin-button,
+.ammoInput::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.verticalBar {
+	border-right: 2px solid black;
+}
