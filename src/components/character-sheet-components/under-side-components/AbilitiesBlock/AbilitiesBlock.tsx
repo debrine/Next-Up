@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { getValue } from '../../../../utils/getValue';
 import SheetLabel from '../../labels/SheetLabel';
 import styles from './AbilitiesBlock.module.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { DeleteAbility } from '../../../../utils/DeleteAbility';
 import { AddAbility } from '../../../../utils/AddAbility';
 import AddButtonLabel from '../../../character-creation-components/AddButtonLabel/AddButtonLabel';
@@ -14,11 +14,10 @@ function AbilitiesBlock() {
 		getValue(`Abilities${characterID}`)
 	);
 
-	let scrollCounter: number = 0;
+	const scrollCounter = useRef<number>(0);
 
-	// Dylan: Tyring to get the page to scroll to the last element after a new ability has been added. A nice to have, but not needed right now.
 	useEffect(() => {
-		if (scrollCounter < 0) {
+		if (scrollCounter.current > 0) {
 			const lastPosition: number =
 				getValue(`Abilities${characterID}`).length - 1;
 			const element = document.getElementById(
@@ -30,16 +29,7 @@ function AbilitiesBlock() {
 
 	function handleAddAbility() {
 		AddAbility(characterID, setTempArray);
-		// const lastPosition: number = tempArray.length - 1;
-		// const element = document.getElementById(
-		// 	`individualAbility${lastPosition}`
-		// )!;
-		scrollCounter++;
-		// element?.scrollIntoView({ behavior: 'smooth' });
-		// window.scrollTo({
-		// 	top: element.getBoundingClientRect().y,
-		// 	behavior: 'smooth',
-		// });
+		scrollCounter.current++;
 	}
 
 	return (
