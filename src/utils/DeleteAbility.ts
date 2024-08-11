@@ -1,12 +1,18 @@
+import { Dispatch, SetStateAction } from 'react';
 import { getValue } from './getValue';
 import { setValue } from './setValue';
 
-export function DeleteAbility(keyID: string, ability: AbilityListTypes) {
+export function DeleteAbility(
+	index: number,
+	keyID: string | undefined,
+	setNewArray: Dispatch<SetStateAction<AbilityListTypes[]>>
+) {
 	const newArray: AbilityListTypes[] = getValue(`Abilities${keyID}`);
 
-	const filteredArray = newArray.filter((filteredAbility: AbilityListTypes) => {
-		filteredAbility.abilityName != ability.abilityName;
-	});
+	const filteredArray = newArray.filter(
+		(ability) => newArray.indexOf(ability) != index
+	);
 
 	setValue(`Abilities${keyID}`, [...filteredArray]);
+	setNewArray(getValue(`Abilities${keyID}`));
 }

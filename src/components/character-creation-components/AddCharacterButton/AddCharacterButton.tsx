@@ -255,7 +255,7 @@ function AddCharacterButton() {
 				weaponRange: '',
 				weaponCritical: '',
 				weaponAmmoTotal: 0,
-				weaponAmmoCurrent: 0,
+				weaponAmmoUsage: 0,
 				weaponProficiency: '',
 				weaponLevel: 0,
 				weaponToHit: 0,

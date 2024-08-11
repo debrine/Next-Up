@@ -9,7 +9,7 @@ function WeaponsBlock() {
 			weaponRange: '',
 			weaponCritical: '',
 			weaponAmmoTotal: 0,
-			weaponAmmoCurrent: 0,
+			weaponAmmoUsage: 0,
 			weaponProficiency: '',
 			weaponLevel: 0,
 			weaponToHit: 0,
@@ -22,7 +22,7 @@ function WeaponsBlock() {
 			weaponRange: '',
 			weaponCritical: '',
 			weaponAmmoTotal: 0,
-			weaponAmmoCurrent: 0,
+			weaponAmmoUsage: 0,
 			weaponProficiency: '',
 			weaponLevel: 0,
 			weaponToHit: 0,
@@ -106,7 +106,7 @@ function WeaponsBlock() {
 								<div className={styles.inputDiv}>
 									<div className={styles.inputLabel}>AMMO</div>
 									<input type='number' className={styles.ammoInput} />
-									<div className={styles.inputLabel}>OF</div>
+									<div className={styles.inputLabel}>USAGE</div>
 									<input type='number' className={styles.ammoInput} />
 								</div>
 								<div className={styles.verticalBar} />

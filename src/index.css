@@ -1,33 +1,33 @@
 body {
-  /* background-image: url('./assets/starfinder-pact-worlds.jpeg'); */
-  /* background-color: #051626; */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  font-family: "Orbitron", sans-serif;
-  margin: 0;
-  padding: 0;
+	/* background-image: url('./assets/starfinder-pact-worlds.jpeg'); */
+	/* background-color: #051626; */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	font-family: 'Orbitron', sans-serif;
+	margin: 0;
+	padding: 0;
 }
 
 .appParent {
-  display: flex;
-  /* flex-direction: row; */
-  flex-direction: column;
+	display: flex;
+	/* flex-direction: row; */
+	flex-direction: column;
 }
 
 .outletBody {
-  width: 50%;
-  margin: auto;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
+	width: 50%;
+	margin: auto;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
 }
 
 .navBar {
-  margin: 0;
-  background-color: hsl(182, 48%, 62%);
-  /* top: 0;
+	margin: 0;
+	background-color: hsl(182, 48%, 62%);
+	/* top: 0;
   left: 0;
   bottom: 0;
   max-width: 180px;
@@ -39,10 +39,32 @@ body {
   justify-content: center;
   transform: translate(0, 0);
   border-radius: 0 16px 16px 0; */
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+textarea {
+	resize: none;
+}
+/* Scrollbar */
+textarea::-webkit-scrollbar {
+	width: 8px;
+}
+textarea::-webkit-scrollbar-track {
+	margin: 2px;
+	background: none;
+	border-radius: 5px;
+}
+textarea::-webkit-scrollbar-thumb {
+	border: 1px solid #555;
+	border-radius: 0.5em;
+}
+textarea::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+textarea::-webkit-scrollbar-thumb {
+	background: #888;
 }
 
 /* 

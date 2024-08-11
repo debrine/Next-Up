@@ -1,13 +1,25 @@
-/* .weaponsBlockContent {
-	position: absolute;
-	width: 100%;
-} */
-
-.parentDiv input {
-	padding: 0;
+.parentDiv:hover .addAbilityButton {
+	display: block;
 }
 
-.individualWeapon {
+.labelDiv {
+	display: flex;
+	flex-direction: row;
+}
+
+.addAbilityButton {
+	display: none;
+	margin: 4px;
+	align-content: end;
+	opacity: 0.3;
+}
+
+.addAbilityButton:hover {
+	opacity: 1;
+	cursor: pointer;
+}
+
+.individualAbility {
 	position: relative;
 	border: 2px solid black;
 	border-radius: 4px;
@@ -18,31 +30,19 @@
 
 .topRow {
 	display: grid;
-	grid-template-columns: 1fr 0fr 0.6fr 0fr 0.1fr;
+	grid-template-columns: 1fr 0fr 0.4fr 0fr 0.1fr 0fr 0.1fr;
 	border-bottom: 2px solid black;
 }
 
-.middleRow {
-	display: grid;
-	grid-template-columns: 0.4fr 1fr 0.7fr 0.7fr;
-	border-bottom: 2px solid black;
+.abilityDescription {
+	padding-right: 4px;
 }
 
-.bottomRow {
-	display: grid;
-	grid-template-columns: 0.8fr 0fr 0.3fr 0fr 1fr;
-}
-
-.numberInput {
-	width: 36px;
-}
-
-.ammoInput {
-	width: 23px;
-	font-size: 1em;
-	font-weight: bold;
+.abilityTextarea {
+	width: 100%;
 	border: none;
-	border-bottom: 1px solid black;
+	outline: none;
+	height: 130px;
 }
 
 .inputDiv {
@@ -57,18 +57,19 @@
 	padding-bottom: 4px;
 }
 
+.numberInput {
+	width: 23px;
+	font-size: 1em;
+	font-weight: bold;
+	border: none;
+	border-bottom: 1px solid black;
+}
+
 .textInput {
 	font-size: 1.2em;
 	font-weight: bold;
 	border: none;
-	border-bottom: 1px solid black;
 	width: 100%;
-}
-
-.ammoInput::-webkit-outer-spin-button,
-.ammoInput::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
 }
 
 .verticalBar {
@@ -76,7 +77,7 @@
 	margin-right: 1px;
 }
 
-.individualWeapon:hover .delete {
+.individualAbility:hover .delete {
 	display: block;
 }
 
@@ -97,4 +98,10 @@
 .delete:hover {
 	opacity: 1;
 	cursor: pointer;
+}
+
+.numberInput::-webkit-outer-spin-button,
+.numberInput::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
 }

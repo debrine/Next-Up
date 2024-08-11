@@ -74,7 +74,7 @@ function ArmorBlock() {
 										type='checkbox'
 										className={styles.checkboxInput}
 										onClick={() => handleEquip(index)}
-										checked={armor.isEquipped ? true : false}
+										defaultChecked={armor.isEquipped ? true : false}
 									/>
 								</div>
 								<div className={styles.inputDiv}>

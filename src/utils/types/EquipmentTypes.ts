@@ -15,7 +15,7 @@ type WeaponType = {
 	weaponRange: string;
 	weaponCritical: string;
 	weaponAmmoTotal: number;
-	weaponAmmoCurrent: number;
+	weaponAmmoUsage: number;
 	weaponProficiency: string;
 	weaponLevel: number;
 	weaponToHit: number;

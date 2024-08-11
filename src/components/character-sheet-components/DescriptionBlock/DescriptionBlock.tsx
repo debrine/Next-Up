@@ -8,7 +8,9 @@ function DescriptionBlock() {
 	return (
 		<div className={styles.parentDiv}>
 			<SheetLabel sheetLabelText='DESCRIPTION' />
-			<textarea {...register('descriptionBlock')} spellCheck={false} />
+			<div className={styles.descriptionBlockWrap}>
+				<textarea {...register('descriptionBlock')} spellCheck={false} />
+			</div>
 		</div>
 	);
 }

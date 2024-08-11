@@ -1,39 +1,43 @@
 .parentDiv {
-  width: 50%;
-  margin: auto;
-  position: absolute;
-  justify-content: center;
+	width: 50%;
+	margin: auto;
+	position: absolute;
+	justify-content: center;
 }
 
 .characterSheetMainDiv {
-  font-size: 0.8rem;
-  width: 100%;
-  margin: 16px 0px 0px 0px;
+	font-size: 0.8rem;
+	width: 100%;
+	margin: 16px 0px 0px 0px;
 }
 
 .characterInfoDescriptionBlock {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 .characterInfoDescriptionBlock input {
-  border: none;
-  border-bottom: 1px solid black;
-  width: 100%;
+	border: none;
+	border-bottom: 1px solid black;
+	width: 100%;
 }
 input {
-  font-size: 1rem;
+	font-size: 1rem;
 }
 textarea {
-  font-size: 1rem;
+	font-size: 1rem;
 }
 
 .statArea {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
-/* Remove arrows on number input */
-/* input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-} */
+.underWrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.underSide {
+	max-width: 1050px;
+	min-width: 1050px;
+}

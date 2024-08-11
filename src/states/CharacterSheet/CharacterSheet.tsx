@@ -22,6 +22,7 @@ import { setValue } from '../../utils/setValue.ts';
 import { useInitiativeScore } from '../../hooks/useInitiativeScore.ts';
 import { useCurrentID } from '../../hooks/useCurrentID.ts';
 import { GetModifier } from '../../utils/GetModifier.ts';
+import UnderSide from '../../components/character-sheet-components/under-side-components/UnderSide/UnderSide.tsx';
 
 type SkillBlockStatesListType = {
 	[key: string]: {
@@ -147,8 +148,11 @@ function CharacterSheet() {
 			tempHP: tempHP,
 			tempRP: tempRP,
 
-			// SkillsBlock registers
+			// SkillsBlock registers (Individual skills registered in SkillsBlock.tsx)
 			ProfessionName: getValue(`ProfessionName${characterID}`),
+
+			// SkillNotesBlock registers
+			skillNotes: getValue(`SkillNotes${characterID}`),
 		};
 
 		// Reset the defaultValues.
@@ -247,6 +251,9 @@ function CharacterSheet() {
 
 			// SkillsBlock registers.
 			setValue(`ProfessionName${characterID}`, data.ProfessionName);
+
+			// SkillNotesBlock registers.
+			setValue(`SkillNotes${characterID}`, data.skillNotes);
 
 			Object.keys(SkillBlockStatesList).forEach((skill) => {
 				// If it's a Specialization Skill, don't add the rank. It's not supposed to count to the total ranks per level, and always equal to the level of the character.
@@ -382,6 +389,11 @@ function CharacterSheet() {
 
 								<div className={styles.rightSide}>
 									<RightSide />
+								</div>
+							</div>
+							<div className={styles.underWrapper}>
+								<div className={styles.underSide}>
+									<UnderSide />
 								</div>
 							</div>
 						</div>
