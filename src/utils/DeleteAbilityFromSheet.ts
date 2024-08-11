@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { getValue } from './getValue';
 import { setValue } from './setValue';
 
-export function DeleteAbility(
+export function DeleteAbilityFromSheet(
 	index: number,
 	keyID: string | undefined,
 	setNewArray: Dispatch<SetStateAction<AbilityListTypes[]>>

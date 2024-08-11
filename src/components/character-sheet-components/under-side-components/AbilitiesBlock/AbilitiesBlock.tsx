@@ -3,8 +3,8 @@ import { getValue } from '../../../../utils/getValue';
 import SheetLabel from '../../labels/SheetLabel';
 import styles from './AbilitiesBlock.module.css';
 import { useEffect, useRef, useState } from 'react';
-import { DeleteAbility } from '../../../../utils/DeleteAbility';
-import { AddAbility } from '../../../../utils/AddAbility';
+import { DeleteAbilityFromSheet } from '../../../../utils/DeleteAbilityFromSheet';
+import { AddAbilityToSheet } from '../../../../utils/AddAbilityToSheet';
 import AddButtonLabel from '../../../character-creation-components/AddButtonLabel/AddButtonLabel';
 
 function AbilitiesBlock() {
@@ -28,7 +28,7 @@ function AbilitiesBlock() {
 	}, [tempArray]);
 
 	function handleAddAbility() {
-		AddAbility(characterID, setTempArray);
+		AddAbilityToSheet(characterID, setTempArray);
 		scrollCounter.current++;
 	}
 
@@ -49,7 +49,9 @@ function AbilitiesBlock() {
 						<div className={styles.individualAbility} key={index}>
 							<div
 								className={styles.delete}
-								onClick={() => DeleteAbility(index, characterID, setTempArray)}
+								onClick={() =>
+									DeleteAbilityFromSheet(index, characterID, setTempArray)
+								}
 							>
 								&#128465;
 							</div>
