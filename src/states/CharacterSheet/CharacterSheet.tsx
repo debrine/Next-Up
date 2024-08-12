@@ -17,6 +17,7 @@ import { useInitiativeScore } from '../../hooks/useInitiativeScore.ts';
 import { useCurrentID } from '../../hooks/useCurrentID.ts';
 import { GetModifier } from '../../utils/GetModifier.ts';
 import UnderSide from '../../components/character-sheet-components/under-side-components/UnderSide/UnderSide.tsx';
+import { useAbilities } from '../../hooks/useAbilities.ts';
 
 type SkillBlockStatesListType = {
 	[key: string]: {
@@ -90,6 +91,8 @@ function CharacterSheet() {
 
 	const { SkillBlockStatesList, setSkill } = useSkills();
 
+	const { abilitiesArray, updateAbilityArray } = useAbilities();
+
 	// useEffect for all changes related to swapping characters
 	useEffect(() => {
 		// Set default values based on character selected.
@@ -143,6 +146,7 @@ function CharacterSheet() {
 			skillNotes: getValue(`SkillNotes${characterID}`),
 
 			// AbilitiesBlock, WeaponsBlock, and ArmorBlock registers will be done in their components since they use useFieldArray.
+			abilities: abilitiesArray,
 		};
 
 		// Reset the defaultValues.
@@ -164,6 +168,7 @@ function CharacterSheet() {
 		tempSP,
 		tempHP,
 		tempRP,
+		abilitiesArray,
 	]);
 
 	// useEffect to save data to local storage.
@@ -273,7 +278,7 @@ function CharacterSheet() {
 			});
 
 			// AbilitiesBlock registers
-			// updateAbilityArray(data.abilities);
+			updateAbilityArray(data.abilities);
 		});
 		return () => subscription.unsubscribe();
 	}, [
@@ -305,6 +310,8 @@ function CharacterSheet() {
 		updateTempHP,
 		tempRP,
 		updateTempRP,
+		abilitiesArray,
+		updateAbilityArray,
 	]);
 
 	const characterInfoDynamicObject: CharacterBasicInfoDynamicType = useMemo(

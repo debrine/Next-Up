@@ -1,36 +1,47 @@
 import SheetLabel from '../../labels/SheetLabel';
 import styles from './AbilitiesBlock.module.css';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import AddButtonLabel from '../../../character-creation-components/AddButtonLabel/AddButtonLabel';
-import { FieldValues, useFieldArray, useForm } from 'react-hook-form';
-import { useAbilities } from '../../../../hooks/useAbilities';
-import { useCurrentID } from '../../../../hooks/useCurrentID';
+import {
+	FieldValues,
+	useFieldArray,
+	// useForm,
+	useFormContext,
+} from 'react-hook-form';
+// import { useAbilities } from '../../../../hooks/useAbilities';
+// import { useCurrentID } from '../../../../hooks/useCurrentID';
 
 type FormValues = FieldValues & {
 	name: AbilityListTypes[];
 };
 
 function AbilitiesBlock() {
-	const { currentID } = useCurrentID();
+	// const { currentID } = useCurrentID();
 
-	const { abilitiesArray, updateAbilityArray } = useAbilities();
+	// const { abilitiesArray, updateAbilityArray } = useAbilities();
 
-	const { control, register, watch } = useForm<FormValues>({
-		defaultValues: { abilities: abilitiesArray },
-	});
+	// const { control, register, watch, reset } = useFormContext<FormValues>();
+	const { control, register } = useFormContext<FormValues>();
 
 	const { fields, append, remove } = useFieldArray<FormValues>({
 		control,
 		name: 'abilities',
 	});
 
-	useEffect(() => {
-		const subscription = watch((data) => {
-			updateAbilityArray(data.abilities);
-			console.log(data.abilities);
-		});
-		return () => subscription.unsubscribe();
-	}, [currentID, watch]);
+	// useEffect(() => {
+	// 	let defaultValues = {
+	// 		abilities: abilitiesArray,
+	// 	};
+
+	// 	reset({ ...defaultValues });
+	// }, [currentID]);
+
+	// useEffect(() => {
+	// 	const subscription = watch((data) => {
+	// 		updateAbilityArray(data.abilities);
+	// 	});
+	// 	return () => subscription.unsubscribe();
+	// }, [currentID, watch]);
 
 	return (
 		<div className={styles.parentDiv}>
