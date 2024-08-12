@@ -1,36 +1,36 @@
-import { useParams } from 'react-router-dom';
-import { getValue } from '../../../../utils/getValue';
 import SheetLabel from '../../labels/SheetLabel';
 import styles from './AbilitiesBlock.module.css';
-import { useEffect, useRef, useState } from 'react';
-import { DeleteAbilityFromSheet } from '../../../../utils/DeleteAbilityFromSheet';
-import { AddAbilityToSheet } from '../../../../utils/AddAbilityToSheet';
+import { useEffect } from 'react';
 import AddButtonLabel from '../../../character-creation-components/AddButtonLabel/AddButtonLabel';
+import { FieldValues, useFieldArray, useForm } from 'react-hook-form';
+import { useAbilities } from '../../../../hooks/useAbilities';
+import { useCurrentID } from '../../../../hooks/useCurrentID';
+
+type FormValues = FieldValues & {
+	name: AbilityListTypes[];
+};
 
 function AbilitiesBlock() {
-	const { characterID } = useParams();
+	const { currentID } = useCurrentID();
 
-	const [tempArray, setTempArray] = useState<AbilityListTypes[]>(
-		getValue(`Abilities${characterID}`)
-	);
+	const { abilitiesArray, updateAbilityArray } = useAbilities();
 
-	const scrollCounter = useRef<number>(0);
+	const { control, register, watch } = useForm<FormValues>({
+		defaultValues: { abilities: abilitiesArray },
+	});
+
+	const { fields, append, remove } = useFieldArray<FormValues>({
+		control,
+		name: 'abilities',
+	});
 
 	useEffect(() => {
-		if (scrollCounter.current > 0) {
-			const lastPosition: number =
-				getValue(`Abilities${characterID}`).length - 1;
-			const element = document.getElementById(
-				`individualAbility${lastPosition}`
-			)!;
-			element?.scrollIntoView({ behavior: 'smooth' });
-		}
-	}, [tempArray]);
-
-	function handleAddAbility() {
-		AddAbilityToSheet(characterID, setTempArray);
-		scrollCounter.current++;
-	}
+		const subscription = watch((data) => {
+			updateAbilityArray(data.abilities);
+			console.log(data.abilities);
+		});
+		return () => subscription.unsubscribe();
+	}, [currentID, watch]);
 
 	return (
 		<div className={styles.parentDiv}>
@@ -38,39 +38,42 @@ function AbilitiesBlock() {
 				<SheetLabel sheetLabelText='ABILITIES' />
 				<div
 					className={styles.addAbilityButton}
-					onClick={() => handleAddAbility()}
+					onClick={() => {
+						append({
+							abilityName: '',
+							abilityDescription: '',
+							abilitySource: '',
+							actionType: [''],
+							usesResolve: 0,
+						});
+					}}
 				>
 					<AddButtonLabel itemToAdd='ABILITY' />
 				</div>
 			</div>
 			<div className={styles.abilitiesBlockContent}>
-				{tempArray.map((ability: AbilityListTypes, index: number) => {
+				{fields.map((field, index) => {
 					return (
-						<div className={styles.individualAbility} key={index}>
-							<div
-								className={styles.delete}
-								onClick={() =>
-									DeleteAbilityFromSheet(index, characterID, setTempArray)
-								}
-							>
+						<div className={styles.individualAbility} key={field.id}>
+							<div className={styles.delete} onClick={() => remove(index)}>
 								&#128465;
 							</div>
 							<div className={styles.topRow}>
 								<div className={styles.inputDiv}>
 									<input
 										type='text'
+										{...register(`abilities.${index}.abilityName`)}
 										spellCheck={false}
 										className={styles.textInput}
-										defaultValue={ability.abilityName}
 									/>
 								</div>
 								<div className={styles.verticalBar} />
 								<div className={styles.inputDiv}>
 									<input
 										type='text'
+										{...register(`abilities.${index}.abilitySource`)}
 										spellCheck={false}
 										className={styles.textInput}
-										defaultValue={ability.abilitySource}
 									/>
 								</div>
 								<div className={styles.verticalBar} />
@@ -80,16 +83,16 @@ function AbilitiesBlock() {
 									<div className={styles.inputLabel}>RP</div>
 									<input
 										type='number'
+										{...register(`abilities.${index}.usesResolve`)}
 										className={styles.numberInput}
-										defaultValue={ability.usesResolve}
 									/>
 								</div>
 							</div>
 							<div className={styles.abilityDescription}>
 								<textarea
+									{...register(`abilities.${index}.abilityDescription`)}
 									className={styles.abilityTextarea}
 									spellCheck={false}
-									defaultValue={ability.abilityDescription}
 								/>
 							</div>
 							<div

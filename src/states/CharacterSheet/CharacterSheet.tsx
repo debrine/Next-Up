@@ -3,13 +3,7 @@ import CharacterInfo from '../../components/character-sheet-components/Character
 import DescriptionBlock from '../../components/character-sheet-components/DescriptionBlock/DescriptionBlock.tsx';
 import LeftSide from '../../components/character-sheet-components/left-side-components/LeftSide/LeftSide.tsx';
 import RightSide from '../../components/character-sheet-components/right-side-components/RightSide/RightSide.tsx';
-import {
-	createContext,
-	useCallback,
-	useEffect,
-	useMemo,
-	useState,
-} from 'react';
+import { createContext, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getValue } from '../../utils/getValue.ts';
 import { levelUpList } from '../../data/levelUpList.ts';
@@ -55,12 +49,6 @@ function CharacterSheet() {
 
 	// This is needed to not overwrite the data in the previously selected character. Form will write data before the characterID from useParams would update.
 	const { currentID } = useCurrentID();
-
-	// Force the abilityScoreBlock to update
-	const [, updateState] = useState<{}>();
-	const forceUpdate = useCallback(() => {
-		updateState({});
-	}, []);
 
 	// React-hook-form methods.
 	const methods = useForm();
@@ -153,6 +141,8 @@ function CharacterSheet() {
 
 			// SkillNotesBlock registers
 			skillNotes: getValue(`SkillNotes${characterID}`),
+
+			// AbilitiesBlock, WeaponsBlock, and ArmorBlock registers will be done in their components since they use useFieldArray.
 		};
 
 		// Reset the defaultValues.
@@ -282,7 +272,8 @@ function CharacterSheet() {
 				}
 			});
 
-			forceUpdate();
+			// AbilitiesBlock registers
+			// updateAbilityArray(data.abilities);
 		});
 		return () => subscription.unsubscribe();
 	}, [
