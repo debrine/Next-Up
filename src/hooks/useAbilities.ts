@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getValue } from '../utils/getValue';
 import { useParams } from 'react-router-dom';
 import { setValue } from '../utils/setValue';
@@ -10,6 +10,10 @@ export function useAbilities() {
 		getValue(`Abilities${characterID}`)
 	);
 
+	useEffect(() => {
+		setAbilitiesArray(getValue(`Abilities${characterID}`));
+	}, [characterID]);
+
 	const updateAbilityArray = useCallback(
 		(newAbilityArray: AbilityListTypes[]) => {
 			setAbilitiesArray(newAbilityArray);
@@ -18,5 +22,30 @@ export function useAbilities() {
 		[characterID]
 	);
 
-	return { abilitiesArray, updateAbilityArray };
+	function handleAddAbility() {
+		updateAbilityArray([
+			...abilitiesArray,
+			{
+				abilityName: '',
+				abilityDescription: '',
+				abilitySource: '',
+				actionType: [''],
+				usesResolve: 0,
+			},
+		]);
+	}
+
+	function handleDeleteAbility(index: number) {
+		const filteredArray = abilitiesArray.filter(
+			(ability) => abilitiesArray.indexOf(ability) != index
+		);
+		updateAbilityArray(filteredArray);
+	}
+
+	return {
+		abilitiesArray,
+		updateAbilityArray,
+		handleAddAbility,
+		handleDeleteAbility,
+	};
 }

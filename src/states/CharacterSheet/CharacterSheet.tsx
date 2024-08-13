@@ -17,7 +17,7 @@ import { useInitiativeScore } from '../../hooks/useInitiativeScore.ts';
 import { useCurrentID } from '../../hooks/useCurrentID.ts';
 import { GetModifier } from '../../utils/GetModifier.ts';
 import UnderSide from '../../components/character-sheet-components/under-side-components/UnderSide/UnderSide.tsx';
-import { useAbilities } from '../../hooks/useAbilities.ts';
+// import { useAbilities } from '../../hooks/useAbilities.ts';
 
 type SkillBlockStatesListType = {
 	[key: string]: {
@@ -43,6 +43,7 @@ export const CharacterSheetContext = createContext<{
 	SkillBlockStatesList: SkillBlockStatesListType;
 	characterInfoObject: CharacterInfoObjectType;
 	characterInfoDynamicObject: CharacterBasicInfoDynamicType;
+	// abilitiesArray: AbilityListTypes[];
 }>({} as any);
 
 function CharacterSheet() {
@@ -91,7 +92,7 @@ function CharacterSheet() {
 
 	const { SkillBlockStatesList, setSkill } = useSkills();
 
-	const { abilitiesArray, updateAbilityArray } = useAbilities();
+	// const { abilitiesArray, updateAbilityArray } = useAbilities();
 
 	// useEffect for all changes related to swapping characters
 	useEffect(() => {
@@ -146,7 +147,7 @@ function CharacterSheet() {
 			skillNotes: getValue(`SkillNotes${characterID}`),
 
 			// AbilitiesBlock, WeaponsBlock, and ArmorBlock registers will be done in their components since they use useFieldArray.
-			abilities: abilitiesArray,
+			// abilities: abilitiesArray,
 		};
 
 		// Reset the defaultValues.
@@ -168,7 +169,7 @@ function CharacterSheet() {
 		tempSP,
 		tempHP,
 		tempRP,
-		abilitiesArray,
+		// abilitiesArray,
 	]);
 
 	// useEffect to save data to local storage.
@@ -278,7 +279,7 @@ function CharacterSheet() {
 			});
 
 			// AbilitiesBlock registers
-			updateAbilityArray(data.abilities);
+			// updateAbilityArray(data.abilities);
 		});
 		return () => subscription.unsubscribe();
 	}, [
@@ -310,8 +311,8 @@ function CharacterSheet() {
 		updateTempHP,
 		tempRP,
 		updateTempRP,
-		abilitiesArray,
-		updateAbilityArray,
+		// abilitiesArray,
+		// updateAbilityArray,
 	]);
 
 	const characterInfoDynamicObject: CharacterBasicInfoDynamicType = useMemo(
@@ -358,6 +359,7 @@ function CharacterSheet() {
 
 				characterInfoObject: characterInfoObject,
 				characterInfoDynamicObject: characterInfoDynamicObject,
+				// abilitiesArray: abilitiesArray,
 			}}
 		>
 			<FormProvider {...methods}>

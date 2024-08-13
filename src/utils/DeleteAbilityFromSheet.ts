@@ -12,9 +12,6 @@ export function DeleteAbilityFromSheet(
 	const filteredArray = newArray.filter(
 		(ability) => newArray.indexOf(ability) != index
 	);
-	console.log(index);
-	console.log(newArray);
-	console.log(filteredArray);
 
 	setValue(`Abilities${keyID}`, [...filteredArray]);
 	setNewArray(getValue(`Abilities${keyID}`));

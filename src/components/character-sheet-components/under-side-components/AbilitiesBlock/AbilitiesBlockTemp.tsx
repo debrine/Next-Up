@@ -1,26 +1,56 @@
 import SheetLabel from '../../labels/SheetLabel';
 import styles from './AbilitiesBlock.module.css';
-import AddButtonLabel from '../../../character-creation-components/AddButtonLabel/AddButtonLabel';
-import { FieldValues, useFormContext } from 'react-hook-form';
 import { useEffect } from 'react';
+import AddButtonLabel from '../../../character-creation-components/AddButtonLabel/AddButtonLabel';
+import {
+	FieldValues,
+	useFieldArray,
+	useForm,
+	// useFormContext,
+} from 'react-hook-form';
 import { useAbilities } from '../../../../hooks/useAbilities';
-
-// Dylan: Works with no infinite render, but not updating dynamically.
+import { useCurrentID } from '../../../../hooks/useCurrentID';
 
 type FormValues = FieldValues & {
 	name: AbilityListTypes[];
 };
 
-function AbilitiesBlock() {
-	const { abilitiesArray } = useAbilities();
+// Dylan: Updates dynamically, but doesn't change between characters.
 
-	const { handleAddAbility, handleDeleteAbility } = useAbilities();
+function AbilitiesBlockTemp() {
+	const { currentID } = useCurrentID();
 
-	const { register } = useFormContext<FormValues>();
+	const { abilitiesArray, updateAbilityArray } = useAbilities();
+
+	const { control, register, watch, reset } = useForm<FormValues>();
+	// const { control, register } = useFormContext<FormValues>();
+
+	const { fields, append, remove } = useFieldArray<
+		FormValues,
+		'abilities',
+		'id'
+	>({
+		control,
+		name: 'abilities',
+		keyName: 'id',
+	});
 
 	useEffect(() => {
-		console.log(abilitiesArray);
-	}, []);
+		let defaultValues = {
+			abilities: abilitiesArray,
+		};
+
+		reset({ ...defaultValues });
+	}, [currentID]);
+
+	useEffect(() => {
+		const subscription = watch((data) => {
+			updateAbilityArray(data.abilities);
+			console.log(data);
+			console.log(currentID);
+		});
+		return () => subscription.unsubscribe();
+	}, [currentID, watch]);
 
 	return (
 		<div className={styles.parentDiv}>
@@ -29,25 +59,23 @@ function AbilitiesBlock() {
 				<div
 					className={styles.addAbilityButton}
 					onClick={() => {
-						handleAddAbility();
+						append({
+							abilityName: '',
+							abilityDescription: '',
+							abilitySource: '',
+							actionType: [''],
+							usesResolve: 0,
+						});
 					}}
 				>
 					<AddButtonLabel itemToAdd='ABILITY' />
 				</div>
 			</div>
-			<div className={styles.abilitiesBlockContent}>
-				{abilitiesArray.map((ability, index) => {
+			<div className={styles.abilitiesBlockTempContent}>
+				{fields.map((field, index) => {
 					return (
-						<div
-							className={styles.individualAbility}
-							key={`${ability.abilityName}${index}`}
-						>
-							<div
-								className={styles.delete}
-								onClick={() => {
-									handleDeleteAbility(index);
-								}}
-							>
+						<div className={styles.individualAbility} key={field.id}>
+							<div className={styles.delete} onClick={() => remove(index)}>
 								&#128465;
 							</div>
 							<div className={styles.topRow}>
@@ -55,7 +83,7 @@ function AbilitiesBlock() {
 									<input
 										type='text'
 										{...register(`abilities.${index}.abilityName`)}
-										value={abilitiesArray[index].abilityName}
+										// value={abilitiesArray[index].abilityName}
 										spellCheck={false}
 										className={styles.textInput}
 									/>
@@ -65,7 +93,7 @@ function AbilitiesBlock() {
 									<input
 										type='text'
 										{...register(`abilities.${index}.abilitySource`)}
-										defaultValue={abilitiesArray[index].abilitySource}
+										// defaultValue={abilitiesArray[index].abilitySource}
 										spellCheck={false}
 										className={styles.textInput}
 									/>
@@ -78,7 +106,7 @@ function AbilitiesBlock() {
 									<input
 										type='number'
 										{...register(`abilities.${index}.usesResolve`)}
-										defaultValue={abilitiesArray[index].usesResolve}
+										// defaultValue={abilitiesArray[index].usesResolve}
 										className={styles.numberInput}
 									/>
 								</div>
@@ -86,7 +114,7 @@ function AbilitiesBlock() {
 							<div className={styles.abilityDescription}>
 								<textarea
 									{...register(`abilities.${index}.abilityDescription`)}
-									defaultValue={abilitiesArray[index].abilityDescription}
+									// defaultValue={abilitiesArray[index].abilityDescription}
 									className={styles.abilityTextarea}
 									spellCheck={false}
 								/>
@@ -99,4 +127,4 @@ function AbilitiesBlock() {
 	);
 }
 
-export default AbilitiesBlock;
+export default AbilitiesBlockTemp;
