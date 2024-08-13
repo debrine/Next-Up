@@ -55,7 +55,7 @@ function AbilitiesBlock() {
 									<input
 										type='text'
 										{...register(`abilities.${index}.abilityName`)}
-										value={abilitiesArray[index].abilityName}
+										defaultValue={abilitiesArray[index].abilityName}
 										spellCheck={false}
 										className={styles.textInput}
 									/>

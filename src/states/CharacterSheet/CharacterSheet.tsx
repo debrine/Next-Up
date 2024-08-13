@@ -17,6 +17,7 @@ import { useInitiativeScore } from '../../hooks/useInitiativeScore.ts';
 import { useCurrentID } from '../../hooks/useCurrentID.ts';
 import { GetModifier } from '../../utils/GetModifier.ts';
 import UnderSide from '../../components/character-sheet-components/under-side-components/UnderSide/UnderSide.tsx';
+import { useArmorClassBlock } from '../../hooks/useArmorClassBlock.ts';
 // import { useAbilities } from '../../hooks/useAbilities.ts';
 
 type SkillBlockStatesListType = {
@@ -43,6 +44,11 @@ export const CharacterSheetContext = createContext<{
 	SkillBlockStatesList: SkillBlockStatesListType;
 	characterInfoObject: CharacterInfoObjectType;
 	characterInfoDynamicObject: CharacterBasicInfoDynamicType;
+	armorEquipped: ArmorType;
+	armorMiscMods: {
+		energy: number;
+		kenetic: number;
+	};
 	// abilitiesArray: AbilityListTypes[];
 }>({} as any);
 
@@ -91,6 +97,13 @@ function CharacterSheet() {
 	} = useStaminaHealthResolve();
 
 	const { SkillBlockStatesList, setSkill } = useSkills();
+
+	const {
+		armorEquipped,
+		updateArmorEquipped,
+		armorMiscMods,
+		updateArmorMiscMods,
+	} = useArmorClassBlock();
 
 	// const { abilitiesArray, updateAbilityArray } = useAbilities();
 
@@ -145,6 +158,14 @@ function CharacterSheet() {
 
 			// SkillNotesBlock registers
 			skillNotes: getValue(`SkillNotes${characterID}`),
+
+			// ArmorClassBlock register
+			bonusEAC: armorEquipped.armorEAC,
+			miscModEAC: armorMiscMods.energy,
+			bonusKAC: armorEquipped.armorKAC,
+			miscModKAC: armorMiscMods.kenetic,
+			damageReduction: getValue(`DR${characterID}`),
+			resistances: getValue(`Resistances${characterID}`),
 
 			// AbilitiesBlock, WeaponsBlock, and ArmorBlock registers will be done in their components since they use useFieldArray.
 			// abilities: abilitiesArray,
@@ -278,6 +299,14 @@ function CharacterSheet() {
 				}
 			});
 
+			// ArmorClassBlock registers
+			setValue(`DR${characterID}`, data.damageReduction);
+			setValue(`Resistances${characterID}`, data.resistances);
+			updateArmorMiscMods({
+				energy: data.miscModEAC,
+				kenetic: data.miscModKAC,
+			});
+
 			// AbilitiesBlock registers
 			// updateAbilityArray(data.abilities);
 		});
@@ -359,6 +388,9 @@ function CharacterSheet() {
 
 				characterInfoObject: characterInfoObject,
 				characterInfoDynamicObject: characterInfoDynamicObject,
+
+				armorEquipped: armorEquipped,
+				armorMiscMods: armorMiscMods,
 				// abilitiesArray: abilitiesArray,
 			}}
 		>

@@ -71,6 +71,9 @@
 	margin-left: 16px;
 	width: 160px;
 	text-align: center;
+	font-size: 1.3em;
+	text-overflow: ellipsis;
+	overflow: scroll;
 }
 
 .parentDiv input:read-only {
